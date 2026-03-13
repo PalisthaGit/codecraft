@@ -4,32 +4,32 @@ const sections = [
   {
     title: "Getting Started",
     items: [
-      { label: "Introduction", href: "/learn/introduction" },
-      { label: "Environment Setup", href: "/learn/setup" },
+      { label: "Introduction", href: "/tutorial/introduction" },
+      { label: "Environment Setup", href: "/tutorial/setup" },
     ],
   },
   {
     title: "HTML Basics",
     items: [
-      { label: "Document Structure", href: "/learn/html-structure" },
-      { label: "Common Elements", href: "/learn/html-elements" },
-      { label: "Forms & Inputs", href: "/learn/html-forms" },
+      { label: "Document Structure", href: "/tutorial/html-structure" },
+      { label: "Common Elements", href: "/tutorial/html-elements" },
+      { label: "Forms & Inputs", href: "/tutorial/html-forms" },
     ],
   },
   {
     title: "CSS Fundamentals",
     items: [
-      { label: "Selectors", href: "/learn/css-selectors" },
-      { label: "Box Model", href: "/learn/css-box-model" },
-      { label: "Flexbox", href: "/learn/css-flexbox" },
+      { label: "Selectors", href: "/tutorial/css-selectors" },
+      { label: "Box Model", href: "/tutorial/css-box-model" },
+      { label: "Flexbox", href: "/tutorial/css-flexbox" },
     ],
   },
   {
     title: "JavaScript",
     items: [
-      { label: "Variables & Types", href: "/learn/js-variables" },
-      { label: "Functions", href: "/learn/js-functions" },
-      { label: "DOM Manipulation", href: "/learn/js-dom" },
+      { label: "Variables & Types", href: "/tutorial/js-variables" },
+      { label: "Functions", href: "/tutorial/js-functions" },
+      { label: "DOM Manipulation", href: "/tutorial/js-dom" },
     ],
   },
 ];

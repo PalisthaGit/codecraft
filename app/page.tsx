@@ -69,7 +69,7 @@ const tracks = [
     description:
       "Learn what coding is, why it matters, and set up everything you need to write your first line of code.",
     lessons: 2,
-    href: "/learn/introduction",
+    href: "/tutorial/introduction",
     color: "bg-violet-50 border-violet-200",
     badge: "bg-violet-100 text-violet-700",
   },
@@ -78,7 +78,7 @@ const tracks = [
     description:
       "Understand how web pages are structured using HTML elements, documents, and forms.",
     lessons: 3,
-    href: "/learn/html-structure",
+    href: "/tutorial/html-structure",
     color: "bg-orange-50 border-orange-200",
     badge: "bg-orange-100 text-orange-700",
   },
@@ -87,7 +87,7 @@ const tracks = [
     description:
       "Style your pages with CSS — control colors, spacing, layout, and more.",
     lessons: 3,
-    href: "/learn/css-selectors",
+    href: "/tutorial/css-selectors",
     color: "bg-sky-50 border-sky-200",
     badge: "bg-sky-100 text-sky-700",
   },
@@ -96,7 +96,7 @@ const tracks = [
     description:
       "Add interactivity to your pages by learning variables, functions, and DOM manipulation.",
     lessons: 3,
-    href: "/learn/js-variables",
+    href: "/tutorial/js-variables",
     color: "bg-yellow-50 border-yellow-200",
     badge: "bg-yellow-100 text-yellow-700",
   },
@@ -121,7 +121,7 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/learn/introduction"
+            href="/tutorial/introduction"
             className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700 transition-colors"
           >
             Start Learning
@@ -140,7 +140,7 @@ export default function HomePage() {
             </svg>
           </Link>
           <Link
-            href="/learn/html-structure"
+            href="/tutorial/html-structure"
             className="inline-flex items-center px-6 py-3 bg-white text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
           >
             Browse Lessons
