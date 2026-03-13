@@ -70,8 +70,6 @@ const tracks = [
       "Learn what coding is, why it matters, and set up everything you need to write your first line of code.",
     lessons: 2,
     href: "/tutorial/introduction",
-    color: "bg-violet-50 border-violet-200",
-    badge: "bg-violet-100 text-violet-700",
   },
   {
     title: "HTML Basics",
@@ -79,8 +77,6 @@ const tracks = [
       "Understand how web pages are structured using HTML elements, documents, and forms.",
     lessons: 3,
     href: "/tutorial/html-structure",
-    color: "bg-orange-50 border-orange-200",
-    badge: "bg-orange-100 text-orange-700",
   },
   {
     title: "CSS Fundamentals",
@@ -88,8 +84,6 @@ const tracks = [
       "Style your pages with CSS — control colors, spacing, layout, and more.",
     lessons: 3,
     href: "/tutorial/css-selectors",
-    color: "bg-sky-50 border-sky-200",
-    badge: "bg-sky-100 text-sky-700",
   },
   {
     title: "JavaScript",
@@ -97,8 +91,6 @@ const tracks = [
       "Add interactivity to your pages by learning variables, functions, and DOM manipulation.",
     lessons: 3,
     href: "/tutorial/js-variables",
-    color: "bg-yellow-50 border-yellow-200",
-    badge: "bg-yellow-100 text-yellow-700",
   },
 ];
 
@@ -107,22 +99,22 @@ export default function HomePage() {
     <div className="max-w-4xl mx-auto space-y-16">
       {/* Hero */}
       <section className="pt-6">
-        <p className="text-sm font-semibold uppercase tracking-widest text-violet-600 mb-4">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[#6367ff] mb-4">
           Free & beginner-friendly
         </p>
-        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight">
+        <h1 className="text-4xl sm:text-5xl font-bold text-[#0f172a] leading-tight">
           Learn to Code,
           <br />
           One Step at a Time
         </h1>
-        <p className="mt-5 text-lg text-slate-600 max-w-xl">
+        <p className="mt-5 text-lg text-[#64748b] max-w-xl leading-relaxed">
           Codecraft breaks programming down into small, manageable lessons. No
           jargon. No overwhelm. Just clear explanations and real examples.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/tutorial/introduction"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white text-sm font-semibold rounded-lg hover:bg-violet-700 transition-colors"
+            className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-semibold rounded-[10px] hover:bg-[#8494ff] transition-colors"
           >
             Start Learning
             <svg
@@ -141,7 +133,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/tutorial/html-structure"
-            className="inline-flex items-center px-6 py-3 bg-white text-slate-700 text-sm font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors"
+            className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-semibold rounded-[10px] border border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-colors"
           >
             Browse Lessons
           </Link>
@@ -150,22 +142,22 @@ export default function HomePage() {
 
       {/* Features */}
       <section>
-        <h2 className="text-xl font-semibold text-slate-900 mb-6">
+        <h2 className="text-xl font-semibold text-[#0f172a] mb-6">
           Why Codecraft?
         </h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-white rounded-xl border border-slate-200 p-5"
+              className="bg-white rounded-[12px] border border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
             >
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-100 text-slate-600 mb-4">
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#c9beff] text-[#6367ff] mb-4">
                 {feature.icon}
               </div>
-              <h3 className="font-semibold text-slate-900 mb-1">
+              <h3 className="font-semibold text-[#0f172a] mb-1">
                 {feature.title}
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-[#64748b] leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -175,7 +167,7 @@ export default function HomePage() {
 
       {/* Learning Tracks */}
       <section>
-        <h2 className="text-xl font-semibold text-slate-900 mb-6">
+        <h2 className="text-xl font-semibold text-[#0f172a] mb-6">
           Learning Tracks
         </h2>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -183,20 +175,18 @@ export default function HomePage() {
             <Link
               key={track.title}
               href={track.href}
-              className={`group rounded-xl border p-5 transition-shadow hover:shadow-md ${track.color}`}
+              className="group bg-white rounded-[12px] border border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:border-[#6367ff] hover:shadow-[0_4px_16px_rgba(99,103,255,0.12)] transition-all"
             >
               <div className="flex items-start justify-between gap-4">
-                <h3 className="font-semibold text-slate-900">{track.title}</h3>
-                <span
-                  className={`shrink-0 text-xs font-medium px-2 py-0.5 rounded-full ${track.badge}`}
-                >
+                <h3 className="font-semibold text-[#0f172a]">{track.title}</h3>
+                <span className="shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full bg-[#c9beff] text-[#6367ff]">
                   {track.lessons} lessons
                 </span>
               </div>
-              <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+              <p className="mt-2 text-sm text-[#64748b] leading-relaxed">
                 {track.description}
               </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-slate-700 group-hover:gap-2 transition-all">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#6367ff] group-hover:gap-2 transition-all">
                 Begin
                 <svg
                   className="w-4 h-4"
