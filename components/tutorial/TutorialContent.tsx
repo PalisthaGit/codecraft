@@ -10,7 +10,7 @@ export default function TutorialContent({ lesson }: TutorialContentProps) {
   return (
     <article className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_4px_12px_rgba(0,0,0,0.05)] p-6 md:p-8">
       {/* Lesson header */}
-      <header className="mb-8 pb-6 border-b border-slate-100">
+      <header className="mb-8 pb-6 border-b border-[#e5e7eb]">
         <h1 className="text-3xl font-bold text-[#0f172a] leading-tight">
           {lesson.title}
         </h1>
@@ -18,7 +18,7 @@ export default function TutorialContent({ lesson }: TutorialContentProps) {
       </header>
 
       {/* Content blocks */}
-      <div className="space-y-1">
+      <div className="space-y-4">
         {lesson.content.map((block, index) => {
           switch (block.type) {
             case "heading":

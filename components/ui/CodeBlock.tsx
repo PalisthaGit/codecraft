@@ -17,11 +17,11 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   }
 
   return (
-    <div className="rounded-[10px] overflow-hidden border border-slate-700 my-5">
+    <div className="rounded-[10px] overflow-hidden border border-[#334155] my-5">
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-800 border-b border-slate-700">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#0f172a] border-b border-[#334155]">
         {language ? (
-          <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
+          <span className="text-xs font-medium text-[#e2e8f0]/50 uppercase tracking-wider">
             {language}
           </span>
         ) : (
@@ -29,7 +29,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
         )}
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+          className="flex items-center gap-1.5 text-xs font-medium text-[#e2e8f0]/50 hover:text-[#e2e8f0] transition-colors"
           aria-label="Copy code"
         >
           {copied ? (

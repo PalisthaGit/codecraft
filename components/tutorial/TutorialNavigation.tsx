@@ -22,7 +22,7 @@ export default function TutorialNavigation({
         {prev ? (
           <Link
             href={`/tutorial/${prev.slug}`}
-            className="group flex flex-col h-full gap-1 bg-white border border-[#e5e7eb] rounded-[10px] px-4 py-3 hover:border-[#6367ff] hover:shadow-sm transition-all"
+            className="group flex flex-col h-full gap-1 bg-white border border-[#e5e7eb] rounded-[10px] px-4 py-3 hover:border-[#6367ff] hover:shadow-[0_4px_12px_rgba(99,103,255,0.12)] transition-all"
           >
             <span className="flex items-center gap-1.5 text-xs font-semibold text-[#64748b] group-hover:text-[#6367ff] transition-colors">
               <svg

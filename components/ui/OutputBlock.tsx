@@ -8,11 +8,11 @@ export default function OutputBlock({
   label = "Output",
 }: OutputBlockProps) {
   return (
-    <div className="my-5 rounded-[10px] overflow-hidden border border-slate-200">
+    <div className="my-5 rounded-[10px] overflow-hidden border border-[#e5e7eb]">
       {/* Label bar */}
-      <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border-b border-slate-200">
+      <div className="flex items-center gap-2 px-4 py-2 bg-[#f8fafc] border-b border-[#e5e7eb]">
         <svg
-          className="w-3.5 h-3.5 text-slate-400"
+          className="w-3.5 h-3.5 text-[#6367ff]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -24,13 +24,13 @@ export default function OutputBlock({
             d="M9 5l7 7-7 7"
           />
         </svg>
-        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+        <span className="text-xs font-medium text-[#64748b] uppercase tracking-wider">
           {label}
         </span>
       </div>
 
       {/* Output content */}
-      <pre className="bg-white text-slate-700 font-mono text-sm leading-relaxed px-5 py-4 overflow-x-auto whitespace-pre-wrap">
+      <pre className="bg-white text-[#0f172a] font-mono text-sm leading-relaxed px-5 py-4 overflow-x-auto whitespace-pre-wrap">
         {content}
       </pre>
     </div>
