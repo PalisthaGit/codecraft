@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const sections = [
   {
@@ -39,6 +42,8 @@ interface NavLinksProps {
 }
 
 export default function NavLinks({ onNavigate }: NavLinksProps) {
+  const pathname = usePathname();
+
   return (
     <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
       {sections.map((section) => (
@@ -47,17 +52,24 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
             {section.title}
           </p>
           <ul className="space-y-1">
-            {section.items.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={onNavigate}
-                  className="block px-3 py-2 text-sm text-slate-700 rounded-md hover:bg-slate-100 hover:text-slate-900 transition-colors"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {section.items.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={onNavigate}
+                    className={`block px-3 py-2 text-sm rounded-md transition-colors ${
+                      isActive
+                        ? "bg-[#6367ff] text-white font-semibold"
+                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}
