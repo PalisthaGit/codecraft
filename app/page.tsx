@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import NewsletterSubscribe from "@/components/home/NewsletterSubscribe";
+import HeroAnimation from "@/components/home/HeroAnimation";
 
 export const metadata: Metadata = {
   title: "Codecraft — Free HTML, CSS & JavaScript Tutorials for Beginners",
@@ -108,7 +109,8 @@ export default function HomePage() {
           <br />
           One Step at a Time
         </h1>
-        <p className="mt-5 text-lg text-[#64748b] max-w-xl leading-relaxed">
+        <HeroAnimation />
+        <p className="text-lg text-[#64748b] max-w-xl leading-relaxed">
           Codecraft breaks programming down into small, manageable lessons. No
           jargon. No overwhelm. Just clear explanations and real examples.
         </p>
