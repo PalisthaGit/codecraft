@@ -20,8 +20,11 @@ const links = {
 export default function Footer() {
   return (
     <footer className="border-t border-[#e5e7eb] bg-white mt-16">
-      <div className="px-6 md:px-10 py-10">
-        <div className="max-w-3xl flex flex-col sm:flex-row sm:items-start gap-10">
+      <div className="max-w-5xl mx-auto px-6 py-10">
+
+        {/* Top row: brand + link columns */}
+        <div className="flex flex-col sm:flex-row sm:items-start gap-10">
+
           {/* Brand */}
           <div className="sm:flex-1">
             <Link
@@ -30,17 +33,17 @@ export default function Footer() {
             >
               Codecraft
             </Link>
-            <p className="mt-2 text-sm text-[#64748b] leading-relaxed max-w-xs">
+            <p className="mt-2 text-sm text-[#64748b] leading-relaxed max-w-[220px]">
               Free, beginner-friendly tutorials for HTML, CSS, and JavaScript.
               Learn to build for the web, one step at a time.
             </p>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap gap-10">
+          {/* Link columns */}
+          <div className="flex flex-wrap gap-12">
             {Object.entries(links).map(([group, items]) => (
               <div key={group}>
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#64748b] mb-3">
+                <p className="text-xs font-extrabold uppercase tracking-[0.1em] text-[#6367ff] mb-3">
                   {group}
                 </p>
                 <ul className="space-y-2">
@@ -60,7 +63,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="max-w-3xl mt-10 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-3">
+        {/* Bottom row: copyright */}
+        <div className="mt-10 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#64748b]">
             © {new Date().getFullYear()} Codecraft. All rights reserved.
           </p>
@@ -68,6 +72,7 @@ export default function Footer() {
             Free for everyone. Always.
           </p>
         </div>
+
       </div>
     </footer>
   );
