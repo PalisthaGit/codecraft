@@ -1,0 +1,84 @@
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { loadHtmlContent } from "@/lib/loadHtmlContent";
+import {
+  contentRegistry,
+  getContentMeta,
+  getPrevContent,
+  getNextContent,
+} from "@/lib/contentRegistry";
+import ContentNavigation from "@/components/tutorial/ContentNavigation";
+
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return contentRegistry.html.lessons.map((l) => ({ slug: l.slug }));
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const meta = getContentMeta("html", slug);
+  if (!meta) return {};
+  return {
+    title: `${meta.title} — Codecraft`,
+    description: meta.description,
+  };
+}
+
+export default async function HtmlLessonPage({ params }: Props) {
+  const { slug } = await params;
+  const meta = getContentMeta("html", slug);
+  if (!meta) notFound();
+
+  const html = loadHtmlContent("html", slug);
+  if (!html) notFound();
+
+  const prev = getPrevContent("html", slug);
+  const next = getNextContent("html", slug);
+
+  return (
+    <article className="max-w-3xl mx-auto">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-1.5 text-xs text-[#64748b] mb-6">
+        <Link href="/" className="text-[#6367ff] font-semibold hover:underline">
+          Tutorial
+        </Link>
+        <span className="text-[#e5e7eb]">›</span>
+        <Link href="/html" className="text-[#6367ff] font-semibold hover:underline">
+          HTML Basics
+        </Link>
+        <span className="text-[#e5e7eb]">›</span>
+        <span>{meta.title}</span>
+      </nav>
+
+      {/* Section badge */}
+      <span className="inline-block bg-[#6367ff]/10 text-[#6367ff] text-[0.72rem] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-4">
+        HTML Basics
+      </span>
+
+      {/* Title */}
+      <h1 className="text-[clamp(1.6rem,4vw,2.2rem)] font-black text-[#0f172a] leading-tight tracking-tight mb-4">
+        {meta.title}
+      </h1>
+
+      {/* Metadata */}
+      <div className="flex items-center gap-4 flex-wrap text-xs text-[#64748b] font-semibold mb-8">
+        <span>⏱ {meta.readTime}</span>
+        <span>📖 {meta.difficulty}</span>
+      </div>
+
+      {/* HTML content */}
+      <div
+        className="html-content"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+
+      {/* Divider */}
+      <div className="h-px bg-[#e5e7eb] mt-10" />
+
+      <ContentNavigation basePath="/html" prev={prev} next={next} />
+    </article>
+  );
+}

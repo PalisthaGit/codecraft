@@ -16,3 +16,135 @@ body {
   background-color: #f8fafc;
   color: #0f172a;
 }
+
+/* Prose styles for HTML file content rendered via dangerouslySetInnerHTML */
+.html-content h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.html-content h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.html-content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.html-content p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.html-content ul,
+.html-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.html-content ul {
+  list-style-type: disc;
+}
+
+.html-content ol {
+  list-style-type: decimal;
+}
+
+.html-content li {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.html-content code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.85em;
+  background-color: #f0f4ff;
+  color: #6367ff;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.html-content pre {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding: 1.25rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin-top: 1.25rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.html-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+  border-radius: 0;
+}
+
+.html-content a {
+  color: #6367ff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.html-content a:hover {
+  color: #5254e8;
+}
+
+.html-content hr {
+  border: none;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.html-content .definition {
+  background-color: #f0f4ff;
+  border: 1px solid rgba(99, 103, 255, 0.25);
+  border-left: 4px solid #6367ff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.7;
+}
+
+.html-content .tip {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(255, 219, 253, 0.4), rgba(201, 190, 255, 0.25));
+  border: 1px solid rgba(201, 190, 255, 0.6);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #0f172a;
+}
