@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "Overview",
-    body: "Codecraft ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains what information we collect when you visit our website, how we use it, and what choices you have. By using this website, you agree to the practices described in this policy.",
+    body: "Codecraft (\"we\", \"us\", or \"our\") is committed to protecting your privacy. This Privacy Policy explains what information we collect when you visit our website, how we use it, and what choices you have. By using this website, you agree to the practices described in this policy.",
   },
   {
     title: "Information We Collect",
