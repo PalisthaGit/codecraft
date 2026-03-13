@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import hljs from "highlight.js";
 
 const LANG_DOTS: Record<string, string> = {
   html: "#e44d26",
@@ -18,6 +19,18 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ code, language }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+
+  const highlighted = useMemo(() => {
+    if (!language) return null;
+    const lang = language.toLowerCase();
+    const alias = lang === "js" ? "javascript" : lang === "ts" ? "typescript" : lang;
+    try {
+      if (hljs.getLanguage(alias)) {
+        return hljs.highlight(code, { language: alias }).value;
+      }
+    } catch {}
+    return null;
+  }, [code, language]);
 
   async function handleCopy() {
     await navigator.clipboard.writeText(code);
@@ -53,35 +66,15 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
         >
           {copied ? (
             <>
-              <svg
-                className="w-3 h-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               Copied!
             </>
           ) : (
             <>
-              <svg
-                className="w-3 h-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
               Copy
             </>
@@ -91,7 +84,11 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
 
       {/* Code body */}
       <pre className="bg-[#1e293b] text-[#e2e8f0] font-mono text-sm leading-[1.7] px-5 py-5 overflow-x-auto">
-        <code>{code}</code>
+        {highlighted ? (
+          <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+        ) : (
+          <code>{code}</code>
+        )}
       </pre>
     </div>
   );

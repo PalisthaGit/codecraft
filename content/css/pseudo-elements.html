@@ -1,0 +1,121 @@
+<div class="definition">
+  <strong>Pseudo-elements</strong> let you style specific parts of an element — like the first line of a paragraph or content inserted before or after an element — without adding extra HTML. They're written with a double colon: <code>::before</code>, <code>::after</code>, <code>::first-line</code>, <code>::placeholder</code>.
+</div>
+
+<p>Pseudo-elements are one of CSS's most powerful features. They let you add decorative content, style text fragments, and create visual effects that would otherwise require extra HTML elements.</p>
+
+<h2>::before and ::after</h2>
+
+<p><code>::before</code> inserts generated content <em>before</em> an element's content. <code>::after</code> inserts it <em>after</em>. Both require a <code>content</code> property — even if it's empty.</p>
+
+<pre><code>.quote::before {
+  content: "\201C";  /* opening curly quote */
+  color: #6367ff;
+  font-size: 1.5em;
+}
+
+.quote::after {
+  content: "\201D";  /* closing curly quote */
+  color: #6367ff;
+  font-size: 1.5em;
+}</code></pre>
+
+<h2>Decorative Effects with ::before and ::after</h2>
+
+<p>A common use is creating decorative shapes or underlines without extra markup:</p>
+
+<pre><code>/* Animated underline on hover */
+.link {
+  position: relative;
+  text-decoration: none;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #6367ff;
+  transition: width 200ms ease;
+}
+
+.link:hover::after {
+  width: 100%;
+}</code></pre>
+
+<pre><code>/* Accent dot before a list item */
+.feature-item::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #6367ff;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When <code>content: ""</code> is set and the pseudo-element is positioned absolutely, it becomes a blank canvas you can size and style freely — no extra HTML needed.</p>
+</div>
+
+<h2>::first-line and ::first-letter</h2>
+
+<pre><code>/* Style just the first line of a paragraph */
+p::first-line {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Drop cap effect */
+.article p:first-child::first-letter {
+  font-size: 3rem;
+  font-weight: 900;
+  float: left;
+  line-height: 1;
+  margin-right: 0.1em;
+  color: #6367ff;
+}</code></pre>
+
+<h2>::placeholder</h2>
+
+<p>Style the placeholder text inside form inputs:</p>
+
+<pre><code>input::placeholder {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+input:focus::placeholder {
+  color: #cbd5e1;
+}</code></pre>
+
+<h2>::selection</h2>
+
+<p>Style the text highlight when a user selects text on the page:</p>
+
+<pre><code>::selection {
+  background-color: #6367ff;
+  color: white;
+}</code></pre>
+
+<h2>::marker</h2>
+
+<p>Style the bullet points or numbers of list items:</p>
+
+<pre><code>li::marker {
+  color: #6367ff;
+  font-weight: bold;
+}</code></pre>
+
+<h2>Pseudo-elements vs Pseudo-classes</h2>
+
+<p>It's easy to confuse the two. Remember:</p>
+
+<ul>
+  <li><strong>Pseudo-elements</strong> (double colon <code>::</code>) — target a <em>part</em> of an element: <code>::before</code>, <code>::after</code>, <code>::first-line</code></li>
+  <li><strong>Pseudo-classes</strong> (single colon <code>:</code>) — target an element in a certain <em>state</em>: <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code></li>
+</ul>

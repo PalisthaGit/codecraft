@@ -1,0 +1,111 @@
+<div class="definition">
+  <strong>Responsive design</strong> means building web pages that look and work well on screens of all sizes — from mobile phones to desktop monitors. The main tool for this in CSS is <strong>media queries</strong>, which apply styles conditionally based on screen width.
+</div>
+
+<p>More than half of all web traffic comes from mobile devices. Designing only for desktop means half your visitors get a broken experience. Responsive design isn't optional — it's the baseline.</p>
+
+<h2>Media Queries</h2>
+
+<p>A media query wraps CSS rules so they only apply when a condition is met:</p>
+
+<pre><code>/* Applies on screens 768px wide or wider */
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
+  }
+}
+
+/* Applies on screens narrower than 768px */
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}</code></pre>
+
+<h2>Mobile-First Approach</h2>
+
+<p>The best practice is to write your base styles for mobile, then layer on styles for larger screens using <code>min-width</code> queries. This is called <strong>mobile-first</strong>.</p>
+
+<pre><code>/* Base styles — mobile */
+.card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Tablet — 640px and up */
+@media (min-width: 640px) {
+  .card-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* Desktop — 1024px and up */
+@media (min-width: 1024px) {
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Mobile-first is better than desktop-first because mobile constraints force you to prioritise content. It also tends to result in less CSS overall — you add complexity as the screen gets larger, rather than stripping it away.</p>
+</div>
+
+<h2>Common Breakpoints</h2>
+
+<pre><code>/* Small phones */
+@media (min-width: 480px) { ... }
+
+/* Tablets */
+@media (min-width: 640px) { ... }
+
+/* Large tablets / small desktops */
+@media (min-width: 768px) { ... }
+
+/* Desktops */
+@media (min-width: 1024px) { ... }
+
+/* Large desktops */
+@media (min-width: 1280px) { ... }</code></pre>
+
+<h2>Fluid Typography</h2>
+
+<p>Instead of fixed font sizes that feel too small on mobile or too large on desktop, use <code>clamp()</code> for type that scales smoothly:</p>
+
+<pre><code>h1 {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  /* minimum: 1.75rem, preferred: 5% of viewport width, maximum: 3rem */
+}</code></pre>
+
+<h2>Responsive Images</h2>
+
+<pre><code>img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Full width on mobile, half width on desktop */
+.article-image {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .article-image {
+    width: 50%;
+    float: right;
+    margin-left: 2rem;
+  }
+}</code></pre>
+
+<h2>The Viewport Meta Tag</h2>
+
+<p>Always include this in your HTML <code>&lt;head&gt;</code> — without it, mobile browsers zoom out and render your page at desktop width:</p>
+
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+<h2>Testing Responsiveness</h2>
+
+<p>Open your browser's developer tools and click the device toggle icon (or press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> in Chrome) to preview your page at different screen sizes. Test at 375px (iPhone), 768px (tablet), and 1280px (desktop) as a minimum.</p>

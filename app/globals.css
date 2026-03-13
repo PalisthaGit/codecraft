@@ -17,6 +17,38 @@ body {
   color: #0f172a;
 }
 
+/* ── Syntax highlighting token colors (highlight.js) ───────────────────── */
+.hljs                        { color: #e2e8f0; }
+.hljs-comment,
+.hljs-quote                  { color: #546e7a; font-style: italic; }
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag                    { color: #c792ea; }
+.hljs-string,
+.hljs-attr,
+.hljs-selector-attr          { color: #c3e88d; }
+.hljs-number,
+.hljs-literal                { color: #f78c6c; }
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-variable,
+.hljs-template-variable      { color: #82aaff; }
+.hljs-type,
+.hljs-class .hljs-title      { color: #ffcb6b; }
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link                   { color: #80cbc4; }
+.hljs-meta,
+.hljs-selector-id,
+.hljs-selector-class         { color: #ff5370; }
+.hljs-emphasis               { font-style: italic; }
+.hljs-strong                 { font-weight: 700; }
+.hljs-addition               { color: #c3e88d; }
+.hljs-deletion               { color: #ff5370; }
+
 /* Prose styles for HTML file content rendered via dangerouslySetInnerHTML */
 .html-content h1 {
   font-size: clamp(1.6rem, 4vw, 2.2rem);

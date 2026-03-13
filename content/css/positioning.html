@@ -1,0 +1,101 @@
+<div class="definition">
+  CSS <strong>positioning</strong> controls where an element sits on the page relative to its normal flow, its parent, or the viewport. The <code>position</code> property accepts five values: <code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, and <code>sticky</code>.
+</div>
+
+<p>Most elements follow the normal document flow — block elements stack vertically, inline elements sit side by side. Positioning lets you step outside that flow and place elements exactly where you need them.</p>
+
+<h2>static (default)</h2>
+
+<p>Every element is <code>position: static</code> by default. It follows normal document flow and is not affected by <code>top</code>, <code>right</code>, <code>bottom</code>, or <code>left</code>.</p>
+
+<pre><code>.box {
+  position: static; /* default — no need to write this */
+}</code></pre>
+
+<h2>relative</h2>
+
+<p>The element stays in normal flow but can be nudged using offset properties. The space it originally occupied is preserved.</p>
+
+<pre><code>.nudged {
+  position: relative;
+  top: 10px;    /* move down 10px from its normal position */
+  left: 20px;   /* move right 20px */
+}</code></pre>
+
+<p><code>position: relative</code> is also used to create a <strong>positioning context</strong> for absolutely positioned children.</p>
+
+<h2>absolute</h2>
+
+<p>The element is removed from normal flow and positioned relative to its nearest ancestor that has a non-static <code>position</code>. If no such ancestor exists, it positions relative to the page.</p>
+
+<pre><code>.card {
+  position: relative; /* positioning context */
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The most common pattern: set <code>position: relative</code> on a parent and <code>position: absolute</code> on a child to pin the child to a corner or edge of the parent.</p>
+</div>
+
+<h2>fixed</h2>
+
+<p>The element is removed from normal flow and positioned relative to the <strong>viewport</strong>. It stays in place when the page scrolls — ideal for sticky headers, floating buttons, and overlays.</p>
+
+<pre><code>.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}</code></pre>
+
+<h2>sticky</h2>
+
+<p>A hybrid of <code>relative</code> and <code>fixed</code>. The element scrolls normally until it hits a threshold, then sticks in place.</p>
+
+<pre><code>.section-header {
+  position: sticky;
+  top: 0;             /* sticks when it reaches the top of the viewport */
+  background: white;
+  z-index: 10;
+}</code></pre>
+
+<h2>z-index</h2>
+
+<p>When positioned elements overlap, <code>z-index</code> controls which one appears on top. Higher values sit in front of lower values.</p>
+
+<pre><code>.modal {
+  position: fixed;
+  z-index: 1000;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 999;
+}
+
+.navbar {
+  position: sticky;
+  z-index: 100;
+}</code></pre>
+
+<p><code>z-index</code> only works on elements with a <code>position</code> other than <code>static</code>.</p>
+
+<h2>Centering with absolute positioning</h2>
+
+<pre><code>.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+<p>This is a classic trick — offset by 50% then pull back by half the element's own size using <code>transform</code>.</p>

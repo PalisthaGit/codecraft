@@ -1,0 +1,112 @@
+<div class="definition">
+  CSS <strong>transitions</strong> smoothly animate a property from one value to another when it changes. <strong>Animations</strong> (using <code>@keyframes</code>) let you define multi-step sequences that run automatically or on a loop.
+</div>
+
+<p>Without transitions, property changes happen instantly — a button turns blue the moment you hover. With transitions, changes animate over time, making your UI feel polished and alive.</p>
+
+<h2>The transition Property</h2>
+
+<p>Add <code>transition</code> to an element to animate changes to its properties:</p>
+
+<pre><code>.button {
+  background-color: #6367ff;
+  transition: background-color 200ms ease;
+}
+
+.button:hover {
+  background-color: #5254e8;
+}</code></pre>
+
+<p>The shorthand takes: <code>property duration timing-function delay</code></p>
+
+<pre><code>transition: all 200ms ease;
+transition: background-color 300ms ease-in-out;
+transition: transform 200ms ease, opacity 150ms ease;</code></pre>
+
+<h2>Timing Functions</h2>
+
+<pre><code>transition-timing-function: ease;         /* slow start, fast middle, slow end (default) */
+transition-timing-function: linear;       /* constant speed */
+transition-timing-function: ease-in;      /* slow start */
+transition-timing-function: ease-out;     /* slow end */
+transition-timing-function: ease-in-out;  /* slow start and end */</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>ease-out</code> feels the most natural for most UI interactions — elements that enter the screen should decelerate as they arrive. Reserve <code>ease-in</code> for elements leaving the screen.</p>
+</div>
+
+<h2>Transitioning Multiple Properties</h2>
+
+<pre><code>.card {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99,103,255,0.15);
+}</code></pre>
+
+<h2>CSS Animations with @keyframes</h2>
+
+<p>For more complex, multi-step animations, use <code>@keyframes</code>:</p>
+
+<pre><code>@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero {
+  animation: fadeIn 400ms ease-out forwards;
+}</code></pre>
+
+<p>The <code>animation</code> shorthand: <code>name duration timing delay iteration direction fill-mode</code></p>
+
+<h2>Animation Properties</h2>
+
+<pre><code>.spinner {
+  animation-name: spin;
+  animation-duration: 800ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;  /* loop forever */
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}</code></pre>
+
+<h2>Keyframe Percentages</h2>
+
+<p>Use percentages to define intermediate steps:</p>
+
+<pre><code>@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.notification {
+  animation: pulse 2s ease-in-out infinite;
+}</code></pre>
+
+<h2>Reducing Motion</h2>
+
+<p>Always respect users who prefer reduced motion — some people experience motion sickness from animations:</p>
+
+<pre><code>@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre>
