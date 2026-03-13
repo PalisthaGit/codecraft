@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import NewsletterSubscribe from "@/components/home/NewsletterSubscribe";
 
 export const metadata: Metadata = {
   title: "Codecraft — Free HTML, CSS & JavaScript Tutorials for Beginners",
@@ -206,6 +207,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Newsletter */}
+      <NewsletterSubscribe />
     </div>
   );
 }
