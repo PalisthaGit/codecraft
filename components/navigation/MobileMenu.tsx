@@ -28,11 +28,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         }`}
         aria-label="Mobile navigation"
       >
-        <div className="flex items-center justify-between h-16 px-4 border-b border-slate-200 shrink-0">
-          <span className="text-lg font-bold text-slate-900">Codecraft</span>
+        <div className="flex items-center justify-between h-16 px-4 border-b border-[#e5e7eb] shrink-0">
+          <span className="text-lg font-bold text-[#0f172a]">Codecraft</span>
           <button
             onClick={onClose}
-            className="p-2 rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+            className="p-2 rounded-md text-[#64748b] hover:text-[#0f172a] hover:bg-[#f8fafc] transition-colors"
             aria-label="Close menu"
           >
             <svg

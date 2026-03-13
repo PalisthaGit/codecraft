@@ -12,7 +12,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Desktop sidebar */}
       <Sidebar />
 
@@ -25,10 +25,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
       {/* Content area — offset by sidebar width on desktop */}
       <div className="md:pl-64 flex flex-col min-h-screen">
         {/* Mobile header */}
-        <header className="md:hidden flex items-center h-16 px-4 bg-white border-b border-slate-200 shrink-0">
+        <header className="md:hidden flex items-center h-16 px-4 bg-white border-b border-[#e5e7eb] shrink-0">
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="p-2 rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+            className="p-2 rounded-md text-[#64748b] hover:text-[#0f172a] hover:bg-[#f8fafc] transition-colors"
             aria-label="Open menu"
           >
             <svg
@@ -45,7 +45,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
               />
             </svg>
           </button>
-          <span className="ml-3 text-lg font-bold text-slate-900">
+          <span className="ml-3 text-lg font-bold text-[#0f172a]">
             Codecraft
           </span>
         </header>

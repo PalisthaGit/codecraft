@@ -48,7 +48,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
     <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
       {sections.map((section) => (
         <div key={section.title}>
-          <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-[#64748b]">
             {section.title}
           </p>
           <ul className="space-y-1">
@@ -62,7 +62,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
                     className={`block px-3 py-2 text-sm rounded-md transition-colors ${
                       isActive
                         ? "bg-[#6367ff] text-white font-semibold"
-                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                        : "text-[#64748b] hover:bg-[#f8fafc] hover:text-[#0f172a]"
                     }`}
                   >
                     {item.label}
