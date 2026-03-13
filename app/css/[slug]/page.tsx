@@ -9,6 +9,7 @@ import {
 } from "@/lib/contentRegistry";
 import ContentNavigation from "@/components/tutorial/ContentNavigation";
 import HtmlContentRenderer from "@/components/ui/HtmlContentRenderer";
+import ArticleFeedback from "@/components/tutorial/ArticleFeedback";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,8 @@ export default async function CssLessonPage({ params }: Props) {
       <HtmlContentRenderer html={html} />
 
       <div className="h-px bg-[#e5e7eb] mt-10" />
+
+      <ArticleFeedback />
 
       <ContentNavigation basePath="/css" prev={prev} next={next} />
     </article>

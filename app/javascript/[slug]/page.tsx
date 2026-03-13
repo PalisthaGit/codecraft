@@ -4,6 +4,7 @@ import { loadHtmlContent } from "@/lib/loadHtmlContent";
 import { getContentMeta, getPrevContent, getNextContent, contentRegistry } from "@/lib/contentRegistry";
 import ContentNavigation from "@/components/tutorial/ContentNavigation";
 import HtmlContentRenderer from "@/components/ui/HtmlContentRenderer";
+import ArticleFeedback from "@/components/tutorial/ArticleFeedback";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -65,6 +66,8 @@ export default async function JavaScriptLessonPage({ params }: Props) {
       <HtmlContentRenderer html={html} />
 
       <div className="h-px bg-[#e5e7eb] mt-10" />
+
+      <ArticleFeedback />
 
       <ContentNavigation basePath="/javascript" prev={prev} next={next} />
     </article>
