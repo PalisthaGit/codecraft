@@ -1,0 +1,87 @@
+<div class="definition">
+  The <code>&lt;img&gt;</code> element embeds images into a web page. It's a self-closing tag — it has no content between opening and closing tags — and it requires at least two attributes: <code>src</code> and <code>alt</code>.
+</div>
+
+<p>Images are one of the most powerful tools for communication on the web. A well-placed image can illustrate a concept better than a paragraph of text. Understanding how to use images correctly — including accessibility — is an essential HTML skill.</p>
+
+<h2>Basic Image Syntax</h2>
+
+<pre><code>&lt;img src="photo.jpg" alt="A mountain landscape at sunset"&gt;</code></pre>
+
+<p><code>src</code> is the path to the image file. <code>alt</code> is a text description of the image.</p>
+
+<h2>The alt Attribute</h2>
+
+<p>The <code>alt</code> attribute is not optional — it serves two critical purposes:</p>
+
+<ul>
+  <li><strong>Accessibility</strong> — screen readers read the alt text aloud for users who can't see the image</li>
+  <li><strong>Fallback</strong> — if the image fails to load, the alt text is shown in its place</li>
+</ul>
+
+<p>Write alt text that describes what the image shows, not what it is:</p>
+
+<pre><code>&lt;!-- Too vague --&gt;
+&lt;img src="dog.jpg" alt="image"&gt;
+
+&lt;!-- Good --&gt;
+&lt;img src="dog.jpg" alt="A golden retriever playing fetch on a beach"&gt;</code></pre>
+
+<p>For decorative images that add no information, use an empty alt attribute so screen readers skip them:</p>
+
+<pre><code>&lt;img src="divider.png" alt=""&gt;</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Alt text is also used by search engines to understand image content. Good alt text improves your page's SEO as well as its accessibility.</p>
+</div>
+
+<h2>Width and Height</h2>
+
+<p>Always specify <code>width</code> and <code>height</code> on images. This reserves space in the layout before the image loads, preventing the page from jumping around:</p>
+
+<pre><code>&lt;img src="hero.jpg" alt="Code editor screenshot" width="800" height="450"&gt;</code></pre>
+
+<p>These values are in pixels and should match the image's natural dimensions. CSS can still resize the image visually.</p>
+
+<h2>Image Paths</h2>
+
+<p>Like links, image paths can be relative or absolute:</p>
+
+<pre><code>&lt;!-- Relative path — image is in the same folder --&gt;
+&lt;img src="photo.jpg" alt="..."&gt;
+
+&lt;!-- Relative path — image is in an images subfolder --&gt;
+&lt;img src="images/photo.jpg" alt="..."&gt;
+
+&lt;!-- Absolute URL — image hosted externally --&gt;
+&lt;img src="https://example.com/images/photo.jpg" alt="..."&gt;</code></pre>
+
+<h2>Responsive Images</h2>
+
+<p>To make sure images don't overflow their container on small screens, add this CSS:</p>
+
+<pre><code>img {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+
+<p>This ensures the image scales down to fit its container while maintaining its aspect ratio.</p>
+
+<h2>The figure and figcaption Elements</h2>
+
+<p>When an image needs a caption, wrap it in <code>&lt;figure&gt;</code> and add a <code>&lt;figcaption&gt;</code>:</p>
+
+<pre><code>&lt;figure&gt;
+  &lt;img src="html-diagram.png" alt="Diagram showing the structure of an HTML element" width="600" height="300"&gt;
+  &lt;figcaption&gt;An HTML element consists of an opening tag, content, and a closing tag.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+<h2>Common Image Formats</h2>
+
+<ul>
+  <li><strong>JPEG (.jpg)</strong> — best for photographs and complex images with many colors</li>
+  <li><strong>PNG (.png)</strong> — best for images with transparency or sharp edges like logos and icons</li>
+  <li><strong>SVG (.svg)</strong> — vector format, scales perfectly at any size, ideal for icons and illustrations</li>
+  <li><strong>WebP (.webp)</strong> — modern format with better compression than JPEG and PNG, widely supported</li>
+</ul>

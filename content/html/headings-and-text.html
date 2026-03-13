@@ -1,0 +1,81 @@
+<div class="definition">
+  HTML provides six heading levels (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>) and several text elements for paragraphs, emphasis, and inline formatting. Using them correctly gives your content structure and meaning.
+</div>
+
+<p>The words on a web page aren't just text — they have hierarchy. Headings tell readers (and search engines) what a page is about and how its sections relate to each other. Inline elements like <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> add emphasis without breaking the flow of a paragraph.</p>
+
+<h2>Headings</h2>
+
+<p>There are six heading levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least important):</p>
+
+<pre><code>&lt;h1&gt;Page Title&lt;/h1&gt;
+&lt;h2&gt;Main Section&lt;/h2&gt;
+&lt;h3&gt;Sub-section&lt;/h3&gt;
+&lt;h4&gt;Smaller heading&lt;/h4&gt;
+&lt;h5&gt;Even smaller&lt;/h5&gt;
+&lt;h6&gt;Smallest heading&lt;/h6&gt;</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Every page should have exactly one <code>&lt;h1&gt;</code> — it's the main title. Think of headings like a document outline: <code>&lt;h2&gt;</code> for top-level sections, <code>&lt;h3&gt;</code> for sub-sections inside those. Don't skip levels (e.g. don't jump from <code>&lt;h2&gt;</code> to <code>&lt;h4&gt;</code>).</p>
+</div>
+
+<h2>Paragraphs</h2>
+
+<p>The <code>&lt;p&gt;</code> tag wraps a block of text into a paragraph. Browsers add spacing above and below each paragraph automatically:</p>
+
+<pre><code>&lt;p&gt;This is the first paragraph. It can contain as much text as you need.&lt;/p&gt;
+
+&lt;p&gt;This is the second paragraph. Each one is treated as a separate block.&lt;/p&gt;</code></pre>
+
+<h2>Bold and Italic</h2>
+
+<p>Use <code>&lt;strong&gt;</code> for important text (rendered bold) and <code>&lt;em&gt;</code> for emphasis (rendered italic):</p>
+
+<pre><code>&lt;p&gt;Please &lt;strong&gt;save your work&lt;/strong&gt; before closing the tab.&lt;/p&gt;
+&lt;p&gt;The answer is &lt;em&gt;always&lt;/em&gt; in the last place you look.&lt;/p&gt;</code></pre>
+
+<p>You may also see <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> used for bold and italic. The difference is semantic: <code>&lt;strong&gt;</code> conveys importance, while <code>&lt;b&gt;</code> is just visual styling with no added meaning. Prefer <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> for meaningful content.</p>
+
+<h2>Line Breaks</h2>
+
+<p>HTML ignores extra whitespace in your source code — multiple spaces or line breaks collapse into one. To force a line break inside a paragraph, use the self-closing <code>&lt;br&gt;</code> tag:</p>
+
+<pre><code>&lt;p&gt;
+  123 Main Street&lt;br&gt;
+  Springfield, IL 62701
+&lt;/p&gt;</code></pre>
+
+<h2>Inline Code</h2>
+
+<p>Use <code>&lt;code&gt;</code> to display inline code or technical terms in a monospace font:</p>
+
+<pre><code>&lt;p&gt;Use the &lt;code&gt;margin&lt;/code&gt; property to add space outside an element.&lt;/p&gt;</code></pre>
+
+<h2>Blockquotes</h2>
+
+<p>Use <code>&lt;blockquote&gt;</code> for longer quoted passages:</p>
+
+<pre><code>&lt;blockquote&gt;
+  &lt;p&gt;The web does not just connect machines, it connects people.&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+
+<h2>Horizontal Rule</h2>
+
+<p>The <code>&lt;hr&gt;</code> element creates a thematic break — a horizontal divider between sections:</p>
+
+<pre><code>&lt;p&gt;End of one section.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Start of the next section.&lt;/p&gt;</code></pre>
+
+<h2>Putting It Together</h2>
+
+<pre><code>&lt;h1&gt;My Favourite Recipe&lt;/h1&gt;
+
+&lt;p&gt;This is my &lt;strong&gt;all-time favourite&lt;/strong&gt; pasta dish. It's&lt;em&gt;incredibly&lt;/em&gt; simple to make.&lt;/p&gt;
+
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;p&gt;You'll need spaghetti, garlic, olive oil, and parmesan.&lt;/p&gt;
+
+&lt;h2&gt;Instructions&lt;/h2&gt;
+&lt;p&gt;Cook the pasta. Meanwhile, fry the garlic in oil. Combine and serve.&lt;/p&gt;</code></pre>
