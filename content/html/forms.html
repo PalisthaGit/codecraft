@@ -1,0 +1,97 @@
+<div class="definition">
+  HTML forms let users enter data and send it to a server. They're how login pages, search bars, contact forms, and checkouts work. The <code>&lt;form&gt;</code> element is the container; <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;button&gt;</code> go inside it.
+</div>
+
+<p>Almost every web app needs forms. Whether it's a search box, a sign-up page, or a settings panel — forms are how users communicate with a site.</p>
+
+<h2>The Form Element</h2>
+
+<p>The <code>&lt;form&gt;</code> element wraps all your form controls. The <code>action</code> attribute sets where the data goes; <code>method</code> sets how it's sent.</p>
+
+<pre><code>&lt;form action="/submit" method="post"&gt;
+  &lt;!-- inputs go here --&gt;
+&lt;/form&gt;</code></pre>
+
+<h2>Text Inputs</h2>
+
+<p>The most common form element. The <code>type</code> attribute controls what kind of input it is:</p>
+
+<pre><code>&lt;input type="text" name="username" placeholder="Enter your name"&gt;
+&lt;input type="email" name="email" placeholder="you@example.com"&gt;
+&lt;input type="password" name="password" placeholder="Password"&gt;
+&lt;input type="number" name="age" min="1" max="120"&gt;</code></pre>
+
+<h2>Labels</h2>
+
+<p>Always pair inputs with <code>&lt;label&gt;</code> elements. The <code>for</code> attribute should match the input's <code>id</code>. This makes the label clickable and improves accessibility:</p>
+
+<pre><code>&lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Skipping labels is one of the most common accessibility mistakes. Screen readers use labels to describe inputs to users who can't see the screen. Always include them.</p>
+</div>
+
+<h2>Textarea</h2>
+
+<p>For multi-line text input, use <code>&lt;textarea&gt;</code>:</p>
+
+<pre><code>&lt;label for="message"&gt;Message&lt;/label&gt;
+&lt;textarea id="message" name="message" rows="4" placeholder="Write your message..."&gt;&lt;/textarea&gt;</code></pre>
+
+<h2>Select Dropdowns</h2>
+
+<pre><code>&lt;label for="country"&gt;Country&lt;/label&gt;
+&lt;select id="country" name="country"&gt;
+  &lt;option value=""&gt;Select a country&lt;/option&gt;
+  &lt;option value="us"&gt;United States&lt;/option&gt;
+  &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;
+  &lt;option value="ca"&gt;Canada&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+<h2>Checkboxes and Radio Buttons</h2>
+
+<pre><code>&lt;!-- Checkboxes — multiple can be selected --&gt;
+&lt;label&gt;
+  &lt;input type="checkbox" name="terms" value="agreed"&gt;
+  I agree to the terms
+&lt;/label&gt;
+
+&lt;!-- Radio buttons — only one can be selected --&gt;
+&lt;label&gt;
+  &lt;input type="radio" name="plan" value="free"&gt; Free
+&lt;/label&gt;
+&lt;label&gt;
+  &lt;input type="radio" name="plan" value="pro"&gt; Pro
+&lt;/label&gt;</code></pre>
+
+<h2>Submit Button</h2>
+
+<pre><code>&lt;button type="submit"&gt;Send Message&lt;/button&gt;
+
+&lt;!-- Or using input --&gt;
+&lt;input type="submit" value="Send Message"&gt;</code></pre>
+
+<h2>Required Fields and Validation</h2>
+
+<p>HTML has built-in validation attributes that work without any JavaScript:</p>
+
+<pre><code>&lt;input type="email" name="email" required&gt;
+&lt;input type="text" name="username" required minlength="3" maxlength="20"&gt;
+&lt;input type="number" name="age" min="18" max="99"&gt;</code></pre>
+
+<h2>A Complete Form Example</h2>
+
+<pre><code>&lt;form action="/contact" method="post"&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input type="text" id="name" name="name" required&gt;
+
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required&gt;
+
+  &lt;label for="message"&gt;Message&lt;/label&gt;
+  &lt;textarea id="message" name="message" rows="4" required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;</code></pre>
