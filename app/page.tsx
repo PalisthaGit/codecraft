@@ -100,46 +100,53 @@ export default function HomePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-16">
       {/* Hero */}
-      <section className="pt-6">
-        <span className="inline-block bg-[#6367ff]/10 text-[#6367ff] text-[0.72rem] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-5">
-          Free &amp; beginner-friendly
-        </span>
-        <h1 className="text-4xl sm:text-5xl font-black text-[#0f172a] leading-tight tracking-tight">
-          Learn to Code,
-          <br />
-          One Step at a Time
-        </h1>
-        <HeroAnimation />
-        <p className="text-lg text-[#64748b] max-w-xl leading-relaxed">
-          Codecraft breaks programming down into small, manageable lessons. No
-          jargon. No overwhelm. Just clear explanations and real examples.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/html/introduction"
-            className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-bold rounded-[10px] hover:bg-[#5254e8] hover:shadow-[0_4px_16px_rgba(99,103,255,0.4)] transition-all duration-200"
-          >
-            Start Learning
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <section className="pt-6 flex flex-col lg:flex-row lg:items-center lg:gap-12">
+        {/* Text */}
+        <div className="flex-1 min-w-0">
+          <span className="inline-block bg-[#6367ff]/10 text-[#6367ff] text-[0.72rem] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-5">
+            Free &amp; beginner-friendly
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-black text-[#0f172a] leading-tight tracking-tight">
+            Learn to Code,
+            <br />
+            One Step at a Time
+          </h1>
+          <p className="mt-5 text-lg text-[#64748b] max-w-xl leading-relaxed">
+            Codecraft breaks programming down into small, manageable lessons. No
+            jargon. No overwhelm. Just clear explanations and real examples.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/html/introduction"
+              className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-bold rounded-[10px] hover:bg-[#5254e8] hover:shadow-[0_4px_16px_rgba(99,103,255,0.4)] transition-all duration-200"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Link>
-          <Link
-            href="/html"
-            className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-bold rounded-[10px] border-[1.5px] border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-all duration-200"
-          >
-            Browse Lessons
-          </Link>
+              Start Learning
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </Link>
+            <Link
+              href="/html"
+              className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-bold rounded-[10px] border-[1.5px] border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-all duration-200"
+            >
+              Browse Lessons
+            </Link>
+          </div>
+        </div>
+
+        {/* Animation */}
+        <div className="mt-12 lg:mt-0 flex justify-center lg:justify-end">
+          <HeroAnimation />
         </div>
       </section>
 
