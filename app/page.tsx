@@ -65,32 +65,25 @@ const features = [
 
 const tracks = [
   {
-    title: "Getting Started",
-    description:
-      "Learn what coding is, why it matters, and set up everything you need to write your first line of code.",
-    lessons: 2,
-    href: "/tutorial/introduction",
-  },
-  {
     title: "HTML Basics",
     description:
       "Understand how web pages are structured using HTML elements, documents, and forms.",
     lessons: 3,
-    href: "/tutorial/html-structure",
+    href: "/html",
   },
   {
     title: "CSS Fundamentals",
     description:
       "Style your pages with CSS — control colors, spacing, layout, and more.",
-    lessons: 3,
-    href: "/tutorial/css-selectors",
+    lessons: 5,
+    href: "/css",
   },
   {
     title: "JavaScript",
     description:
       "Add interactivity to your pages by learning variables, functions, and DOM manipulation.",
     lessons: 3,
-    href: "/tutorial/js-variables",
+    href: "/javascript",
   },
 ];
 
@@ -113,7 +106,7 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/tutorial/introduction"
+            href="/html/introduction"
             className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-bold rounded-[10px] hover:bg-[#5254e8] hover:shadow-[0_4px_16px_rgba(99,103,255,0.4)] transition-all duration-200"
           >
             Start Learning
@@ -132,7 +125,7 @@ export default function HomePage() {
             </svg>
           </Link>
           <Link
-            href="/tutorial/html-structure"
+            href="/html"
             className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-bold rounded-[10px] border-[1.5px] border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-all duration-200"
           >
             Browse Lessons
