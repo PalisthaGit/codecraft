@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CodeBlock from "@/components/ui/CodeBlock";
 import OutputBlock from "@/components/ui/OutputBlock";
 import type { Lesson } from "@/lib/lessons";
@@ -8,24 +9,56 @@ interface TutorialContentProps {
 
 export default function TutorialContent({ lesson }: TutorialContentProps) {
   return (
-    <article className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_4px_12px_rgba(0,0,0,0.05)] p-6 md:p-8">
-      {/* Lesson header */}
-      <header className="mb-8 pb-6 border-b border-[#e5e7eb]">
-        <h1 className="text-3xl font-bold text-[#0f172a] leading-tight">
-          {lesson.title}
-        </h1>
-        <p className="mt-2 text-[#64748b] text-base">{lesson.description}</p>
-      </header>
+    <article>
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-1.5 text-xs text-[#64748b] mb-6">
+        <Link
+          href="/"
+          className="text-[#6367ff] font-semibold hover:underline"
+        >
+          Tutorial
+        </Link>
+        <span className="text-[#e5e7eb]">›</span>
+        <span className="text-[#6367ff] font-semibold">{lesson.section}</span>
+        <span className="text-[#e5e7eb]">›</span>
+        <span>{lesson.title}</span>
+      </nav>
+
+      {/* Section tag */}
+      <span className="inline-block bg-[#6367ff]/10 text-[#6367ff] text-[0.72rem] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-4">
+        {lesson.section}
+      </span>
+
+      {/* Title */}
+      <h1 className="text-[clamp(1.6rem,4vw,2.2rem)] font-black text-[#0f172a] leading-tight tracking-tight mb-4">
+        {lesson.title}
+      </h1>
+
+      {/* Metadata */}
+      <div className="flex items-center gap-4 flex-wrap text-xs text-[#64748b] font-semibold mb-8">
+        <span>⏱ {lesson.readTime}</span>
+        <span>📖 {lesson.difficulty}</span>
+      </div>
 
       {/* Content blocks */}
-      <div className="space-y-4">
+      <div>
         {lesson.content.map((block, index) => {
           switch (block.type) {
+            case "definition":
+              return (
+                <div
+                  key={index}
+                  className="bg-[#f0f4ff] border border-[#6367ff]/25 border-l-4 border-l-[#6367ff] rounded-lg px-5 py-4 mb-5 text-base font-semibold text-[#0f172a] leading-[1.7]"
+                >
+                  {block.text}
+                </div>
+              );
+
             case "heading":
               return (
                 <h2
                   key={index}
-                  className="text-xl font-semibold text-[#0f172a] mt-8 mb-3 first:mt-0"
+                  className="text-[1.3rem] font-extrabold text-[#0f172a] mt-9 mb-3"
                 >
                   {block.text}
                 </h2>
@@ -35,7 +68,7 @@ export default function TutorialContent({ lesson }: TutorialContentProps) {
               return (
                 <p
                   key={index}
-                  className="text-[#0f172a] leading-relaxed text-base"
+                  className="text-[0.95rem] leading-[1.8] text-[#374151] mb-4"
                 >
                   {block.text}
                 </p>
@@ -63,22 +96,10 @@ export default function TutorialContent({ lesson }: TutorialContentProps) {
               return (
                 <div
                   key={index}
-                  className="my-5 flex gap-3 bg-[#ffdbfd] border border-[#c9beff] rounded-[10px] px-4 py-3"
+                  className="flex gap-3 items-start bg-gradient-to-br from-[#ffdbfd]/40 to-[#c9beff]/25 border border-[#c9beff]/60 rounded-[12px] px-5 py-4 mt-2 mb-7"
                 >
-                  <svg
-                    className="w-5 h-5 text-[#6367ff] shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <p className="text-sm text-[#0f172a] leading-relaxed">
+                  <span className="text-xl shrink-0 mt-0.5">💡</span>
+                  <p className="text-sm leading-[1.6] text-[#0f172a] m-0">
                     {block.text}
                   </p>
                 </div>
@@ -89,6 +110,9 @@ export default function TutorialContent({ lesson }: TutorialContentProps) {
           }
         })}
       </div>
+
+      {/* Divider */}
+      <div className="h-px bg-[#e5e7eb] mt-10" />
     </article>
   );
 }

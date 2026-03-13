@@ -2,6 +2,15 @@
 
 import { useState } from "react";
 
+const LANG_DOTS: Record<string, string> = {
+  html: "#e44d26",
+  css: "#264de4",
+  javascript: "#f7df1e",
+  js: "#f7df1e",
+  typescript: "#3178c6",
+  ts: "#3178c6",
+};
+
 interface CodeBlockProps {
   code: string;
   language?: string;
@@ -16,26 +25,36 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  const dotColor = language
+    ? (LANG_DOTS[language.toLowerCase()] ?? "#6366f1")
+    : "#6366f1";
+
   return (
-    <div className="rounded-[10px] overflow-hidden border border-[#334155] my-5">
-      {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#0f172a] border-b border-[#334155]">
-        {language ? (
-          <span className="text-xs font-medium text-[#e2e8f0]/50 uppercase tracking-wider">
-            {language}
-          </span>
-        ) : (
-          <span />
-        )}
+    <div className="rounded-[12px] overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.12)] mt-5 mb-7">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-[10px] bg-[#0f172a] border-b border-white/[0.07]">
+        <div className="flex items-center gap-2">
+          <span
+            className="w-2 h-2 rounded-full shrink-0"
+            style={{ background: dotColor }}
+          />
+          {language && (
+            <span className="text-[0.72rem] font-bold tracking-[0.08em] uppercase text-white/40">
+              {language}
+            </span>
+          )}
+        </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs font-medium text-[#e2e8f0]/50 hover:text-[#e2e8f0] transition-colors"
+          className={`flex items-center gap-1.5 text-[0.72rem] font-semibold px-[10px] py-1 rounded-[6px] transition-all bg-white/[0.08] hover:bg-white/[0.15] ${
+            copied ? "text-[#4ade80]" : "text-white/50 hover:text-white"
+          }`}
           aria-label="Copy code"
         >
           {copied ? (
             <>
               <svg
-                className="w-3.5 h-3.5 text-green-400"
+                className="w-3 h-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -47,12 +66,12 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="text-green-400">Copied!</span>
+              Copied!
             </>
           ) : (
             <>
               <svg
-                className="w-3.5 h-3.5"
+                className="w-3 h-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -71,7 +90,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
       </div>
 
       {/* Code body */}
-      <pre className="bg-[#1e293b] text-[#e2e8f0] font-mono text-sm leading-relaxed px-5 py-4 overflow-x-auto">
+      <pre className="bg-[#1e293b] text-[#e2e8f0] font-mono text-sm leading-[1.7] px-5 py-5 overflow-x-auto">
         <code>{code}</code>
       </pre>
     </div>

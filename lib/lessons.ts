@@ -1,6 +1,7 @@
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
+  | { type: "definition"; text: string }
   | { type: "code"; code: string; language?: string }
   | { type: "output"; content: string; label?: string }
   | { type: "tip"; text: string };
@@ -9,6 +10,9 @@ export interface Lesson {
   slug: string;
   title: string;
   description: string;
+  section: string;
+  readTime: string;
+  difficulty: string;
   content: ContentBlock[];
 }
 
@@ -18,10 +22,13 @@ export const lessons: Lesson[] = [
     title: "Introduction to Coding",
     description:
       "Understand what programming is and why it is a valuable skill to learn.",
+    section: "Getting Started",
+    readTime: "8 min read",
+    difficulty: "Beginner",
     content: [
       {
-        type: "paragraph",
-        text: "Programming is the process of writing instructions that a computer can follow. These instructions tell the computer what to do, step by step — from displaying text on a screen to processing data or building websites.",
+        type: "definition",
+        text: "Programming is the process of writing instructions that a computer can follow — step by step — to perform a task, display information, or power an application.",
       },
       {
         type: "paragraph",
@@ -64,6 +71,9 @@ export const lessons: Lesson[] = [
     title: "Environment Setup",
     description:
       "Set up everything you need to start writing and running code.",
+    section: "Getting Started",
+    readTime: "6 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -102,10 +112,13 @@ export const lessons: Lesson[] = [
     title: "HTML Document Structure",
     description:
       "Learn how every web page is built using a standard HTML document structure.",
+    section: "HTML Basics",
+    readTime: "7 min read",
+    difficulty: "Beginner",
     content: [
       {
-        type: "paragraph",
-        text: "HTML stands for HyperText Markup Language. It is the language used to create the structure and content of web pages. Every website you visit is built with HTML at its core.",
+        type: "definition",
+        text: "HTML (HyperText Markup Language) is the standard language used to create web pages. It describes the structure and content of a page using a system of tags and elements.",
       },
       {
         type: "heading",
@@ -144,6 +157,9 @@ export const lessons: Lesson[] = [
     title: "Common HTML Elements",
     description:
       "Explore the most-used HTML tags for text, images, and links.",
+    section: "HTML Basics",
+    readTime: "8 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -190,6 +206,9 @@ export const lessons: Lesson[] = [
     slug: "html-forms",
     title: "Forms & Inputs",
     description: "Learn how to collect user input using HTML forms.",
+    section: "HTML Basics",
+    readTime: "6 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -215,7 +234,14 @@ export const lessons: Lesson[] = [
     title: "CSS Selectors",
     description:
       "Learn how to target HTML elements and apply styles using CSS selectors.",
+    section: "CSS Fundamentals",
+    readTime: "7 min read",
+    difficulty: "Beginner",
     content: [
+      {
+        type: "definition",
+        text: "A CSS selector is the part of a CSS rule that identifies which HTML elements to style. Selectors are the foundation of styling — without them, your styles have nothing to target.",
+      },
       {
         type: "paragraph",
         text: "CSS (Cascading Style Sheets) controls how HTML elements look — colors, spacing, fonts, and layout. A CSS rule has two parts: a selector (what to style) and declarations (how to style it).",
@@ -240,6 +266,9 @@ export const lessons: Lesson[] = [
     title: "The Box Model",
     description:
       "Understand how CSS calculates the size and spacing of every element.",
+    section: "CSS Fundamentals",
+    readTime: "6 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -261,6 +290,9 @@ export const lessons: Lesson[] = [
     title: "Flexbox Layout",
     description:
       "Use CSS Flexbox to build flexible, responsive one-dimensional layouts.",
+    section: "CSS Fundamentals",
+    readTime: "8 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -287,10 +319,17 @@ export const lessons: Lesson[] = [
     title: "Variables & Types",
     description:
       "Learn how to store and work with data in JavaScript using variables.",
+    section: "JavaScript",
+    readTime: "7 min read",
+    difficulty: "Beginner",
     content: [
       {
+        type: "definition",
+        text: "A variable is a named container that holds a value. Variables let you store data — like a number, a word, or a true/false answer — and refer to it later in your code.",
+      },
+      {
         type: "paragraph",
-        text: "A variable is a named container for storing a value. In JavaScript, you declare variables using let (for values that change) or const (for values that stay fixed).",
+        text: "In JavaScript, you declare variables using let (for values that change) or const (for values that stay fixed).",
       },
       {
         type: "code",
@@ -313,6 +352,9 @@ export const lessons: Lesson[] = [
     title: "Functions",
     description:
       "Learn how to group reusable logic into functions in JavaScript.",
+    section: "JavaScript",
+    readTime: "7 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",
@@ -339,6 +381,9 @@ export const lessons: Lesson[] = [
     title: "DOM Manipulation",
     description:
       "Learn how JavaScript interacts with HTML to make pages dynamic.",
+    section: "JavaScript",
+    readTime: "8 min read",
+    difficulty: "Beginner",
     content: [
       {
         type: "paragraph",

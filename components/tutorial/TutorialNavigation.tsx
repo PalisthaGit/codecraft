@@ -14,33 +14,23 @@ export default function TutorialNavigation({
 
   return (
     <nav
-      className="flex items-stretch gap-3 mt-6"
+      className="grid grid-cols-2 gap-4 mt-10 mb-2"
       aria-label="Lesson navigation"
     >
       {/* Previous */}
-      <div className="flex-1">
+      <div>
         {prev ? (
           <Link
             href={`/tutorial/${prev.slug}`}
-            className="group flex flex-col h-full gap-1 bg-white border border-[#e5e7eb] rounded-[10px] px-4 py-3 hover:border-[#6367ff] hover:shadow-[0_4px_12px_rgba(99,103,255,0.12)] transition-all"
+            className="group relative flex flex-col pl-12 pr-5 py-5 bg-white border-[1.5px] border-[#e5e7eb] rounded-[14px] hover:border-[#6367ff] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(99,103,255,0.12)] transition-all duration-200"
           >
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-[#64748b] group-hover:text-[#6367ff] transition-colors">
-              <svg
-                className="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Previous
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[#64748b] group-hover:text-[#6367ff] transition-all duration-200 group-hover:-translate-x-0.5">
+              ←
             </span>
-            <span className="text-sm font-semibold text-[#0f172a] leading-snug">
+            <span className="text-[0.72rem] font-bold tracking-[0.08em] uppercase text-[#64748b] mb-1.5">
+              Previous Lesson
+            </span>
+            <span className="text-base font-extrabold text-[#0f172a] leading-snug">
               {prev.title}
             </span>
           </Link>
@@ -50,29 +40,19 @@ export default function TutorialNavigation({
       </div>
 
       {/* Next */}
-      <div className="flex-1">
+      <div>
         {next ? (
           <Link
             href={`/tutorial/${next.slug}`}
-            className="group flex flex-col h-full gap-1 items-end text-right bg-[#6367ff] border border-[#6367ff] rounded-[10px] px-4 py-3 hover:bg-[#8494ff] hover:border-[#8494ff] transition-all"
+            className="group relative flex flex-col items-end text-right pl-5 pr-12 py-5 bg-[#6367ff] border-[1.5px] border-[#6367ff] rounded-[14px] hover:bg-[#5254e8] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(99,103,255,0.35)] transition-all duration-200"
           >
-            <span className="flex items-center gap-1.5 text-xs font-semibold text-white/80 group-hover:text-white transition-colors">
-              Next
-              <svg
-                className="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+            <span className="absolute right-5 top-1/2 -translate-y-1/2 text-white/70 group-hover:text-white transition-all duration-200 group-hover:translate-x-0.5">
+              →
             </span>
-            <span className="text-sm font-semibold text-white leading-snug">
+            <span className="text-[0.72rem] font-bold tracking-[0.08em] uppercase text-white/60 mb-1.5">
+              Next Lesson
+            </span>
+            <span className="text-base font-extrabold text-white leading-snug">
               {next.title}
             </span>
           </Link>
