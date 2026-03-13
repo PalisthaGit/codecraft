@@ -1,0 +1,113 @@
+<div class="definition">
+  <strong>Flexbox</strong> is a CSS layout mode that makes it easy to arrange items in a row or column, distribute space between them, and align them along one or two axes.
+</div>
+
+<p>Before flexbox, centering something vertically in CSS was notoriously difficult. Flexbox changed that. It's now the go-to tool for most one-dimensional layouts — navbars, card rows, button groups, and more.</p>
+
+<h2>Enabling Flexbox</h2>
+
+<p>Add <code>display: flex</code> to a container. Its direct children become <strong>flex items</strong> and are arranged in a row by default.</p>
+
+<pre><code>.container {
+  display: flex;
+}</code></pre>
+
+<h2>flex-direction</h2>
+
+<p>Controls whether items are laid out in a row or column:</p>
+
+<pre><code>.row {
+  display: flex;
+  flex-direction: row;       /* default: left to right */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;    /* top to bottom */
+}</code></pre>
+
+<h2>Alignment</h2>
+
+<p>Two properties control alignment. Think of them as "main axis" and "cross axis":</p>
+
+<ul>
+  <li><code>justify-content</code> — aligns items along the <strong>main axis</strong> (horizontal in a row)</li>
+  <li><code>align-items</code> — aligns items along the <strong>cross axis</strong> (vertical in a row)</li>
+</ul>
+
+<pre><code>.navbar {
+  display: flex;
+  justify-content: space-between;  /* logo on left, links on right */
+  align-items: center;             /* vertically centered */
+}</code></pre>
+
+<p>Common values for <code>justify-content</code>:</p>
+
+<pre><code>justify-content: flex-start;    /* pack to the start (default) */
+justify-content: flex-end;      /* pack to the end */
+justify-content: center;        /* center all items */
+justify-content: space-between; /* first and last at edges, rest evenly spaced */
+justify-content: space-around;  /* equal space around each item */</code></pre>
+
+<h2>Centering an Element</h2>
+
+<p>The classic flexbox trick — centering both horizontally and vertically:</p>
+
+<pre><code>.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>This pattern works for centering a single child inside a container. It's one of the most-used snippets in CSS — worth memorizing.</p>
+</div>
+
+<h2>flex-wrap</h2>
+
+<p>By default, flex items stay on one line even if they overflow. Use <code>flex-wrap: wrap</code> to let them wrap onto the next line:</p>
+
+<pre><code>.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}</code></pre>
+
+<h2>gap</h2>
+
+<p>The <code>gap</code> property adds space between flex items without needing margins:</p>
+
+<pre><code>.buttons {
+  display: flex;
+  gap: 0.75rem;
+}</code></pre>
+
+<h2>flex on Items</h2>
+
+<p>The <code>flex</code> property on individual items controls how they grow and shrink:</p>
+
+<pre><code>.sidebar {
+  flex: 0 0 260px;  /* don't grow, don't shrink, stay 260px */
+}
+
+.main {
+  flex: 1;          /* take up all remaining space */
+}</code></pre>
+
+<h2>A Complete Example</h2>
+
+<pre><code>.page-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.sidebar {
+  flex: 0 0 240px;
+}
+
+.content {
+  flex: 1;
+  min-width: 0; /* prevents overflow on long content */
+}</code></pre>

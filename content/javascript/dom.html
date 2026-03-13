@@ -1,0 +1,110 @@
+<div class="definition">
+  The <strong>DOM</strong> (Document Object Model) is a JavaScript representation of your HTML page. It lets you read and change HTML elements, attributes, and content from JavaScript code.
+</div>
+
+<p>When a browser loads an HTML page, it creates a tree of objects representing every element. JavaScript can reach into that tree, find elements, and modify them — that's how web pages become interactive.</p>
+
+<h2>Selecting Elements</h2>
+
+<p>The most common way to find an element is <code>querySelector</code>, which accepts any CSS selector:</p>
+
+<pre><code>// Select the first matching element
+const heading = document.querySelector("h1");
+const button = document.querySelector(".btn");
+const input = document.querySelector("#email");
+
+// Select all matching elements (returns a NodeList)
+const paragraphs = document.querySelectorAll("p");</code></pre>
+
+<h2>Reading and Changing Content</h2>
+
+<pre><code>const heading = document.querySelector("h1");
+
+// Read text content
+console.log(heading.textContent);   // "Hello, World!"
+
+// Change text content
+heading.textContent = "Welcome to Codecraft";</code></pre>
+
+<pre><code>// innerHTML lets you set HTML, not just text
+const container = document.querySelector(".container");
+container.innerHTML = "&lt;p&gt;New &lt;strong&gt;content&lt;/strong&gt;&lt;/p&gt;";</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Prefer <code>textContent</code> over <code>innerHTML</code> when you're inserting plain text. <code>innerHTML</code> parses HTML, which can be a security risk if the content comes from user input.</p>
+</div>
+
+<h2>Changing Styles</h2>
+
+<pre><code>const box = document.querySelector(".box");
+
+// Set individual styles
+box.style.backgroundColor = "#6367ff";
+box.style.padding = "1rem";
+box.style.borderRadius = "12px";</code></pre>
+
+<h2>Working with Classes</h2>
+
+<p>The <code>classList</code> API is the cleanest way to toggle styles by adding and removing CSS classes:</p>
+
+<pre><code>const card = document.querySelector(".card");
+
+card.classList.add("active");       // add a class
+card.classList.remove("active");    // remove a class
+card.classList.toggle("active");    // add if missing, remove if present
+card.classList.contains("active");  // returns true or false</code></pre>
+
+<h2>Changing Attributes</h2>
+
+<pre><code>const link = document.querySelector("a");
+
+link.getAttribute("href");              // read an attribute
+link.setAttribute("href", "/about");    // set an attribute
+link.removeAttribute("target");         // remove an attribute</code></pre>
+
+<h2>Event Listeners</h2>
+
+<p>Events are how you respond to user actions — clicks, keypresses, form submissions, and more:</p>
+
+<pre><code>const button = document.querySelector("button");
+
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});</code></pre>
+
+<p>Using an arrow function:</p>
+
+<pre><code>button.addEventListener("click", () => {
+  button.textContent = "Clicked!";
+  button.style.backgroundColor = "#4ade80";
+});</code></pre>
+
+<h2>The Event Object</h2>
+
+<p>The callback receives an event object with details about what happened:</p>
+
+<pre><code>document.addEventListener("keydown", (event) => {
+  console.log(event.key);   // the key that was pressed
+});
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();   // stop the page from reloading
+  console.log("Form submitted!");
+});</code></pre>
+
+<h2>Creating and Inserting Elements</h2>
+
+<pre><code>// Create a new element
+const item = document.createElement("li");
+item.textContent = "New item";
+
+// Add it to the page
+const list = document.querySelector("ul");
+list.appendChild(item);</code></pre>
+
+<h2>Removing Elements</h2>
+
+<pre><code>const element = document.querySelector(".remove-me");
+element.remove();</code></pre>

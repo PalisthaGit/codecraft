@@ -1,0 +1,117 @@
+<div class="definition">
+  A <strong>function</strong> is a reusable block of code that performs a task. You define it once and call it as many times as you need, with different inputs each time.
+</div>
+
+<p>Functions are the building blocks of JavaScript programs. Instead of repeating code, you wrap it in a function and call it by name.</p>
+
+<h2>Function Declarations</h2>
+
+<p>The classic way to define a function:</p>
+
+<pre><code>function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+console.log(greet("Alice"));   // "Hello, Alice!"
+console.log(greet("Bob"));     // "Hello, Bob!"</code></pre>
+
+<p>The value after <code>return</code> is sent back to wherever the function was called.</p>
+
+<h2>Parameters and Arguments</h2>
+
+<p><strong>Parameters</strong> are the variables listed in the function definition. <strong>Arguments</strong> are the actual values passed when calling the function.</p>
+
+<pre><code>// name and age are parameters
+function introduce(name, age) {
+  return `${name} is ${age} years old.`;
+}
+
+// "Alice" and 25 are arguments
+console.log(introduce("Alice", 25));</code></pre>
+
+<h2>Default Parameters</h2>
+
+<p>You can provide fallback values for parameters that aren't passed:</p>
+
+<pre><code>function greet(name = "stranger") {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("Alice"));   // "Hello, Alice!"
+console.log(greet());          // "Hello, stranger!"</code></pre>
+
+<h2>Function Expressions</h2>
+
+<p>You can store a function in a variable:</p>
+
+<pre><code>const double = function(n) {
+  return n * 2;
+};
+
+console.log(double(5));   // 10</code></pre>
+
+<h2>Arrow Functions</h2>
+
+<p>Arrow functions are a shorter syntax for function expressions. They're very common in modern JavaScript:</p>
+
+<pre><code>// Traditional
+const square = function(n) {
+  return n * n;
+};
+
+// Arrow function
+const square = (n) => {
+  return n * n;
+};
+
+// Concise arrow (single expression — return is implicit)
+const square = (n) => n * n;
+
+console.log(square(4));   // 16</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>If an arrow function has exactly one parameter and one expression, you can drop both the parentheses and the curly braces: <code>const double = n => n * 2;</code></p>
+</div>
+
+<h2>Functions Calling Functions</h2>
+
+<pre><code>function add(a, b) {
+  return a + b;
+}
+
+function addAndDouble(a, b) {
+  const sum = add(a, b);
+  return sum * 2;
+}
+
+console.log(addAndDouble(3, 4));   // 14</code></pre>
+
+<h2>Scope</h2>
+
+<p>Variables declared inside a function are <strong>local</strong> to that function — they can't be accessed outside it:</p>
+
+<pre><code>function calculate() {
+  const result = 42;   // local variable
+  return result;
+}
+
+console.log(result);   // ReferenceError: result is not defined</code></pre>
+
+<h2>Higher-Order Functions</h2>
+
+<p>Functions can accept other functions as arguments. This is a key pattern in JavaScript:</p>
+
+<pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// map — transform each item
+const doubled = numbers.map(n => n * 2);
+console.log(doubled);   // [2, 4, 6, 8, 10]
+
+// filter — keep items that pass a test
+const evens = numbers.filter(n => n % 2 === 0);
+console.log(evens);     // [2, 4]
+
+// reduce — combine all items into one value
+const sum = numbers.reduce((total, n) => total + n, 0);
+console.log(sum);       // 15</code></pre>

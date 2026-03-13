@@ -1,0 +1,101 @@
+<div class="definition">
+  CSS gives you several ways to specify color — hex codes, RGB, HSL, and named colors. Each format has its strengths, and knowing when to use each one makes working with color much easier.
+</div>
+
+<p>Color is one of the most expressive tools in CSS. You'll use it for text, backgrounds, borders, shadows, and gradients. Understanding color formats lets you write cleaner, more maintainable styles.</p>
+
+<h2>Hex Colors</h2>
+
+<p>Hex (hexadecimal) is the most common color format in CSS. It represents red, green, and blue channels as two-digit hex values:</p>
+
+<pre><code>color: #0f172a;       /* dark navy */
+color: #6367ff;       /* brand purple */
+color: #e5e7eb;       /* light gray */
+color: #ffffff;       /* white */
+color: #000000;       /* black */</code></pre>
+
+<p>You can also use 3-digit shorthand when each pair repeats:</p>
+
+<pre><code>color: #fff;   /* same as #ffffff */
+color: #000;   /* same as #000000 */</code></pre>
+
+<h2>RGB and RGBA</h2>
+
+<p>RGB defines colors using red, green, and blue values from 0 to 255. RGBA adds an alpha (opacity) channel from 0 (transparent) to 1 (opaque):</p>
+
+<pre><code>color: rgb(99, 103, 255);
+background: rgba(99, 103, 255, 0.1);   /* 10% opacity */
+border: rgba(99, 103, 255, 0.25);      /* 25% opacity */</code></pre>
+
+<p>The alpha channel is particularly useful for overlays, hover states, and subtle tints.</p>
+
+<h2>HSL and HSLA</h2>
+
+<p>HSL stands for Hue, Saturation, Lightness. Many designers find it more intuitive than hex because you can reason about colors in human terms:</p>
+
+<pre><code>/* hsl(hue, saturation%, lightness%) */
+color: hsl(238, 100%, 69%);   /* purple */
+color: hsl(142, 76%, 36%);    /* green */
+color: hsl(0, 84%, 60%);      /* red */
+
+/* Adjust lightness to create tints and shades */
+.light { background: hsl(238, 100%, 95%); }
+.dark  { background: hsl(238, 100%, 30%); }</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>HSL makes it easy to create color scales. Keep the hue and saturation the same, and adjust only the lightness to get lighter tints and darker shades of the same color.</p>
+</div>
+
+<h2>Named Colors</h2>
+
+<p>CSS has 140+ named colors like <code>red</code>, <code>blue</code>, <code>tomato</code>, <code>coral</code>, and <code>steelblue</code>. They're convenient for quick prototyping but too imprecise for production work:</p>
+
+<pre><code>color: tomato;
+background: aliceblue;
+border-color: steelblue;</code></pre>
+
+<h2>currentColor</h2>
+
+<p>The special keyword <code>currentColor</code> inherits the element's current <code>color</code> value. It's handy for SVG icons and borders that should match the text color:</p>
+
+<pre><code>.icon {
+  color: #6367ff;
+  fill: currentColor;   /* SVG fills with the same purple */
+}
+
+.button {
+  color: #6367ff;
+  border: 1.5px solid currentColor;  /* border matches text */
+}</code></pre>
+
+<h2>Opacity vs. Alpha</h2>
+
+<p>There are two ways to make something semi-transparent:</p>
+
+<pre><code>/* opacity affects the element AND all its children */
+.overlay {
+  background: #0f172a;
+  opacity: 0.5;
+}
+
+/* rgba/hsla only affects the specific property */
+.overlay {
+  background: rgba(15, 23, 42, 0.5);  /* only background is transparent */
+}</code></pre>
+
+<h2>Gradients</h2>
+
+<p>CSS supports linear and radial gradients as background values:</p>
+
+<pre><code>.hero {
+  background: linear-gradient(135deg, #6367ff, #c9beff);
+}
+
+.card {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 219, 253, 0.4),
+    rgba(201, 190, 255, 0.25)
+  );
+}</code></pre>

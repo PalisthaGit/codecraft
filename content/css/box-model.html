@@ -1,0 +1,89 @@
+<div class="definition">
+  The <strong>box model</strong> is how browsers calculate the size and spacing of every element on a page. Every element is a rectangular box made up of four layers: content, padding, border, and margin.
+</div>
+
+<p>Understanding the box model is one of the most important steps in learning CSS. Once you see how every element is a box with controllable layers, layout stops feeling mysterious.</p>
+
+<h2>The Four Layers</h2>
+
+<p>From the inside out:</p>
+
+<ul>
+  <li><strong>Content</strong> — the actual text, image, or inner elements</li>
+  <li><strong>Padding</strong> — space between the content and the border</li>
+  <li><strong>Border</strong> — a line around the padding and content</li>
+  <li><strong>Margin</strong> — space outside the border, separating this element from others</li>
+</ul>
+
+<pre><code>.card {
+  padding: 1.5rem;       /* space inside */
+  border: 1px solid #e5e7eb;
+  margin: 1rem 0;        /* space outside */
+}</code></pre>
+
+<h2>Width and Height</h2>
+
+<p>By default, <code>width</code> and <code>height</code> only apply to the <strong>content area</strong>. Padding and border are added on top of that, which can cause unexpected sizing.</p>
+
+<pre><code>.box {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid black;
+  /* actual rendered width: 300 + 20 + 20 + 2 + 2 = 344px */
+}</code></pre>
+
+<h2>box-sizing: border-box</h2>
+
+<p>The fix is <code>box-sizing: border-box</code>. This makes <code>width</code> and <code>height</code> include padding and border — so what you set is what you get.</p>
+
+<pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid black;
+  /* actual rendered width: exactly 300px */
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always add <code>box-sizing: border-box</code> as a global reset. Nearly every CSS framework does this by default, and it prevents a huge class of sizing bugs.</p>
+</div>
+
+<h2>Padding Shorthand</h2>
+
+<p>You can set padding on all four sides at once using shorthand:</p>
+
+<pre><code>/* All sides */
+padding: 1rem;
+
+/* Top/bottom, left/right */
+padding: 0.5rem 1rem;
+
+/* Top, right, bottom, left (clockwise) */
+padding: 0.25rem 1rem 0.5rem 0.75rem;</code></pre>
+
+<p>The same shorthand applies to <code>margin</code>.</p>
+
+<h2>Margin Collapse</h2>
+
+<p>When two vertical margins touch, they <strong>collapse</strong> into a single margin equal to the larger of the two. This only happens vertically (top/bottom), not horizontally.</p>
+
+<pre><code>/* These two paragraphs won't have 2rem of space between them —
+   only 1rem, because the margins collapse */
+p {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}</code></pre>
+
+<h2>Negative Margins</h2>
+
+<p>Margins can be negative, pulling an element toward or past its neighbors. This is occasionally useful for overlapping elements:</p>
+
+<pre><code>.overlap {
+  margin-top: -1rem;
+}</code></pre>

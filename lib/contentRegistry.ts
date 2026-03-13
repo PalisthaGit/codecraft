@@ -1,3 +1,7 @@
+import { htmlLessons } from "@/data/htmlLessons";
+import { cssLessons } from "@/data/cssLessons";
+import { javascriptLessons } from "@/data/javascriptLessons";
+
 export interface ContentMeta {
   slug: string;
   title: string;
@@ -16,42 +20,17 @@ export const contentRegistry: Record<string, ContentSection> = {
   html: {
     title: "HTML Basics",
     basePath: "/html",
-    lessons: [
-      {
-        slug: "introduction",
-        title: "Introduction to HTML",
-        description: "Learn what HTML is and why it's the foundation of every web page.",
-        readTime: "5 min read",
-        difficulty: "Beginner",
-      },
-      {
-        slug: "document-structure",
-        title: "Document Structure",
-        description: "Understand how an HTML document is structured with head, body, and semantic elements.",
-        readTime: "6 min read",
-        difficulty: "Beginner",
-      },
-      {
-        slug: "links",
-        title: "Links & Navigation",
-        description: "Connect pages together using anchor tags and learn about relative vs absolute URLs.",
-        readTime: "5 min read",
-        difficulty: "Beginner",
-      },
-    ],
+    lessons: htmlLessons,
   },
   css: {
     title: "CSS Fundamentals",
     basePath: "/css",
-    lessons: [
-      {
-        slug: "selectors",
-        title: "CSS Selectors",
-        description: "Target HTML elements precisely using element, class, ID, and attribute selectors.",
-        readTime: "7 min read",
-        difficulty: "Beginner",
-      },
-    ],
+    lessons: cssLessons,
+  },
+  javascript: {
+    title: "JavaScript",
+    basePath: "/javascript",
+    lessons: javascriptLessons,
   },
   blog: {
     title: "Blog",

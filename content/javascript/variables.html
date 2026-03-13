@@ -1,0 +1,114 @@
+<div class="definition">
+  A <strong>variable</strong> is a named container for storing a value. JavaScript has three keywords for declaring variables: <code>var</code>, <code>let</code>, and <code>const</code>.
+</div>
+
+<p>Variables are how programs remember information. You store a value in a variable, give it a name, and refer to it later. In modern JavaScript, you'll mostly use <code>let</code> and <code>const</code>.</p>
+
+<h2>let and const</h2>
+
+<p>Use <code>const</code> when the value won't change, and <code>let</code> when it will:</p>
+
+<pre><code>const siteName = "Codecraft";   // can't be reassigned
+let score = 0;                  // can be reassigned later
+
+score = 10;                     // ✓ fine
+siteName = "Other";             // ✗ TypeError</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Default to <code>const</code>. Only switch to <code>let</code> when you know the value needs to change. This prevents accidental reassignments and makes code easier to reason about.</p>
+</div>
+
+<h2>Data Types</h2>
+
+<p>JavaScript has several built-in data types:</p>
+
+<pre><code>// String — text, wrapped in quotes
+const name = "Alice";
+const greeting = 'Hello, world!';
+const message = `Hello, ${name}!`;   // template literal
+
+// Number — integers and decimals
+const age = 25;
+const price = 9.99;
+
+// Boolean — true or false
+const isLoggedIn = true;
+const hasError = false;
+
+// null — intentionally empty
+const selectedItem = null;
+
+// undefined — variable declared but not assigned
+let currentUser;
+console.log(currentUser);   // undefined</code></pre>
+
+<h2>typeof</h2>
+
+<p>Use <code>typeof</code> to check what type a value is:</p>
+
+<pre><code>typeof "hello"      // "string"
+typeof 42           // "number"
+typeof true         // "boolean"
+typeof undefined    // "undefined"
+typeof null         // "object"  ← known quirk in JavaScript</code></pre>
+
+<h2>String Operations</h2>
+
+<pre><code>const first = "Jane";
+const last = "Doe";
+
+// Concatenation
+const full = first + " " + last;   // "Jane Doe"
+
+// Template literals (preferred)
+const full2 = `${first} ${last}`;  // "Jane Doe"
+
+// String length
+console.log(full.length);          // 8
+
+// Access a character
+console.log(full[0]);              // "J"
+
+// Methods
+console.log(full.toUpperCase());   // "JANE DOE"
+console.log(full.includes("Jane")); // true</code></pre>
+
+<h2>Number Operations</h2>
+
+<pre><code>const a = 10;
+const b = 3;
+
+console.log(a + b);   // 13
+console.log(a - b);   // 7
+console.log(a * b);   // 30
+console.log(a / b);   // 3.333...
+console.log(a % b);   // 1  (remainder)
+console.log(a ** b);  // 1000 (exponent)</code></pre>
+
+<h2>Arrays</h2>
+
+<p>Arrays store ordered lists of values:</p>
+
+<pre><code>const colors = ["red", "green", "blue"];
+
+console.log(colors[0]);       // "red"
+console.log(colors.length);   // 3
+
+colors.push("yellow");        // add to end
+colors.pop();                 // remove from end</code></pre>
+
+<h2>Objects</h2>
+
+<p>Objects store key-value pairs:</p>
+
+<pre><code>const user = {
+  name: "Alice",
+  age: 25,
+  isAdmin: false,
+};
+
+console.log(user.name);       // "Alice"
+console.log(user["age"]);     // 25
+
+user.age = 26;                // update a property</code></pre>
