@@ -99,10 +99,10 @@ export default function HomePage() {
     <div className="max-w-4xl mx-auto space-y-16">
       {/* Hero */}
       <section className="pt-6">
-        <p className="text-sm font-semibold uppercase tracking-widest text-[#6367ff] mb-4">
-          Free & beginner-friendly
-        </p>
-        <h1 className="text-4xl sm:text-5xl font-bold text-[#0f172a] leading-tight">
+        <span className="inline-block bg-[#6367ff]/10 text-[#6367ff] text-[0.72rem] font-bold tracking-[0.08em] uppercase px-3 py-1 rounded-full mb-5">
+          Free &amp; beginner-friendly
+        </span>
+        <h1 className="text-4xl sm:text-5xl font-black text-[#0f172a] leading-tight tracking-tight">
           Learn to Code,
           <br />
           One Step at a Time
@@ -114,7 +114,7 @@ export default function HomePage() {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href="/tutorial/introduction"
-            className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-semibold rounded-[10px] hover:bg-[#8494ff] transition-colors"
+            className="inline-flex items-center gap-2 px-[18px] py-[10px] bg-[#6367ff] text-white text-sm font-bold rounded-[10px] hover:bg-[#5254e8] hover:shadow-[0_4px_16px_rgba(99,103,255,0.4)] transition-all duration-200"
           >
             Start Learning
             <svg
@@ -133,7 +133,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/tutorial/html-structure"
-            className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-semibold rounded-[10px] border border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-colors"
+            className="inline-flex items-center px-[18px] py-[10px] bg-white text-[#0f172a] text-sm font-bold rounded-[10px] border-[1.5px] border-[#e5e7eb] hover:border-[#6367ff] hover:text-[#6367ff] transition-all duration-200"
           >
             Browse Lessons
           </Link>
@@ -142,19 +142,19 @@ export default function HomePage() {
 
       {/* Features */}
       <section>
-        <h2 className="text-xl font-semibold text-[#0f172a] mb-6">
+        <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
           Why Codecraft?
         </h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-white rounded-[12px] border border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+              className="bg-white rounded-[14px] border-[1.5px] border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
             >
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#c9beff] text-[#6367ff] mb-4">
+              <div className="w-11 h-11 flex items-center justify-center rounded-[10px] bg-[#c9beff] text-[#6367ff] mb-4">
                 {feature.icon}
               </div>
-              <h3 className="font-semibold text-[#0f172a] mb-1">
+              <h3 className="font-extrabold text-[#0f172a] mb-1">
                 {feature.title}
               </h3>
               <p className="text-sm text-[#64748b] leading-relaxed">
@@ -167,7 +167,7 @@ export default function HomePage() {
 
       {/* Learning Tracks */}
       <section>
-        <h2 className="text-xl font-semibold text-[#0f172a] mb-6">
+        <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
           Learning Tracks
         </h2>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -175,18 +175,18 @@ export default function HomePage() {
             <Link
               key={track.title}
               href={track.href}
-              className="group bg-white rounded-[12px] border border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:border-[#6367ff] hover:shadow-[0_4px_16px_rgba(99,103,255,0.12)] transition-all"
+              className="group relative bg-white rounded-[14px] border-[1.5px] border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:border-[#6367ff] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(99,103,255,0.12)] transition-all duration-200"
             >
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-semibold text-[#0f172a]">{track.title}</h3>
-                <span className="shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full bg-[#c9beff] text-[#6367ff]">
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <h3 className="font-extrabold text-[#0f172a]">{track.title}</h3>
+                <span className="shrink-0 text-[0.7rem] font-bold tracking-[0.05em] px-2 py-0.5 rounded-full bg-[#6367ff]/10 text-[#6367ff]">
                   {track.lessons} lessons
                 </span>
               </div>
-              <p className="mt-2 text-sm text-[#64748b] leading-relaxed">
+              <p className="text-sm text-[#64748b] leading-relaxed mb-4">
                 {track.description}
               </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#6367ff] group-hover:gap-2 transition-all">
+              <span className="inline-flex items-center gap-1 text-sm font-bold text-[#6367ff] group-hover:gap-2 transition-all duration-200">
                 Begin
                 <svg
                   className="w-4 h-4"
