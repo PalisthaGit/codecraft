@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-[#e5e7eb] bg-white mt-16">
       <div className="px-6 md:px-10 py-10">
-        <div className="flex flex-col sm:flex-row sm:items-start gap-10">
+        <div className="max-w-3xl flex flex-col sm:flex-row sm:items-start gap-10">
           {/* Brand */}
           <div className="sm:flex-1">
             <Link
@@ -60,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-3xl mt-10 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#64748b]">
             © {new Date().getFullYear()} Codecraft. All rights reserved.
           </p>
