@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { htmlLessonGroups } from "@/data/htmlLessons";
 import { cssLessons } from "@/data/cssLessons";
 import { javascriptLessons } from "@/data/javascriptLessons";
@@ -77,12 +77,23 @@ function NavItem({
             : "text-[#64748b] hover:bg-[#f8fafc] hover:text-[#0f172a]"
         }`}
       >
-        {isCompleted && (
-          <CheckIcon
-            className={`shrink-0 w-3.5 h-3.5 ${isActive ? "text-white/80" : "text-[#6367ff]"}`}
-          />
-        )}
-        {label}
+        {/* always reserve space for the tick */}
+        <span className="shrink-0 w-5 h-5 flex items-center justify-center">
+          {isCompleted ? (
+            <CheckIcon
+              className={`w-4 h-4 ${isActive ? "text-white" : "text-[#6367ff]"}`}
+            />
+          ) : (
+            <span
+              className={`block w-3 h-3 rounded-full border-[1.5px] ${
+                isActive ? "border-white/40" : "border-[#d1d5db]"
+              }`}
+            />
+          )}
+        </span>
+        <span className={`font-medium ${isActive ? "" : "text-[#374151]"}`}>
+          {label}
+        </span>
       </Link>
     </li>
   );
@@ -90,7 +101,7 @@ function NavItem({
 
 function SectionHeading({ title }: { title: string }) {
   return (
-    <p className="px-3 mb-2 mt-1 text-[0.7rem] font-extrabold uppercase tracking-widest text-[#6367ff]/70">
+    <p className="px-3 mb-2 mt-1 text-xs font-black uppercase tracking-widest text-[#6367ff]">
       {title}
     </p>
   );
@@ -207,19 +218,24 @@ const tutorialSections = [
 export default function NavLinks({ onNavigate }: NavLinksProps) {
   const pathname = usePathname();
   const [completed, setCompleted] = useState<Set<string>>(new Set());
+  const prevPathRef = useRef<string | null>(null);
 
   // Hydrate from localStorage on mount
   useEffect(() => {
     setCompleted(loadCompleted());
   }, []);
 
-  // Mark current lesson as completed whenever pathname changes
+  // Mark the PREVIOUS lesson as completed when navigating away from it
   useEffect(() => {
-    if (!isLessonPath(pathname)) return;
-    setCompleted((prev) => {
-      if (prev.has(pathname)) return prev;
-      const next = new Set(prev);
-      next.add(pathname);
+    const prev = prevPathRef.current;
+    prevPathRef.current = pathname;
+
+    if (!prev || !isLessonPath(prev) || prev === pathname) return;
+
+    setCompleted((current) => {
+      if (current.has(prev)) return current;
+      const next = new Set(current);
+      next.add(prev);
       saveCompleted(next);
       return next;
     });
@@ -281,7 +297,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
   // Default: top-level section list
   return (
     <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
-      <p className="px-3 mb-3 text-[0.7rem] font-extrabold uppercase tracking-widest text-[#6367ff]/70">
+      <p className="px-3 mb-3 text-xs font-black uppercase tracking-widest text-[#6367ff]">
         Tutorials
       </p>
       {tutorialSections.map((section) => {
