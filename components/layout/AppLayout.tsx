@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Sidebar from "./Sidebar";
+import Footer from "./Footer";
 import MobileMenu from "@/components/navigation/MobileMenu";
 
 interface AppLayoutProps {
@@ -52,6 +53,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
         {/* Page content */}
         <main className="flex-1 p-6 md:p-10">{children}</main>
+
+        {/* Footer */}
+        <Footer />
       </div>
     </div>
   );

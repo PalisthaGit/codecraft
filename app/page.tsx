@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Codecraft — Free HTML, CSS & JavaScript Tutorials for Beginners",
+  description:
+    "Learn web development from scratch with free, beginner-friendly tutorials. Master HTML, CSS, and JavaScript with clear explanations and real code examples.",
+};
 
 const features = [
   {
