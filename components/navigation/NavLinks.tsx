@@ -2,25 +2,68 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { htmlLessonGroups } from "@/data/htmlLessons";
 import { cssLessons } from "@/data/cssLessons";
 import { javascriptLessons } from "@/data/javascriptLessons";
 import type { ContentMeta } from "@/lib/contentRegistry";
 import type { LessonGroup } from "@/data/htmlLessons";
 
+const STORAGE_KEY = "codecraft_progress";
+
+function loadCompleted(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return new Set(raw ? (JSON.parse(raw) as string[]) : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function saveCompleted(set: Set<string>) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...set]));
+  } catch {}
+}
+
+// Article slug paths that count as "lessons"
+const LESSON_PREFIXES = ["/html/", "/css/", "/javascript/", "/blog/"];
+
+function isLessonPath(path: string) {
+  return LESSON_PREFIXES.some((p) => path.startsWith(p));
+}
+
 interface NavLinksProps {
   onNavigate?: () => void;
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      strokeWidth={2.5}
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  );
 }
 
 function NavItem({
   href,
   label,
   isActive,
+  isCompleted,
   onNavigate,
 }: {
   href: string;
   label: string;
   isActive: boolean;
+  isCompleted: boolean;
   onNavigate?: () => void;
 }) {
   return (
@@ -28,25 +71,39 @@ function NavItem({
       <Link
         href={href}
         onClick={onNavigate}
-        className={`block px-3 py-2 text-sm rounded-md transition-colors ${
+        className={`flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors ${
           isActive
             ? "bg-[#6367ff] text-white font-semibold"
             : "text-[#64748b] hover:bg-[#f8fafc] hover:text-[#0f172a]"
         }`}
       >
+        {isCompleted && (
+          <CheckIcon
+            className={`shrink-0 w-3.5 h-3.5 ${isActive ? "text-white/80" : "text-[#6367ff]"}`}
+          />
+        )}
         {label}
       </Link>
     </li>
   );
 }
 
-// Grouped sidebar — supports multiple sub-sections
+function SectionHeading({ title }: { title: string }) {
+  return (
+    <p className="px-3 mb-2 mt-1 text-[0.7rem] font-extrabold uppercase tracking-widest text-[#6367ff]/70">
+      {title}
+    </p>
+  );
+}
+
+// Grouped sidebar — supports multiple sub-sections (HTML)
 function GroupedSectionNav({
   groups,
   basePath,
   backLabel = "← All Tutorials",
   backHref = "/",
   pathname,
+  completed,
   onNavigate,
 }: {
   groups: LessonGroup[];
@@ -54,6 +111,7 @@ function GroupedSectionNav({
   backLabel?: string;
   backHref?: string;
   pathname: string;
+  completed: Set<string>;
   onNavigate?: () => void;
 }) {
   return (
@@ -67,9 +125,7 @@ function GroupedSectionNav({
       </Link>
       {groups.map((group) => (
         <div key={group.title}>
-          <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-[#64748b]">
-            {group.title}
-          </p>
+          <SectionHeading title={group.title} />
           <ul className="space-y-1">
             {group.lessons.map((lesson) => {
               const href = `${basePath}/${lesson.slug}`;
@@ -79,6 +135,7 @@ function GroupedSectionNav({
                   href={href}
                   label={lesson.title}
                   isActive={pathname === href}
+                  isCompleted={completed.has(href)}
                   onNavigate={onNavigate}
                 />
               );
@@ -90,7 +147,7 @@ function GroupedSectionNav({
   );
 }
 
-// Flat sidebar — single section, no groups
+// Flat sidebar — single section, no groups (CSS, JavaScript)
 function FlatSectionNav({
   title,
   lessons,
@@ -98,6 +155,7 @@ function FlatSectionNav({
   backLabel = "← All Tutorials",
   backHref = "/",
   pathname,
+  completed,
   onNavigate,
 }: {
   title: string;
@@ -106,6 +164,7 @@ function FlatSectionNav({
   backLabel?: string;
   backHref?: string;
   pathname: string;
+  completed: Set<string>;
   onNavigate?: () => void;
 }) {
   return (
@@ -118,9 +177,7 @@ function FlatSectionNav({
         {backLabel}
       </Link>
       <div>
-        <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-[#64748b]">
-          {title}
-        </p>
+        <SectionHeading title={title} />
         <ul className="space-y-1">
           {lessons.map((lesson) => {
             const href = `${basePath}/${lesson.slug}`;
@@ -130,6 +187,7 @@ function FlatSectionNav({
                 href={href}
                 label={lesson.title}
                 isActive={pathname === href}
+                isCompleted={completed.has(href)}
                 onNavigate={onNavigate}
               />
             );
@@ -148,6 +206,24 @@ const tutorialSections = [
 
 export default function NavLinks({ onNavigate }: NavLinksProps) {
   const pathname = usePathname();
+  const [completed, setCompleted] = useState<Set<string>>(new Set());
+
+  // Hydrate from localStorage on mount
+  useEffect(() => {
+    setCompleted(loadCompleted());
+  }, []);
+
+  // Mark current lesson as completed whenever pathname changes
+  useEffect(() => {
+    if (!isLessonPath(pathname)) return;
+    setCompleted((prev) => {
+      if (prev.has(pathname)) return prev;
+      const next = new Set(prev);
+      next.add(pathname);
+      saveCompleted(next);
+      return next;
+    });
+  }, [pathname]);
 
   if (pathname.startsWith("/html")) {
     return (
@@ -155,6 +231,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
         groups={htmlLessonGroups}
         basePath="/html"
         pathname={pathname}
+        completed={completed}
         onNavigate={onNavigate}
       />
     );
@@ -167,6 +244,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
         lessons={cssLessons}
         basePath="/css"
         pathname={pathname}
+        completed={completed}
         onNavigate={onNavigate}
       />
     );
@@ -179,6 +257,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
         lessons={javascriptLessons}
         basePath="/javascript"
         pathname={pathname}
+        completed={completed}
         onNavigate={onNavigate}
       />
     );
@@ -194,9 +273,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
         >
           ← Home
         </Link>
-        <p className="px-3 mb-2 text-xs font-semibold uppercase tracking-wider text-[#64748b]">
-          Blog
-        </p>
+        <SectionHeading title="Blog" />
       </nav>
     );
   }
@@ -204,7 +281,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
   // Default: top-level section list
   return (
     <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
-      <p className="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-[#64748b]">
+      <p className="px-3 mb-3 text-[0.7rem] font-extrabold uppercase tracking-widest text-[#6367ff]/70">
         Tutorials
       </p>
       {tutorialSections.map((section) => {
