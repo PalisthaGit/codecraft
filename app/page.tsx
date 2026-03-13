@@ -150,31 +150,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features */}
-      <section>
-        <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
-          Why Codecraft?
-        </h2>
-        <div className="grid sm:grid-cols-3 gap-4">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="bg-white rounded-[14px] border-[1.5px] border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
-            >
-              <div className="w-11 h-11 flex items-center justify-center rounded-[10px] bg-[#c9beff] text-[#6367ff] mb-4">
-                {feature.icon}
-              </div>
-              <h3 className="font-extrabold text-[#0f172a] mb-1">
-                {feature.title}
-              </h3>
-              <p className="text-sm text-[#64748b] leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Learning Tracks */}
       <section>
         <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
@@ -213,6 +188,31 @@ export default function HomePage() {
                 </svg>
               </span>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section>
+        <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
+          Why Codecraft?
+        </h2>
+        <div className="grid sm:grid-cols-3 gap-4">
+          {features.map((feature) => (
+            <div
+              key={feature.title}
+              className="bg-white rounded-[14px] border-[1.5px] border-[#e5e7eb] p-6 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+            >
+              <div className="w-11 h-11 flex items-center justify-center rounded-[10px] bg-[#c9beff] text-[#6367ff] mb-4">
+                {feature.icon}
+              </div>
+              <h3 className="font-extrabold text-[#0f172a] mb-1">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-[#64748b] leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
           ))}
         </div>
       </section>
