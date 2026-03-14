@@ -349,6 +349,12 @@ li:last-child {
       // show correct read-only view
       if (activeTab === 'css') { cssView.style.display = ''; htmlView.style.display = 'none'; }
       else                     { htmlView.style.display = ''; cssView.style.display = 'none'; }
+      // reset editor content and output to defaults
+      htmlTA.value = HTML_DEFAULT;
+      cssTA.value  = CSS_DEFAULT;
+      var resetSrc = '<!DOCTYPE html><html><head><style>' + CSS_DEFAULT + '</style></head><body style="margin:0;padding:16px;font-family:sans-serif;">' + HTML_DEFAULT + '</body></html>';
+      lastSrc = resetSrc;
+      output.srcdoc = resetSrc;
     }
   });
 
