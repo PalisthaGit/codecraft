@@ -77,6 +77,12 @@
   <style>
     #try-textarea::selection { background: rgba(99, 103, 255, 0.35); }
     #hl-mirror::-webkit-scrollbar { display: none; }
+    @keyframes hint-pop {
+      0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
+      12%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+      75%  { opacity: 1; }
+      100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    }
   </style>
 
   <!-- ── CODE SECTION ──────────────────────────────────────────────────── -->
@@ -113,6 +119,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
     <div id="editor-wrap" style="display:none;position:relative;overflow:hidden;background:#1E293B;">
       <pre id="hl-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:monospace;font-size:13px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;-ms-overflow-style:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
       <textarea id="try-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:monospace;font-size:13px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
+      <div id="edit-hint" style="display:none;position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(99,103,255,0.92);color:white;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 12px rgba(99,103,255,0.4);">✏️ You can now edit — output updates live</div>
     </div>
 
   </div>
@@ -217,6 +224,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
       var tryBtn     = document.getElementById('try-it-btn');
       var copyBtn    = document.getElementById('copy-code-btn');
       var copyLbl    = document.getElementById('copy-label');
+      var editHint   = document.getElementById('edit-hint');
       var editing    = false;
 
       // ── Initialise ─────────────────────────────────────────────────────────
@@ -288,6 +296,13 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
           tryBtn.style.background   = '#334155';
           hlCode.innerHTML = highlightHTML(editor.value);
           editor.focus();
+          // Show onboarding hint
+          editHint.style.display = 'block';
+          editHint.style.animation = 'none';
+          editHint.offsetHeight; // force reflow to restart animation
+          editHint.style.animation = 'hint-pop 3.2s ease forwards';
+          clearTimeout(editHint._t);
+          editHint._t = setTimeout(function () { editHint.style.display = 'none'; }, 3200);
         } else {
           editorWrap.style.display  = 'none';
           codeView.style.display    = 'flex';
