@@ -382,7 +382,7 @@ export default function HtmlEditorPage() {
               }}
               spellCheck={false}
               placeholder="Write your HTML here…"
-              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", margin: 0, padding: PAD, fontFamily: FONT, fontSize: FONT_SIZE, fontWeight: 600, lineHeight: LINE_H, background: "transparent", color: "transparent", caretColor: dark ? "#e2e8f0" : "#0f172a", border: "none", outline: "none", resize: "none", whiteSpace: "pre-wrap", wordWrap: "break-word", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box", tabSize: 2 }}
+              style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, width: "100%", height: "100%", margin: 0, padding: PAD, fontFamily: FONT, fontSize: FONT_SIZE, fontWeight: 600, lineHeight: LINE_H, background: "transparent", color: "transparent", caretColor: dark ? "#e2e8f0" : "#1e293b", border: "none", outline: "none", resize: "none", whiteSpace: "pre-wrap", wordWrap: "break-word", overflowY: "scroll", overflowX: "hidden", boxSizing: "border-box", tabSize: 2 }}
             />
           </div>
         </div>
