@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import MobileMenu from "@/components/navigation/MobileMenu";
@@ -11,6 +12,11 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/compiler")) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
