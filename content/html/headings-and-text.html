@@ -111,6 +111,10 @@
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           <span id="copy-label">Copy Code</span>
         </button>
+        <button id="run-btn" style="display:none;align-items:center;gap:5px;background:#22c55e;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          Run
+        </button>
         <button id="try-it-btn" style="background:#6367FF;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">Try It Yourself</button>
       </div>
     </div>
@@ -239,6 +243,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
       var tryBtn     = document.getElementById('try-it-btn');
       var copyBtn    = document.getElementById('copy-code-btn');
       var copyLbl    = document.getElementById('copy-label');
+      var runBtn     = document.getElementById('run-btn');
       var editHint   = document.getElementById('edit-hint');
       var editing    = false;
       var typedChars = 0;
@@ -298,10 +303,9 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
         hlMirror.scrollLeft = editor.scrollLeft;
       });
 
-      // On every keystroke: re-highlight the mirror and refresh the preview
+      // On every keystroke: re-highlight the mirror only (output updates on Run)
       editor.addEventListener('input', function () {
         hlCode.innerHTML  = highlightHTML(editor.value);
-        output.srcdoc     = editor.value;
         // Dismiss hint after 5 characters typed
         var delta = editor.value.length - prevLen;
         if (delta > 0) typedChars += delta;
@@ -333,6 +337,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
           tryBtn.textContent        = 'Close Editor';
           tryBtn.style.background   = '#334155';
           tryBtn.style.animation    = 'none';
+          runBtn.style.display      = 'flex';
           hlCode.innerHTML = highlightHTML(editor.value);
           editor.focus();
           // Show onboarding hint — stays until user types 5+ chars
@@ -347,8 +352,15 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
           codeView.style.display    = 'flex';
           tryBtn.textContent        = 'Try It Yourself';
           tryBtn.style.background   = '#6367FF';
-          tryBtn.style.animation    = 'btn-glow 2.8s ease-in-out infinite';
+          tryBtn.style.animation    = 'btn-glow 1.8s ease-in-out infinite';
+          runBtn.style.display      = 'none';
         }
+      });
+
+      // ── Run ────────────────────────────────────────────────────────────────
+
+      runBtn.addEventListener('click', function () {
+        output.srcdoc = editor.value;
       });
 
       // ── Copy ───────────────────────────────────────────────────────────────
