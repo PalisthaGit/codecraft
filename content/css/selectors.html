@@ -8,7 +8,7 @@
 
 <p>The most basic selector targets all elements of a given type:</p>
 
-<pre><code>p {
+<pre><code class="language-css">p {
   color: #374151;
   line-height: 1.7;
 }
@@ -24,7 +24,7 @@ h1 {
 
 <p>Class selectors let you target specific elements by their <code>class</code> attribute. Prefix the class name with a dot:</p>
 
-<pre><code>.card {
+<pre><code class="language-css">.card {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
@@ -41,7 +41,7 @@ h1 {
 
 <p>ID selectors target a <em>single unique element</em> by its <code>id</code> attribute. Prefix with a <code>#</code>:</p>
 
-<pre><code>#header {
+<pre><code class="language-css">#header {
   background: #0f172a;
   padding: 1rem 2rem;
 }</code></pre>
@@ -57,7 +57,7 @@ h1 {
 
 <p>You can target elements based on their attributes:</p>
 
-<pre><code>/* Links that open in a new tab */
+<pre><code class="language-css">/* Links that open in a new tab */
 a[target="_blank"] {
   color: #6367ff;
 }
@@ -71,7 +71,7 @@ input[type="email"] {
 
 <p>Target elements that are <em>inside</em> other elements:</p>
 
-<pre><code>/* Any p inside a .card (descendant) */
+<pre><code class="language-css">/* Any p inside a .card (descendant) */
 .card p {
   font-size: 0.9rem;
 }
@@ -85,7 +85,7 @@ input[type="email"] {
 
 <p>Pseudo-classes apply styles based on element state or position:</p>
 
-<pre><code>a:hover {
+<pre><code class="language-css">a:hover {
   color: #5254e8;
   text-decoration: underline;
 }
@@ -107,7 +107,7 @@ li:last-child {
 
 <p>You can apply the same styles to multiple selectors at once by separating them with commas:</p>
 
-<pre><code>h1, h2, h3 {
+<pre><code class="language-css">h1, h2, h3 {
   font-family: sans-serif;
   color: #0f172a;
 }</code></pre>
@@ -155,12 +155,12 @@ li:last-child {
 
   <!-- Read-only CSS view (default, CSS tab shown) -->
   <div id="sel-css-view" style="background:#1E293B;">
-    <pre id="sel-css-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-css-code" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
+    <pre id="sel-css-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-css-code" data-highlighted="yes" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
   </div>
 
   <!-- Read-only HTML view (hidden by default) -->
   <div id="sel-html-view" style="display:none;background:#1E293B;">
-    <pre id="sel-html-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-html-code" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
+    <pre id="sel-html-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-html-code" data-highlighted="yes" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
   </div>
 
   <!-- Editor wrap (hidden until Try It Yourself) -->
@@ -275,16 +275,35 @@ li:last-child {
   }
 
   function highlightCSS(code) {
-    var e = escH(code);
-    e = e.replace(/(\/\*[\s\S]*?\*\/)/g, '<span style="color:#546e7a;font-style:italic">$1</span>');
-    e = e.replace(/([.#]?[\w-]+)(\s*\{)/g, '<span style="color:#c792ea">$1</span><span style="color:#e2e8f0">$2</span>');
-    e = e.replace(/([\w-]+)(\s*:\s*)([^;{}\n]+)(;?)/g, '<span style="color:#ffcb6b">$1</span><span style="color:#e2e8f0">$2</span><span style="color:#c3e88d">$3</span><span style="color:#e2e8f0">$4</span>');
-    return e;
+    // Tokenise: comments | strings | selectors (word+{) | prop:value; | other
+    var out = '';
+    var re = /(\/\*[\s\S]*?\*\/)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|((?:[^{};\/\n"'])+)(\{)|([\w-]+)(\s*:\s*)((?:[^;{}\/\n"'])+)(;?)|([\s\S])/g;
+    var m;
+    while ((m = re.exec(code)) !== null) {
+      if (m[1]) { // comment
+        out += '<span style="color:#546e7a;font-style:italic">' + escH(m[1]) + '</span>';
+      } else if (m[2]) { // string
+        out += '<span style="color:#c3e88d">' + escH(m[2]) + '</span>';
+      } else if (m[3] !== undefined) { // selector + {
+        out += '<span style="color:#c792ea">' + escH(m[3]) + '</span><span style="color:#e2e8f0">' + escH(m[4]) + '</span>';
+      } else if (m[5] !== undefined) { // property: value;
+        out += '<span style="color:#80cbc4">' + escH(m[5]) + '</span>'
+             + '<span style="color:#e2e8f0">' + escH(m[6]) + '</span>'
+             + '<span style="color:#f78c6c">' + escH(m[7]) + '</span>'
+             + '<span style="color:#e2e8f0">' + escH(m[8]) + '</span>';
+      } else {
+        out += escH(m[9]);
+      }
+    }
+    return out;
   }
 
   // ── Syntax-color the read-only views ─────────────────────────────────────
   cssViewCode.innerHTML  = highlightCSS(CSS_DEFAULT);
   htmlViewCode.innerHTML = highlightHTML(HTML_DEFAULT);
+  // Prevent hljs from overwriting our colors
+  cssViewCode.dataset.highlighted  = 'yes';
+  htmlViewCode.dataset.highlighted = 'yes';
 
   // ── Tab switching ─────────────────────────────────────────────────────────
   function setTab(tab) {
