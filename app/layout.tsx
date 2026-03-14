@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, Geist_Mono } from "next/font/google";
+import { Nunito, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AppLayout from "@/components/layout/AppLayout";
 
@@ -8,8 +8,8 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#f8fafc]">
       <body
-        className={`${nunito.variable} ${geistMono.variable} antialiased`}
+        className={`${nunito.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <AppLayout>{children}</AppLayout>
       </body>
