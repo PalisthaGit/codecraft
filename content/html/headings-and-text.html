@@ -79,10 +79,25 @@
     #hl-mirror::-webkit-scrollbar { display: none; }
     @keyframes hint-pop {
       0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
-      12%  { opacity: 1; transform: translateX(-50%) translateY(0); }
-      75%  { opacity: 1; }
-      100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
+    @keyframes hint-out {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+    }
+    @keyframes btn-glow {
+      0%, 100% {
+        box-shadow: 0 0 6px 2px rgba(99,103,255,0.5), 0 0 0 2px rgba(99,103,255,0.5);
+        transform: scale(1);
+        filter: brightness(1);
+      }
+      50% {
+        box-shadow: 0 0 28px 10px rgba(99,103,255,1), 0 0 0 3px rgba(160,164,255,1), 0 0 50px 16px rgba(99,103,255,0.4);
+        transform: scale(1.07);
+        filter: brightness(1.25);
+      }
+    }
+    #try-it-btn { animation: btn-glow 1.8s ease-in-out infinite; }
   </style>
 
   <!-- ── CODE SECTION ──────────────────────────────────────────────────── -->
@@ -226,6 +241,8 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
       var copyLbl    = document.getElementById('copy-label');
       var editHint   = document.getElementById('edit-hint');
       var editing    = false;
+      var typedChars = 0;
+      var prevLen    = 0;
 
       // ── Initialise ─────────────────────────────────────────────────────────
 
@@ -272,6 +289,14 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
       editor.addEventListener('input', function () {
         hlCode.innerHTML  = highlightHTML(editor.value);
         output.srcdoc     = editor.value;
+        // Dismiss hint after 5 characters typed
+        var delta = editor.value.length - prevLen;
+        if (delta > 0) typedChars += delta;
+        prevLen = editor.value.length;
+        if (typedChars >= 5 && editHint.style.display !== 'none') {
+          editHint.style.animation = 'hint-out 0.4s ease forwards';
+          setTimeout(function () { editHint.style.display = 'none'; }, 400);
+        }
       });
 
       // Tab key → insert two spaces instead of moving focus
@@ -294,20 +319,22 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
           editorWrap.style.display  = 'block';
           tryBtn.textContent        = 'Close Editor';
           tryBtn.style.background   = '#334155';
+          tryBtn.style.animation    = 'none';
           hlCode.innerHTML = highlightHTML(editor.value);
           editor.focus();
-          // Show onboarding hint
+          // Show onboarding hint — stays until user types 5+ chars
+          typedChars = 0;
+          prevLen    = editor.value.length;
           editHint.style.display = 'block';
           editHint.style.animation = 'none';
           editHint.offsetHeight; // force reflow to restart animation
-          editHint.style.animation = 'hint-pop 3.2s ease forwards';
-          clearTimeout(editHint._t);
-          editHint._t = setTimeout(function () { editHint.style.display = 'none'; }, 3200);
+          editHint.style.animation = 'hint-pop 0.35s ease forwards';
         } else {
           editorWrap.style.display  = 'none';
           codeView.style.display    = 'flex';
           tryBtn.textContent        = 'Try It Yourself';
           tryBtn.style.background   = '#6367FF';
+          tryBtn.style.animation    = 'btn-glow 2.8s ease-in-out infinite';
         }
       });
 
