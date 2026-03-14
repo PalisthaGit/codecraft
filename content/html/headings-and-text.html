@@ -98,6 +98,12 @@
       }
     }
     #try-it-btn { animation: btn-glow 1.8s ease-in-out infinite; }
+    @keyframes output-glow {
+      0%   { box-shadow: 0 0 0 0 rgba(99,103,255,0); border-color: #E5E7EB; }
+      30%  { box-shadow: 0 0 0 6px rgba(99,103,255,0.35); border-color: #6367ff; }
+      100% { box-shadow: 0 0 0 0 rgba(99,103,255,0); border-color: #E5E7EB; }
+    }
+    .output-glow-once { animation: output-glow 1s ease-out forwards; }
   </style>
 
   <!-- ── CODE SECTION ──────────────────────────────────────────────────── -->
@@ -105,7 +111,7 @@
 
     <!-- Header: HTML label | Copy Code | Try It Yourself / Close Editor -->
     <div style="display:flex;align-items:center;justify-content:space-between;background:#1E293B;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);">
-      <span style="color:#94A3B8;font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;font-weight:600;letter-spacing:0.04em;">HTML</span>
+      <span style="color:#94A3B8;font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.04em;">HTML</span>
       <div style="display:flex;gap:6px;">
         <button id="copy-code-btn" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.08);color:#CBD5E1;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -136,6 +142,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
 
     <!-- Overlay editor (transparent textarea over highlighted mirror) -->
     <div id="editor-wrap" style="display:none;position:relative;overflow:hidden;background:#1E293B;">
+      <span id="try-updated-badge" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:15px;font-weight:800;color:#fff;background:rgba(34,197,94,0.92);border:none;border-radius:12px;padding:10px 28px;pointer-events:none;z-index:10;white-space:nowrap;box-shadow:0 4px 24px rgba(34,197,94,0.5);letter-spacing:0.02em;">✓ Output updated</span>
       <pre id="hl-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;-ms-overflow-style:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
       <textarea id="try-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
       <div id="edit-hint" style="display:none;position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(99,103,255,0.92);color:white;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 12px rgba(99,103,255,0.4);">✏️ Edit the code, then hit Run to see your result</div>
@@ -145,7 +152,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
 
   <!-- ── OUTPUT SECTION ────────────────────────────────────────────────── -->
   <p style="margin:12px 0 6px;font-size:1.05rem;font-weight:700;color:#64748B;">Output</p>
-  <div style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
+  <div id="try-output-wrap" style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
     <iframe id="try-output" style="width:100%;height:auto;min-height:80px;border:none;display:block;"></iframe>
   </div>
 
@@ -359,8 +366,23 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
 
       // ── Run ────────────────────────────────────────────────────────────────
 
+      var outputWrap   = document.getElementById('try-output-wrap');
+      var updatedBadge = document.getElementById('try-updated-badge');
+      var tryLastCode  = output.srcdoc;
+
       runBtn.addEventListener('click', function () {
-        output.srcdoc = editor.value;
+        var newCode = editor.value;
+        var changed = newCode !== tryLastCode;
+        tryLastCode = newCode;
+        output.srcdoc = newCode;
+        if (changed) {
+          outputWrap.classList.remove('output-glow-once');
+          void outputWrap.offsetWidth;
+          outputWrap.classList.add('output-glow-once');
+          updatedBadge.style.display = 'inline-block';
+          clearTimeout(updatedBadge._t);
+          updatedBadge._t = setTimeout(function () { updatedBadge.style.display = 'none'; }, 2000);
+        }
       });
 
       // ── Copy ───────────────────────────────────────────────────────────────
@@ -404,13 +426,14 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
     </div>
 
     <div id="wiy-editor-wrap" style="position:relative;overflow:hidden;background:#1E293B;">
+      <span id="wiy-updated-badge" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:15px;font-weight:800;color:#fff;background:rgba(34,197,94,0.92);border:none;border-radius:12px;padding:10px 28px;pointer-events:none;z-index:10;white-space:nowrap;box-shadow:0 4px 24px rgba(34,197,94,0.5);letter-spacing:0.02em;">✓ Output updated</span>
       <pre id="wiy-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;-ms-overflow-style:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="wiy-hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
       <textarea id="wiy-textarea" spellcheck="false" placeholder="Write your HTML here…" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
     </div>
   </div>
 
   <p style="margin:12px 0 6px;font-size:1.05rem;font-weight:700;color:#64748B;">Output</p>
-  <div style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
+  <div id="wiy-output-wrap" style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
     <iframe id="wiy-output" style="width:100%;height:auto;min-height:80px;border:none;display:block;"></iframe>
   </div>
 
@@ -506,8 +529,23 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
         editor.dispatchEvent(new Event('input'));
       });
 
+      var wiyOutputWrap   = document.getElementById('wiy-output-wrap');
+      var wiyUpdatedBadge = document.getElementById('wiy-updated-badge');
+      var wiyLastCode     = output.srcdoc;
+
       runBtn.addEventListener('click', function () {
-        output.srcdoc = editor.value;
+        var newCode = editor.value;
+        var changed = newCode !== wiyLastCode;
+        wiyLastCode = newCode;
+        output.srcdoc = newCode;
+        if (changed) {
+          wiyOutputWrap.classList.remove('output-glow-once');
+          void wiyOutputWrap.offsetWidth;
+          wiyOutputWrap.classList.add('output-glow-once');
+          wiyUpdatedBadge.style.display = 'inline-block';
+          clearTimeout(wiyUpdatedBadge._t);
+          wiyUpdatedBadge._t = setTimeout(function () { wiyUpdatedBadge.style.display = 'none'; }, 2000);
+        }
       });
 
       copyBtn.addEventListener('click', function () {
