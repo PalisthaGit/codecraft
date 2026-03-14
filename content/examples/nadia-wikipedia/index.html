@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadia - Wikipedia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #202122;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.text-small {
+            font-size: 14px;
+        }
+
+        body.text-standard {
+            font-size: 16px;
+        }
+
+        body.text-large {
+            font-size: 18px;
+        }
+
+        body.width-standard .container {
+            max-width: 1200px;
+        }
+
+        body.width-wide .container {
+            max-width: 100%;
+        }
+
+        body.color-light {
+            background-color: #ffffff;
+        }
+
+        body.color-dark {
+            background-color: #1a1a1a;
+            color: #e8e8e8;
+        }
+
+        body.color-dark .header {
+            background-color: #000;
+        }
+
+        body.color-dark .main-content,
+        body.color-dark .sidebar,
+        body.color-dark .infobox {
+            background-color: #2a2a2a;
+            color: #e8e8e8;
+            border-color: #444;
+        }
+
+        body.color-dark .title-section,
+        body.color-dark .tabs-section,
+        body.color-dark .appearance-bar {
+            background-color: #2a2a2a;
+            border-color: #444;
+        }
+
+        .wiki-thumb-image {
+            width: 100%;
+        }
+
+        .wiki-thumb-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .wiki-thumb.left {
+            float: left;
+            margin: 0 12px 12px 0;
+        }
+
+        .wiki-thumb-image {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wiki-thumb-caption {
+            padding: 5px 3px 2px;
+            color: #54595d;
+            font-style: italic;
+            text-align: center;
+        }
+
+        body.color-dark .wiki-thumb {
+            border-color: #555;
+            background: #2a2a2a;
+        }
+
+        body.color-dark .wiki-thumb-caption {
+            color: #aaa;
+        }
+
+        .header {
+            background-color: #f8f9fa;
+            color: #202122;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #a2a9b1;
+        }
+
+        body.color-dark .header {
+            background-color: #202122;
+            color: #fff;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            font-family: "Linux Libertine", Georgia, Times, serif;
+        }
+
+        .logo span {
+            color: #3366cc;
+        }
+
+        .tagline {
+            font-size: 10px;
+            color: #ccc;
+            font-weight: normal;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .header-links a {
+            color: #3366cc;
+            text-decoration: none;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 0;
+            align-items: center;
+        }
+
+        .search-box {
+            padding: 6px 12px;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px 0 0 2px;
+            width: 300px;
+            background-color: #fff;
+            color: #202122;
+            font-size: 13px;
+        }
+
+        .wiki-thumb {
+            float: right;
+            width: 220px;
+            border: 1px solid #a2a9b1;
+            background: #f8f9fa;
+            padding: 3px;
+            margin: 0 0 12px 12px;
+            font-size: 12px;
+        }
+
+        .wiki-thumb.left {
+            float: left;
+            margin: 0 12px 12px 0;
+        }
+
+        .wiki-thumb img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .wiki-thumb-caption {
+            text-align: center;
+            padding-top: 4px;
+            font-style: italic;
+            color: #54595d;
+        }
+
+        body.color-dark .search-box {
+            background-color: #202122;
+            color: #fff;
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            padding: 7px 16px;
+            background-color: #36c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+            font-size: 13px;
+        }
+
+        .title-section {
+            background-color: white;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-family: "Linux Libertine", Georgia, Times, serif;
+            font-weight: normal;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #36c;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .tabs-section {
+            background-color: white;
+            border-bottom: 1px solid #a2a9b1;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+        }
+
+        .tabs a {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #36c;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .tabs a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .tabs a.active {
+            border-bottom: 2px solid #202122;
+        }
+
+        .tools-section {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .tools-section a {
+            color: #36c;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .tools-dropdown {
+            cursor: pointer;
+            color: #36c;
+            font-size: 14px;
+        }
+
+        .appearance-sidebar {
+            width: 200px;
+            background-color: transparent;
+            padding: 0;
+            height: fit-content;
+        }
+
+        .appearance-group {
+            margin-bottom: 20px;
+        }
+
+        .appearance-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .hide-link {
+            color: #36c;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .hide-link:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 1px solid #a2a9b1;
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #a2a9b1;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 5px 0;
+            font-size: 13px;
+        }
+
+        .sidebar ul li a {
+            color: #36c;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar ul ul {
+            margin-left: 15px;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: white;
+            padding: 20px 30px;
+            border: 1px solid #a2a9b1;
+        }
+
+        .infobox {
+            float: right;
+            width: 280px;
+            margin: 0 0 15px 15px;
+            border: 1px solid #a2a9b1;
+            background-color: #f8f9fa;
+            font-size: 13px;
+        }
+
+        .infobox-title {
+            background-color: #cfe9ff;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        body.color-dark .infobox-title {
+            background-color: #1a4d7a;
+        }
+
+        .infobox-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .infobox-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .infobox-caption {
+            text-align: center;
+            padding: 8px;
+            background-color: white;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        body.color-dark .infobox-caption {
+            background-color: #1a1a1a;
+        }
+
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .infobox th {
+            background-color: #eaecf0;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        body.color-dark .infobox th {
+            background-color: #3a3a3a;
+        }
+
+        .infobox td {
+            padding: 8px;
+            border-top: 1px solid #eaecf0;
+        }
+
+        .infobox-label {
+            font-weight: bold;
+            width: 40%;
+        }
+
+        h1 {
+            font-size: 32px;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-family: "Linux Libertine", Georgia, Times, serif;
+        }
+
+        h2 {
+            font-size: 24px;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-family: "Linux Libertine", Georgia, Times, serif;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        a {
+            color: #36c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        body.color-dark a {
+            color: #6b9eff;
+        }
+
+        .pronunciation {
+            font-size: 14px;
+            color: #54595d;
+        }
+
+        .reference {
+            font-size: 11px;
+            vertical-align: super;
+            color: #36c;
+        }
+
+        ul,
+        ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .note {
+            font-size: 12px;
+            font-style: italic;
+            color: #54595d;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 3px solid #36c;
+            margin: 15px 0;
+        }
+
+        body.color-dark .note {
+            background-color: #3a3a3a;
+            color: #ccc;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body class="text-standard width-wide color-auto">
+    <div class="header">
+        <div class="header-left">
+            <div class="hamburger">☰</div>
+            <div class="logo-container">
+                <div class="logo">WIKIPEDIA<span>★</span></div>
+                <div class="tagline">25 years of the free encyclopedia</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search Wikipedia">
+                <button class="search-btn">Search</button>
+            </div>
+            <div class="header-links">
+                <a href="#">Donate</a>
+                <a href="#">Create account</a>
+                <a href="#">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="title-section">
+        <div class="language-selector">🌐 136 languages ˅</div>
+    </div>
+
+    <div class="tabs-section">
+        <div class="tabs">
+            <a href="#" class="active">Article</a>
+            <a href="#">Talk</a>
+        </div>
+        <div class="tools-section">
+            <a href="#">Read</a>
+            <a href="#">View source</a>
+            <a href="#">View history</a>
+            <div class="tools-dropdown">Tools ˅</div>
+            <div style="margin-left: 20px; display: flex; align-items: center; gap: 10px;">
+                <span style="font-weight: bold;">Appearance</span>
+                <a href="#" class="hide-link">hide</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#top">(Top)</a></li>
+                <li><a href="#early-life">Early life</a></li>
+                <li><a href="#career">Career</a>
+                    <ul>
+                        <li><a href="#early-career">2010–2015: Early career</a></li>
+                        <li><a href="#youtube">2015–2020: YouTube success</a></li>
+                        <li><a href="#faang">2020–present: FAANG</a></li>
+                    </ul>
+                </li>
+                <li><a href="#teaching">Teaching and mentorship</a></li>
+                <li><a href="#youtube-channel">YouTube channel</a></li>
+                <li><a href="#recognition">Recognition and awards</a></li>
+                <li><a href="#personal-life">Personal life</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <p style="font-size: 12px; font-style: italic; color: #54595d; margin-bottom: 10px;">From Wikipedia, the
+                free encyclopedia</p>
+
+            <h1>Nadia</h1>
+
+            <div class="infobox">
+                <div class="infobox-title">Nadia</div>
+                <div class="infobox-image"><img src="../../images/examples/nadia-wikipedia/main-image.png" alt="Nadia" /></div>
+                <div class="infobox-caption">Nadia in 2025</div>
+                <table>
+                    <tr>
+                        <th colspan="2">Personal information</th>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Born</td>
+                        <td>1988 (age 36–37)</td>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Nationality</td>
+                        <td>American</td>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Occupation</td>
+                        <td><a href="#">Software Engineer</a><br><a href="#">Web Developer</a><br><a
+                                href="#">Educator</a><br><a href="#">YouTuber</a></td>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Years active</td>
+                        <td>2010–present</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Career highlights</th>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Known for</td>
+                        <td><a href="#">Web development</a> education<br>Training <a href="#">junior
+                                developers</a><br><a href="#">YouTube</a> content creation</td>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">YouTube subscribers</td>
+                        <td>2.5 million+ (as of 2025)</td>
+                    </tr>
+                    <tr>
+                        <td class="infobox-label">Total YouTube revenue</td>
+                        <td>$12+ million <a href="#">USD</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <p><b>Nadia</b> <span class="pronunciation">(born 1988)</span> is an American <a href="#">software
+                    engineer</a>, <a href="#">web developer</a>, <a href="#">educator</a>, and <a href="#">content
+                    creator</a>. With over 10 years of professional experience in <a href="#">web development</a>, she
+                has become one of the most influential voices in <a href="#">tech education</a>, particularly known for
+                her comprehensive approach to training <a href="#">junior developers</a> and her widely successful <a
+                    href="#">YouTube</a> channel dedicated to web development education.<a href="#"
+                    class="reference">[1]</a></p>
+
+            <h2 id="early-life">Early life</h2>
+
+            <p>Nadia was born in 1988 and showed an early aptitude for <a href="#">technology</a> and <a
+                    href="#">problem-solving</a>. Growing up during the dawn of the <a href="#">internet</a> age, she
+                developed a fascination with how <a href="#">websites</a> worked and began experimenting with basic <a
+                    href="#">HTML</a> and <a href="#">CSS</a> during her teenage years.<a href="#"
+                    class="reference">[4]</a></p>
+            <p>Her academic excellence earned her a prestigious <a href="#">scholarship</a> to attend university, where
+                she pursued <a href="#">Computer Science</a> with a focus on <a href="#">web technologies</a> and <a
+                    href="#">software engineering</a>. The scholarship, awarded based on both academic merit and
+                demonstrated potential in the field of technology, covered her full tuition and provided additional
+                support for research projects.<a href="#" class="reference">[5]</a> During her university years, she
+                distinguished herself not only through her technical skills but also through her ability to explain
+                complex concepts to her peers, foreshadowing her future career as an educator.</p>
+            <p>While still in university, Nadia completed multiple <a href="#">internships</a> at tech companies, where
+                she honed her skills in modern web development frameworks, <a href="#">responsive design</a>, and <a
+                    href="#">full-stack development</a>. These early experiences shaped her understanding of both the
+                theoretical and practical aspects of software engineering that would later inform her teaching
+                methodology.<a href="#" class="reference">[6]</a></p>
+
+            <h2 id="career">Career</h2>
+
+            <h3 id="early-career">2010–2015: Early career and breakthrough</h3>
+
+            <!-- INLINE PHOTO 1: floated right, early career -->
+            <div class="wiki-thumb">
+                <div class="wiki-thumb-image thumb-bg-1"><img src="../../images/examples/nadia-wikipedia/early-career.png" alt="Nadia" /></div>
+                <div class="wiki-thumb-caption">Nadia at her desk during her early startup years, c. 2012</div>
+            </div>
+
+            <p>After graduating with honors, Nadia began her professional career as a <a href="#">junior web
+                    developer</a> at a mid-sized tech <a href="#">startup</a> in 2010. Her exceptional problem-solving
+                abilities and dedication to writing clean, maintainable code quickly earned her recognition within the
+                company. Within her first two years, she was promoted to <a href="#">senior developer</a>, taking on
+                responsibilities that included mentoring new team members and leading critical projects.<a href="#"
+                    class="reference">[7]</a></p>
+            <p>During this period, Nadia developed her distinctive approach to web development that emphasized <a
+                    href="#">best practices</a>, <a href="#">accessibility</a>, and <a href="#">user-centered
+                    design</a>. She became known for her ability to bridge the gap between design and development,
+                creating interfaces that were both beautiful and highly functional. Her work on several high-profile
+                projects demonstrated her versatility across the entire web development stack, from <a
+                    href="#">front-end frameworks</a> to <a href="#">back-end architecture</a> and <a href="#">database
+                    design</a>.<a href="#" class="reference">[8]</a></p>
+            <p>It was also during this time that Nadia discovered her passion for teaching. She began conducting
+                internal training sessions for junior developers at her company, developing a systematic curriculum that
+                covered everything from fundamental programming concepts to advanced architectural patterns. Her
+                teaching style—which combined clear explanations with hands-on projects and real-world examples—proved
+                highly effective, with her mentees consistently advancing more rapidly than their peers.<a href="#"
+                    class="reference">[9]</a></p>
+
+            <h3 id="youtube">2015–2020: YouTube success and educational impact</h3>
+
+            <!-- INLINE PHOTO 2: floated left, YouTube era -->
+            <div class="wiki-thumb left">
+                <div class="wiki-thumb-image"><img src="../../images/examples/nadia-wikipedia/youtube-image.png" alt="Nadia" /></div>
+                <div class="wiki-thumb-caption">Nadia filming a tutorial in her home studio, 2018</div>
+            </div>
+
+            <p>In 2015, recognizing the demand for high-quality, accessible web development education, Nadia launched
+                her <a href="#">YouTube channel</a>. Her initial videos focused on explaining core web technologies—<a
+                    href="#">HTML</a>, <a href="#">CSS</a>, and <a href="#">JavaScript</a>—in a way that was
+                approachable for beginners while still offering depth for more experienced developers. The response was
+                overwhelming, with her clear teaching style and professional production quality setting her apart from
+                other educational content creators.<a href="#" class="reference">[10]</a></p>
+            <p>The channel's growth was remarkable. By 2017, she had surpassed 500,000 subscribers, and by 2020, that
+                number had grown to over 2 million. Her content evolved to cover a comprehensive range of topics
+                including:</p>
+            <ul>
+                <li>Modern <a href="#">JavaScript frameworks</a> (<a href="#">React</a>, <a href="#">Vue</a>, <a
+                        href="#">Angular</a>)</li>
+                <li><a href="#">Backend development</a> with <a href="#">Node.js</a>, <a href="#">Python</a>, and <a
+                        href="#">Ruby</a></li>
+                <li><a href="#">Database design</a> and management</li>
+                <li><a href="#">DevOps</a> and deployment strategies</li>
+                <li>Career development and <a href="#">interview preparation</a> for developers</li>
+                <li><a href="#">Code review</a> techniques and <a href="#">software architecture</a></li>
+                <li>Web <a href="#">performance optimization</a></li>
+                <li><a href="#">Accessibility</a> and <a href="#">inclusive design</a></li>
+            </ul>
+            <p>The financial success of the channel exceeded all expectations. Through a combination of <a href="#">ad
+                    revenue</a>, sponsorships from major tech companies, and premium course offerings, Nadia's YouTube
+                venture generated over $12 million in revenue by 2023, making her one of the most successful educational
+                content creators in the technology sector.<a href="#" class="reference">[11]</a> Despite this success,
+                she has maintained her commitment to keeping the majority of her content free and accessible to learners
+                worldwide.</p>
+            <p>What distinguished Nadia's content was not just the technical knowledge she shared, but her emphasis on
+                the human aspects of being a developer—dealing with <a href="#">imposter syndrome</a>, navigating career
+                transitions, and building a sustainable <a href="#">work-life balance</a> in the tech industry. This
+                holistic approach resonated deeply with her audience and helped countless developers navigate their
+                careers more successfully.<a href="#" class="reference">[12]</a></p>
+
+            <h3 id="faang">2020–present: FAANG achievement and continued excellence</h3>
+
+            <!-- INLINE PHOTO 3: floated right, FAANG/speaking -->
+            <div class="wiki-thumb">
+                <div class="wiki-thumb-image thumb-bg-3"><img src="../../images/examples/nadia-wikipedia/react-conf.png" alt="Nadia" /></div>
+                <div class="wiki-thumb-caption">Nadia speaking at React Conf 2023 in San Francisco</div>
+            </div>
+
+            <p>In 2020, Nadia achieved what many developers aspire to: securing a position at one of the prestigious <a
+                    href="#">FAANG</a> companies. The rigorous <a href="#">interview process</a>, which she documented
+                (with appropriate discretion) for her audience, showcased the depth of her technical expertise and
+                problem-solving abilities. Her hiring was seen as a validation of the skills and knowledge she had been
+                teaching for years.<a href="#" class="reference">[13]</a></p>
+            <p>At her FAANG position, Nadia works on large-scale <a href="#">distributed systems</a> that serve millions
+                of users globally. Her role involves architecting complex web applications, optimizing performance at
+                scale, and collaborating with cross-functional teams of designers, product managers, and fellow
+                engineers. She has been instrumental in several high-impact projects, though many details remain
+                confidential due to the proprietary nature of her work.<a href="#" class="reference">[14]</a></p>
+            <p>Rather than stepping away from education after achieving corporate success, Nadia has doubled down on her
+                commitment to teaching. She continues to produce YouTube content, now bringing insights from her work at
+                one of the world's most advanced tech companies. Her videos on <a href="#">system design</a>, <a
+                    href="#">scalability</a>, and engineering culture at FAANG companies have become particularly
+                popular among developers preparing for senior-level positions.<a href="#" class="reference">[15]</a></p>
+            <p>The combination of her corporate role and her educational platform has created a unique feedback loop:
+                insights from her day job inform her teaching, while questions and challenges from her audience keep her
+                connected to the needs of the broader developer community. This dual perspective has made her an
+                invaluable bridge between industry best practices and accessible education.</p>
+
+            <h2 id="teaching">Teaching and mentorship</h2>
+            <p>Beyond her YouTube channel, Nadia has developed a comprehensive <a href="#">mentorship program</a> for
+                junior developers. Her structured approach to training has helped hundreds of aspiring developers
+                transition into professional roles. The program covers:</p>
+            <ul>
+                <li><b>Technical foundations:</b> Core programming concepts, <a href="#">data structures</a>, and <a
+                        href="#">algorithms</a></li>
+                <li><b>Practical skills:</b> <a href="#">Version control</a>, <a href="#">debugging</a>, <a
+                        href="#">testing</a>, and code review practices</li>
+                <li><b>Professional development:</b> Resume building, interview preparation, and <a href="#">salary
+                        negotiation</a></li>
+                <li><b>Soft skills:</b> Communication, teamwork, and navigating workplace dynamics</li>
+                <li><b>Career planning:</b> Setting goals, building a <a href="#">portfolio</a>, and continuous learning
+                    strategies</li>
+            </ul>
+            <p>Her mentees have gone on to secure positions at major tech companies, startups, and agencies around the
+                world. Many credit her structured approach and supportive teaching style as crucial factors in their
+                success. Nadia maintains an alumni network that allows her former mentees to continue supporting each
+                other and newer participants in the program.<a href="#" class="reference">[16]</a></p>
+            <p>She has also contributed to <a href="#">diversity and inclusion</a> in tech, actively working to make web
+                development education accessible to underrepresented groups. Through scholarship programs and free
+                workshops, she has helped lower barriers to entry in the tech industry for individuals from various
+                backgrounds.<a href="#" class="reference">[17]</a></p>
+
+            <h2 id="youtube-channel">YouTube channel</h2>
+            <p>Nadia's YouTube channel, which as of 2025 has over 2.5 million subscribers and more than 200 million
+                total views, is widely regarded as one of the premier destinations for web development education. The
+                channel features several distinct content series:</p>
+            <ul>
+                <li><b>"Build Real Projects":</b> Comprehensive tutorials where viewers code complete applications from
+                    scratch</li>
+                <li><b>"5-Minute Concepts":</b> Quick explanations of specific technical topics</li>
+                <li><b>"Interview Prep":</b> Guides to technical interviews and coding challenges</li>
+                <li><b>"Day in the Life":</b> Behind-the-scenes looks at working as a developer at a major tech company
+                </li>
+                <li><b>"Code Review":</b> Analysis of real code submissions from viewers, providing constructive
+                    feedback</li>
+                <li><b>"Career Talks":</b> Discussions on career development, work-life balance, and industry trends
+                </li>
+            </ul>
+            <p>The production quality of her videos is notably high, featuring clear audio, professional editing, and
+                well-designed graphics that help illustrate complex concepts. This attention to detail has contributed
+                significantly to the channel's success and viewer engagement.<a href="#" class="reference">[18]</a></p>
+            <p>The financial success of the channel—generating over $12 million in cumulative revenue—has come from
+                multiple streams including YouTube ad revenue, sponsorships from tech companies and developer tools, <a
+                    href="#">affiliate marketing</a>, and premium course offerings. Despite this commercial success,
+                Nadia has been praised for maintaining editorial integrity and only promoting tools and services she
+                genuinely uses and believes in.<a href="#" class="reference">[19]</a></p>
+
+            <h2 id="recognition">Recognition and awards</h2>
+            <p>Nadia's contributions to tech education and the developer community have earned her numerous accolades:
+            </p>
+            <ul>
+                <li>Named to "Top 100 Tech Influencers" by <a href="#">TechCrunch</a> (2019, 2021, 2023)</li>
+                <li><a href="#">YouTube Creator Award</a> for surpassing 1 million and 2 million subscribers</li>
+                <li>"Excellence in STEM Education" award from the National Education Association (2022)</li>
+                <li>Featured speaker at major tech conferences including <a href="#">Google I/O</a>, <a href="#">React
+                        Conf</a>, and <a href="#">JSConf</a></li>
+                <li>Regular contributor to leading tech publications and developer blogs</li>
+            </ul>
+            <p>She has been profiled in major publications including <a href="#">Wired</a>, <a href="#">The New York
+                    Times</a>, and <a href="#">Forbes</a>, which recognized her as one of the leading voices in making
+                tech education more accessible and practical.<a href="#" class="reference">[20]</a></p>
+
+            <h2 id="personal-life">Personal life</h2>
+            <p>While Nadia maintains a relatively private personal life, she has been open about her journey in the tech
+                industry and the challenges she faced early in her career. She has spoken candidly about experiencing <a
+                    href="#">imposter syndrome</a> and the importance of building support networks in what can be an
+                isolating field.</p>
+            <p>She is an advocate for <a href="#">work-life balance</a> in the tech industry and regularly discusses the
+                importance of maintaining <a href="#">mental health</a> and avoiding <a href="#">burnout</a>. Her
+                transparency about these issues has helped normalize conversations about wellness in the developer
+                community.</p>
+            <p>In her free time, Nadia enjoys <a href="#">hiking</a>, <a href="#">photography</a>, and continuing to
+                learn new technologies and programming languages. She maintains that staying curious and always being a
+                student—even while teaching others—is key to longevity and satisfaction in a tech career.<a href="#"
+                    class="reference">[21]</a></p>
+
+            <h2 id="references">References</h2>
+            <div class="note">
+                <p><b>Note:</b> This is a fictional biographical page created for educational purposes as part of a
+                    college project. All information, references, awards, and achievements described herein are
+                    fictional and created for demonstrative purposes only.</p>
+            </div>
+            <ol style="font-size: 12px; color: #54595d;">
+                <li>"Tech Educator Profile: Nadia". Tech Education Journal. 2023.</li>
+                <li>"The Rise of Educational Content Creators in Tech". Digital Learning Today. 2024.</li>
+                <li>"FAANG Hiring: Success Stories from 2020". Silicon Valley Times. 2021.</li>
+                <li>"Early Influences: How Childhood Shapes Tech Careers". Computer Science Quarterly. 2022.</li>
+                <li>"Scholarship Recipients Who Changed Tech Education". Education Foundation Report. 2020.</li>
+                <li>"From Intern to Industry Leader: Career Trajectories in Software Development". Career Development
+                    Review. 2023.</li>
+                <li>"Breaking Through: Early Career Success in Tech Startups". Startup Magazine. 2015.</li>
+                <li>"Best Practices in Modern Web Development". Web Dev Journal. 2018.</li>
+                <li>"The Art of Teaching Code: Effective Mentorship in Technology". Tech Teaching Quarterly. 2019.</li>
+                <li>"YouTube's Educational Revolution: Top Channels Changing Lives". Digital Media Studies. 2020.</li>
+                <li>"The Economics of Educational Content Creation". New Media Economics. 2023.</li>
+                <li>"Beyond Code: The Human Side of Software Development". Developer Psychology Today. 2021.</li>
+                <li>"Inside FAANG: Interview Process and What It Takes". Tech Career Guide. 2020.</li>
+                <li>"Large-Scale Systems: Engineering at the World's Biggest Companies". Systems Architecture Review.
+                    2022.</li>
+                <li>"Learning from FAANG: Industry Insights for Developers". Professional Development Magazine. 2024.
+                </li>
+                <li>"Mentorship Programs That Work: Case Studies in Tech Education". Education Technology Review. 2023.
+                </li>
+                <li>"Diversity in Tech: Programs Making a Difference". Inclusive Technology Journal. 2024.</li>
+                <li>"Production Quality in Educational Content: What Works and Why". Digital Learning Research. 2022.
+                </li>
+                <li>"Monetization and Integrity: Balancing Commercial Success with Educational Value". Content Creator
+                    Ethics. 2023.</li>
+                <li>"Profiles in Tech Education: Leaders Shaping the Next Generation". Forbes Technology. 2023.</li>
+                <li>"Work-Life Balance in High-Performance Tech Careers". Tech Wellness Magazine. 2024.</li>
+            </ol>
+        </div>
+
+        <div class="appearance-sidebar">
+            <div class="appearance-group">
+                <label>Text</label>
+                <div class="radio-group">
+                    <div class="radio-option"><input type="radio" name="text-size" id="text-small"
+                            onclick="changeTextSize('small')"><label for="text-small">Small</label></div>
+                    <div class="radio-option"><input type="radio" name="text-size" id="text-standard" checked
+                            onclick="changeTextSize('standard')"><label for="text-standard">Standard</label></div>
+                    <div class="radio-option"><input type="radio" name="text-size" id="text-large"
+                            onclick="changeTextSize('large')"><label for="text-large">Large</label></div>
+                </div>
+            </div>
+            <div class="appearance-group">
+                <label>Width</label>
+                <div class="radio-group">
+                    <div class="radio-option"><input type="radio" name="width" id="width-standard"
+                            onclick="changeWidth('standard')"><label for="width-standard">Standard</label></div>
+                    <div class="radio-option"><input type="radio" name="width" id="width-wide" checked
+                            onclick="changeWidth('wide')"><label for="width-wide">Wide</label></div>
+                </div>
+            </div>
+            <div class="appearance-group">
+                <label>Color (beta)</label>
+                <div class="radio-group">
+                    <div class="radio-option"><input type="radio" name="color" id="color-auto" checked
+                            onclick="changeColor('auto')"><label for="color-auto">Automatic</label></div>
+                    <div class="radio-option"><input type="radio" name="color" id="color-light"
+                            onclick="changeColor('light')"><label for="color-light">Light</label></div>
+                    <div class="radio-option"><input type="radio" name="color" id="color-dark"
+                            onclick="changeColor('dark')"><label for="color-dark">Dark</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeTextSize(size) { document.body.className = document.body.className.replace(/text-\w+/, 'text-' + size); }
+        function changeWidth(width) { document.body.className = document.body.className.replace(/width-\w+/, 'width-' + width); }
+        function changeColor(color) { document.body.className = document.body.className.replace(/color-\w+/, 'color-' + color); }
+    </script>
+</body>
+
+</html>
