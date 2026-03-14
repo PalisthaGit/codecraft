@@ -19,34 +19,57 @@ body {
 
 /* ── Syntax highlighting token colors (highlight.js) ───────────────────── */
 .hljs                        { color: #e2e8f0; }
+
+/* Comments */
 .hljs-comment,
 .hljs-quote                  { color: #546e7a; font-style: italic; }
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-built_in,
-.hljs-name,
+
+/* Tags & keywords  →  purple */
 .hljs-tag                    { color: #c792ea; }
+.hljs-name,
+.hljs-keyword,
+.hljs-selector-tag           { color: #c792ea; }
+
+/* Attribute names  →  yellow */
+.hljs-attr                   { color: #ffcb6b; }
+
+/* Strings & attribute values  →  green */
 .hljs-string,
-.hljs-attr,
-.hljs-selector-attr          { color: #c3e88d; }
+.hljs-selector-attr,
+.hljs-addition               { color: #c3e88d; }
+
+/* Numbers & booleans  →  orange */
 .hljs-number,
 .hljs-literal                { color: #f78c6c; }
+
+/* Functions, titles, built-ins  →  blue */
 .hljs-title,
 .hljs-section,
-.hljs-attribute,
+.hljs-built_in               { color: #82aaff; }
+
+/* Variables & template vars  →  light red */
 .hljs-variable,
-.hljs-template-variable      { color: #82aaff; }
+.hljs-template-variable      { color: #f07178; }
+
+/* Types & class names  →  yellow */
 .hljs-type,
 .hljs-class .hljs-title      { color: #ffcb6b; }
+
+/* Attributes / CSS properties  →  blue */
+.hljs-attribute              { color: #82aaff; }
+
+/* Symbols, links  →  teal */
 .hljs-symbol,
 .hljs-bullet,
 .hljs-link                   { color: #80cbc4; }
+
+/* Meta / selectors  →  red */
 .hljs-meta,
 .hljs-selector-id,
 .hljs-selector-class         { color: #ff5370; }
+
 .hljs-emphasis               { font-style: italic; }
 .hljs-strong                 { font-weight: 700; }
-.hljs-addition               { color: #c3e88d; }
 .hljs-deletion               { color: #ff5370; }
 
 /* Prose styles for HTML file content rendered via dangerouslySetInnerHTML */
@@ -113,8 +136,8 @@ body {
 }
 
 .html-content pre {
-  background-color: #1e293b;
-  color: #e2e8f0;
+  background-color: #1E293B;
+  color: #E2E8F0;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.875rem;
   line-height: 1.7;
@@ -164,6 +187,32 @@ body {
   font-weight: 600;
   color: #0f172a;
   line-height: 1.7;
+}
+
+.html-content .try-example {
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.html-content .try-example h3 {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6367ff;
+  margin: 0 0 1rem 0;
+}
+
+.html-content .try-example iframe {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  border: 1px solid #e5e7eb;
 }
 
 .html-content .tip {

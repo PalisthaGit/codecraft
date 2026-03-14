@@ -83,7 +83,7 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
       </div>
 
       {/* Code body */}
-      <pre className="bg-[#1e293b] text-[#e2e8f0] font-mono text-sm leading-[1.7] px-5 py-5 overflow-x-auto">
+      <pre className="bg-[#1E293B] text-[#E2E8F0] font-mono text-sm leading-[1.7] px-5 py-5 overflow-x-auto">
         {highlighted ? (
           <code dangerouslySetInnerHTML={{ __html: highlighted }} />
         ) : (
