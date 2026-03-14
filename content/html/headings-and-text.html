@@ -376,3 +376,148 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
   </script>
 
 </section>
+
+<h2>Write It Yourself</h2>
+
+<p>Now try writing your own HTML from scratch. Use what you've learned — add headings, paragraphs, bold and italic text, and anything else you want. Hit <strong>Run</strong> to see your result.</p>
+
+<section class="try-example">
+
+  <style>
+    #wiy-textarea::selection { background: rgba(99, 103, 255, 0.35); }
+    #wiy-mirror::-webkit-scrollbar { display: none; }
+  </style>
+
+  <div style="border-radius:12px;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;background:#1E293B;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);">
+      <span style="color:#94A3B8;font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.04em;">HTML</span>
+      <div style="display:flex;gap:6px;">
+        <button id="wiy-copy-btn" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.08);color:#CBD5E1;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span id="wiy-copy-label">Copy Code</span>
+        </button>
+        <button id="wiy-run-btn" style="display:flex;align-items:center;gap:5px;background:#22c55e;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          Run
+        </button>
+      </div>
+    </div>
+
+    <div id="wiy-editor-wrap" style="position:relative;overflow:hidden;background:#1E293B;">
+      <pre id="wiy-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;-ms-overflow-style:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="wiy-hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
+      <textarea id="wiy-textarea" spellcheck="false" placeholder="Write your HTML here…" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
+    </div>
+  </div>
+
+  <p style="margin:12px 0 6px;font-size:1.05rem;font-weight:700;color:#64748B;">Output</p>
+  <div style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
+    <iframe id="wiy-output" style="width:100%;height:auto;min-height:80px;border:none;display:block;"></iframe>
+  </div>
+
+  <script>
+    (function () {
+
+      var C = {
+        bracket:  '#c792ea', tagName: '#c792ea', attrName: '#ffcb6b',
+        attrEq:   '#e2e8f0', attrVal: '#c3e88d', special:  '#c792ea',
+        comment:  '#546e7a', text:    '#e2e8f0',
+      };
+
+      function esc(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      function colorTag(token) {
+        var inner = token.slice(1, -1);
+        if (!inner) return esc(token);
+        if (inner[0] === '!') return '<span style="color:' + C.special + '">' + esc(token) + '</span>';
+        var selfClose = inner.slice(-1) === '/';
+        if (selfClose) inner = inner.slice(0, -1).replace(/\s+$/, '');
+        var isClose = inner[0] === '/';
+        if (isClose) inner = inner.slice(1);
+        var sp = inner.search(/\s/);
+        var tagName = sp === -1 ? inner : inner.slice(0, sp);
+        var rest    = sp === -1 ? '' : inner.slice(sp);
+        var hlRest  = esc(rest).replace(/([\w:-]+)(=)("(?:[^"]*)")/g,
+          '<span style="color:' + C.attrName + '">$1</span>' +
+          '<span style="color:' + C.attrEq   + '">$2</span>' +
+          '<span style="color:' + C.attrVal  + '">$3</span>');
+        var lb = '<span style="color:' + C.bracket + '">&lt;' + (isClose ? '/' : '') + '</span>';
+        var rb = '<span style="color:' + C.bracket + '">' + (selfClose ? '/' : '') + '&gt;</span>';
+        var tn = '<span style="color:' + C.tagName + '">' + esc(tagName) + '</span>';
+        return lb + tn + hlRest + rb;
+      }
+
+      function highlightHTML(code) {
+        var result = '', re = /<!--[\s\S]*?-->|<[^>]*>|[^<]+/g, m;
+        while ((m = re.exec(code)) !== null) {
+          var t = m[0];
+          if (t.slice(0, 4) === '<!--') result += '<span style="color:' + C.comment + '">' + esc(t) + '</span>';
+          else if (t[0] === '<')        result += colorTag(t);
+          else                          result += esc(t);
+        }
+        return result;
+      }
+
+      var mirror  = document.getElementById('wiy-mirror');
+      var hlCode  = document.getElementById('wiy-hl-code');
+      var editor  = document.getElementById('wiy-textarea');
+      var wrap    = document.getElementById('wiy-editor-wrap');
+      var output  = document.getElementById('wiy-output');
+      var runBtn  = document.getElementById('wiy-run-btn');
+      var copyBtn = document.getElementById('wiy-copy-btn');
+      var copyLbl = document.getElementById('wiy-copy-label');
+
+      // Default editor height = 12 lines
+      var lineH  = 14 * 1.7;
+      wrap.style.height = (12 * lineH + 32) + 'px';
+
+      function resizeOutput() {
+        try {
+          var body = output.contentDocument.body;
+          body.style.margin = '0';
+          body.style.padding = '12px 16px';
+          body.style.boxSizing = 'border-box';
+          var h = body.scrollHeight;
+          var maxH = 20 * 24;
+          if (h > 0) {
+            output.style.height = (h > maxH ? maxH : h) + 'px';
+            output.style.overflowY = h > maxH ? 'auto' : 'hidden';
+          }
+        } catch (e) {}
+      }
+      output.addEventListener('load', resizeOutput);
+
+      editor.addEventListener('scroll', function () {
+        mirror.scrollTop  = editor.scrollTop;
+        mirror.scrollLeft = editor.scrollLeft;
+      });
+
+      editor.addEventListener('input', function () {
+        hlCode.innerHTML = highlightHTML(editor.value);
+      });
+
+      editor.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab') return;
+        e.preventDefault();
+        var s = editor.selectionStart;
+        editor.value = editor.value.slice(0, s) + '  ' + editor.value.slice(editor.selectionEnd);
+        editor.selectionStart = editor.selectionEnd = s + 2;
+        editor.dispatchEvent(new Event('input'));
+      });
+
+      runBtn.addEventListener('click', function () {
+        output.srcdoc = editor.value;
+      });
+
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(editor.value).then(function () {
+          copyLbl.textContent = 'Copied!';
+          setTimeout(function () { copyLbl.textContent = 'Copy Code'; }, 2000);
+        });
+      });
+
+    })();
+  </script>
+
+</section>
