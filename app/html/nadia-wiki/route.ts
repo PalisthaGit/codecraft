@@ -3,7 +3,7 @@ import { join } from "path";
 
 export async function GET() {
   const html = readFileSync(
-    join(process.cwd(), "content/html/project/index.html"),
+    join(process.cwd(), "content/html/nadia-wiki/index.html"),
     "utf-8"
   );
   return new Response(html, {
