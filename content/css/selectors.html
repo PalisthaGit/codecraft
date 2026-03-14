@@ -120,6 +120,14 @@ li:last-child {
 <style>
   #sel-textarea::selection, #sel-css-textarea::selection { background: rgba(99,103,255,0.35); }
   #sel-mirror::-webkit-scrollbar, #sel-css-mirror::-webkit-scrollbar { display: none; }
+  @keyframes hint-pop {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  @keyframes hint-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
   @keyframes btn-glow {
     0%, 100% { box-shadow: 0 0 6px 2px rgba(99,103,255,0.5), 0 0 0 2px rgba(99,103,255,0.5); transform: scale(1); filter: brightness(1); }
     50% { box-shadow: 0 0 28px 10px rgba(99,103,255,1), 0 0 0 3px rgba(160,164,255,1), 0 0 50px 16px rgba(99,103,255,0.4); transform: scale(1.07); filter: brightness(1.25); }
@@ -177,6 +185,7 @@ li:last-child {
       <span id="sel-updated-badge" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:15px;font-weight:800;color:#fff;background:rgba(34,197,94,0.92);border:none;border-radius:12px;padding:10px 28px;pointer-events:none;z-index:10;white-space:nowrap;box-shadow:0 4px 24px rgba(34,197,94,0.5);letter-spacing:0.02em;">✓ Output updated</span>
       <pre id="sel-css-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="sel-css-hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
       <textarea id="sel-css-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
+      <div id="sel-edit-hint" style="display:none;position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(99,103,255,0.92);color:white;font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;white-space:nowrap;pointer-events:none;box-shadow:0 4px 12px rgba(99,103,255,0.4);">✏️ Edit the code, then hit Run to see your result</div>
     </div>
 
   </div>
@@ -213,6 +222,7 @@ li:last-child {
   var mirrorH     = document.getElementById('sel-mirror');
   var mirrorC     = document.getElementById('sel-css-mirror');
   var badge       = document.getElementById('sel-updated-badge');
+  var editHint    = document.getElementById('sel-edit-hint');
   var cssViewPre  = document.getElementById('sel-css-view-pre');
   var htmlViewPre = document.getElementById('sel-html-view-pre');
   var cssViewCode = document.getElementById('sel-css-code');
@@ -222,6 +232,8 @@ li:last-child {
   var maxViewLines = 16;
   var editing = false;
   var activeTab = 'css'; // css is default open
+  var typedChars = 0;
+  var prevLen = 0;
 
   // ── Compute shared height from whichever content is longer ───────────────
   var htmlLines = HTML_DEFAULT.split('\n').length;
@@ -340,6 +352,12 @@ li:last-child {
       hlHtml.innerHTML = highlightHTML(htmlTA.value);
       hlCss.innerHTML  = highlightCSS(cssTA.value);
       cssTA.focus();
+      typedChars = 0;
+      prevLen = cssTA.value.length;
+      editHint.style.display = 'block';
+      editHint.style.animation = 'none';
+      editHint.offsetHeight;
+      editHint.style.animation = 'hint-pop 0.35s ease forwards';
     } else {
       editorWrap.style.display   = 'none';
       tryBtn.textContent         = 'Try It Yourself';
@@ -359,8 +377,17 @@ li:last-child {
   });
 
   // ── Live highlight on input ──────────────────────────────────────────────
-  htmlTA.addEventListener('input', function () { hlHtml.innerHTML = highlightHTML(htmlTA.value); });
-  cssTA.addEventListener('input',  function () { hlCss.innerHTML  = highlightCSS(cssTA.value);   });
+  function dismissHint(ta) {
+    var delta = ta.value.length - prevLen;
+    if (delta > 0) typedChars += delta;
+    prevLen = ta.value.length;
+    if (typedChars >= 5 && editHint.style.display !== 'none') {
+      editHint.style.animation = 'hint-out 0.4s ease forwards';
+      setTimeout(function () { editHint.style.display = 'none'; }, 400);
+    }
+  }
+  htmlTA.addEventListener('input', function () { hlHtml.innerHTML = highlightHTML(htmlTA.value); dismissHint(htmlTA); });
+  cssTA.addEventListener('input',  function () { hlCss.innerHTML  = highlightCSS(cssTA.value);  dismissHint(cssTA);  });
 
   // ── Sync scroll ──────────────────────────────────────────────────────────
   htmlTA.addEventListener('scroll', function () { mirrorH.scrollTop = htmlTA.scrollTop; mirrorH.scrollLeft = htmlTA.scrollLeft; });
