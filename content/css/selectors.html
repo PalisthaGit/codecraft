@@ -111,3 +111,289 @@ li:last-child {
   font-family: sans-serif;
   color: #0f172a;
 }</code></pre>
+
+<h2>Putting It All Together</h2>
+
+<p>Here's how selectors work in practice — a card component styled with multiple selector types:</p>
+
+<section class="try-example">
+<style>
+  #sel-textarea::selection, #sel-css-textarea::selection { background: rgba(99,103,255,0.35); }
+  #sel-mirror::-webkit-scrollbar, #sel-css-mirror::-webkit-scrollbar { display: none; }
+  @keyframes btn-glow {
+    0%, 100% { box-shadow: 0 0 6px 2px rgba(99,103,255,0.5), 0 0 0 2px rgba(99,103,255,0.5); transform: scale(1); filter: brightness(1); }
+    50% { box-shadow: 0 0 28px 10px rgba(99,103,255,1), 0 0 0 3px rgba(160,164,255,1), 0 0 50px 16px rgba(99,103,255,0.4); transform: scale(1.07); filter: brightness(1.25); }
+  }
+  @keyframes output-glow {
+    0%   { box-shadow: 0 0 0 0 rgba(99,103,255,0); border-color: #E5E7EB; }
+    30%  { box-shadow: 0 0 0 6px rgba(99,103,255,0.35); border-color: #6367ff; }
+    100% { box-shadow: 0 0 0 0 rgba(99,103,255,0); border-color: #E5E7EB; }
+  }
+  .output-glow-once { animation: output-glow 1s ease-out forwards; }
+</style>
+
+<div style="border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.12);">
+
+  <!-- Header: tabs | Copy | Run (hidden) | Try It Yourself -->
+  <div style="display:flex;align-items:center;justify-content:space-between;background:#0f172a;padding:0 14px;border-bottom:1px solid rgba(255,255,255,0.07);">
+    <div style="display:flex;">
+      <button id="sel-tab-html" style="background:transparent;border:none;border-bottom:2px solid transparent;color:rgba(255,255,255,0.35);font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;cursor:pointer;font-family:'JetBrains Mono',monospace;">HTML</button>
+      <button id="sel-tab-css" style="background:transparent;border:none;border-bottom:2px solid #6367ff;color:#fff;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;cursor:pointer;font-family:'JetBrains Mono',monospace;">CSS</button>
+    </div>
+    <div style="display:flex;gap:6px;">
+      <button id="sel-copy-btn" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.08);color:#CBD5E1;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="sel-copy-label">Copy</span>
+      </button>
+      <button id="sel-run-btn" style="display:none;align-items:center;gap:5px;background:#22c55e;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        Run
+      </button>
+      <button id="sel-try-btn" style="background:#6367FF;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;animation:btn-glow 1.8s ease-in-out infinite;">Try It Yourself</button>
+    </div>
+  </div>
+
+  <!-- Read-only CSS view (default, CSS tab shown) -->
+  <div id="sel-css-view" style="background:#1E293B;">
+    <pre id="sel-css-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-css-code" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
+  </div>
+
+  <!-- Read-only HTML view (hidden by default) -->
+  <div id="sel-html-view" style="display:none;background:#1E293B;">
+    <pre id="sel-html-view-pre" style="margin:0;padding:16px;background:transparent;overflow-y:auto;overflow-x:auto;box-sizing:border-box;"><code id="sel-html-code" style="background:transparent;font-size:14px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:pre;display:block;"></code></pre>
+  </div>
+
+  <!-- Editor wrap (hidden until Try It Yourself) -->
+  <div id="sel-editor-wrap" style="display:none;">
+
+    <!-- HTML editor pane (hidden by default) -->
+    <div id="sel-html-pane" style="display:none;position:relative;overflow:hidden;background:#1E293B;">
+      <pre id="sel-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="sel-hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
+      <textarea id="sel-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
+    </div>
+
+    <!-- CSS editor pane (visible by default in editor) -->
+    <div id="sel-css-pane" style="position:relative;overflow:hidden;background:#1E293B;">
+      <span id="sel-updated-badge" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:15px;font-weight:800;color:#fff;background:rgba(34,197,94,0.92);border:none;border-radius:12px;padding:10px 28px;pointer-events:none;z-index:10;white-space:nowrap;box-shadow:0 4px 24px rgba(34,197,94,0.5);letter-spacing:0.02em;">✓ Output updated</span>
+      <pre id="sel-css-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="sel-css-hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
+      <textarea id="sel-css-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
+    </div>
+
+  </div>
+
+</div>
+
+<p style="margin:12px 0 6px;font-size:1.05rem;font-weight:700;color:#64748B;">Output</p>
+<div id="sel-output-wrap" style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
+  <iframe id="sel-output" style="width:100%;height:auto;min-height:220px;border:none;display:block;"></iframe>
+</div>
+
+<script>
+(function () {
+  var HTML_DEFAULT = '<div class="card">\n  <h2>CSS Selectors</h2>\n  <p>Selectors tell the browser <em>which elements</em> to style.</p>\n</div>';
+  var CSS_DEFAULT  = '.card {\n  background: white;\n  border-radius: 12px;\n  padding: 1.5rem;\n  box-shadow: 0 4px 12px rgba(0,0,0,0.05);\n  font-family: sans-serif;\n  max-width: 320px;\n}\n\n.card h2 {\n  font-size: 1.2rem;\n  color: #0f172a;\n  margin: 0 0 8px;\n}\n\n.card p {\n  color: #64748b;\n  line-height: 1.6;\n  margin: 0;\n}';
+
+  var htmlTA      = document.getElementById('sel-textarea');
+  var cssTA       = document.getElementById('sel-css-textarea');
+  var htmlPane    = document.getElementById('sel-html-pane');
+  var cssPane     = document.getElementById('sel-css-pane');
+  var htmlView    = document.getElementById('sel-html-view');
+  var cssView     = document.getElementById('sel-css-view');
+  var editorWrap  = document.getElementById('sel-editor-wrap');
+  var tabHtml     = document.getElementById('sel-tab-html');
+  var tabCss      = document.getElementById('sel-tab-css');
+  var runBtn      = document.getElementById('sel-run-btn');
+  var tryBtn      = document.getElementById('sel-try-btn');
+  var copyBtn     = document.getElementById('sel-copy-btn');
+  var copyLbl     = document.getElementById('sel-copy-label');
+  var output      = document.getElementById('sel-output');
+  var outWrap     = document.getElementById('sel-output-wrap');
+  var hlHtml      = document.getElementById('sel-hl-code');
+  var hlCss       = document.getElementById('sel-css-hl-code');
+  var mirrorH     = document.getElementById('sel-mirror');
+  var mirrorC     = document.getElementById('sel-css-mirror');
+  var badge       = document.getElementById('sel-updated-badge');
+  var cssViewPre  = document.getElementById('sel-css-view-pre');
+  var htmlViewPre = document.getElementById('sel-html-view-pre');
+  var cssViewCode = document.getElementById('sel-css-code');
+  var htmlViewCode= document.getElementById('sel-html-code');
+
+  var lineH = 14 * 1.7;
+  var maxViewLines = 16;
+  var editing = false;
+  var activeTab = 'css'; // css is default open
+
+  // ── Compute shared height from whichever content is longer ───────────────
+  var htmlLines = HTML_DEFAULT.split('\n').length;
+  var cssLines  = CSS_DEFAULT.split('\n').length;
+  var maxLines  = Math.max(htmlLines, cssLines);
+  var sharedH   = Math.min(maxLines, maxViewLines) * lineH + 32;
+  sharedH = Math.max(sharedH, 120);
+
+  // Apply to read-only view pres
+  cssViewPre.style.height    = sharedH + 'px';
+  htmlViewPre.style.height   = sharedH + 'px';
+  if (maxLines > maxViewLines) {
+    cssViewPre.style.overflowY  = 'auto';
+    htmlViewPre.style.overflowY = 'auto';
+  }
+
+  // Apply same height to editor panes
+  htmlPane.style.height = sharedH + 'px';
+  cssPane.style.height  = sharedH + 'px';
+
+  // ── Set initial content ──────────────────────────────────────────────────
+  htmlTA.value = HTML_DEFAULT;
+  cssTA.value  = CSS_DEFAULT;
+
+  // ── Syntax highlighters ──────────────────────────────────────────────────
+  function escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function highlightHTML(code) {
+    var result = '';
+    var re = /<!--[\s\S]*?-->|<[^>]*>|[^<]+/g, m;
+    var C = { bracket:'#c792ea', tag:'#c792ea', attr:'#ffcb6b', eq:'#e2e8f0', val:'#c3e88d', comment:'#546e7a' };
+    while ((m = re.exec(code)) !== null) {
+      var t = m[0];
+      if (t.slice(0,4) === '<!--') { result += '<span style="color:' + C.comment + '">' + escH(t) + '</span>'; continue; }
+      if (t[0] === '<') {
+        var inner = t.slice(1,-1);
+        if (!inner) { result += escH(t); continue; }
+        if (inner[0]==='!') { result += '<span style="color:'+C.tag+'">'+escH(t)+'</span>'; continue; }
+        var sc = inner.slice(-1)==='/'; if (sc) inner=inner.slice(0,-1).replace(/\s+$/,'');
+        var cl = inner[0]==='/'; if (cl) inner=inner.slice(1);
+        var sp = inner.search(/\s/);
+        var tn = sp===-1?inner:inner.slice(0,sp);
+        var rt = sp===-1?'':inner.slice(sp);
+        var hr = escH(rt).replace(/([\w:-]+)(=)("(?:[^"]*)")/g,'<span style="color:'+C.attr+'">$1</span><span style="color:'+C.eq+'">$2</span><span style="color:'+C.val+'">$3</span>');
+        result += '<span style="color:'+C.bracket+'">&lt;'+(cl?'/':'')+'</span><span style="color:'+C.tag+'">'+escH(tn)+'</span>'+hr+'<span style="color:'+C.bracket+'">'+(sc?'/':'')+'&gt;</span>';
+        continue;
+      }
+      result += escH(t);
+    }
+    return result;
+  }
+
+  function highlightCSS(code) {
+    var e = escH(code);
+    e = e.replace(/(\/\*[\s\S]*?\*\/)/g, '<span style="color:#546e7a;font-style:italic">$1</span>');
+    e = e.replace(/([.#]?[\w-]+)(\s*\{)/g, '<span style="color:#c792ea">$1</span><span style="color:#e2e8f0">$2</span>');
+    e = e.replace(/([\w-]+)(\s*:\s*)([^;{}\n]+)(;?)/g, '<span style="color:#ffcb6b">$1</span><span style="color:#e2e8f0">$2</span><span style="color:#c3e88d">$3</span><span style="color:#e2e8f0">$4</span>');
+    return e;
+  }
+
+  // ── Syntax-color the read-only views ─────────────────────────────────────
+  cssViewCode.innerHTML  = highlightCSS(CSS_DEFAULT);
+  htmlViewCode.innerHTML = highlightHTML(HTML_DEFAULT);
+
+  // ── Tab switching ─────────────────────────────────────────────────────────
+  function setTab(tab) {
+    activeTab = tab;
+    if (tab === 'css') {
+      if (editing) { cssPane.style.display = ''; htmlPane.style.display = 'none'; }
+      else         { cssView.style.display = ''; htmlView.style.display = 'none'; }
+      tabCss.style.color  = '#fff';  tabCss.style.borderBottomColor  = '#6367ff';
+      tabHtml.style.color = 'rgba(255,255,255,0.35)'; tabHtml.style.borderBottomColor = 'transparent';
+    } else {
+      if (editing) { htmlPane.style.display = ''; cssPane.style.display = 'none'; }
+      else         { htmlView.style.display = ''; cssView.style.display = 'none'; }
+      tabHtml.style.color = '#fff';  tabHtml.style.borderBottomColor  = '#6367ff';
+      tabCss.style.color  = 'rgba(255,255,255,0.35)'; tabCss.style.borderBottomColor = 'transparent';
+    }
+  }
+  tabHtml.addEventListener('click', function () { setTab('html'); });
+  tabCss.addEventListener('click',  function () { setTab('css');  });
+
+  // ── Try It Yourself toggle ────────────────────────────────────────────────
+  tryBtn.addEventListener('click', function () {
+    editing = !editing;
+    if (editing) {
+      cssView.style.display      = 'none';
+      htmlView.style.display     = 'none';
+      editorWrap.style.display   = 'block';
+      tryBtn.textContent         = 'Close Editor';
+      tryBtn.style.background    = '#334155';
+      tryBtn.style.animation     = 'none';
+      runBtn.style.display       = 'flex';
+      // show the correct pane
+      if (activeTab === 'css') { cssPane.style.display = ''; htmlPane.style.display = 'none'; }
+      else                     { htmlPane.style.display = ''; cssPane.style.display = 'none'; }
+      hlHtml.innerHTML = highlightHTML(htmlTA.value);
+      hlCss.innerHTML  = highlightCSS(cssTA.value);
+      cssTA.focus();
+    } else {
+      editorWrap.style.display   = 'none';
+      tryBtn.textContent         = 'Try It Yourself';
+      tryBtn.style.background    = '#6367FF';
+      tryBtn.style.animation     = 'btn-glow 1.8s ease-in-out infinite';
+      runBtn.style.display       = 'none';
+      // show correct read-only view
+      if (activeTab === 'css') { cssView.style.display = ''; htmlView.style.display = 'none'; }
+      else                     { htmlView.style.display = ''; cssView.style.display = 'none'; }
+    }
+  });
+
+  // ── Live highlight on input ──────────────────────────────────────────────
+  htmlTA.addEventListener('input', function () { hlHtml.innerHTML = highlightHTML(htmlTA.value); });
+  cssTA.addEventListener('input',  function () { hlCss.innerHTML  = highlightCSS(cssTA.value);   });
+
+  // ── Sync scroll ──────────────────────────────────────────────────────────
+  htmlTA.addEventListener('scroll', function () { mirrorH.scrollTop = htmlTA.scrollTop; mirrorH.scrollLeft = htmlTA.scrollLeft; });
+  cssTA.addEventListener('scroll',  function () { mirrorC.scrollTop = cssTA.scrollTop;  mirrorC.scrollLeft = cssTA.scrollLeft;  });
+
+  // ── Tab key indent ───────────────────────────────────────────────────────
+  [htmlTA, cssTA].forEach(function (ta) {
+    ta.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      e.preventDefault();
+      var s = ta.selectionStart;
+      ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd);
+      ta.selectionStart = ta.selectionEnd = s + 2;
+      ta.dispatchEvent(new Event('input'));
+    });
+  });
+
+  // ── Run ──────────────────────────────────────────────────────────────────
+  var lastSrc = '';
+  function runCode() {
+    var src = '<!DOCTYPE html><html><head><style>' + cssTA.value + '</style></head><body style="margin:0;padding:16px;font-family:sans-serif;">' + htmlTA.value + '</body></html>';
+    var changed = src !== lastSrc;
+    lastSrc = src;
+    output.srcdoc = src;
+    if (changed) {
+      outWrap.classList.remove('output-glow-once');
+      void outWrap.offsetWidth;
+      outWrap.classList.add('output-glow-once');
+      badge.style.display = 'inline-block';
+      clearTimeout(badge._t);
+      badge._t = setTimeout(function () { badge.style.display = 'none'; }, 2000);
+    }
+  }
+  runBtn.addEventListener('click', runCode);
+
+  // ── Auto-resize output iframe ─────────────────────────────────────────────
+  output.addEventListener('load', function () {
+    try {
+      var body = output.contentDocument.body;
+      body.style.margin = '0'; body.style.padding = '16px'; body.style.boxSizing = 'border-box';
+      var h = body.scrollHeight;
+      output.style.height = Math.max(220, Math.min(h, 500)) + 'px';
+    } catch(e) {}
+  });
+
+  // ── Copy active tab ───────────────────────────────────────────────────────
+  copyBtn.addEventListener('click', function () {
+    navigator.clipboard.writeText(activeTab === 'css' ? cssTA.value : htmlTA.value).then(function () {
+      copyLbl.textContent = 'Copied!';
+      setTimeout(function () { copyLbl.textContent = 'Copy'; }, 2000);
+    });
+  });
+
+  // ── Run initial preview ───────────────────────────────────────────────────
+  var initSrc = '<!DOCTYPE html><html><head><style>' + CSS_DEFAULT + '</style></head><body style="margin:0;padding:16px;font-family:sans-serif;">' + HTML_DEFAULT + '</body></html>';
+  lastSrc = initSrc;
+  output.srcdoc = initSrc;
+})();
+</script>
+
+</section>
