@@ -39,6 +39,7 @@ export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) 
       ref={ref}
       className="html-content"
       dangerouslySetInnerHTML={{ __html: html }}
+      suppressHydrationWarning
     />
   );
 }
