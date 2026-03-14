@@ -142,7 +142,7 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
   <!-- ── OUTPUT SECTION ────────────────────────────────────────────────── -->
   <p style="margin:12px 0 6px;font-size:1.05rem;font-weight:700;color:#64748B;">Output</p>
   <div style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;background:white;">
-    <iframe id="try-output" style="width:100%;height:auto;min-height:60px;border:none;display:block;"></iframe>
+    <iframe id="try-output" style="width:100%;height:auto;min-height:80px;border:none;display:block;"></iframe>
   </div>
 
   <script>
@@ -267,8 +267,21 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
       // Auto-resize output iframe to fit its content
       function resizeOutput() {
         try {
-          var h = output.contentDocument.body.scrollHeight;
-          if (h > 0) output.style.height = h + 'px';
+          var body = output.contentDocument.body;
+          body.style.margin = '0';
+          body.style.padding = '12px 16px';
+          body.style.boxSizing = 'border-box';
+          var h = body.scrollHeight;
+          var maxH = 20 * 24; // 20 lines ≈ 480px
+          if (h > 0) {
+            if (h > maxH) {
+              output.style.height = maxH + 'px';
+              output.style.overflowY = 'auto';
+            } else {
+              output.style.height = h + 'px';
+              output.style.overflowY = 'hidden';
+            }
+          }
         } catch (e) {}
       }
       output.addEventListener('load', resizeOutput);
