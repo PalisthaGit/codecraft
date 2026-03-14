@@ -177,6 +177,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* HTML Compiler */}
+      <section className="relative overflow-hidden bg-[#1e293b] rounded-[18px] p-8 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+        {/* Background glow */}
+        <div className="absolute -top-10 -right-10 w-64 h-64 bg-[#6367ff]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-[#8494ff]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-8">
+          {/* Icon */}
+          <div className="shrink-0 w-16 h-16 flex items-center justify-center rounded-2xl bg-[#6367ff]/20 border border-[#6367ff]/30">
+            <svg className="w-8 h-8 text-[#8494ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+
+          {/* Text */}
+          <div className="flex-1 min-w-0">
+            <span className="inline-block text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#8494ff] mb-2">
+              Try it yourself
+            </span>
+            <h2 className="text-2xl font-black text-white leading-tight mb-2">
+              HTML Compiler
+            </h2>
+            <p className="text-[#94a3b8] text-sm leading-relaxed max-w-md">
+              Write HTML directly in your browser and see the result in real time. No installs, no setup. Just open it and start building.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="shrink-0">
+            <Link
+              href="/compiler/html"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#6367ff] text-white text-sm font-bold rounded-[10px] hover:bg-[#8494ff] hover:shadow-[0_4px_20px_rgba(99,103,255,0.5)] transition-all duration-200"
+            >
+              Open Compiler
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <section>
         <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
