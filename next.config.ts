@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/examples/nadia-wiki",
+        destination: "/examples/nadia-wiki/index.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
