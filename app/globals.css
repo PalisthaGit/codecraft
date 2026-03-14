@@ -192,28 +192,8 @@ body {
 .html-content .try-example {
   margin-top: 2.5rem;
   margin-bottom: 2rem;
-  background: #ffffff;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 1.25rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.html-content .try-example h3 {
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6367ff;
-  margin: 0 0 1rem 0;
-}
-
-.html-content .try-example iframe {
-  width: 100%;
-  border-radius: 10px;
-  display: block;
-  border: 1px solid #e5e7eb;
-}
 
 .html-content .tip {
   display: flex;

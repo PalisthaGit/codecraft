@@ -74,29 +74,29 @@
 
 <section class="try-example">
 
-  <!-- Selection highlight colour for the transparent textarea -->
   <style>
     #try-textarea::selection { background: rgba(99, 103, 255, 0.35); }
     #hl-mirror::-webkit-scrollbar { display: none; }
   </style>
 
-  <div style="border:1px solid #E5E7EB;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+  <!-- ── CODE SECTION ──────────────────────────────────────────────────── -->
+  <div style="border-radius:4px;overflow:hidden;">
 
-    <!-- Header bar -->
-    <div style="display:flex;align-items:center;justify-content:space-between;background:#0F172A;padding:12px 16px;">
-      <span style="color:#94A3B8;font-size:13px;font-family:monospace;">&lt;/&gt; HTML</span>
-      <div style="display:flex;gap:8px;">
-        <button id="copy-code-btn" style="display:flex;align-items:center;gap:6px;background:white;color:#0F172A;border:1px solid #CBD5E1;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span id="copy-label">Copy code</span>
+    <!-- Header: HTML label | Copy Code | Try It Yourself / Close Editor -->
+    <div style="display:flex;align-items:center;justify-content:space-between;background:#1E293B;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);">
+      <span style="color:#94A3B8;font-size:12px;font-family:monospace;font-weight:600;letter-spacing:0.04em;">HTML</span>
+      <div style="display:flex;gap:6px;">
+        <button id="copy-code-btn" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.08);color:#CBD5E1;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span id="copy-label">Copy Code</span>
         </button>
-        <button id="try-it-btn" style="background:#6367FF;color:white;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">Try It Yourself</button>
+        <button id="try-it-btn" style="background:#6367FF;color:white;border:none;border-radius:4px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1;">Try It Yourself</button>
       </div>
     </div>
 
-    <!-- Read-only code view with line numbers (shown by default) -->
+    <!-- Read-only highlighted view (default) -->
     <div id="code-view" style="display:flex;overflow:auto;max-height:260px;background:#1E293B;">
-      <div id="line-nums" style="background:#0F172A;color:#475569;font-family:monospace;font-size:13px;line-height:1.7;padding:16px 10px 16px 14px;text-align:right;user-select:none;white-space:pre;flex-shrink:0;"></div>
+      <div id="line-nums" style="background:#1E293B;color:#475569;font-family:monospace;font-size:13px;line-height:1.7;padding:16px 10px 16px 14px;text-align:right;user-select:none;white-space:pre;flex-shrink:0;"></div>
       <pre style="flex:1;margin:0;padding:16px;background:transparent;overflow:visible;"><code id="the-code" style="background:transparent;font-size:13px;line-height:1.7;">&lt;h1&gt;My Favourite Recipe&lt;/h1&gt;
 
 &lt;p&gt;This is my &lt;strong&gt;all-time favourite&lt;/strong&gt; pasta dish.
@@ -110,22 +110,18 @@ It&apos;s &lt;em&gt;incredibly&lt;/em&gt; simple to make.&lt;/p&gt;
 oil. Combine and serve.&lt;/p&gt;</code></pre>
     </div>
 
-    <!--
-      Overlay editor: a highlighted <pre> sits underneath a transparent <textarea>.
-      The textarea captures all input; the pre shows the coloured result.
-      Both must share identical font / size / padding so characters line up exactly.
-    -->
+    <!-- Overlay editor (transparent textarea over highlighted mirror) -->
     <div id="editor-wrap" style="display:none;position:relative;height:260px;overflow:hidden;background:#1E293B;">
       <pre id="hl-mirror" style="position:absolute;top:0;left:0;right:0;bottom:0;margin:0;padding:16px;font-family:monospace;font-size:13px;line-height:1.7;background:transparent;color:#e2e8f0;overflow:scroll;scrollbar-width:none;-ms-overflow-style:none;white-space:pre-wrap;word-wrap:break-word;pointer-events:none;box-sizing:border-box;"><code id="hl-code" style="font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;"></code></pre>
       <textarea id="try-textarea" spellcheck="false" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:transparent;color:transparent;caret-color:#e2e8f0;font-family:monospace;font-size:13px;line-height:1.7;padding:16px;border:none;resize:none;outline:none;box-sizing:border-box;white-space:pre-wrap;word-wrap:break-word;overflow-y:scroll;overflow-x:hidden;tab-size:2;"></textarea>
     </div>
 
-    <!-- Output panel (always visible) -->
-    <div style="border-top:2px solid #0F172A;">
-      <div style="background:#F1F5F9;padding:8px 14px;font-size:11px;font-weight:700;color:#64748B;letter-spacing:0.08em;border-bottom:1px solid #E5E7EB;">OUTPUT</div>
-      <iframe id="try-output" style="width:100%;height:200px;border:none;display:block;"></iframe>
-    </div>
+  </div>
 
+  <!-- ── OUTPUT SECTION ────────────────────────────────────────────────── -->
+  <p style="margin:12px 0 6px;font-size:13px;color:#64748B;">Output</p>
+  <div style="border:1px solid #E5E7EB;border-radius:4px;overflow:hidden;background:white;">
+    <iframe id="try-output" style="width:100%;height:220px;border:none;display:block;"></iframe>
   </div>
 
   <script>
@@ -269,16 +265,13 @@ oil. Combine and serve.&lt;/p&gt;</code></pre>
         editing = !editing;
 
         if (editing) {
-          // Swap to the overlay editor
           codeView.style.display    = 'none';
           editorWrap.style.display  = 'block';
           tryBtn.textContent        = 'Close Editor';
-          tryBtn.style.background   = '#475569';
-          // Render initial highlighting then focus
+          tryBtn.style.background   = '#334155';
           hlCode.innerHTML = highlightHTML(editor.value);
           editor.focus();
         } else {
-          // Swap back to the read-only highlighted view
           editorWrap.style.display  = 'none';
           codeView.style.display    = 'flex';
           tryBtn.textContent        = 'Try It Yourself';
