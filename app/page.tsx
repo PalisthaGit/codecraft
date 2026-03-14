@@ -43,7 +43,7 @@ const features = [
   {
     title: "Learn by Doing",
     description:
-      "Each lesson includes hands-on examples with real code you can study and apply yourself.",
+      "Every lesson has a live Try It Yourself editor — tweak real code and see your changes instantly. No setup, no installs.",
     iconBg: "bg-emerald-100 group-hover:bg-emerald-200",
     iconColor: "text-emerald-600",
     hoverBorder: "hover:border-emerald-300",
