@@ -65,9 +65,19 @@ export default function HtmlEditorPage() {
   const [copied, setCopied] = useState(false);
   const [formatMsg, setFormatMsg] = useState("");
   const [highlighted, setHighlighted] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileTab, setMobileTab] = useState<"code" | "output">("code");
   const iframeRef  = useRef<HTMLIFrameElement>(null);
   const mirrorRef  = useRef<HTMLPreElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    setIsMobile(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     setHighlighted(highlightHTML(code, dark));
@@ -207,10 +217,10 @@ export default function HtmlEditorPage() {
   const PAD = "20px";
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: dark ? "#0f172a" : "#f8fafc", color: text, fontFamily: "Nunito, sans-serif" }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: dark ? "#0f172a" : "#f8fafc", color: text, fontFamily: "Nunito, sans-serif", overflow: "hidden", maxWidth: "100vw" }}>
 
       {/* ── Brand bar ── */}
-      <div style={{ padding: "16px 28px", background: dark ? "#0d1117" : "#ffffff", borderBottom: `1px solid ${border}`, flexShrink: 0, display: "flex", alignItems: "center", gap: "16px" }}>
+      <div style={{ padding: isMobile ? "12px 16px" : "16px 28px", background: dark ? "#0d1117" : "#ffffff", borderBottom: `1px solid ${border}`, flexShrink: 0, display: "flex", alignItems: "center", gap: "12px", minWidth: 0 }}>
         {/* Hamburger */}
         <button
           onClick={() => setMenuOpen(true)}
@@ -221,14 +231,14 @@ export default function HtmlEditorPage() {
           <span style={{ display: "block", width: "22px", height: "2px", background: subtext, borderRadius: "2px" }} />
           <span style={{ display: "block", width: "22px", height: "2px", background: subtext, borderRadius: "2px" }} />
         </button>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "3px" }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6367ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <div style={{ minWidth: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "2px" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6367ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
             </svg>
-            <span style={{ fontWeight: 800, fontSize: "22px", color: text, letterSpacing: "-0.02em" }}>Codecraft</span>
+            <span style={{ fontWeight: 800, fontSize: isMobile ? "18px" : "22px", color: text, letterSpacing: "-0.02em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Codecraft</span>
           </div>
-          <span style={{ fontSize: "13px", fontWeight: 600, color: subtext }}>HTML Online Compiler</span>
+          <span style={{ fontSize: "12px", fontWeight: 600, color: subtext, whiteSpace: "nowrap" }}>HTML Online Compiler</span>
         </div>
       </div>
 
@@ -272,92 +282,107 @@ export default function HtmlEditorPage() {
         </nav>
       </div>
 
-      {/* ── Header ── */}
-      <div style={{ display: "flex", alignItems: "center", height: "52px", background: surface, borderBottom: `1px solid ${border}`, flexShrink: 0 }}>
-        {/* Left: title + theme + Run (all on compiler side) */}
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px 0 20px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      {/* ── Header: desktop only (side-by-side labels + buttons) ── */}
+      {!isMobile && (
+        <div style={{ display: "flex", alignItems: "center", height: "52px", background: surface, borderBottom: `1px solid ${border}`, flexShrink: 0 }}>
+          {/* Left: HTML label + action buttons */}
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px 0 20px" }}>
             <span style={{ fontSize: "12px", fontWeight: 700, color: subtext, letterSpacing: "0.06em", textTransform: "uppercase" }}>HTML</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            {/* Format message toast */}
-            {formatMsg && (
-              <span style={{ fontSize: "11px", fontWeight: 600, color: formatMsg === "Already formatted" ? "#f59e0b" : "#22c55e", background: formatMsg === "Already formatted" ? "#fef3c720" : "#dcfce720", border: `1px solid ${formatMsg === "Already formatted" ? "#f59e0b40" : "#22c55e40"}`, borderRadius: "6px", padding: "3px 10px", whiteSpace: "nowrap" }}>
-                {formatMsg}
-              </span>
-            )}
-            {/* Format */}
-            <button
-              onClick={formatCode}
-              title="Format code"
-              style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
-              Format
-            </button>
-            {/* Copy */}
-            <button
-              onClick={copyCode}
-              title="Copy code"
-              style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: copied ? "#22c55e" : subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}
-            >
-              {copied ? (
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              ) : (
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              {formatMsg && (
+                <span style={{ fontSize: "11px", fontWeight: 600, color: formatMsg === "Already formatted" ? "#f59e0b" : "#22c55e", background: formatMsg === "Already formatted" ? "#fef3c720" : "#dcfce720", border: `1px solid ${formatMsg === "Already formatted" ? "#f59e0b40" : "#22c55e40"}`, borderRadius: "6px", padding: "3px 10px", whiteSpace: "nowrap" }}>
+                  {formatMsg}
+                </span>
               )}
-              {copied ? "Copied!" : "Copy"}
-            </button>
-            {/* Clear */}
-            <button
-              onClick={() => setCode("")}
-              title="Clear editor"
-              style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-              Clear
-            </button>
-            {/* Run */}
-            <button
-              onClick={runCode}
-              style={{ display: "flex", alignItems: "center", gap: "6px", background: "#6367ff", color: "white", border: "none", borderRadius: "8px", padding: "6px 18px", cursor: "pointer", fontSize: "13px", fontWeight: 700, fontFamily: "inherit" }}
-            >
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-              Run
+              <button onClick={formatCode} title="Format code" style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+                Format
+              </button>
+              <button onClick={copyCode} title="Copy code" style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: copied ? "#22c55e" : subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}>
+                {copied ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg> : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>}
+                {copied ? "Copied!" : "Copy"}
+              </button>
+              <button onClick={() => setCode("")} title="Clear editor" style={{ display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "5px 10px", cursor: "pointer", fontFamily: "inherit" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                Clear
+              </button>
+              <button onClick={runCode} style={{ display: "flex", alignItems: "center", gap: "6px", background: "#6367ff", color: "white", border: "none", borderRadius: "8px", padding: "6px 18px", cursor: "pointer", fontSize: "13px", fontWeight: 700, fontFamily: "inherit" }}>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                Run
+              </button>
+            </div>
+          </div>
+          {/* Right: Output label + theme toggle */}
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", borderLeft: `1px solid ${border}` }}>
+            <span style={{ fontSize: "13px", fontWeight: 700, color: subtext, letterSpacing: "0.06em", textTransform: "uppercase" }}>Output</span>
+            <button onClick={() => setDark(!dark)} style={{ display: "flex", alignItems: "center", gap: "6px", background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "8px", padding: "5px 12px", cursor: "pointer", fontSize: "12px", fontWeight: 700, color: subtext, fontFamily: "inherit" }}>
+              {dark ? <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>Light</> : <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark</>}
             </button>
           </div>
         </div>
-        {/* Right: Output label + theme toggle (above preview) */}
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 16px", borderLeft: `1px solid ${border}` }}>
-          <span style={{ fontSize: "13px", fontWeight: 700, color: subtext, letterSpacing: "0.06em", textTransform: "uppercase" }}>Output</span>
-          <button
-            onClick={() => setDark(!dark)}
-            style={{ display: "flex", alignItems: "center", gap: "6px", background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "8px", padding: "5px 12px", cursor: "pointer", fontSize: "12px", fontWeight: 700, color: subtext, fontFamily: "inherit" }}
-          >
-            {dark ? (
-              <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>Light</>
-            ) : (
-              <><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Dark</>
-            )}
+      )}
+
+      {/* ── Mobile tab bar ── */}
+      {isMobile && (
+        <div style={{ display: "flex", alignItems: "center", background: surface, borderBottom: `1px solid ${border}`, flexShrink: 0 }}>
+          {/* Tabs */}
+          <div style={{ display: "flex", flex: 1 }}>
+            {(["code", "output"] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => { setMobileTab(tab); if (tab === "output") runCode(); }}
+                style={{ flex: 1, height: "48px", background: "transparent", border: "none", borderBottom: mobileTab === tab ? "2px solid #6367ff" : `2px solid transparent`, color: mobileTab === tab ? "#6367ff" : subtext, fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", textTransform: "capitalize", letterSpacing: "0.04em" }}
+              >
+                {tab === "code" ? "Code" : "Output"}
+              </button>
+            ))}
+          </div>
+          {/* Theme toggle */}
+          <button onClick={() => setDark(!dark)} style={{ display: "flex", alignItems: "center", gap: "5px", background: "transparent", border: "none", borderLeft: `1px solid ${border}`, height: "48px", padding: "0 14px", cursor: "pointer", fontSize: "12px", fontWeight: 700, color: subtext, fontFamily: "inherit", flexShrink: 0 }}>
+            {dark ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg> : <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>}
           </button>
         </div>
-      </div>
+      )}
 
-      {/* ── Split panes ── */}
-      <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+      {/* ── Mobile: action toolbar (when Code tab active) ── */}
+      {isMobile && mobileTab === "code" && (
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px", background: surface, borderBottom: `1px solid ${border}`, flexShrink: 0, overflowX: "auto" }}>
+          {formatMsg && (
+            <span style={{ fontSize: "11px", fontWeight: 600, color: formatMsg === "Already formatted" ? "#f59e0b" : "#22c55e", whiteSpace: "nowrap", marginRight: "4px" }}>
+              {formatMsg}
+            </span>
+          )}
+          <button onClick={formatCode} style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "6px 10px", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="21" y1="10" x2="7" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="7" y2="18"/></svg>
+            Format
+          </button>
+          <button onClick={copyCode} style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: 600, color: copied ? "#22c55e" : subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "6px 10px", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
+            {copied ? <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg> : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>}
+            {copied ? "Copied!" : "Copy"}
+          </button>
+          <button onClick={() => setCode("")} style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: 600, color: subtext, background: dark ? "#334155" : "#f1f5f9", border: `1px solid ${border}`, borderRadius: "7px", padding: "6px 10px", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 }}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+            Clear
+          </button>
+          <button onClick={() => { runCode(); setMobileTab("output"); }} style={{ display: "flex", alignItems: "center", gap: "5px", background: "#6367ff", color: "white", border: "none", borderRadius: "8px", padding: "7px 18px", cursor: "pointer", fontSize: "13px", fontWeight: 700, fontFamily: "inherit", flexShrink: 0, marginLeft: "auto" }}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            Run
+          </button>
+        </div>
+      )}
+
+      {/* ── Panes ── */}
+      <div style={{ flex: 1, display: "flex", flexDirection: isMobile ? "column" : "row", overflow: "hidden" }}>
 
         {/* Editor pane */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", borderRight: `1px solid ${border}` }}>
-          {/* Overlay editor: mirror + textarea */}
+        <div style={{ flex: 1, display: isMobile && mobileTab === "output" ? "none" : "flex", flexDirection: "column", borderRight: isMobile ? "none" : `1px solid ${border}` }}>
           <div style={{ flex: 1, position: "relative", overflow: "hidden", background: editorBg }}>
-            {/* Highlighted mirror */}
             <pre
               ref={mirrorRef}
               aria-hidden
               style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, margin: 0, padding: PAD, fontFamily: FONT, fontSize: FONT_SIZE, fontWeight: 600, lineHeight: LINE_H, background: "transparent", color: text, overflow: "scroll", scrollbarWidth: "none", whiteSpace: "pre-wrap", wordWrap: "break-word", pointerEvents: "none", boxSizing: "border-box" }}
               dangerouslySetInnerHTML={{ __html: highlighted + "\n" }}
             />
-            {/* Transparent textarea */}
             <textarea
               ref={textareaRef}
               value={code}
@@ -388,7 +413,7 @@ export default function HtmlEditorPage() {
         </div>
 
         {/* Preview pane */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none" }}>
           <iframe ref={iframeRef} style={{ flex: 1, border: "none", background: "white" }} title="preview" />
         </div>
       </div>
