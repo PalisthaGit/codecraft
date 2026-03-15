@@ -67,6 +67,9 @@ export default function HtmlEditorPage() {
   const [highlighted, setHighlighted] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [mobileTab, setMobileTab] = useState<"code" | "output">("code");
+  const [showOutputHint, setShowOutputHint] = useState(false);
+  const [snakeCodeTab, setSnakeCodeTab] = useState(false);
+  const outputHintTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const iframeRef  = useRef<HTMLIFrameElement>(null);
   const mirrorRef  = useRef<HTMLPreElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -330,7 +333,25 @@ export default function HtmlEditorPage() {
             {(["code", "output"] as const).map((tab) => (
               <button
                 key={tab}
-                onClick={() => { setMobileTab(tab); if (tab === "output") runCode(); }}
+                onClick={() => {
+                  setMobileTab(tab);
+                  if (tab === "output") {
+                    runCode();
+                    setShowOutputHint(false);
+                    setSnakeCodeTab(false);
+                    if (outputHintTimer.current) clearTimeout(outputHintTimer.current);
+                    outputHintTimer.current = setTimeout(() => {
+                      setShowOutputHint(true);
+                      setSnakeCodeTab(true);
+                      setTimeout(() => setSnakeCodeTab(false), 1800);
+                    }, 2500);
+                  } else {
+                    setShowOutputHint(false);
+                    if (outputHintTimer.current) clearTimeout(outputHintTimer.current);
+                    setSnakeCodeTab(false);
+                  }
+                }}
+                className={tab === "code" && snakeCodeTab ? "snake-border" : ""}
                 style={{ flex: 1, height: "48px", background: "transparent", border: "none", borderBottom: mobileTab === tab ? "2px solid #6367ff" : `2px solid transparent`, color: mobileTab === tab ? "#6367ff" : subtext, fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", textTransform: "capitalize", letterSpacing: "0.04em" }}
               >
                 {tab === "code" ? "Code" : "Output"}
@@ -364,7 +385,18 @@ export default function HtmlEditorPage() {
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
             Clear
           </button>
-          <button onClick={() => { runCode(); setMobileTab("output"); }} style={{ display: "flex", alignItems: "center", gap: "5px", background: "#6367ff", color: "white", border: "none", borderRadius: "8px", padding: "7px 18px", cursor: "pointer", fontSize: "13px", fontWeight: 700, fontFamily: "inherit", flexShrink: 0, marginLeft: "auto" }}>
+          <button onClick={() => {
+            runCode();
+            setMobileTab("output");
+            setShowOutputHint(false);
+            setSnakeCodeTab(false);
+            if (outputHintTimer.current) clearTimeout(outputHintTimer.current);
+            outputHintTimer.current = setTimeout(() => {
+              setShowOutputHint(true);
+              setSnakeCodeTab(true);
+              setTimeout(() => setSnakeCodeTab(false), 1800);
+            }, 2500);
+          }} style={{ display: "flex", alignItems: "center", gap: "5px", background: "#6367ff", color: "white", border: "none", borderRadius: "8px", padding: "7px 18px", cursor: "pointer", fontSize: "13px", fontWeight: 700, fontFamily: "inherit", flexShrink: 0, marginLeft: "auto" }}>
             <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
             Run
           </button>
@@ -413,8 +445,14 @@ export default function HtmlEditorPage() {
         </div>
 
         {/* Preview pane */}
-        <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none" }}>
+        <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none", position: "relative" }}>
           <iframe ref={iframeRef} style={{ flex: 1, border: "none", background: "white" }} title="preview" />
+          {/* Mobile output hint — top of output */}
+          {isMobile && showOutputHint && (
+            <div style={{ position: "absolute", top: "14px", left: "50%", transform: "translateX(-50%)", background: "rgba(99,103,255,0.92)", color: "white", fontSize: "13px", fontWeight: 700, padding: "8px 18px", borderRadius: "999px", whiteSpace: "nowrap", pointerEvents: "none", boxShadow: "0 4px 16px rgba(99,103,255,0.4)", animation: "hint-fade-in 0.4s ease forwards", zIndex: 10 }}>
+              ✏️ Switch to Code tab to edit
+            </div>
+          )}
         </div>
       </div>
     </div>
