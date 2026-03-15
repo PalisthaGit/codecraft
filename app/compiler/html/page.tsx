@@ -69,7 +69,33 @@ export default function HtmlEditorPage() {
   const [mobileTab, setMobileTab] = useState<"code" | "output">("code");
   const [showOutputHint, setShowOutputHint] = useState(false);
   const [snakeCodeTab, setSnakeCodeTab] = useState(false);
+  const [splitPct, setSplitPct] = useState(50);
+  const [dragging, setDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const outputHintTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const onDividerMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setDragging(true);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const pct = ((ev.clientX - rect.left) / rect.width) * 100;
+      setSplitPct(Math.min(Math.max(pct, 20), 80));
+    };
+    const onMouseUp = () => {
+      setDragging(false);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+  }, []);
   const iframeRef  = useRef<HTMLIFrameElement>(null);
   const mirrorRef  = useRef<HTMLPreElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -404,10 +430,10 @@ export default function HtmlEditorPage() {
       )}
 
       {/* ── Panes ── */}
-      <div style={{ flex: 1, display: "flex", flexDirection: isMobile ? "column" : "row", overflow: "hidden" }}>
+      <div ref={containerRef} style={{ flex: 1, display: "flex", flexDirection: isMobile ? "column" : "row", overflow: "hidden" }}>
 
         {/* Editor pane */}
-        <div style={{ flex: 1, display: isMobile && mobileTab === "output" ? "none" : "flex", flexDirection: "column", borderRight: isMobile ? "none" : `1px solid ${border}` }}>
+        <div style={{ width: isMobile ? "100%" : `${splitPct}%`, display: isMobile && mobileTab === "output" ? "none" : "flex", flexDirection: "column", flexShrink: 0 }}>
           <div style={{ flex: 1, position: "relative", overflow: "hidden", background: editorBg }}>
             <pre
               ref={mirrorRef}
@@ -444,9 +470,26 @@ export default function HtmlEditorPage() {
           </div>
         </div>
 
+        {/* Divider — desktop only */}
+        {!isMobile && (
+          <div
+            onMouseDown={onDividerMouseDown}
+            style={{ width: "5px", flexShrink: 0, background: border, cursor: "col-resize", position: "relative", zIndex: 10, transition: "background 0.15s" }}
+            onMouseEnter={e => (e.currentTarget.style.background = "#6367ff")}
+            onMouseLeave={e => (e.currentTarget.style.background = border)}
+          >
+            {/* grip dots */}
+            <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", display: "flex", flexDirection: "column", gap: "4px", pointerEvents: "none" }}>
+              {[0,1,2].map(i => <span key={i} style={{ width: "3px", height: "3px", borderRadius: "50%", background: "#64748b", display: "block" }} />)}
+            </div>
+          </div>
+        )}
+
         {/* Preview pane */}
-        <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none", position: "relative" }}>
-          <iframe ref={iframeRef} style={{ flex: 1, border: "none", background: "white" }} title="preview" />
+        <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none", position: "relative", overflow: "hidden" }}>
+          <iframe ref={iframeRef} style={{ flex: 1, border: "none", background: "white", pointerEvents: dragging ? "none" : "auto" }} title="preview" />
+          {/* Drag shield — blocks iframe from stealing mousemove during resize */}
+          {dragging && <div style={{ position: "absolute", inset: 0, zIndex: 20, cursor: "col-resize" }} />}
           {/* Mobile output hint — top of output */}
           {isMobile && showOutputHint && (
             <div style={{ position: "absolute", top: "14px", left: "50%", transform: "translateX(-50%)", background: "rgba(99,103,255,0.92)", color: "white", fontSize: "13px", fontWeight: 700, padding: "8px 18px", borderRadius: "999px", whiteSpace: "nowrap", pointerEvents: "none", boxShadow: "0 4px 16px rgba(99,103,255,0.4)", animation: "hint-fade-in 0.4s ease forwards", zIndex: 10 }}>
