@@ -433,7 +433,7 @@ export default function HtmlEditorPage() {
       <div ref={containerRef} style={{ flex: 1, display: "flex", flexDirection: isMobile ? "column" : "row", overflow: "hidden" }}>
 
         {/* Editor pane */}
-        <div style={{ width: isMobile ? "100%" : `${splitPct}%`, display: isMobile && mobileTab === "output" ? "none" : "flex", flexDirection: "column", flexShrink: 0 }}>
+        <div style={{ width: isMobile ? "100%" : `${splitPct}%`, flexGrow: isMobile ? 1 : 0, flexShrink: 0, flexBasis: isMobile ? "auto" : `${splitPct}%`, display: isMobile && mobileTab === "output" ? "none" : "flex", flexDirection: "column", minWidth: 0 }}>
           <div style={{ flex: 1, position: "relative", overflow: "hidden", background: editorBg }}>
             <pre
               ref={mirrorRef}
