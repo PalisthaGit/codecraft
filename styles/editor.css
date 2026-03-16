@@ -1,0 +1,46 @@
+/* ── Interactive Editor: text selection highlight ─────────────────────── */
+.te-textarea::selection {
+  background: rgba(99, 103, 255, 0.35);
+}
+
+/* ── Hide scrollbars on mirror panes ──────────────────────────────────── */
+.te-mirror::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Try It Yourself button glow ──────────────────────────────────────── */
+@keyframes te-btn-glow {
+  0%, 100% {
+    box-shadow: 0 0 6px 2px rgba(99, 103, 255, 0.5), 0 0 0 2px rgba(99, 103, 255, 0.5);
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 28px 10px rgba(99, 103, 255, 1), 0 0 0 3px rgba(160, 164, 255, 1),
+      0 0 50px 16px rgba(99, 103, 255, 0.4);
+    transform: scale(1.07);
+    filter: brightness(1.25);
+  }
+}
+
+/* ── Output iframe glow on run ────────────────────────────────────────── */
+@keyframes te-output-glow {
+  0%   { box-shadow: 0 0 0 0 rgba(99, 103, 255, 0); border-color: #e5e7eb; }
+  30%  { box-shadow: 0 0 0 6px rgba(99, 103, 255, 0.35); border-color: #6367ff; }
+  100% { box-shadow: 0 0 0 0 rgba(99, 103, 255, 0); border-color: #e5e7eb; }
+}
+
+.te-output-glow {
+  animation: te-output-glow 1s ease-out forwards;
+}
+
+/* ── Edit hint tooltip animations ─────────────────────────────────────── */
+@keyframes te-hint-pop {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes te-hint-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}

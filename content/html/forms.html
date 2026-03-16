@@ -1,97 +1,160 @@
 <div class="definition">
-  HTML forms let users enter data and send it to a server. They're how login pages, search bars, contact forms, and checkouts work. The <code>&lt;form&gt;</code> element is the container; <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, and <code>&lt;button&gt;</code> go inside it.
+  The <strong>DOM</strong> (Document Object Model) is a JavaScript representation of your HTML page. It lets you read
+  and change HTML elements, attributes, and content from JavaScript code.
 </div>
 
-<p>Almost every web app needs forms. Whether it's a search box, a sign-up page, or a settings panel — forms are how users communicate with a site.</p>
+<p>When a browser loads an HTML page, it creates a tree of objects representing every element. JavaScript can reach into
+  that tree, find elements, and modify them — that's how web pages become interactive.</p>
 
-<h2>The Form Element</h2>
+<h2>Selecting Elements</h2>
 
-<p>The <code>&lt;form&gt;</code> element wraps all your form controls. The <code>action</code> attribute sets where the data goes; <code>method</code> sets how it's sent.</p>
+<p>The most common way to find an element is <code>querySelector</code>, which accepts any CSS selector:</p>
 
-<pre><code>&lt;form action="/submit" method="post"&gt;
-  &lt;!-- inputs go here --&gt;
-&lt;/form&gt;</code></pre>
+<pre><code class="language-javascript">// Select the first matching element
+const heading = document.querySelector("h1");
+const button = document.querySelector(".btn");
+const input = document.querySelector("#email");
 
-<h2>Text Inputs</h2>
+// Select all matching elements (returns a NodeList)
+const paragraphs = document.querySelectorAll("p");</code></pre>
 
-<p>The most common form element. The <code>type</code> attribute controls what kind of input it is:</p>
+<h2>Reading and Changing Content</h2>
 
-<pre><code>&lt;input type="text" name="username" placeholder="Enter your name"&gt;
-&lt;input type="email" name="email" placeholder="you@example.com"&gt;
-&lt;input type="password" name="password" placeholder="Password"&gt;
-&lt;input type="number" name="age" min="1" max="120"&gt;</code></pre>
+<pre><code class="language-javascript">const heading = document.querySelector("h1");
 
-<h2>Labels</h2>
+// Read text content
+console.log(heading.textContent);   // "Hello, World!"
 
-<p>Always pair inputs with <code>&lt;label&gt;</code> elements. The <code>for</code> attribute should match the input's <code>id</code>. This makes the label clickable and improves accessibility:</p>
+// Change text content
+heading.textContent = "Welcome to Codecraft";</code></pre>
 
-<pre><code>&lt;label for="email"&gt;Email address&lt;/label&gt;
-&lt;input type="email" id="email" name="email"&gt;</code></pre>
+<pre><code class="language-javascript">// innerHTML lets you set HTML, not just text
+const container = document.querySelector(".container");
+container.innerHTML = "&lt;p&gt;New &lt;strong&gt;content&lt;/strong&gt;&lt;/p&gt;";</code></pre>
 
 <div class="tip">
   <span>💡</span>
-  <p>Skipping labels is one of the most common accessibility mistakes. Screen readers use labels to describe inputs to users who can't see the screen. Always include them.</p>
+  <p>Prefer <code>textContent</code> over <code>innerHTML</code> when you're inserting plain text.
+    <code>innerHTML</code> parses HTML, which can be a security risk if the content comes from user input.
+  </p>
 </div>
 
-<h2>Textarea</h2>
+<h2>Changing Styles</h2>
 
-<p>For multi-line text input, use <code>&lt;textarea&gt;</code>:</p>
+<pre><code class="language-javascript">const box = document.querySelector(".box");
 
-<pre><code>&lt;label for="message"&gt;Message&lt;/label&gt;
-&lt;textarea id="message" name="message" rows="4" placeholder="Write your message..."&gt;&lt;/textarea&gt;</code></pre>
+// Set individual styles
+box.style.backgroundColor = "#6367ff";
+box.style.padding = "1rem";
+box.style.borderRadius = "12px";</code></pre>
 
-<h2>Select Dropdowns</h2>
+<h2>Working with Classes</h2>
 
-<pre><code>&lt;label for="country"&gt;Country&lt;/label&gt;
-&lt;select id="country" name="country"&gt;
-  &lt;option value=""&gt;Select a country&lt;/option&gt;
-  &lt;option value="us"&gt;United States&lt;/option&gt;
-  &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;
-  &lt;option value="ca"&gt;Canada&lt;/option&gt;
-&lt;/select&gt;</code></pre>
+<p>The <code>classList</code> API is the cleanest way to toggle styles by adding and removing CSS classes:</p>
 
-<h2>Checkboxes and Radio Buttons</h2>
+<pre><code class="language-javascript">const card = document.querySelector(".card");
 
-<pre><code>&lt;!-- Checkboxes — multiple can be selected --&gt;
-&lt;label&gt;
-  &lt;input type="checkbox" name="terms" value="agreed"&gt;
-  I agree to the terms
-&lt;/label&gt;
+card.classList.add("active");       // add a class
+card.classList.remove("active");    // remove a class
+card.classList.toggle("active");    // add if missing, remove if present
+card.classList.contains("active");  // returns true or false</code></pre>
 
-&lt;!-- Radio buttons — only one can be selected --&gt;
-&lt;label&gt;
-  &lt;input type="radio" name="plan" value="free"&gt; Free
-&lt;/label&gt;
-&lt;label&gt;
-  &lt;input type="radio" name="plan" value="pro"&gt; Pro
-&lt;/label&gt;</code></pre>
+<h2>Changing Attributes</h2>
 
-<h2>Submit Button</h2>
+<pre><code class="language-javascript">const link = document.querySelector("a");
 
-<pre><code>&lt;button type="submit"&gt;Send Message&lt;/button&gt;
+link.getAttribute("href");              // read an attribute
+link.setAttribute("href", "/about");    // set an attribute
+link.removeAttribute("target");         // remove an attribute</code></pre>
 
-&lt;!-- Or using input --&gt;
-&lt;input type="submit" value="Send Message"&gt;</code></pre>
+<h2>Event Listeners</h2>
 
-<h2>Required Fields and Validation</h2>
+<p>Events are how you respond to user actions — clicks, keypresses, form submissions, and more:</p>
 
-<p>HTML has built-in validation attributes that work without any JavaScript:</p>
+<pre><code class="language-javascript">const button = document.querySelector("button");
 
-<pre><code>&lt;input type="email" name="email" required&gt;
-&lt;input type="text" name="username" required minlength="3" maxlength="20"&gt;
-&lt;input type="number" name="age" min="18" max="99"&gt;</code></pre>
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});</code></pre>
 
-<h2>A Complete Form Example</h2>
+<p>Using an arrow function:</p>
 
-<pre><code>&lt;form action="/contact" method="post"&gt;
-  &lt;label for="name"&gt;Name&lt;/label&gt;
-  &lt;input type="text" id="name" name="name" required&gt;
+<pre><code class="language-javascript">button.addEventListener("click", () => {
+  button.textContent = "Clicked!";
+  button.style.backgroundColor = "#4ade80";
+});</code></pre>
 
-  &lt;label for="email"&gt;Email&lt;/label&gt;
-  &lt;input type="email" id="email" name="email" required&gt;
+<h2>The Event Object</h2>
 
-  &lt;label for="message"&gt;Message&lt;/label&gt;
-  &lt;textarea id="message" name="message" rows="4" required&gt;&lt;/textarea&gt;
+<p>The callback receives an event object with details about what happened:</p>
 
-  &lt;button type="submit"&gt;Send&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+<pre><code class="language-javascript">document.addEventListener("keydown", (event) => {
+  console.log(event.key);   // the key that was pressed
+});
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();   // stop the page from reloading
+  console.log("Form submitted!");
+});</code></pre>
+
+<h2>Creating and Inserting Elements</h2>
+
+<pre><code class="language-javascript">// Create a new element
+const item = document.createElement("li");
+item.textContent = "New item";
+
+// Add it to the page
+const list = document.querySelector("ul");
+list.appendChild(item);</code></pre>
+
+<h2>Removing Elements</h2>
+
+<pre><code class="language-javascript">const element = document.querySelector(".remove-me");
+element.remove();</code></pre>
+
+<h2>Try It Yourself</h2>
+
+<p>Click the button below and edit the HTML, CSS, and JS to see live output:</p>
+
+<section class="try-example">
+
+  <template class="try-default-html">
+    <div class="box">
+      <h2 id="title">Hello, DOM!</h2>
+      <p id="desc">Click the button below.</p>
+      <button id="btn">Change Text</button>
+    </div>
+  </template>
+
+  <template class="try-default-css">.box {
+  font-family: sans-serif;
+  padding: 1.5rem;
+  max-width: 320px;
+  border-radius: 12px;
+  border: 1.5px solid #e5e7eb;
+}
+h2 { color: #0f172a; margin: 0 0 8px; }
+p  { color: #64748b; margin: 0 0 12px; }
+button {
+  background: #6367ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 700;
+}</template>
+
+  <template class="try-default-js">var btn   = document.getElementById('btn');
+var title = document.getElementById('title');
+var desc  = document.getElementById('desc');
+
+btn.addEventListener('click', function () {
+  title.textContent = 'Text Changed!';
+  desc.textContent  = 'The DOM was updated by JavaScript.';
+  btn.textContent   = 'Click again';
+  btn.style.background = '#22c55e';
+});</template>
+
+</section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import AppLayout from "@/components/layout/AppLayout";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <Script src="/js/editor.js" strategy="afterInteractive" />
         <AppLayout>{children}</AppLayout>
       </body>
     </html>
