@@ -31,12 +31,21 @@ function initChallenge(el: HTMLElement): void {
     ? `data-mode="edit" data-html="${escHtml(starterHtml)}" data-css="${escHtml(starterCss)}"`
     : `data-mode="edit" data-html="${escHtml(starterHtml)}"`;
 
+  // Build target srcdoc — wrap solution in a minimal document
+  const targetSrc = hasCssTab
+    ? `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}${solution}</style></head><body>${starterHtml}</body></html>`
+    : `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}</style></head><body>${solution}</body></html>`;
+
   el.innerHTML = `
     <div class="challenge-header">
       <span class="challenge-badge">Challenge</span>
       <h3 class="challenge-title">${escHtml(title)}</h3>
     </div>
     <p class="challenge-desc">${escHtml(description)}</p>
+    <div class="challenge-target">
+      <span class="challenge-target-label">Target output</span>
+      <iframe class="challenge-target-frame" sandbox="allow-same-origin" referrerpolicy="no-referrer"></iframe>
+    </div>
     <section class="try-example" ${editorAttrs}></section>
     <button class="challenge-check-btn" type="button">Check my answer</button>
     <div class="challenge-result" style="display:none"></div>
@@ -52,6 +61,18 @@ function initChallenge(el: HTMLElement): void {
     </details>
   `;
 
+  // ── Target output iframe ──────────────────────────────────────────────────
+  const targetFrame = el.querySelector<HTMLIFrameElement>(".challenge-target-frame")!;
+  targetFrame.srcdoc = targetSrc;
+  targetFrame.addEventListener("load", () => {
+    try {
+      const body = targetFrame.contentDocument?.body;
+      if (body) {
+        targetFrame.style.height = Math.max(80, Math.min(body.scrollHeight + 2, 360)) + "px";
+      }
+    } catch (_) { /* cross-origin guard */ }
+  });
+
   const checkBtn = el.querySelector<HTMLButtonElement>(".challenge-check-btn")!;
   const resultDiv = el.querySelector<HTMLElement>(".challenge-result")!;
   const copyBtn   = el.querySelector<HTMLButtonElement>(".challenge-copy-btn")!;
@@ -59,7 +80,8 @@ function initChallenge(el: HTMLElement): void {
   const codeEl    = el.querySelector<HTMLElement>(".challenge-solution pre code")!;
 
   checkBtn.addEventListener("click", () => {
-    const iframe = el.querySelector<HTMLIFrameElement>("iframe");
+    // Use .try-example iframe to avoid matching the target preview iframe
+    const iframe = el.querySelector<HTMLIFrameElement>(".try-example iframe");
     if (!iframe?.contentDocument?.body) {
       resultDiv.style.display = "block";
       resultDiv.className = "challenge-result fail";

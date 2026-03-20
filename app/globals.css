@@ -316,6 +316,30 @@ body {
   box-shadow: 0 4px 16px rgba(99, 103, 255, 0.4);
 }
 
+.challenge-target {
+  margin-bottom: 1.25rem;
+}
+
+.challenge-target-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+.challenge-target-frame {
+  width: 100%;
+  min-height: 80px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  display: block;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 .challenge-result {
   display: flex;
   align-items: flex-start;
