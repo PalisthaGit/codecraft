@@ -10,7 +10,7 @@ export default function NewsletterSubscribe() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return;
     setState("submitting");
 
     try {

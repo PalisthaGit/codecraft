@@ -21,6 +21,8 @@ export default function CodePenEmbed({ src, title = "Try it yourself", height = 
           allowTransparency={true}
           allowFullScreen={true}
           title={title}
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          referrerPolicy="no-referrer"
         />
       </div>
     </div>

@@ -13,7 +13,8 @@ export default function ArticleFeedback() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!message.trim() || !email.trim()) return;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    if (!message.trim() || !emailOk) return;
     setState("submitting");
 
     try {
