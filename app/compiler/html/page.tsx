@@ -620,7 +620,7 @@ export default function HtmlEditorPage() {
 
         {/* Preview pane */}
         <div style={{ flex: 1, display: isMobile && mobileTab === "code" ? "none" : "flex", flexDirection: "column", borderTop: isMobile ? `1px solid ${border}` : "none", position: "relative", overflow: "hidden" }}>
-          <iframe ref={iframeRef} sandbox="allow-scripts" referrerPolicy="no-referrer" style={{ flex: 1, border: "none", background: "white", pointerEvents: dragging ? "none" : "auto" }} title="preview" />
+          <iframe ref={iframeRef} sandbox="allow-scripts allow-modals" referrerPolicy="no-referrer" style={{ flex: 1, border: "none", background: "white", pointerEvents: dragging ? "none" : "auto" }} title="preview" />
           {dragging && <div style={{ position: "absolute", inset: 0, zIndex: 20, cursor: "col-resize" }} />}
           {isMobile && showOutputHint && (
             <div style={{ position: "absolute", top: "14px", left: "50%", transform: "translateX(-50%)", background: "rgba(99,103,255,0.92)", color: "white", fontSize: "13px", fontWeight: 700, padding: "8px 18px", borderRadius: "999px", whiteSpace: "nowrap", pointerEvents: "none", boxShadow: "0 4px 16px rgba(99,103,255,0.4)", animation: "hint-fade-in 0.4s ease forwards", zIndex: 10 }}>
