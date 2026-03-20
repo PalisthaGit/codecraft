@@ -197,10 +197,10 @@ export default function HomePage() {
               Try it yourself
             </span>
             <h2 className="text-2xl font-black text-white leading-tight mb-2">
-              HTML Compiler
+              HTML CSS JS Compiler
             </h2>
             <p className="text-[#94a3b8] text-sm leading-relaxed max-w-md">
-              Write HTML directly in your browser and see the result in real time. No installs, no setup. Just open it and start building.
+              Write HTML, CSS, and JavaScript directly in your browser and see the result in real time. No installs, no setup. Just open it and start building.
             </p>
           </div>
 
