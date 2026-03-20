@@ -24,7 +24,7 @@ export async function generateMetadata({
   const lesson = getLessonBySlug(slug);
   if (!lesson) return {};
   return {
-    title: `${lesson.title} — Codecraft`,
+    title: `${lesson.title} — CodingBanana`,
     description: lesson.description,
   };
 }

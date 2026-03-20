@@ -30,7 +30,7 @@ app/layout.tsx
 Root layout that wraps all pages.
 
 app/page.tsx
-Homepage of the Codecraft platform.
+Homepage of the CodingBanana platform.
 
 app/globals.css
 Global styles. Tailwind CSS is imported here.
@@ -54,15 +54,15 @@ Folders inside `app` become routes automatically.
 # Product Overview
 
 Product Name
-Codecraft
+CodingBanana
 
 Tagline
 Learn Coding Without Feeling Overwhelmed
 
-Codecraft is a beginner-friendly coding tutorial platform designed to teach programming through clear step-by-step lessons with real code examples and outputs.
+CodingBanana is a beginner-friendly coding tutorial platform designed to teach programming through clear step-by-step lessons with real code examples and outputs.
 
 Many learning platforms move too fast or skip explanations.
-Codecraft focuses on **clarity, structured progression, and practical examples** so concepts actually stick.
+CodingBanana focuses on **clarity, structured progression, and practical examples** so concepts actually stick.
 
 ---
 
@@ -99,7 +99,7 @@ Nice to Have
 
 Learning to code can feel overwhelming.
 
-The Codecraft interface should therefore be:
+The CodingBanana interface should therefore be:
 
 • calm
 • structured

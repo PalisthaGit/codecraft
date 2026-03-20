@@ -53,7 +53,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
             </svg>
           </button>
           <span className="ml-3 text-lg font-bold text-[#0f172a]">
-            Codecraft
+            CodingBanana
           </span>
         </header>
 

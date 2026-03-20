@@ -2,19 +2,19 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Codecraft — Free Coding Tutorials for Beginners",
+  title: "About CodingBanana — Free Coding Tutorials for Beginners",
   description:
-    "Codecraft is a free, beginner-friendly platform for learning HTML, CSS, and JavaScript. No experience needed — just clear lessons and real examples.",
+    "CodingBanana is a free, beginner-friendly platform for learning HTML, CSS, and JavaScript. No experience needed — just clear lessons and real examples.",
 };
 
 const sections = [
   {
-    title: "What is Codecraft?",
-    body: "Codecraft is a free learning platform for people who want to learn web development from scratch. We cover the three core technologies of the web — HTML, CSS, and JavaScript — with structured, easy-to-follow lessons that anyone can understand, regardless of prior experience. Every lesson is written in plain language. No jargon. No assumptions. We start from the very beginning and build up your knowledge one concept at a time.",
+    title: "What is CodingBanana?",
+    body: "CodingBanana is a free learning platform for people who want to learn web development from scratch. We cover the three core technologies of the web — HTML, CSS, and JavaScript — with structured, easy-to-follow lessons that anyone can understand, regardless of prior experience. Every lesson is written in plain language. No jargon. No assumptions. We start from the very beginning and build up your knowledge one concept at a time.",
   },
   {
     title: "Who is it for?",
-    body: "Codecraft is built for absolute beginners — people who have never written a line of code and want to start building websites. It's also useful for anyone who learned a little in the past and wants to fill in the gaps. If you've ever looked at a web page and wondered how it was made, you're in the right place.",
+    body: "CodingBanana is built for absolute beginners — people who have never written a line of code and want to start building websites. It's also useful for anyone who learned a little in the past and wants to fill in the gaps. If you've ever looked at a web page and wondered how it was made, you're in the right place.",
   },
   {
     title: "How does it work?",
@@ -22,7 +22,7 @@ const sections = [
   },
   {
     title: "Is it really free?",
-    body: "Yes — completely free. No account required, no paywalls, no premium tiers. Codecraft is supported by ads that help keep the lights on. All content is freely available to everyone, forever.",
+    body: "Yes — completely free. No account required, no paywalls, no premium tiers. CodingBanana is supported by ads that help keep the lights on. All content is freely available to everyone, forever.",
   },
 ];
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
         About
       </span>
       <h1 className="text-[clamp(1.6rem,4vw,2.2rem)] font-black text-[#0f172a] leading-tight tracking-tight mb-3">
-        About Codecraft
+        About CodingBanana
       </h1>
       <p className="text-[0.95rem] leading-[1.8] text-[#64748b] mb-10 max-w-xl">
         A free, beginner-friendly place to learn the fundamentals of web

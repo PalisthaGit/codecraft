@@ -4,7 +4,7 @@ import NewsletterSubscribe from "@/components/home/NewsletterSubscribe";
 import HeroAnimation from "@/components/home/HeroAnimation";
 
 export const metadata: Metadata = {
-  title: "Codecraft — Free HTML, CSS & JavaScript Tutorials for Beginners",
+  title: "CodingBanana — Free HTML, CSS & JavaScript Tutorials for Beginners",
   description:
     "Learn web development from scratch with free, beginner-friendly tutorials. Master HTML, CSS, and JavaScript with clear explanations and real code examples.",
 };
@@ -97,7 +97,7 @@ export default function HomePage() {
             One Step at a Time
           </h1>
           <p className="mt-5 text-lg text-[#64748b] max-w-xl leading-relaxed">
-            Codecraft breaks programming down into small, manageable lessons. No
+            CodingBanana breaks programming down into small, manageable lessons. No
             jargon. No overwhelm. Just clear explanations and real examples.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -222,7 +222,7 @@ export default function HomePage() {
       {/* Features */}
       <section>
         <h2 className="text-xl font-extrabold text-[#0f172a] tracking-tight mb-6">
-          Why Codecraft?
+          Why CodingBanana?
         </h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {features.map((feature) => (

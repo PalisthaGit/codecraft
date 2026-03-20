@@ -2,7 +2,7 @@ import Link from "next/link";
 import { javascriptLessons } from "@/data/javascriptLessons";
 
 export const metadata = {
-  title: "JavaScript — Codecraft",
+  title: "JavaScript — CodingBanana",
   description: "Learn JavaScript from scratch — variables, functions, DOM manipulation, and more.",
 };
 

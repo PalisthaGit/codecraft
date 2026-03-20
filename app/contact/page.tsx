@@ -65,7 +65,7 @@ export default function ContactPage() {
         Contact
       </span>
       <h1 className="text-[clamp(1.6rem,4vw,2.2rem)] font-black text-[#0f172a] leading-tight tracking-tight mb-3">
-        Contact Codecraft
+        Contact CodingBanana
       </h1>
       <p className="text-[0.95rem] leading-[1.8] text-[#64748b] mb-8 max-w-md">
         Found a mistake in a lesson? Have a suggestion? We read every message

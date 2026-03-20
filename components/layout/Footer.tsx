@@ -31,7 +31,7 @@ export default function Footer() {
               href="/"
               className="text-lg font-black text-[#0f172a] tracking-tight"
             >
-              Codecraft
+              CodingBanana
             </Link>
             <p className="mt-2 text-sm text-[#64748b] leading-relaxed max-w-[220px]">
               Free, beginner-friendly tutorials for HTML, CSS, and JavaScript.
@@ -66,7 +66,7 @@ export default function Footer() {
         {/* Bottom row: copyright */}
         <div className="mt-10 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#64748b]">
-            © {new Date().getFullYear()} Codecraft. All rights reserved.
+            © {new Date().getFullYear()} CodingBanana. All rights reserved.
           </p>
           <p className="text-xs text-[#64748b]">
             Free for everyone. Always.

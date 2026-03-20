@@ -52,7 +52,7 @@ export default function ArticleFeedback() {
             </svg>
           </span>
           <p className="font-semibold text-[#0f172a] leading-relaxed">
-            Thanks for the feedback! Your input helps make Codecraft tutorials better.
+            Thanks for the feedback! Your input helps make CodingBanana tutorials better.
           </p>
         </div>
       ) : (

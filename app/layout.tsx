@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Codecraft",
+  title: "CodingBanana",
   description: "Learn Coding Without Feeling Overwhelmed",
 };
 

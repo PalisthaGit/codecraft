@@ -265,7 +265,7 @@ export default function HtmlEditorPage() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6367ff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
               <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
             </svg>
-            <span style={{ fontWeight: 800, fontSize: isMobile ? "18px" : "22px", color: text, letterSpacing: "-0.02em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>Codecraft</span>
+            <span style={{ fontWeight: 800, fontSize: isMobile ? "18px" : "22px", color: text, letterSpacing: "-0.02em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>CodingBanana</span>
           </div>
           <span style={{ fontSize: "12px", fontWeight: 600, color: subtext, whiteSpace: "nowrap" }}>HTML Online Compiler</span>
         </div>
@@ -280,7 +280,7 @@ export default function HtmlEditorPage() {
       {/* Panel */}
       <div style={{ position: "fixed", top: 0, left: 0, zIndex: 50, width: "256px", height: "100%", background: "#ffffff", boxShadow: "4px 0 24px rgba(0,0,0,0.12)", display: "flex", flexDirection: "column", transform: menuOpen ? "translateX(0)" : "translateX(-100%)", transition: "transform 0.3s ease-in-out" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", padding: "0 16px", borderBottom: "1px solid #e5e7eb", flexShrink: 0 }}>
-          <span style={{ fontSize: "18px", fontWeight: 800, color: "#0f172a" }}>Codecraft</span>
+          <span style={{ fontSize: "18px", fontWeight: 800, color: "#0f172a" }}>CodingBanana</span>
           <button onClick={() => setMenuOpen(false)} style={{ background: "transparent", border: "none", cursor: "pointer", padding: "8px", color: "#64748b" }}>
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
           </button>

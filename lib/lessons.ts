@@ -62,7 +62,7 @@ export const lessons: Lesson[] = [
       },
       {
         type: "paragraph",
-        text: "With coding skills, you can build websites, mobile apps, games, automation tools, and much more. As you progress through Codecraft, you'll develop the foundation to build real things.",
+        text: "With coding skills, you can build websites, mobile apps, games, automation tools, and much more. As you progress through CodingBanana, you'll develop the foundation to build real things.",
       },
     ],
   },

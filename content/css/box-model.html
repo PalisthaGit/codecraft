@@ -1,89 +1,138 @@
-<div class="definition">
-  The <strong>box model</strong> is how browsers calculate the size and spacing of every element on a page. Every element is a rectangular box made up of four layers: content, padding, border, and margin.
-</div>
+<p>DOM (Document Object Model) is a JavaScript representation of your HTML page. It lets you read and change HTML
+  elements, attributes, and content using JavaScript.
+</p>
+<p>When a browser loads an HTML page, it builds a tree of objects that represent every element in the page. JavaScript
+  can access that tree, find elements, and modify them. This is what makes web pages interactive.
+</p>
+<h2>Selecting Elements
+</h2>
+<p>The most common way to find elements is querySelector, which accepts any CSS selector.
+</p>
+<pre><code class="language-javascript">
+// Select the first matching element
+const heading = document.querySelector("h1");
+const button = document.querySelector(".btn");
+const input = document.querySelector("#email");
 
-<p>Understanding the box model is one of the most important steps in learning CSS. Once you see how every element is a box with controllable layers, layout stops feeling mysterious.</p>
+// Select all matching elements (returns a NodeList)
+const paragraphs = document.querySelectorAll("p");
+Reading and Changing Content
+const heading = document.querySelector("h1");
 
-<h2>The Four Layers</h2>
+// Read text content
+console.log(heading.textContent);   // "Hello, World!"
 
-<p>From the inside out:</p>
-
-<ul>
-  <li><strong>Content</strong> — the actual text, image, or inner elements</li>
-  <li><strong>Padding</strong> — space between the content and the border</li>
-  <li><strong>Border</strong> — a line around the padding and content</li>
-  <li><strong>Margin</strong> — space outside the border, separating this element from others</li>
-</ul>
-
-<pre><code>.card {
-  padding: 1.5rem;       /* space inside */
-  border: 1px solid #e5e7eb;
-  margin: 1rem 0;        /* space outside */
-}</code></pre>
-
-<h2>Width and Height</h2>
-
-<p>By default, <code>width</code> and <code>height</code> only apply to the <strong>content area</strong>. Padding and border are added on top of that, which can cause unexpected sizing.</p>
-
-<pre><code>.box {
-  width: 300px;
-  padding: 20px;
-  border: 2px solid black;
-  /* actual rendered width: 300 + 20 + 20 + 2 + 2 = 344px */
-}</code></pre>
-
-<h2>box-sizing: border-box</h2>
-
-<p>The fix is <code>box-sizing: border-box</code>. This makes <code>width</code> and <code>height</code> include padding and border — so what you set is what you get.</p>
-
-<pre><code>*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-.box {
-  width: 300px;
-  padding: 20px;
-  border: 2px solid black;
-  /* actual rendered width: exactly 300px */
-}</code></pre>
+// Change text content
+heading.textContent = "Welcome to CodingBanana";
+// innerHTML lets you set HTML, not just text
+const container = document.querySelector(".container");
+container.innerHTML = "<p>New <strong>content</strong></p>";
+</code></pre>
 
 <div class="tip">
-  <span>💡</span>
-  <p>Always add <code>box-sizing: border-box</code> as a global reset. Nearly every CSS framework does this by default, and it prevents a huge class of sizing bugs.</p>
+  <span>💡</span> Tip: Prefer textContent when inserting plain text. innerHTML parses HTML and can create security risks
+  if the content comes from user input.
+
 </div>
+<h2>Changing Styles
+</h2>
+<pre><code class="language-javascript">
+const box = document.querySelector(".box");
 
-<h2>Padding Shorthand</h2>
+// Set individual styles
+box.style.backgroundColor = "#6367ff";
+box.style.padding = "1rem";
+box.style.borderRadius = "12px";
+</code></pre>
+<h2>Working with Classes
+</h2>
+<p>The classList API makes it easy to manage CSS classes.
+</p>
+<pre><code class="language-javascript">
+const card = document.querySelector(".card");
 
-<p>You can set padding on all four sides at once using shorthand:</p>
+card.classList.add("active");       // add a class
+card.classList.remove("active");    // remove a class
+card.classList.toggle("active");    // add if missing, remove if present
+card.classList.contains("active");  // returns true or false
+Changing Attributes
+const link = document.querySelector("a");
 
-<pre><code>/* All sides */
-padding: 1rem;
+link.getAttribute("href");              // read an attribute
+link.setAttribute("href", "/about");    // set an attribute
+link.removeAttribute("target");         // remove an attribute
+</code></pre>
+<h2>Event Listeners
+</h2>
+<p>Events allow JavaScript to respond to user actions like clicks, typing, and form submissions.
+</p>
+<pre><code class="language-javascript">
+const button = document.querySelector("button");
 
-/* Top/bottom, left/right */
-padding: 0.5rem 1rem;
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});
 
-/* Top, right, bottom, left (clockwise) */
-padding: 0.25rem 1rem 0.5rem 0.75rem;</code></pre>
+</code></pre>
+<h2>Using an arrow function:
+</h2>
+<pre><code class="language-javascript">
+button.addEventListener("click", () => {
+  button.textContent = "Clicked!";
+  button.style.backgroundColor = "#4ade80";
+});
+</code></pre>
+<h2>The Event Object
+</h2>
+<p>The event callback receives an event object with details about the event.
+</p>
+<pre><code class="language-javascript">
+document.addEventListener("keydown", (event) => {
+  console.log(event.key);   // key that was pressed
+});
 
-<p>The same shorthand applies to <code>margin</code>.</p>
+const form = document.querySelector("form");
 
-<h2>Margin Collapse</h2>
+form.addEventListener("submit", (event) => {
+  event.preventDefault();   // prevent page reload
+  console.log("Form submitted!");
+});
+Creating and Inserting Elements
+// Create a new element
+const item = document.createElement("li");
+item.textContent = "New item";
 
-<p>When two vertical margins touch, they <strong>collapse</strong> into a single margin equal to the larger of the two. This only happens vertically (top/bottom), not horizontally.</p>
+// Add it to the page
+const list = document.querySelector("ul");
+list.appendChild(item);
+Removing Elements
+const element = document.querySelector(".remove-me");
+element.remove();
+</code></pre>
 
-<pre><code>/* These two paragraphs won't have 2rem of space between them —
-   only 1rem, because the margins collapse */
-p {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-}</code></pre>
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="box">
+      <h2 id="title">Hello, DOM!</h2>
+      <p id="desc">Click the button below.</p>
+      <button id="btn">Change Text</button>
+    </div>
+  </template>
 
-<h2>Negative Margins</h2>
+  <template class="try-default-css">
+    Example JavaScript:
 
-<p>Margins can be negative, pulling an element toward or past its neighbors. This is occasionally useful for overlapping elements:</p>
+  </template>
+  <template class="try-default-js">
+    var btn = document.getElementById('btn');
+    var title = document.getElementById('title');
+    var desc = document.getElementById('desc');
 
-<pre><code>.overlap {
-  margin-top: -1rem;
-}</code></pre>
+    btn.addEventListener('click', function () {
+    title.textContent = 'Text Changed!';
+    desc.textContent = 'The DOM was updated by JavaScript.';
+    btn.textContent = 'Click again';
+    btn.style.background = '#22c55e';
+    });
+  </template>
+</section>

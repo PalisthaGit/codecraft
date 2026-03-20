@@ -2,7 +2,7 @@ import Link from "next/link";
 import { contentRegistry } from "@/lib/contentRegistry";
 
 export const metadata = {
-  title: "Blog — Codecraft",
+  title: "Blog — CodingBanana",
   description: "Articles on web development, learning to code, and the fundamentals of HTML, CSS, and JavaScript.",
 };
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { contentRegistry } from "@/lib/contentRegistry";
 
 export const metadata = {
-  title: "CSS Fundamentals — Codecraft",
+  title: "CSS Fundamentals — CodingBanana",
   description: "Learn CSS from scratch — selectors, the box model, flexbox, and more.",
 };
 

@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Codecraft",
+  title: "Privacy Policy — CodingBanana",
   description:
-    "Codecraft's privacy policy explains how we collect, use, and protect your data when you use our website.",
+    "CodingBanana's privacy policy explains how we collect, use, and protect your data when you use our website.",
 };
 
 const sections = [
   {
     title: "Overview",
-    body: "Codecraft (\"we\", \"us\", or \"our\") is committed to protecting your privacy. This Privacy Policy explains what information we collect when you visit our website, how we use it, and what choices you have. By using this website, you agree to the practices described in this policy.",
+    body: "CodingBanana (\"we\", \"us\", or \"our\") is committed to protecting your privacy. This Privacy Policy explains what information we collect when you visit our website, how we use it, and what choices you have. By using this website, you agree to the practices described in this policy.",
   },
   {
     title: "Information We Collect",
-    body: "Codecraft does not require you to create an account or provide personal information to access our content. We may collect non-personally identifiable information automatically: pages viewed and time spent, browser type and operating system, referring website or search query, and general geographic region. This data is collected in aggregate and cannot be used to identify you personally.",
+    body: "CodingBanana does not require you to create an account or provide personal information to access our content. We may collect non-personally identifiable information automatically: pages viewed and time spent, browser type and operating system, referring website or search query, and general geographic region. This data is collected in aggregate and cannot be used to identify you personally.",
   },
   {
     title: "Cookies",
-    body: "Codecraft uses cookies — small text files stored on your device — to improve your experience and serve relevant advertisements. Cookies help us understand how visitors use our site so we can improve our content. You can control or disable cookies through your browser settings, though doing so may affect some site functionality.",
+    body: "CodingBanana uses cookies — small text files stored on your device — to improve your experience and serve relevant advertisements. Cookies help us understand how visitors use our site so we can improve our content. You can control or disable cookies through your browser settings, though doing so may affect some site functionality.",
   },
   {
     title: "Google AdSense & Advertising",
-    body: "Codecraft uses Google AdSense to display advertisements. Google AdSense uses cookies to serve ads based on your prior visits to this and other websites. You may opt out of personalised advertising by visiting Google Ads Settings or aboutads.info. We do not control the content of advertisements shown on this site.",
+    body: "CodingBanana uses Google AdSense to display advertisements. Google AdSense uses cookies to serve ads based on your prior visits to this and other websites. You may opt out of personalised advertising by visiting Google Ads Settings or aboutads.info. We do not control the content of advertisements shown on this site.",
   },
   {
     title: "Analytics",
@@ -33,7 +33,7 @@ const sections = [
   },
   {
     title: "Children's Privacy",
-    body: "Codecraft is intended for general audiences and does not knowingly collect personal information from children under 13. If you believe we have inadvertently collected information from a child, please contact us so we can promptly delete it.",
+    body: "CodingBanana is intended for general audiences and does not knowingly collect personal information from children under 13. If you believe we have inadvertently collected information from a child, please contact us so we can promptly delete it.",
   },
   {
     title: "Changes to This Policy",

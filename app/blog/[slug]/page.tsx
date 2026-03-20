@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props) {
   const meta = getContentMeta("blog", slug);
   if (!meta) return {};
   return {
-    title: `${meta.title} — Codecraft`,
+    title: `${meta.title} — CodingBanana`,
     description: meta.description,
   };
 }

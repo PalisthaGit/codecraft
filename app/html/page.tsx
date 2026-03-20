@@ -2,7 +2,7 @@ import Link from "next/link";
 import { contentRegistry } from "@/lib/contentRegistry";
 
 export const metadata = {
-  title: "HTML Basics — Codecraft",
+  title: "HTML Basics — CodingBanana",
   description: "Learn HTML from scratch with structured, beginner-friendly lessons.",
 };
 
