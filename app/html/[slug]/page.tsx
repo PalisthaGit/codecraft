@@ -1,6 +1,8 @@
+import type { Metadata } from 'next'
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { loadHtmlContent } from "@/lib/loadHtmlContent";
+import { htmlLessons } from "@/data/htmlLessons";
 import {
   contentRegistry,
   getContentMeta,
@@ -19,14 +21,38 @@ export async function generateStaticParams() {
   return contentRegistry.html.lessons.map((l) => ({ slug: l.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
-  const meta = getContentMeta("html", slug);
-  if (!meta) return {};
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
+  const lesson = htmlLessons.find((l) => l.slug === params.slug)
+
+  if (!lesson) {
+    return {
+      title: 'Lesson Not Found | CodingBanana',
+    }
+  }
+
   return {
-    title: `${meta.title} — CodingBanana`,
-    description: meta.description,
-  };
+    title: `${lesson.title} | HTML Tutorial | CodingBanana`,
+    description: lesson.description,
+    openGraph: {
+      title: `${lesson.title} | CodingBanana`,
+      description: lesson.description,
+      url: `https://www.codingbanana.com/html/${lesson.slug}`,
+      siteName: 'CodingBanana',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary',
+      title: `${lesson.title} | CodingBanana`,
+      description: lesson.description,
+    },
+    alternates: {
+      canonical: `https://www.codingbanana.com/html/${lesson.slug}`,
+    },
+  }
 }
 
 export default async function HtmlLessonPage({ params }: Props) {

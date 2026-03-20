@@ -217,6 +217,7 @@
 
       var hl = document.createElement('code');
       hl.style.cssText = 'font-family:inherit;font-size:inherit;line-height:inherit;background:transparent;white-space:pre-wrap;word-wrap:break-word;';
+      hl.dataset.highlighted = 'yes';
       hl.innerHTML = hlFn(defaultCode);
       mirror.appendChild(hl);
 
@@ -242,6 +243,7 @@
 
       var codeEl = document.createElement('code');
       codeEl.style.cssText = 'background:transparent;font-size:14px;line-height:1.7;font-family:\'JetBrains Mono\',monospace;font-weight:600;white-space:pre;display:block;';
+      codeEl.dataset.highlighted = 'yes';
       codeEl.innerHTML = hlFn(defaultCode);
       pre.appendChild(codeEl);
       view.appendChild(pre);
