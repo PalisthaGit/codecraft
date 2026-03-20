@@ -9,7 +9,7 @@
 
   function highlightHTML(code) {
     var result = '';
-    var re = /<!--[\s\S]*?-->|<[^>]*>|[^<]+/g, m;
+    var re = /<!--[\s\S]*?-->|<[^>]*>|<|[^<]+/g, m;
     var C = { bracket: '#c792ea', tag: '#c792ea', attr: '#ffcb6b', eq: '#e2e8f0', val: '#c3e88d', comment: '#546e7a' };
     while ((m = re.exec(code)) !== null) {
       var t = m[0];
@@ -19,7 +19,7 @@
       }
       if (t[0] === '<') {
         var inner = t.slice(1, -1);
-        if (!inner) { result += escH(t); continue; }
+        if (!inner) { result += '<span style="color:' + C.bracket + '">' + escH(t) + '</span>'; continue; }
         if (inner[0] === '!') { result += '<span style="color:' + C.tag + '">' + escH(t) + '</span>'; continue; }
         var sc = inner.slice(-1) === '/';
         if (sc) inner = inner.slice(0, -1).replace(/\s+$/, '');
@@ -145,6 +145,7 @@
     var activeTab  = hasJs ? 'js' : (hasCss ? 'css' : 'html');
     var typedChars = 0;
     var prevLen    = 0;
+    var hasEdits   = false;
 
     // ── Build outer wrapper ───────────────────────────────────────────────
     var outerWrap = document.createElement('div');
@@ -392,14 +393,17 @@
 
     htmlPane.ta.addEventListener('input', function () {
       htmlPane.hl.innerHTML = highlightHTML(htmlPane.ta.value);
+      hasEdits = true;
       dismissHint(htmlPane.ta);
     });
     if (cssPane) cssPane.ta.addEventListener('input', function () {
       cssPane.hl.innerHTML = highlightCSS(cssPane.ta.value);
+      hasEdits = true;
       dismissHint(cssPane.ta);
     });
     if (jsPane) jsPane.ta.addEventListener('input', function () {
       jsPane.hl.innerHTML = highlightJS(jsPane.ta.value);
+      hasEdits = true;
       dismissHint(jsPane.ta);
     });
 
@@ -449,12 +453,15 @@
     // ── Run ──────────────────────────────────────────────────────────────
     function runCode() {
       output.srcdoc = buildSrc();
-      outWrap.classList.remove('te-output-glow');
-      void outWrap.offsetWidth;
-      outWrap.classList.add('te-output-glow');
-      badge.style.display = 'inline-block';
-      clearTimeout(badge._t);
-      badge._t = setTimeout(function () { badge.style.display = 'none'; }, 2000);
+      if (hasEdits) {
+        outWrap.classList.remove('te-output-glow');
+        void outWrap.offsetWidth;
+        outWrap.classList.add('te-output-glow');
+        badge.style.display = 'inline-block';
+        clearTimeout(badge._t);
+        badge._t = setTimeout(function () { badge.style.display = 'none'; }, 2000);
+        hasEdits = false;
+      }
     }
 
     runBtn.addEventListener('click', runCode);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import hljs from "highlight.js";
+import { renderChallenges } from "@/lib/challengeRenderer";
 
 interface HtmlContentRendererProps {
   html: string;
@@ -12,6 +13,10 @@ export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) 
 
   useEffect(() => {
     if (!ref.current) return;
+
+    // Build challenge UIs from data-attribute divs first, so their
+    // code blocks are in the DOM when the hljs loop runs below.
+    renderChallenges(ref.current);
 
     // Syntax-highlight code blocks
     ref.current.querySelectorAll<HTMLElement>("pre code").forEach((block) => {
