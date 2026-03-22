@@ -1,129 +1,116 @@
 <div class="definition">
-  HTML provides six heading levels (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>) and several text elements
-  for paragraphs, emphasis, and inline formatting. Using them correctly gives your content structure and meaning.
+  HTML is the language used to create web pages. It tells the browser what each thing on the page is.
 </div>
 
-<p>The words on a web page aren't just text — they have hierarchy. Headings tell readers (and search engines) what a
-  page is about and how its sections relate to each other. Inline elements like <code>&lt;strong&gt;</code> and
-  <code>&lt;em&gt;</code> add emphasis without breaking the flow of a paragraph.
-</p>
+<p>Every website you have ever visited, from Wikipedia to YouTube to Google, started with the same thing.</p>
 
-<h2>Headings</h2>
+<p>One simple language called HTML.</p>
 
-<p>There are six heading levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code> (least
-  important):</p>
+<p>By the end of this lesson you will understand exactly how it works and why every single webpage on the internet is
+  built on it.</p>
 
-<pre><code class="language-html">&lt;h1&gt;Page Title&lt;/h1&gt;
-&lt;h2&gt;Main Section&lt;/h2&gt;
-&lt;h3&gt;Sub-section&lt;/h3&gt;
-&lt;h4&gt;Smaller heading&lt;/h4&gt;
-&lt;h5&gt;Even smaller&lt;/h5&gt;
-&lt;h6&gt;Smallest heading&lt;/h6&gt;</code></pre>
+<h2>Let's Start With Something You Already Know</h2>
+
+<p>Open a browser. You know what a browser is. Chrome, Firefox, Safari. That app you use to go on the internet.</p>
+
+<p>Now imagine you search for Scarlett Johansson and click on her Wikipedia page. Go ahead and actually do it if you
+  want. Take a second and just look at what is on that screen.</p>
+
+<div class="wiki-preview">
+  <div class="wiki-preview-label">👀 Here is what you see on her Wikipedia page</div>
+  <div class="wiki-preview-body">
+    <div class="wiki-preview-main">
+      <h1 class="wiki-preview-title">Scarlett Johansson</h1>
+      <hr class="wiki-preview-hr">
+      <p class="wiki-preview-text">Scarlett Ingrid Johansson (born November 22, 1984) is an American actress and singer.
+        Her films as a leading actress have grossed over $15.1 billion worldwide, making her the highest-grossing lead
+        actor in history.</p>
+    </div>
+    <div class="wiki-preview-sidebar">
+      <div class="wiki-preview-photo">📷</div>
+      <div class="wiki-preview-facts">
+        <p><strong>Born:</strong> Nov 22, 1984</p>
+        <p><strong>From:</strong> New York City</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Everything is organized. Everything is in its place. Nothing is randomly thrown on the screen.</p>
+
+<p>Now here is the question nobody really stops to think about.</p>
+
+<p>How does the browser know to put the title at the top? How does it know the photo goes on the right? How does it even
+  know what is a heading and what is just a paragraph of text?</p>
+
+<p>That is exactly what we are going to figure out right now.</p>
+
+<h2>A Webpage Has Three Layers</h2>
+
+<p>Every single webpage you have ever visited is made up of three different things working together.</p>
+
+<p>Let me give you an analogy that actually makes sense.</p>
+
+<p>Think about building a house.</p>
+
+<p>First you lay the foundation and put up the walls. The structure. Without this nothing else can exist. You cannot
+  paint a wall that does not exist. Then once the structure is there you paint it, add furniture, make it look nice. And
+  then finally you add the things that actually do something. Light switches. Plugs. A doorbell.</p>
+
+<p>Webpages work the exact same way.</p>
+
+<ul>
+  <li><strong>HTML</strong> is the structure. The walls and the floors. It tells the browser what everything on the page
+    is. This is a heading. This is a paragraph. This is an image. This is a link. Without HTML there is nothing.</li>
+  <li><strong>CSS</strong> is the paint and the furniture. It controls how everything looks. Colors, font sizes,
+    spacing, layout. If HTML says "this is a heading," CSS decides how big it looks, what color it is, and exactly where
+    it sits on the screen.</li>
+  <li><strong>JavaScript</strong> is the light switches. It makes things interactive. When you click a button and
+    something happens, when you toggle dark mode and the whole page changes instantly, when you type in a search bar and
+    results start appearing as you type — that is JavaScript.</li>
+</ul>
+
+<p>Every website you have ever used has all three of these working together. Wikipedia, YouTube, Instagram, Google. All
+  of them. Built on the same foundation every single time.</p>
+
+<p>And that foundation is always HTML.</p>
+
+<h2>So What Actually is HTML</h2>
+
+<p>HTML stands for HyperText Markup Language.</p>
+
+<p>Do not let that name put you off. It sounds more complicated than it is.</p>
+
+<p>Think of HTML as a labeling system. You write some content and you put a label around it that tells the browser what
+  that content is. Those labels are called tags.</p>
+
+<ul>
+  <li>If something is a heading you put it inside a heading tag</li>
+  <li>If something is a paragraph you put it inside a paragraph tag</li>
+  <li>The browser reads those tags and knows exactly what to do with everything</li>
+</ul>
+
+<p>Without tags the browser just sees a wall of plain text. No structure. No headings. No organization. Everything runs
+  together in one messy block and nothing looks the way it should.</p>
+
+<p>With tags everything falls into place.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>Every page should have exactly one <code>&lt;h1&gt;</code> — it's the main title. Think of headings like a document
-    outline: <code>&lt;h2&gt;</code> for top-level sections, <code>&lt;h3&gt;</code> for sub-sections inside those.
-    Don't skip levels (e.g. don't jump from <code>&lt;h2&gt;</code> to <code>&lt;h4&gt;</code>).</p>
+  <p>Tags are the core idea behind HTML. Everything else you learn builds on top of this one concept.</p>
 </div>
 
-<h2>Paragraphs</h2>
+<h2>Why HTML Always Comes First</h2>
 
-<p>The <code>&lt;p&gt;</code> tag wraps a block of text into a paragraph. Browsers add spacing above and below each
-  paragraph automatically:</p>
+<p>Here is something worth remembering.</p>
 
-<pre><code class="language-html">&lt;p&gt;This is the first paragraph. It can contain as much text as you need.&lt;/p&gt;
+<p>You cannot style something with CSS until HTML has defined what it is. You cannot make something interactive with
+  JavaScript until HTML has actually put it on the page.</p>
 
-&lt;p&gt;This is the second paragraph. Each one is treated as a separate block.&lt;/p&gt;</code></pre>
+<p>Everything starts with HTML. Always.</p>
 
-<h2>Bold and Italic</h2>
+<p>That is why it is called the foundation. Not because it is the flashiest part, it definitely is not. But because
+  without it nothing else works.</p>
 
-<p>Use <code>&lt;strong&gt;</code> for important text (rendered bold) and <code>&lt;em&gt;</code> for emphasis (rendered
-  italic):</p>
-
-<pre><code class="language-html">&lt;p&gt;Please &lt;strong&gt;save your work&lt;/strong&gt; before closing the tab.&lt;/p&gt;
-&lt;p&gt;The answer is &lt;em&gt;always&lt;/em&gt; in the last place you look.&lt;/p&gt;</code></pre>
-
-<p>You may also see <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> used for bold and italic. The difference is
-  semantic: <code>&lt;strong&gt;</code> conveys importance, while <code>&lt;b&gt;</code> is just visual styling with no
-  added meaning. Prefer <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> for meaningful content.</p>
-
-<h2>Line Breaks</h2>
-
-<p>HTML ignores extra whitespace in your source code — multiple spaces or line breaks collapse into one. To force a line
-  break inside a paragraph, use the self-closing <code>&lt;br&gt;</code> tag:</p>
-
-<pre><code class="language-html">&lt;p&gt;
-  123 Main Street&lt;br&gt;
-  Springfield, IL 62701
-&lt;/p&gt;</code></pre>
-
-<h2>Inline Code</h2>
-
-<p>Use <code>&lt;code&gt;</code> to display inline code or technical terms in a monospace font:</p>
-
-<pre><code class="language-html">&lt;p&gt;Use the &lt;code&gt;margin&lt;/code&gt; property to add space outside an element.&lt;/p&gt;</code></pre>
-
-<h2>Blockquotes</h2>
-
-<p>Use <code>&lt;blockquote&gt;</code> for longer quoted passages:</p>
-
-<pre><code class="language-html">&lt;blockquote&gt;
-  &lt;p&gt;The web does not just connect machines, it connects people.&lt;/p&gt;
-&lt;/blockquote&gt;</code></pre>
-
-<h2>Horizontal Rule</h2>
-
-<p>The <code>&lt;hr&gt;</code> element creates a thematic break — a horizontal divider between sections:</p>
-
-<pre><code class="language-html">&lt;p&gt;End of one section.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Start of the next section.&lt;/p&gt;</code></pre>
-
-<h2>Putting It Together</h2>
-
-<p>Here is a complete example combining everything from this lesson. The output renders automatically below — click
-  <strong>Try It Yourself</strong> to edit the code live.
-</p>
-
-<section class="try-example">
-
-  <template class="try-default-html">
-    <h1>My Favourite Recipe</h1>
-
-    <p>This is my <strong>all-time favourite</strong> pasta dish.
-      It's <em>incredibly</em> simple to make.</p>
-
-    <h2>Ingredients</h2>
-    <p>You'll need spaghetti, garlic, olive oil, and parmesan.</p>
-
-    <h2>Instructions</h2>
-    <p>Cook the pasta. Meanwhile, fry the garlic in
-      oil. Combine and serve.</p>
-  </template>
-
-</section>
-
-<h2>Write It Yourself</h2>
-
-<p>Now try writing your own HTML from scratch. Use what you've learned — add headings, paragraphs, bold and italic text,
-  and anything else you want. Hit <strong>Run</strong> to see your result.</p>
-
-<section class="try-example" data-mode="edit">
-  <template class="try-default-html">
-    <h1>Your Heading Here</h1>
-  </template>
-  <template class="try-default-css">
-  </template>
-</section>
-
-<div class="challenge" data-title="Build a redsdcipe page"
-  data-description="Create a small recipe page using what you have learned. Add an h1 for the recipe name, two h2 headings for Ingredients and Instructions, and a paragraph under each one."
-  data-checks="h1,h2,p" data-solution="&lt;h1&gt;My Recipe&lt;/h1&gt;
-
-&lt;h2&gt;Ingredients&lt;/h2&gt;
-&lt;p&gt;Flour, eggs, milk, and butter.&lt;/p&gt;
-
-&lt;h2&gt;Instructions&lt;/h2&gt;
-&lt;p&gt;Mix everything and bake at 180&deg;C for 25 minutes.&lt;/p&gt;">
-</div>
+<p>In the next lesson we will set everything up and write our very first HTML code step by step. By the end of it you
+  will have a real webpage running right there in your own browser.</p>

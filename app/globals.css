@@ -20,8 +20,15 @@ body {
 }
 
 @keyframes hint-fade-in {
-  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 @property --snake-angle {
@@ -31,8 +38,13 @@ body {
 }
 
 @keyframes snake-spin {
-  from { --snake-angle: 0deg; }
-  to   { --snake-angle: 360deg; }
+  from {
+    --snake-angle: 0deg;
+  }
+
+  to {
+    --snake-angle: 360deg;
+  }
 }
 
 .snake-border {
@@ -55,59 +67,95 @@ body {
 }
 
 /* ── Syntax highlighting token colors (highlight.js) ───────────────────── */
-.hljs                        { color: #e2e8f0; }
+.hljs {
+  color: #e2e8f0;
+}
 
 /* Comments */
 .hljs-comment,
-.hljs-quote                  { color: #546e7a; font-style: italic; }
+.hljs-quote {
+  color: #546e7a;
+  font-style: italic;
+}
 
 /* Tags & keywords  →  purple */
-.hljs-tag                    { color: #c792ea; }
+.hljs-tag {
+  color: #c792ea;
+}
+
 .hljs-name,
 .hljs-keyword,
-.hljs-selector-tag           { color: #c792ea; }
+.hljs-selector-tag {
+  color: #c792ea;
+}
 
 /* Attribute names  →  yellow */
-.hljs-attr                   { color: #ffcb6b; }
+.hljs-attr {
+  color: #ffcb6b;
+}
 
 /* Strings & attribute values  →  green */
 .hljs-string,
 .hljs-selector-attr,
-.hljs-addition               { color: #c3e88d; }
+.hljs-addition {
+  color: #c3e88d;
+}
 
 /* Numbers & booleans  →  orange */
 .hljs-number,
-.hljs-literal                { color: #f78c6c; }
+.hljs-literal {
+  color: #f78c6c;
+}
 
 /* Functions, titles, built-ins  →  blue */
 .hljs-title,
 .hljs-section,
-.hljs-built_in               { color: #82aaff; }
+.hljs-built_in {
+  color: #82aaff;
+}
 
 /* Variables & template vars  →  light red */
 .hljs-variable,
-.hljs-template-variable      { color: #f07178; }
+.hljs-template-variable {
+  color: #f07178;
+}
 
 /* Types & class names  →  yellow */
 .hljs-type,
-.hljs-class .hljs-title      { color: #ffcb6b; }
+.hljs-class .hljs-title {
+  color: #ffcb6b;
+}
 
 /* Attributes / CSS properties  →  blue */
-.hljs-attribute              { color: #82aaff; }
+.hljs-attribute {
+  color: #82aaff;
+}
 
 /* Symbols, links  →  teal */
 .hljs-symbol,
 .hljs-bullet,
-.hljs-link                   { color: #80cbc4; }
+.hljs-link {
+  color: #80cbc4;
+}
 
 /* Meta / selectors  →  red */
 .hljs-meta,
 .hljs-selector-id,
-.hljs-selector-class         { color: #ff5370; }
+.hljs-selector-class {
+  color: #ff5370;
+}
 
-.hljs-emphasis               { font-style: italic; }
-.hljs-strong                 { font-weight: 700; }
-.hljs-deletion               { color: #ff5370; }
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}
+
+.hljs-deletion {
+  color: #ff5370;
+}
 
 /* Prose styles for HTML file content rendered via dangerouslySetInnerHTML */
 .html-content h1 {
@@ -241,7 +289,7 @@ body {
   background: linear-gradient(135deg, rgba(255, 219, 253, 0.4), rgba(201, 190, 255, 0.25));
   border: 1px solid rgba(201, 190, 255, 0.6);
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.25rem 0.5rem;
   margin-top: 0.5rem;
   margin-bottom: 1.75rem;
   font-size: 0.875rem;
@@ -253,22 +301,35 @@ body {
 
 .challenge {
   background: #f0fff4;
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-left: 4px solid #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   margin-top: 2.5rem;
   margin-bottom: 2rem;
 }
 
+@media (max-width: 640px) {
+  .challenge {
+    padding: 1rem 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .challenge-target-frame {
+    border-radius: 0;
+    overflow: hidden;
+  }
+}
+
 .challenge-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
   margin-bottom: 0.75rem;
 }
 
-.challenge-title {
+.challenge-header .challenge-title {
   font-size: 1.05rem;
   font-weight: 800;
   color: #0f172a;
@@ -290,15 +351,24 @@ body {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.2em 0.65em;
+  padding: 0.3em 0.65em;
+  line-height: 1;
   border-radius: 999px;
   flex-shrink: 0;
+}
+
+.challenge-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .challenge-check-btn {
   display: inline-flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0;
   padding: 9px 18px;
   background: #6367ff;
   color: white;
@@ -365,7 +435,27 @@ body {
 }
 
 .challenge-solution {
-  margin-top: 1.25rem;
+  margin-top: 0;
+}
+
+.challenge-show-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  background: white;
+  color: #6367ff;
+  font-size: 0.825rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: 1.5px solid #6367ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.challenge-show-btn:hover {
+  background: #6367ff;
+  color: white;
 }
 
 .challenge-solution summary {
@@ -418,6 +508,7 @@ body {
 .challenge-solution-code {
   position: relative;
   margin-top: 0.75rem;
+  width: 100%;
 }
 
 .challenge-solution-code .challenge-solution pre {
@@ -447,4 +538,94 @@ body {
 .challenge-copy-btn:hover {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
+}
+
+.wiki-preview {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: #ffffff;
+}
+
+.wiki-preview-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.wiki-preview-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.wiki-preview-main {
+  flex: 1;
+}
+
+.wiki-preview-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  font-family: Georgia, serif;
+}
+
+.wiki-preview-hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 10px 0 14px;
+}
+
+.wiki-preview-text {
+  color: #334155;
+  line-height: 1.7;
+  font-size: 15px;
+  margin: 0;
+}
+
+.wiki-preview-sidebar {
+  width: 160px;
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wiki-preview-photo {
+  background: #f1f5f9;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.wiki-preview-facts {
+  padding: 10px 12px;
+}
+
+.wiki-preview-facts p {
+  font-size: 13px;
+  color: #334155;
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+.wiki-preview-facts p:last-child {
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .wiki-preview-body {
+    flex-direction: column;
+  }
+
+  .wiki-preview-sidebar {
+    width: 100%;
+  }
 }

@@ -1,0 +1,144 @@
+<div class="definition">
+    HTML tags are how you talk to the browser. You write them, the browser reads them, and it builds the page exactly
+    the way you described.
+</div>
+<p>You have opened plenty of websites up to now. Think about the last time you were curious about something. Maybe you
+    wanted to know about Scarlett Johansson. You typed her name into Google, clicked the Wikipedia page, and a whole
+    page loaded in front of you.</p>
+<p>You saw something like this on that page:</p>
+
+<ul>
+    <li>Her name in big bold letters at the very top</li>
+    <li>A short description right below it</li>
+    <li>Sections with titles like "Early Life" and "Career"</li>
+    <li>Paragraphs of text inside each section</li>
+    <li>A photo sitting neatly on the side</li>
+</ul>
+<p>Everything was in its place. Easy to scan. Easy to read.</p>
+<p>Every single thing you saw on that page was there because of HTML tags. The big bold name at the top was there
+    because of a tag. The paragraphs were there because of tags. The sections, the spacing, the structure of the whole
+    page — all of it came from tags.</p>
+<p>Without them the browser has no idea what to do. Let us prove that right now.</p>
+<h2>What Happens Without Tags</h2>
+<p>Say we want to write something about a fictional character called Nadia. Just plain text, no tags:</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        Nadia
+        Nadia is a software developer and coding teacher.
+        She has been building websites for over ten years.</template>
+</section>
+<p>The words are there on the screen. That means it is working. But take a closer look:</p>
+<ul>
+    <li>Everything is squished into one block</li>
+    <li>"Nadia" does not look like a title</li>
+    <li>The sentences sit right next to each other with no breathing room</li>
+    <li>It looks nothing like the Scarlett Johansson Wikipedia page</li>
+</ul>
+<p>It works, but it does not look right. It does not feel like a proper page at all.</p>
+<p>The browser does not know <code>Nadia</code> is a heading. It does not know the next lines are paragraphs. To the
+    browser it is all just text. And that is exactly why we need HTML tags.</p>
+<h2>Writing Your First Tag</h2>
+<p>Tags are written inside angle brackets like this:</p>
+<pre><code class="language-html">< ></code></pre>
+<p>If we want something to be a paragraph we use the paragraph tag. The paragraph tag is simply the letter
+    <code>p</code> inside angle brackets:
+</p>
+<pre><code class="language-html">&lt;p&gt;Your paragraph text here&lt;/p&gt;</code></pre>
+<p>Notice there are two parts:</p>
+<ul>
+    <li>The opening tag <code>&lt;p&gt;</code> — this is where the paragraph starts</li>
+    <li>The closing tag <code>&lt;/p&gt;</code> — this is where the paragraph ends</li>
+    <li>The only difference is the forward slash in the closing tag</li>
+</ul>
+<p>When the browser reads this it understands that everything between <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code>
+    is one paragraph. That is how it knows where it starts and where it ends.</p>
+<p>Let us wrap our text in <code>&lt;p&gt;</code> tags:</p>
+<section class="try-example">
+    <template class="try-default-html">Nadia
+        <p>Nadia is a software developer and coding teacher.</p>
+        <p>She has been building websites for over ten years.</p>
+    </template>
+</section>
+<div class="tip">
+    <span>💡</span>
+    <p>Click <strong>Try It Yourself</strong> to open the editor and experiment with the code.</p>
+</div>
+<p>The two paragraphs appear underneath each other. Clearly separated and easy to read, just like paragraphs in a book
+    or an article. Each one feels complete on its own.</p>
+<p>The paragraphs look great now. But "Nadia" at the top is still just plain text. It does not stand out the way a title
+    should. Let us fix that.</p>
+<h2>Making a Heading</h2>
+<p>For the main heading we use the <code>&lt;h1&gt;</code> tag. <code>h1</code> means heading 1. The number 1 is there
+    because it represents the most important heading on the page:</p>
+<pre><code class="language-html">&lt;h1&gt;Write Your Heading&lt;/h1&gt;</code></pre>
+<p>Let us add <code>&lt;h1&gt;</code> to Nadia:</p>
+<section class="try-example">
+    <template class="try-default-html">
+        <h1>Nadia</h1>
+        <p>Nadia is a software developer and coding teacher.</p>
+        <p>She has been building websites for over ten years.</p>
+    </template>
+</section>
+<p>It actually looks like a heading now. It is bigger, it is clear, and it naturally stands out from the paragraphs
+    below it. Everything feels more organized. The main heading at the top, the content underneath it, just the way we
+    expect a page to look.</p>
+<h2>Tags That Do Not Need Closing</h2>
+<p>Every tag you have written so far comes in pairs. One to open, one to close. That makes sense because
+    <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> wrap around content. The browser needs to know where that content
+    begins and where it ends.
+</p>
+<p>But some tags do not wrap around anything at all. You have probably seen this on Wikipedia pages. Right below the
+    main title there is a thin horizontal line separating it from the content below. To add that to your page use the
+    <code>&lt;hr&gt;</code> tag:
+</p>
+<pre><code class="language-html">&lt;hr&gt;</code></pre>
+<p>Let us add it to our page:</p>
+<pre><code class="language-html">&lt;h1&gt;Nadia&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;Nadia is a software developer and coding teacher.&lt;/p&gt;
+&lt;p&gt;She has been building websites for over ten years.&lt;/p&gt;</code></pre>
+<section class="try-example">
+    <template class="try-default-html">
+        <h1>Nadia</h1>
+        <hr>
+        <p>Nadia is a software developer and coding teacher.</p>
+        <p>She has been building websites for over ten years.</p>
+    </template>
+</section>
+<p>Here is why <code>&lt;hr&gt;</code> does not need a closing tag:</p>
+<ul>
+    <li>For a paragraph you tell the browser "from here to here, this is one paragraph"</li>
+    <li>For a heading, same thing</li>
+    <li>But a line is always just a line</li>
+    <li>It simply appears across the page</li>
+    <li>There is nothing inside it and nothing to mark the start or end of</li>
+</ul>
+<div class="tip">
+    <span>💡</span>
+    <p>Tags like <code>&lt;hr&gt;</code> are called <strong>self-closing tags</strong> or <strong>empty tags</strong>.
+        You will come across a few more of them as you keep going.</p>
+</div>
+<h2>Putting It All Together</h2>
+<p>Here is the complete Nadia page with everything from this lesson:</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <h1>Nadia</h1>
+        <hr>
+        <p>Nadia is a software developer and coding teacher.</p>
+        <p>She has been building websites for over ten years.</p>
+        <p>She started coding at the age of 15 and never looked back.</p>
+        <p>Today she helps thousands of beginners learn to build for the web.</p>
+    </template>
+</section>
+<p>Try editing it on your own. Put your name in the <code>&lt;h1&gt;</code> instead of Nadia. Write a few paragraphs
+    about yourself. Get used to the structure. The more you write it the more natural it feels.</p>
+<div class="challenge" data-title="Build a page about yourself"
+    data-description="Create a simple page about you. Add your name as the main heading, a line to divide the heading from the content, and at least three paragraphs about yourself."
+    data-checks="h1,hr,p" data-solution="&lt;h1&gt;Nadia&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;Nadia likes to learn.&lt;/p&gt;
+&lt;p&gt;She is passionate about teaching others.&lt;/p&gt;
+&lt;p&gt;She believes in the power of education to change lives.&lt;/p&gt;">
+</div>

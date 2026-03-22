@@ -24,6 +24,13 @@ export const htmlLessonGroups: LessonGroup[] = [
         difficulty: "Beginner",
       },
       {
+        slug: "tags",
+        title: "HTML Tags",
+        description: "Learn what HTML tags are, how they work, and the difference between opening, closing, and self-closing tags.",
+        readTime: "4 min read",
+        difficulty: "Beginner",
+      },
+      {
         slug: "headings-and-text",
         title: "Headings & Text",
         description: "Structure your content with headings, paragraphs, bold, italic, and other inline elements.",

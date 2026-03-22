@@ -33,8 +33,8 @@ function initChallenge(el: HTMLElement): void {
 
   // Build target srcdoc — wrap solution in a minimal document
   const targetSrc = hasCssTab
-    ? `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}${solution}</style></head><body>${starterHtml}</body></html>`
-    : `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}</style></head><body>${solution}</body></html>`;
+    ? `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;overflow:hidden;}${solution}</style></head><body>${starterHtml}</body></html>`
+    : `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;overflow:hidden;}</style></head><body>${solution}</body></html>`;
 
   el.innerHTML = `
     <div class="challenge-header">
@@ -44,21 +44,21 @@ function initChallenge(el: HTMLElement): void {
     <p class="challenge-desc">${escHtml(description)}</p>
     <div class="challenge-target">
       <span class="challenge-target-label">Target output</span>
-      <iframe class="challenge-target-frame" sandbox="allow-same-origin" referrerpolicy="no-referrer"></iframe>
+      <iframe class="challenge-target-frame" sandbox="allow-same-origin" referrerpolicy="no-referrer" scrolling="no"></iframe>
     </div>
     <section class="try-example" ${editorAttrs}></section>
-    <button class="challenge-check-btn" type="button">Check my answer</button>
+    <div class="challenge-actions">
+      <button class="challenge-check-btn" type="button">Check my answer</button>
+      <button class="challenge-show-btn" type="button">Show solution</button>
+    </div>
     <div class="challenge-result" style="display:none"></div>
-    <details class="challenge-solution">
-      <summary>Show solution</summary>
-      <div class="challenge-solution-code">
-        <button class="challenge-copy-btn" type="button">
-          ${COPY_ICON}
-          <span>Copy</span>
-        </button>
-        <pre><code class="language-${lang}">${escHtml(solution)}</code></pre>
-      </div>
-    </details>
+    <div class="challenge-solution-code" style="display:none">
+      <button class="challenge-copy-btn" type="button">
+        ${COPY_ICON}
+        <span>Copy</span>
+      </button>
+      <pre><code class="language-${lang}">${escHtml(solution)}</code></pre>
+    </div>
   `;
 
   // ── Target output iframe ──────────────────────────────────────────────────
@@ -73,11 +73,19 @@ function initChallenge(el: HTMLElement): void {
     } catch (_) { /* cross-origin guard */ }
   });
 
-  const checkBtn = el.querySelector<HTMLButtonElement>(".challenge-check-btn")!;
-  const resultDiv = el.querySelector<HTMLElement>(".challenge-result")!;
-  const copyBtn   = el.querySelector<HTMLButtonElement>(".challenge-copy-btn")!;
+  const checkBtn   = el.querySelector<HTMLButtonElement>(".challenge-check-btn")!;
+  const resultDiv  = el.querySelector<HTMLElement>(".challenge-result")!;
+  const showBtn    = el.querySelector<HTMLButtonElement>(".challenge-show-btn")!;
+  const solutionEl = el.querySelector<HTMLElement>(".challenge-solution-code")!;
+  const copyBtn    = el.querySelector<HTMLButtonElement>(".challenge-copy-btn")!;
+
+  showBtn.addEventListener("click", () => {
+    const open = solutionEl.style.display !== "none";
+    solutionEl.style.display = open ? "none" : "block";
+    showBtn.textContent = open ? "Show solution" : "Hide solution";
+  });
   const copyLbl   = copyBtn.querySelector("span")!;
-  const codeEl    = el.querySelector<HTMLElement>(".challenge-solution pre code")!;
+  const codeEl    = el.querySelector<HTMLElement>(".challenge-solution-code pre code")!;
 
   checkBtn.addEventListener("click", () => {
     // Use .try-example iframe to avoid matching the target preview iframe

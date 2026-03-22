@@ -3,6 +3,26 @@
 
   // ── Syntax highlighters ─────────────────────────────────────────────────
 
+  function dedent(str) {
+    var lines = str.replace(/\r\n/g, '\n').split('\n');
+    // remember whether content started inline with the opening tag (non-blank first line)
+    var inlineFirst = !!lines[0].trim();
+    // strip leading/trailing blank lines
+    while (lines.length && !lines[0].trim()) lines.shift();
+    while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+    // for inline-first templates compute min from line 2+ (line 1 has no formatter indent)
+    // for normal templates (blank first line) compute min from all lines
+    var startIdx = inlineFirst ? 1 : 0;
+    var min = Infinity;
+    for (var i = startIdx; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var indent = lines[i].match(/^(\s*)/)[1].length;
+      if (indent < min) min = indent;
+    }
+    if (min === Infinity) min = 0;
+    return lines.map(function (l, i) { return (i === 0 && inlineFirst) ? l : l.slice(min); }).join('\n');
+  }
+
   function escH(s) {
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
@@ -119,9 +139,9 @@
     var tplCss  = section.querySelector('template.try-default-css');
     var tplJs   = section.querySelector('template.try-default-js');
 
-    var HTML_DEFAULT = tplHtml ? tplHtml.innerHTML.trim() : (section.dataset.html || '');
-    var CSS_DEFAULT  = tplCss  ? tplCss.innerHTML.trim()  : (section.dataset.css  || '');
-    var JS_DEFAULT   = tplJs   ? tplJs.innerHTML.trim()   : (section.dataset.js   || '');
+    var HTML_DEFAULT = tplHtml ? dedent(tplHtml.innerHTML) : (section.dataset.html || '');
+    var CSS_DEFAULT  = tplCss  ? dedent(tplCss.innerHTML)  : (section.dataset.css  || '');
+    var JS_DEFAULT   = tplJs   ? dedent(tplJs.innerHTML)   : (section.dataset.js   || '');
 
     var hasCss    = tplCss !== null || section.hasAttribute('data-css');
     var hasJs     = tplJs  !== null || section.hasAttribute('data-js');
