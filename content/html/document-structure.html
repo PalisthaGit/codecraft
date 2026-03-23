@@ -1,82 +1,175 @@
 <div class="definition">
-  An HTML document has a specific structure that every browser expects. Understanding this structure is essential before you write a single line of content.
+  Every HTML page has the same basic structure. A head section for information about the page and a body section for
+  everything users actually see.
 </div>
 
-<p>When you open an HTML file in a browser, the browser parses it from top to bottom. It looks for specific elements to understand what the page is about, how to display it, and what content to show. Every HTML page follows the same skeleton.</p>
+<p>Up to this point you have been writing bits of HTML directly and that works fine for learning. But real web pages
+  need a proper structure. Without it the browser might still show your content but it is not professional and things
+  can go wrong.</p>
 
-<h2>The DOCTYPE Declaration</h2>
+<p>Think of it like writing an essay. You can just scribble sentences but it is always better when you have a title, an
+  introduction, and clear sections. HTML works the same way.</p>
 
-<p>The very first line of every HTML file should be the doctype declaration:</p>
+<h2>The Skeleton of Every HTML Page</h2>
 
-<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+<p>Every proper HTML page has the same basic skeleton. Every single one. Whether it is a simple practice page or a
+  massive website like Wikipedia, they all start with this.</p>
 
-<p>This tells the browser that the document uses modern HTML (HTML5). Without it, some browsers fall into "quirks mode" and may render your page differently than expected.</p>
-
-<h2>The HTML Element</h2>
-
-<p>Everything in your page lives inside the <code>&lt;html&gt;</code> element. The <code>lang</code> attribute tells the browser (and screen readers) what language the page is written in:</p>
-
-<pre><code>&lt;html lang="en"&gt;
-  ...
-&lt;/html&gt;</code></pre>
-
-<h2>The Head Section</h2>
-
-<p>The <code>&lt;head&gt;</code> contains information <em>about</em> the page — metadata that the browser needs but the user doesn't directly see.</p>
-
-<pre><code>&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Page Title&lt;/title&gt;
-&lt;/head&gt;</code></pre>
-
-<p>Key elements in the head:</p>
-<ul>
-  <li><code>&lt;meta charset="UTF-8"&gt;</code> — sets character encoding so special characters display correctly</li>
-  <li><code>&lt;meta name="viewport"&gt;</code> — ensures the page scales properly on mobile devices</li>
-  <li><code>&lt;title&gt;</code> — the text shown in the browser tab</li>
-</ul>
-
-<h2>The Body Section</h2>
-
-<p>The <code>&lt;body&gt;</code> contains everything the user actually sees — text, images, links, buttons, and more.</p>
-
-<pre><code>&lt;body&gt;
-  &lt;h1&gt;Welcome to My Site&lt;/h1&gt;
-  &lt;p&gt;This is a paragraph of text.&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-
-<h2>Putting It All Together</h2>
-
-<pre><code>&lt;!DOCTYPE html&gt;
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;My Page&lt;/title&gt;
+    &lt;!-- Information about the page --&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;Hello, World!&lt;/h1&gt;
-    &lt;p&gt;This is the body of my page.&lt;/p&gt;
+    &lt;!-- The content users see --&gt;
   &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Every HTML page you write should include the full structure above — DOCTYPE, html, head, and body. Think of it as the required template before you add any real content.</p>
-</div>
-
-<h2>Semantic Elements</h2>
-
-<p>HTML5 introduced semantic elements that describe the <em>role</em> of content, not just its appearance. Instead of using generic <code>&lt;div&gt;</code> elements everywhere, you can use:</p>
+<p>Let us break down what each part does.</p>
 
 <ul>
-  <li><code>&lt;header&gt;</code> — top of the page or section</li>
-  <li><code>&lt;nav&gt;</code> — navigation links</li>
-  <li><code>&lt;main&gt;</code> — the primary content of the page</li>
-  <li><code>&lt;footer&gt;</code> — bottom of the page</li>
-  <li><code>&lt;article&gt;</code> — a self-contained piece of content</li>
-  <li><code>&lt;section&gt;</code> — a thematic grouping of content</li>
+  <li><code>&lt;!DOCTYPE html&gt;</code> — tells the browser this is an HTML5 page</li>
+  <li><code>&lt;html&gt;</code> — wraps the entire document, everything lives inside it</li>
+  <li><code>&lt;head&gt;</code> — holds information about the page that users do not see directly</li>
+  <li><code>&lt;body&gt;</code> — the actual content users see, headings, paragraphs, images, everything</li>
 </ul>
 
-<p>Semantic HTML makes your pages more accessible to screen readers and easier for search engines to understand.</p>
+<h2>A Simple Example</h2>
+
+<p>Here is the smallest proper HTML page you can make.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <title>My First Page</title>
+    </head>
+
+    <body>
+      <p>Hello world!</p>
+    </body>
+
+    </html>
+  </template>
+</section>
+
+<p>The title shows up in the browser tab not on the page itself. The paragraph shows up on the page. That is the
+  difference between head and body.</p>
+
+<h2>DOCTYPE</h2>
+
+<p>This line goes at the very top of every HTML file.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;</code></pre>
+
+<p>It tells the browser "this file is written in HTML5." Without it the browser has to guess what version of HTML you
+  are using and sometimes it guesses wrong. Always include this at the very top.</p>
+
+<h2>The html Tag</h2>
+
+<p>This wraps the entire page. Everything else lives inside it.</p>
+
+<pre><code class="language-html">&lt;html lang="en"&gt;</code></pre>
+
+<p>The <code>lang="en"</code> attribute tells the browser, screen readers, and search engines that the page is in
+  English. If your page is in Spanish you would write <code>lang="es"</code>. It is a small detail but it matters for
+  accessibility and SEO.</p>
+
+<h2>The head Section</h2>
+
+<p>Think of the head as the settings of your page. Users do not see it directly but it is crucial. Here is what goes
+  inside it.</p>
+
+<pre><code class="language-html">&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta name="description" content="A page about Nadia, software engineer and educator."&gt;
+  &lt;meta name="author" content="Your Name"&gt;
+  &lt;title&gt;Nadia&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+
+<p>Let us go through each one.</p>
+
+<ul>
+  <li><code>&lt;meta charset="UTF-8"&gt;</code> — tells the browser what character set to use. UTF-8 supports pretty
+    much every language including emojis. Without it weird characters can show up instead of letters.</li>
+  <li><code>&lt;meta name="viewport" ...&gt;</code> — makes your page mobile friendly. Without it your site could look
+    squished or zoomed out on phones.</li>
+  <li><code>&lt;meta name="description" ...&gt;</code> — a short description of your page. Search engines use this in
+    search results under your link.</li>
+  <li><code>&lt;meta name="author" ...&gt;</code> — optional. Just credits you as the author of the page.</li>
+  <li><code>&lt;title&gt;</code> — shows up in the browser tab and is what search engines display as the clickable
+    headline in results.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The head is not visible on the page but it is what makes your page work properly on mobile, show up correctly in
+    search results, and display the right tab title.</p>
+</div>
+
+<h2>The body Section</h2>
+
+<p>Everything the user actually sees goes inside the body. All the things you have been learning up to this point go
+  here.</p>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1&gt;Nadia&lt;/h1&gt;
+  &lt;p&gt;Nadia is a software engineer and coding teacher.&lt;/p&gt;
+  &lt;img src="nadia.png" width="250" height="auto" alt="Photo of Nadia"&gt;
+&lt;/body&gt;</code></pre>
+
+<p>Headings, paragraphs, images, links, lists, tables, forms — all of it goes inside the body.</p>
+
+<h2>Putting It All Together</h2>
+
+<p>Here is a complete proper HTML page with everything in the right place.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="A page about Nadia, software engineer and educator.">
+      <title>Nadia</title>
+    </head>
+
+    <body>
+      <h1>Nadia</h1>
+      <p>Nadia is a software engineer and coding teacher.</p>
+      <p>She has been building websites for over ten years.</p>
+    </body>
+
+    </html>
+  </template>
+</section>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A quick way to remember the structure: DOCTYPE says what version of HTML you are using. The html tag is the box for
+    your whole page. The head is behind the scenes info. The body is everything people actually see.</p>
+</div>
+
+<div class="challenge" data-title="Build a proper HTML page"
+  data-description="Build a complete HTML page with the proper structure. Include DOCTYPE, html tag with a lang attribute, a head section with charset, viewport, description, and title, and a body section with an h1 heading, at least two paragraphs, and one image. Make it about yourself."
+  data-checks="head,body,title,meta" data-solution="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;A page about me.&quot;&gt;
+    &lt;title&gt;Your Name&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Your Name&lt;/h1&gt;
+    &lt;p&gt;First paragraph about you.&lt;/p&gt;
+    &lt;p&gt;Second paragraph about you.&lt;/p&gt;
+    &lt;img src=&quot;photo.jpg&quot; width=&quot;250&quot; height=&quot;auto&quot; alt=&quot;Photo of me&quot;&gt;
+  &lt;/body&gt;
+&lt;/html&gt;">
+</div>

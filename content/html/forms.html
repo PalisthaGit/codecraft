@@ -1,160 +1,218 @@
 <div class="definition">
-  The <strong>DOM</strong> (Document Object Model) is a JavaScript representation of your HTML page. It lets you read
-  and change HTML elements, attributes, and content from JavaScript code.
+  A form is a way for users to give information to a page. HTML gives us the <code>&lt;form&gt;</code> tag to wrap all
+  our inputs together.
 </div>
 
-<p>When a browser loads an HTML page, it creates a tree of objects representing every element. JavaScript can reach into
-  that tree, find elements, and modify them — that's how web pages become interactive.</p>
+<p>You have seen plenty of websites up to now.</p>
 
-<h2>Selecting Elements</h2>
+<p>Think about the last time you searched for something online. You clicked on a box, typed something in, and hit enter.
+  The site took what you typed and did something with it.</p>
 
-<p>The most common way to find an element is <code>querySelector</code>, which accepts any CSS selector:</p>
+<p>That is a form. A form is simply a way for you to give information and for the site to use that information to do
+  something.</p>
 
-<pre><code class="language-javascript">// Select the first matching element
-const heading = document.querySelector("h1");
-const button = document.querySelector(".btn");
-const input = document.querySelector("#email");
+<p>Take a look at this page for example.</p>
 
-// Select all matching elements (returns a NodeList)
-const paragraphs = document.querySelectorAll("p");</code></pre>
+<div class="wiki-preview">
+  <div class="wiki-preview-label">👀 Here is what you see on the page</div>
+  <div class="wiki-preview-body">
+    <div class="wiki-preview-main">
+      <h1 class="wiki-preview-title">Nadia</h1>
+      <hr class="wiki-preview-hr">
+      <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American software engineer, web developer,
+        educator, and content creator.</p>
+      <div style="margin-top:12px;">
+        <input type="text" placeholder="Search Wikipedia"
+          style="padding:6px 12px;border:1px solid #a2a9b1;border-radius:2px;width:200px;font-size:13px;">
+        <button
+          style="padding:7px 16px;background:#36c;color:white;border:none;cursor:pointer;border-radius:0 2px 2px 0;font-size:13px;">Search</button>
+      </div>
+    </div>
+    <div class="wiki-preview-sidebar">
+      <div class="wiki-preview-photo">
+        <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="wiki-preview-facts">
+        <p><strong>Born:</strong> 1988</p>
+        <p><strong>From:</strong> New York City</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2>Reading and Changing Content</h2>
+<p>See that search box at the bottom of the card? That is a form. You type something in, press search, and the page uses
+  what you typed to find results.</p>
 
-<pre><code class="language-javascript">const heading = document.querySelector("h1");
+<p>Let us learn how to build one.</p>
 
-// Read text content
-console.log(heading.textContent);   // "Hello, World!"
+<h2>The form Tag</h2>
 
-// Change text content
-heading.textContent = "Welcome to CodingBanana";</code></pre>
+<p>All HTML forms are wrapped inside a <code>&lt;form&gt;</code> tag. That is the container. Inside it you decide what
+  kind of inputs you want.</p>
 
-<pre><code class="language-javascript">// innerHTML lets you set HTML, not just text
-const container = document.querySelector(".container");
-container.innerHTML = "&lt;p&gt;New &lt;strong&gt;content&lt;/strong&gt;&lt;/p&gt;";</code></pre>
+<p>To create a text box you use the <code>&lt;input&gt;</code> tag with <code>type="text"</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <input type="text">
+    </form>
+  </template>
+</section>
+
+<p>But if you look at a real search box there is usually some grey hint text inside it. That is called a placeholder.
+  You add it with the <code>placeholder</code> attribute.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <input type="text" placeholder="Search Wikipedia">
+    </form>
+  </template>
+</section>
+
+<p>Now the box shows that hint text until the user starts typing.</p>
+
+<h2>Adding a Submit Button</h2>
+
+<p>Now let us add a button so the user can actually submit the form. For that you use another <code>&lt;input&gt;</code>
+  but this time with <code>type="submit"</code>. You can give it a label using the <code>value</code> attribute.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <input type="text" placeholder="Search Wikipedia">
+      <input type="submit" value="Search">
+    </form>
+  </template>
+</section>
+
+<p>Now you have a text box where the user can type, a placeholder that guides them, and a button that lets them send the
+  form.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>Prefer <code>textContent</code> over <code>innerHTML</code> when you're inserting plain text.
-    <code>innerHTML</code> parses HTML, which can be a security risk if the content comes from user input.
-  </p>
+  <p>For now this form will not actually search anything or send data anywhere. That requires a backend. The goal here
+    is just to learn how to build the form itself.</p>
 </div>
 
-<h2>Changing Styles</h2>
+<h2>Radio Buttons</h2>
 
-<pre><code class="language-javascript">const box = document.querySelector(".box");
+<p>Sometimes instead of letting users type freely you want to give them a fixed set of options to choose from. That is
+  where radio buttons come in. The user can only pick one option at a time.</p>
 
-// Set individual styles
-box.style.backgroundColor = "#6367ff";
-box.style.padding = "1rem";
-box.style.borderRadius = "12px";</code></pre>
+<p>Each radio button needs three things:</p>
 
-<h2>Working with Classes</h2>
+<ul>
+  <li><code>type="radio"</code> — tells the browser this is a radio button</li>
+  <li><code>name="group-name"</code> — groups them together so only one can be selected</li>
+  <li><code>value="something"</code> — the value that gets saved when selected</li>
+</ul>
 
-<p>The <code>classList</code> API is the cleanest way to toggle styles by adding and removing CSS classes:</p>
-
-<pre><code class="language-javascript">const card = document.querySelector(".card");
-
-card.classList.add("active");       // add a class
-card.classList.remove("active");    // remove a class
-card.classList.toggle("active");    // add if missing, remove if present
-card.classList.contains("active");  // returns true or false</code></pre>
-
-<h2>Changing Attributes</h2>
-
-<pre><code class="language-javascript">const link = document.querySelector("a");
-
-link.getAttribute("href");              // read an attribute
-link.setAttribute("href", "/about");    // set an attribute
-link.removeAttribute("target");         // remove an attribute</code></pre>
-
-<h2>Event Listeners</h2>
-
-<p>Events are how you respond to user actions — clicks, keypresses, form submissions, and more:</p>
-
-<pre><code class="language-javascript">const button = document.querySelector("button");
-
-button.addEventListener("click", function() {
-  console.log("Button clicked!");
-});</code></pre>
-
-<p>Using an arrow function:</p>
-
-<pre><code class="language-javascript">button.addEventListener("click", () => {
-  button.textContent = "Clicked!";
-  button.style.backgroundColor = "#4ade80";
-});</code></pre>
-
-<h2>The Event Object</h2>
-
-<p>The callback receives an event object with details about what happened:</p>
-
-<pre><code class="language-javascript">document.addEventListener("keydown", (event) => {
-  console.log(event.key);   // the key that was pressed
-});
-
-const form = document.querySelector("form");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();   // stop the page from reloading
-  console.log("Form submitted!");
-});</code></pre>
-
-<h2>Creating and Inserting Elements</h2>
-
-<pre><code class="language-javascript">// Create a new element
-const item = document.createElement("li");
-item.textContent = "New item";
-
-// Add it to the page
-const list = document.querySelector("ul");
-list.appendChild(item);</code></pre>
-
-<h2>Removing Elements</h2>
-
-<pre><code class="language-javascript">const element = document.querySelector(".remove-me");
-element.remove();</code></pre>
-
-<h2>Try It Yourself</h2>
-
-<p>Click the button below and edit the HTML, CSS, and JS to see live output:</p>
+<div class="tip">
+  <span>💡</span>
+  <p>Same <code>name</code> means same group. Only one option in the group can be picked at a time.</p>
+</div>
 
 <section class="try-example">
-
   <template class="try-default-html">
-    <div class="box">
-      <h2 id="title">Hello, DOM!</h2>
-      <p id="desc">Click the button below.</p>
-      <button id="btn">Change Text</button>
-    </div>
+    <form>
+      <p><strong>Text size</strong></p>
+      <input type="radio" name="text-size" value="small"> Small <br>
+      <input type="radio" name="text-size" value="standard" checked> Standard <br>
+      <input type="radio" name="text-size" value="large"> Large
+    </form>
   </template>
-
-  <template class="try-default-css">.box {
-  font-family: sans-serif;
-  padding: 1.5rem;
-  max-width: 320px;
-  border-radius: 12px;
-  border: 1.5px solid #e5e7eb;
-}
-h2 { color: #0f172a; margin: 0 0 8px; }
-p  { color: #64748b; margin: 0 0 12px; }
-button {
-  background: #6367ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 18px;
-  cursor: pointer;
-  font-weight: 700;
-}</template>
-
-  <template class="try-default-js">var btn   = document.getElementById('btn');
-var title = document.getElementById('title');
-var desc  = document.getElementById('desc');
-
-btn.addEventListener('click', function () {
-  title.textContent = 'Text Changed!';
-  desc.textContent  = 'The DOM was updated by JavaScript.';
-  btn.textContent   = 'Click again';
-  btn.style.background = '#22c55e';
-});</template>
-
 </section>
+
+<h2>Dropdown</h2>
+
+<p>Sometimes you want a neat menu where the user clicks and chooses from a list. That is a dropdown. Instead of showing
+  all options at once like radio buttons you put them in one tidy menu.</p>
+
+<p>You use two tags together. <code>&lt;select&gt;</code> creates the dropdown box and <code>&lt;option&gt;</code> is
+  each choice inside it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <p><strong>Select your country</strong></p>
+      <select name="country">
+        <option>United States</option>
+        <option>India</option>
+        <option>United Kingdom</option>
+      </select>
+    </form>
+  </template>
+</section>
+
+<h2>Textarea</h2>
+
+<p>A regular text box is perfect for short input like a name or a search term. But what if you want the user to write
+  more? A comment, some feedback, or a longer answer.</p>
+
+<p>That is where <code>&lt;textarea&gt;</code> comes in. It creates a bigger box where users can type multiple lines.
+  You control the size with <code>rows</code> and <code>cols</code> attributes.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <p><strong>Leave your feedback</strong></p>
+      <textarea rows="4" cols="40"></textarea>
+    </form>
+  </template>
+</section>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>&lt;input type="text"&gt;</code> is for one line only. <code>&lt;textarea&gt;</code> lets users type multiple
+    lines and even expand the box.</p>
+</div>
+
+<h2>The action Attribute</h2>
+
+<p>In real forms you will usually see a <code>action</code> attribute on the <code>&lt;form&gt;</code> tag. This tells
+  the form where to send the data when the user clicks submit.</p>
+
+<pre><code class="language-html">&lt;form action="/submit"&gt;
+  &lt;input type="text"&gt;
+  &lt;input type="submit" value="Send"&gt;
+&lt;/form&gt;</code></pre>
+
+<p>When the user clicks Send the browser sends all the form data to that location. That could be a page, a file, or a
+  server.</p>
+
+<p>If you are just learning and do not have a backend yet that is completely fine. You can leave the action empty or
+  leave it out entirely and the form will still work for building and testing.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Leave <code>action=""</code> or just use <code>&lt;form&gt;</code> without an action while you are learning. You
+    can always add the real destination later.</p>
+</div>
+
+<div class="challenge" data-title="Build a profile form"
+  data-description="Build a form about yourself. Add a text input for your name with a placeholder. Add radio buttons for your experience level with at least three options like Beginner, Intermediate, and Advanced. Add a dropdown for your favourite programming language with at least three options. And add a textarea where you can write a short bio about yourself. Finish with a submit button."
+  data-checks="form,input,select,option,textarea" data-solution="&lt;form&gt;
+  &lt;p&gt;&lt;strong&gt;Your name&lt;/strong&gt;&lt;/p&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Enter your name&quot;&gt;
+
+  &lt;p&gt;&lt;strong&gt;Experience level&lt;/strong&gt;&lt;/p&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;beginner&quot;&gt; Beginner &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;intermediate&quot;&gt; Intermediate &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;advanced&quot;&gt; Advanced
+
+  &lt;p&gt;&lt;strong&gt;Favourite language&lt;/strong&gt;&lt;/p&gt;
+  &lt;select name=&quot;language&quot;&gt;
+    &lt;option&gt;HTML&lt;/option&gt;
+    &lt;option&gt;CSS&lt;/option&gt;
+    &lt;option&gt;JavaScript&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;p&gt;&lt;strong&gt;About you&lt;/strong&gt;&lt;/p&gt;
+  &lt;textarea rows=&quot;4&quot; cols=&quot;40&quot; placeholder=&quot;Write a short bio&quot;&gt;&lt;/textarea&gt;
+
+  &lt;br&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;">
+</div>

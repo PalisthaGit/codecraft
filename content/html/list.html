@@ -1,0 +1,199 @@
+<div class="definition">
+    HTML gives us two types of lists. An unordered list for bullet points and an ordered list for numbers or letters.
+    Both use the same <code>&lt;li&gt;</code> tag for each item inside.
+</div>
+
+<p>You have seen plenty of websites up to now.</p>
+
+<p>Have you ever noticed how some pages group things together like this?</p>
+
+<div class="wiki-preview">
+    <div class="wiki-preview-label">👀 Here is what you see on the page</div>
+    <div class="wiki-preview-body">
+        <div class="wiki-preview-main">
+            <h1 class="wiki-preview-title">Nadia</h1>
+            <hr class="wiki-preview-hr">
+            <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American software engineer, web
+                developer, educator, and content creator.</p>
+            <h2
+                style="font-size:16px;margin-top:12px;margin-bottom:6px;border-bottom:1px solid #e2e8f0;padding-bottom:4px;">
+                See Also</h2>
+            <ul style="margin:6px 0 0 20px;font-size:14px;color:#334155;">
+                <li>List of top web development educators</li>
+                <li>List of YouTube channels for learning HTML</li>
+                <li>List of free coding resources online</li>
+            </ul>
+            <h2
+                style="font-size:16px;margin-top:12px;margin-bottom:6px;border-bottom:1px solid #e2e8f0;padding-bottom:4px;">
+                References</h2>
+            <ol style="margin:6px 0 0 20px;font-size:14px;color:#334155;">
+                <li>Tech Education Journal. 2023.</li>
+                <li>Digital Learning Today. 2024.</li>
+                <li>Silicon Valley Times. 2021.</li>
+            </ol>
+        </div>
+        <div class="wiki-preview-sidebar">
+            <div class="wiki-preview-photo">
+                <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+            </div>
+            <div class="wiki-preview-facts">
+                <p style="text-align:center;font-style:italic;font-size:12px;color:#54595d;margin:8px 0 0;">Nadia in
+                    2025</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>See those two sections at the bottom of the card. One has bullet points, the other has numbers. Those are lists. And
+    they are everywhere. Ingredients in a recipe. Steps in a tutorial. References on a page. Any time you have a group
+    of related items a list is the right tool.</p>
+
+<p>Let us learn how to build both.</p>
+
+<h2>Unordered List</h2>
+
+<p>For a bulleted list you use the <code>&lt;ul&gt;</code> tag. <code>ul</code> stands for unordered list.</p>
+
+<p>Inside it you put each item wrapped in an <code>&lt;li&gt;</code> tag. <code>li</code> stands for list item.</p>
+
+<p>Think of <code>&lt;ul&gt;</code> as the container and each <code>&lt;li&gt;</code> as one item sitting inside it.</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <h2>See Also</h2>
+        <hr>
+        <ul>
+            <li>List of top web development educators</li>
+            <li>List of YouTube channels for learning HTML</li>
+            <li>List of free coding resources online</li>
+        </ul>
+    </template>
+</section>
+
+<p>Each item gets a bullet point automatically. You did not add any styling. The browser just knows that is how a
+    <code>&lt;ul&gt;</code> looks.
+</p>
+
+<h2>Ordered List</h2>
+
+<p>Sometimes you want items to be numbered instead of bulleted. Maybe it is a set of steps or a ranking. That is where
+    an ordered list comes in.</p>
+
+<p>The only difference is you use <code>&lt;ol&gt;</code> instead of <code>&lt;ul&gt;</code>. The
+    <code>&lt;li&gt;</code> tags stay exactly the same inside.
+</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <h2>References</h2>
+        <hr>
+        <ol>
+            <li>Tech Education Journal. 2023.</li>
+            <li>Digital Learning Today. 2024.</li>
+            <li>Silicon Valley Times. 2021.</li>
+        </ol>
+    </template>
+</section>
+
+<p>Swap <code>&lt;ul&gt;</code> for <code>&lt;ol&gt;</code> and your list goes from bullets to numbers. That is
+    literally all there is to it.</p>
+
+<h2>Types of Unordered Lists</h2>
+
+<p>You can also change what the bullet looks like. By default it is a filled circle but you can change it with the
+    <code>type</code> attribute.
+</p>
+
+<ul>
+    <li><code>type="disc"</code> — filled circle, this is the default</li>
+    <li><code>type="circle"</code> — hollow circle</li>
+    <li><code>type="square"</code> — filled square</li>
+</ul>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <ul type="disc">
+            <li>Disc — filled circle</li>
+        </ul>
+        <ul type="circle">
+            <li>Circle — hollow circle</li>
+        </ul>
+        <ul type="square">
+            <li>Square — filled square</li>
+        </ul>
+    </template>
+</section>
+
+<div class="tip">
+    <span>💡</span>
+    <p>In practice most people change bullet styles using CSS rather than the <code>type</code> attribute. But it is
+        good to know it exists.</p>
+</div>
+
+<h2>Types of Ordered Lists</h2>
+
+<p>The <code>type</code> attribute works on ordered lists too. You can use letters or Roman numerals instead of numbers.
+</p>
+
+<ul>
+    <li><code>type="1"</code> — numbers, this is the default</li>
+    <li><code>type="a"</code> — lowercase letters, a, b, c</li>
+    <li><code>type="A"</code> — uppercase letters, A, B, C</li>
+    <li><code>type="i"</code> — lowercase Roman numerals, i, ii, iii</li>
+    <li><code>type="I"</code> — uppercase Roman numerals, I, II, III</li>
+</ul>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <ol type="1">
+            <li>Numbers — 1, 2, 3</li>
+        </ol>
+        <ol type="a">
+            <li>Lowercase letters — a, b, c</li>
+        </ol>
+        <ol type="A">
+            <li>Uppercase letters — A, B, C</li>
+        </ol>
+        <ol type="i">
+            <li>Lowercase Roman numerals — i, ii, iii</li>
+        </ol>
+        <ol type="I">
+            <li>Uppercase Roman numerals — I, II, III</li>
+        </ol>
+    </template>
+</section>
+
+<p>Most of the time you will only ever use numbers and letters. But it is good to know the others exist.</p>
+
+<div class="tip">
+    <span>💡</span>
+    <p>In practice most people change list styles using CSS rather than the <code>type</code> attribute. But it is good
+        to know it exists.</p>
+</div>
+
+<div class="challenge" data-title="Build your own profile with lists"
+    data-description="Time to build something about you. Add a Skills section with an unordered list of things you know or are learning. Then add a Career section with an ordered list of things you have done or want to do. Then add a Courses section with an ordered list using uppercase letters of three things you want to learn. Make it feel like a real profile about yourself."
+    data-checks="ul,ol,li" data-solution="&lt;h2&gt;Skills&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Career&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+  &lt;li&gt;Started learning to code&lt;/li&gt;
+  &lt;li&gt;Built my first webpage&lt;/li&gt;
+  &lt;li&gt;Working towards my first dev job&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Courses&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ol type=&quot;A&quot;&gt;
+  &lt;li&gt;HTML for Beginners&lt;/li&gt;
+  &lt;li&gt;CSS Fundamentals&lt;/li&gt;
+  &lt;li&gt;JavaScript Basics&lt;/li&gt;
+&lt;/ol&gt;">
+</div>

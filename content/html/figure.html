@@ -1,0 +1,111 @@
+<div class="definition">
+    The <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> tags let you group an image with its caption so
+    the browser understands they belong together.
+</div>
+
+<p>You have seen plenty of websites up to now.</p>
+
+<p>You must have noticed that images on pages usually have a small line of text right underneath them.</p>
+
+<div class="wiki-preview">
+    <div class="wiki-preview-label">👀 Here is what you see on the page</div>
+    <div class="wiki-preview-body">
+        <div class="wiki-preview-main">
+            <h1 class="wiki-preview-title">Nadia</h1>
+            <hr class="wiki-preview-hr">
+            <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American software engineer, web
+                developer,
+                educator, and content creator. With over 10 years of professional experience in web development, she has
+                become
+                one of the most influential voices in tech education.</p>
+        </div>
+        <div class="wiki-preview-sidebar">
+            <div class="wiki-preview-photo">
+                <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+            </div>
+            <div class="wiki-preview-facts">
+                <p style="text-align:center;font-style:italic;font-size:12px;color:#54595d;margin:8px 0 0;">Nadia in
+                    2025</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>See that text right under the photo? That small line is called a caption. It tells you what you are looking at
+    without you having to guess.</p>
+
+<p>And you can add one to your images too.</p>
+
+<h2>The Simple Way</h2>
+
+<p>The quickest way to add a caption is to just drop a <code>&lt;p&gt;</code> tag right after your image.</p>
+
+<section class="try-example">
+    <template class="try-default-html"><img src="nadia.png" width="250" height="auto" alt="Photo of Nadia">
+        <p>Nadia in 2025</p>
+    </template>
+</section>
+
+<p>It works fine. The text shows up under the image and it looks like a caption.</p>
+
+<p>But there is a problem. The browser has no idea that paragraph belongs to the image. To the browser they are just two
+    separate things sitting next to each other. An image and then some random text.</p>
+
+<p>HTML actually has special tags built exactly for this. Let us look at those instead.</p>
+
+<h2>The Better Way — figure and figcaption</h2>
+
+<p>HTML gives us two tags that work together: <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code>.</p>
+
+<p>Think of <code>&lt;figure&gt;</code> as a little box that groups the image and its caption together as one thing. And
+    <code>&lt;figcaption&gt;</code> is the caption that sits inside that box.
+</p>
+
+<p>Let us see it in action.</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <figure>
+            <img src="nadia.png" width="250" height="auto" alt="Photo of Nadia">
+            <figcaption>Nadia in 2025</figcaption>
+        </figure>
+    </template>
+</section>
+<p>The image and the caption are now properly tied together. The browser understands they belong to each other. Search
+    engines understand it. Screen readers understand it.</p>
+
+
+
+<p>It is not just about how it looks. It is about what it means.</p>
+
+<h2>Why Does This Matter</h2>
+
+<p>You might wonder why bother with <code>&lt;figure&gt;</code> when the image already shows up fine on its own.</p>
+
+<p>The reason is that <code>&lt;figure&gt;</code> adds meaning, not just presentation.</p>
+
+<p>With <code>&lt;img&gt;</code> alone the browser only knows it is an image. If you put a <code>&lt;p&gt;</code> after
+    it the browser just sees some text. It has no idea the two are connected.</p>
+
+<p>With <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> everything changes. The browser, search engines,
+    and screen readers all understand that the text is the caption for that specific image. They belong together and the
+    code makes that clear.</p>
+
+<div class="tip">
+    <span>💡</span>
+    <p>Using <code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> is not strictly required but it is the
+        right
+        way to do it. It makes your code more meaningful and accessible.</p>
+</div>
+
+<div class="challenge" data-title="Add a captioned image to your page"
+    data-description="Go to unsplash.com and find any free image you like. Copy the image address and add it to your page inside a figure tag. Set the width to 300 and height to auto. Then add a figcaption underneath describing what the image shows. Make it feel like something you would see on a real page."
+    data-checks="figure,figcaption,img" data-solution="&lt;figure&gt;
+  &lt;img
+    src=&quot;https://images.unsplash.com/photo-example.jpg&quot;
+    width=&quot;300&quot;
+    height=&quot;auto&quot;
+    alt=&quot;A short description of the image&quot;&gt;
+  &lt;figcaption&gt;A short caption describing the image&lt;/figcaption&gt;
+&lt;/figure&gt;">
+</div>
