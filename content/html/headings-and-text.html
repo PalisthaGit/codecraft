@@ -1,116 +1,108 @@
 <div class="definition">
-  HTML is the language used to create web pages. It tells the browser what each thing on the page is.
+  The <code>&lt;abbr&gt;</code> tag lets you add extra information to any text on your page. When someone hovers over
+  it, a small tooltip appears with the details you added.
 </div>
 
-<p>Every website you have ever visited, from Wikipedia to YouTube to Google, started with the same thing.</p>
+<p>You have probably seen this before without even noticing it.</p>
 
-<p>One simple language called HTML.</p>
+<p>You are reading something on a website and you hover over a word or phrase. A small popup appears with a little extra
+  information. You did not click anything. You did not go anywhere. You just moved your mouse over it and something
+  showed up.</p>
 
-<p>By the end of this lesson you will understand exactly how it works and why every single webpage on the internet is
-  built on it.</p>
-
-<h2>Let's Start With Something You Already Know</h2>
-
-<p>Open a browser. You know what a browser is. Chrome, Firefox, Safari. That app you use to go on the internet.</p>
-
-<p>Now imagine you search for Scarlett Johansson and click on her Wikipedia page. Go ahead and actually do it if you
-  want. Take a second and just look at what is on that screen.</p>
+<p>Try hovering over her name in the card below and see what happens.</p>
 
 <div class="wiki-preview">
-  <div class="wiki-preview-label">👀 Here is what you see on her Wikipedia page</div>
+  <div class="wiki-preview-label">👀 Here is what you see on the Wikipedia page</div>
   <div class="wiki-preview-body">
     <div class="wiki-preview-main">
-      <h1 class="wiki-preview-title">Scarlett Johansson</h1>
+      <h1 class="wiki-preview-title"><abbr
+          title="Nadia is a software engineer, web developer, and coding teacher with over 10 years of experience.">Nadia</abbr>
+      </h1>
       <hr class="wiki-preview-hr">
-      <p class="wiki-preview-text">Scarlett Ingrid Johansson (born November 22, 1984) is an American actress and singer.
-        Her films as a leading actress have grossed over $15.1 billion worldwide, making her the highest-grossing lead
-        actor in history.</p>
+      <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American software engineer, web developer,
+        educator, and content creator. With over 10 years of professional experience in web development, she has become
+        one of the most influential voices in tech education.</p>
     </div>
     <div class="wiki-preview-sidebar">
-      <div class="wiki-preview-photo">📷</div>
+      <div class="wiki-preview-photo">
+        <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+      </div>
       <div class="wiki-preview-facts">
-        <p><strong>Born:</strong> Nov 22, 1984</p>
+        <p><strong>Born:</strong> 1988</p>
         <p><strong>From:</strong> New York City</p>
+        <p><strong>Known for:</strong> Web dev education</p>
       </div>
     </div>
   </div>
 </div>
 
-<p>Everything is organized. Everything is in its place. Nothing is randomly thrown on the screen.</p>
+<p>That little popup is called a tooltip. And you can add one to any text on your page with just one tag.</p>
 
-<p>Now here is the question nobody really stops to think about.</p>
+<h2>The abbr Tag</h2>
 
-<p>How does the browser know to put the title at the top? How does it know the photo goes on the right? How does it even
-  know what is a heading and what is just a paragraph of text?</p>
+<p>Here is what it looks like:</p>
 
-<p>That is exactly what we are going to figure out right now.</p>
+<pre><code class="language-html">&lt;abbr title="Software engineer and coding teacher"&gt;Nadia&lt;/abbr&gt;</code></pre>
 
-<h2>A Webpage Has Three Layers</h2>
-
-<p>Every single webpage you have ever visited is made up of three different things working together.</p>
-
-<p>Let me give you an analogy that actually makes sense.</p>
-
-<p>Think about building a house.</p>
-
-<p>First you lay the foundation and put up the walls. The structure. Without this nothing else can exist. You cannot
-  paint a wall that does not exist. Then once the structure is there you paint it, add furniture, make it look nice. And
-  then finally you add the things that actually do something. Light switches. Plugs. A doorbell.</p>
-
-<p>Webpages work the exact same way.</p>
+<p>Two things are happening here:</p>
 
 <ul>
-  <li><strong>HTML</strong> is the structure. The walls and the floors. It tells the browser what everything on the page
-    is. This is a heading. This is a paragraph. This is an image. This is a link. Without HTML there is nothing.</li>
-  <li><strong>CSS</strong> is the paint and the furniture. It controls how everything looks. Colors, font sizes,
-    spacing, layout. If HTML says "this is a heading," CSS decides how big it looks, what color it is, and exactly where
-    it sits on the screen.</li>
-  <li><strong>JavaScript</strong> is the light switches. It makes things interactive. When you click a button and
-    something happens, when you toggle dark mode and the whole page changes instantly, when you type in a search bar and
-    results start appearing as you type — that is JavaScript.</li>
+  <li><code>&lt;abbr&gt;</code> is the tag that wraps around the text</li>
+  <li><code>title</code> is an attribute that holds the tooltip text</li>
+  <li>The value inside the quotes is what actually appears in the tooltip when someone hovers</li>
 </ul>
 
-<p>Every website you have ever used has all three of these working together. Wikipedia, YouTube, Instagram, Google. All
-  of them. Built on the same foundation every single time.</p>
+<h2>What is an Attribute</h2>
 
-<p>And that foundation is always HTML.</p>
+<p>This is a good moment to talk about attributes properly. You have seen them before with <code>src</code> on images.
+  But let us make sure the idea is clear.</p>
 
-<h2>So What Actually is HTML</h2>
+<p>A tag is the basic instruction. It tells the browser what something is.</p>
 
-<p>HTML stands for HyperText Markup Language.</p>
+<p>An attribute is extra information you add to that tag. It changes how the tag behaves or what it shows.</p>
 
-<p>Do not let that name put you off. It sounds more complicated than it is.</p>
+<p>Think of it like ordering coffee. The tag is "coffee." The attributes are "large, oat milk, no sugar." The tag tells
+  the browser what you want. The attributes tell it exactly how you want it.</p>
 
-<p>Think of HTML as a labeling system. You write some content and you put a label around it that tells the browser what
-  that content is. Those labels are called tags.</p>
+<p>In our case:</p>
 
 <ul>
-  <li>If something is a heading you put it inside a heading tag</li>
-  <li>If something is a paragraph you put it inside a paragraph tag</li>
-  <li>The browser reads those tags and knows exactly what to do with everything</li>
+  <li><code>&lt;abbr&gt;</code> is the tag</li>
+  <li><code>title="..."</code> is the attribute</li>
+  <li>The value inside the quotes is what actually appears in the tooltip</li>
 </ul>
-
-<p>Without tags the browser just sees a wall of plain text. No structure. No headings. No organization. Everything runs
-  together in one messy block and nothing looks the way it should.</p>
-
-<p>With tags everything falls into place.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>Tags are the core idea behind HTML. Everything else you learn builds on top of this one concept.</p>
+  <p>Attributes are always written inside the opening tag. You can learn more in the <a href="/html/attributes">HTML
+      Attributes</a> article.</p>
 </div>
 
-<h2>Why HTML Always Comes First</h2>
+<h2>Adding a Tooltip to the Nadia Page</h2>
 
-<p>Here is something worth remembering.</p>
+<p>Let us add one to the Nadia page. Say we want to show a little extra info when someone hovers over "New York City":
+</p>
 
-<p>You cannot style something with CSS until HTML has defined what it is. You cannot make something interactive with
-  JavaScript until HTML has actually put it on the page.</p>
+<section class="try-example">
+  <template class="try-default-html">
+    <p>She was born in <abbr title="The most populous city in the United States">New York City</abbr> and started coding
+      at the age of 15.</p>
+  </template>
+</section>
 
-<p>Everything starts with HTML. Always.</p>
+<p>Or on her name at the very top of the page:</p>
 
-<p>That is why it is called the foundation. Not because it is the flashiest part, it definitely is not. But because
-  without it nothing else works.</p>
+<section class="try-example">
+  <template class="try-default-html">
+    <h1><abbr title="Software engineer, web developer, and coding teacher">Nadia</abbr></h1>
+  </template>
+</section>
 
-<p>In the next lesson we will set everything up and write our very first HTML code step by step. By the end of it you
-  will have a real webpage running right there in your own browser.</p>
+<p>Hover over the text and the tooltip pops up. Clean, subtle, and really useful when you want to add context without
+  cluttering the page.</p>
+
+<div class="challenge" data-title="Add a tooltip to your profile"
+  data-description="Go back to the profile page you built earlier. Add a paragraph about yourself and wrap your name in an abbr tag. Add a title attribute that shows something about you when someone hovers over it. Something like your job, what you are learning, or what you want to build. Make it feel like a real profile."
+  data-checks="abbr,p" data-solution="&lt;h1&gt;&lt;abbr title=&quot;Aspiring web developer learning HTML and CSS&quot;&gt;Your Name&lt;/abbr&gt;&lt;/h1&gt;
+&lt;p&gt;I am currently learning web development and building my first projects.&lt;/p&gt;">
+</div>

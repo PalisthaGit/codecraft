@@ -38,6 +38,20 @@ export const htmlLessonGroups: LessonGroup[] = [
         difficulty: "Beginner",
       },
       {
+        slug: "headings",
+        title: "Headings",
+        description: "Learn how HTML headings give your page structure and why the order matters.",
+        readTime: "6 min read",
+        difficulty: "Beginner",
+      },
+      {
+        slug: "abbr",
+        title: "Tooltips & Abbreviations",
+        description: "Use the abbr tag to add hover tooltips and learn how attributes give extra information to HTML tags.",
+        readTime: "5 min read",
+        difficulty: "Beginner",
+      },
+      {
         slug: "lists",
         title: "Lists",
         description: "Organise content with unordered, ordered, and description lists — and nest them too.",

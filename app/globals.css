@@ -320,6 +320,13 @@ body {
     border-radius: 0;
     overflow: hidden;
   }
+
+  .html-content pre {
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: 0.8rem;
+  }
 }
 
 .challenge-header {
