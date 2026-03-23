@@ -1,46 +1,111 @@
 <div class="definition">
-  HTML stands for <strong>HyperText Markup Language</strong>. It is the standard language used to create and structure content on the web.
+  HTML is the language used to create web pages. It tells the browser what each thing on the page is.
 </div>
 
-<p>Every web page you've ever visited — news articles, social media profiles, online shops — is built with HTML at its core. HTML is not a programming language; it's a <strong>markup language</strong>. That means it describes the structure and meaning of content, not logic or behavior.</p>
+<p>Every website you have ever visited, from Wikipedia to YouTube to Google, started with the same thing.</p>
 
-<h2>What Does HTML Do?</h2>
+<p>One simple language called HTML.</p>
 
-<p>HTML uses <strong>elements</strong> (also called tags) to wrap around content and give it meaning. For example, wrapping text in a <code>&lt;p&gt;</code> tag tells the browser "this is a paragraph." Wrapping text in an <code>&lt;h1&gt;</code> tag says "this is the main heading."</p>
+<p>By the end of this lesson you will understand exactly how it works and why every single webpage on the internet is
+  built on it.</p>
 
-<p>The browser reads your HTML and turns it into the visual page you see. It knows that a heading should look bigger than a paragraph, that a list should have bullet points, and that a link should be clickable.</p>
+<h2>Let's Start With Something You Already Know</h2>
 
-<h2>Your First HTML Element</h2>
+<p>Open a browser. You know what a browser is. Chrome, Firefox, Safari. That app you use to go on the internet.</p>
 
-<p>An HTML element has three parts: an opening tag, the content, and a closing tag.</p>
+<p>Now imagine you search for Scarlett Johansson and click on her Wikipedia page. Go ahead and actually do it if you
+  want. Take a second and just look at what is on that screen.</p>
 
-<pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+<div class="wiki-preview">
+  <div class="wiki-preview-label">👀 Here is what you see on her Wikipedia page</div>
+  <div class="wiki-preview-body">
+    <div class="wiki-preview-main">
+      <h1 class="wiki-preview-title">Scarlett Johansson</h1>
+      <hr class="wiki-preview-hr">
+      <p class="wiki-preview-text">Scarlett Ingrid Johansson (born November 22, 1984) is an American actress and singer.
+        Her films as a leading actress have grossed over $15.1 billion worldwide, making her the highest-grossing lead
+        actor in history.</p>
+    </div>
+    <div class="wiki-preview-sidebar">
+      <div class="wiki-preview-photo">📷</div>
+      <div class="wiki-preview-facts">
+        <p><strong>Born:</strong> Nov 22, 1984</p>
+        <p><strong>From:</strong> New York City</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>The <code>&lt;p&gt;</code> is the opening tag. The <code>&lt;/p&gt;</code> is the closing tag (notice the forward slash). Everything in between is the content that will appear on the page.</p>
+<p>Everything is organized. Everything is in its place. Nothing is randomly thrown on the screen.</p>
 
-<h2>A Minimal Web Page</h2>
+<p>Now here is the question nobody really stops to think about.</p>
 
-<p>Every HTML page follows a basic template. Here's the smallest valid page you can write:</p>
+<p>How does the browser know to put the title at the top? How does it know the photo goes on the right? How does it even
+  know what is a heading and what is just a paragraph of text?</p>
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;title&gt;My First Page&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello, World!&lt;/h1&gt;
-    &lt;p&gt;This is my first web page.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<p>That is exactly what we are going to figure out right now.</p>
 
-<p>Don't worry about memorizing every tag right now. You'll learn each part in the lessons ahead. For now, just understand that HTML is the starting point for everything on the web.</p>
+<h2>A Webpage Has Three Layers</h2>
+
+<p>Every single webpage you have ever visited is made up of three different things working together.</p>
+
+<p>Think about building a house.</p>
+
+<p>First you lay the foundation and put up the walls. The structure. Without this nothing else can exist. You cannot
+  paint a wall that does not exist. Then once the structure is there you paint it, add furniture, make it look nice. And
+  then finally you add the things that actually do something. Light switches. Plugs. A doorbell.</p>
+
+<p>Webpages work the exact same way.</p>
+
+<ul>
+  <li><strong>HTML</strong> is the structure. The walls and the floors. It tells the browser what everything on the page
+    is. This is a heading. This is a paragraph. This is an image. This is a link. Without HTML there is nothing.</li>
+  <li><strong>CSS</strong> is the paint and the furniture. It controls how everything looks. Colors, font sizes,
+    spacing, layout. If HTML says "this is a heading," CSS decides how big it looks, what color it is, and exactly where
+    it sits on the screen.</li>
+  <li><strong>JavaScript</strong> is the light switches. It makes things interactive. When you click a button and
+    something happens, when you toggle dark mode and the whole page changes instantly, when you type in a search bar and
+    results start appearing as you type — that is JavaScript.</li>
+</ul>
+
+<p>Every website you have ever used has all three of these working together. Wikipedia, YouTube, Instagram, Google. All
+  of them. Built on the same foundation every single time.</p>
+
+<p>And that foundation is always HTML.</p>
+
+<h2>So What Actually is HTML</h2>
+
+<p>HTML stands for HyperText Markup Language.</p>
+
+<p>Do not let that name put you off. It sounds more complicated than it is.</p>
+
+<p>Think of HTML as a labeling system. You write some content and you put a label around it that tells the browser what
+  that content is. Those labels are called tags.</p>
+
+<ul>
+  <li>If something is a heading you put it inside a heading tag</li>
+  <li>If something is a paragraph you put it inside a paragraph tag</li>
+  <li>The browser reads those tags and knows exactly what to do with everything</li>
+</ul>
+
+<p>Without tags the browser just sees a wall of plain text. No structure. No headings. No organization. Everything runs
+  together in one messy block and nothing looks the way it should.</p>
+
+<p>With tags everything falls into place.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>You don't need any special software to write HTML. A plain text editor (like Notepad or TextEdit) and a web browser are all you need to get started.</p>
+  <p>Tags are the core idea behind HTML. Everything else you learn builds on top of this one concept.</p>
 </div>
 
-<h2>Why Learn HTML?</h2>
+<h2>Why HTML Always Comes First</h2>
 
-<p>HTML is the foundation of web development. Whether you want to build websites, learn CSS, or get into JavaScript — it all starts here. Once you understand how HTML structures a page, everything else becomes easier to learn.</p>
+<p>Here is something worth remembering.</p>
+
+<p>You cannot style something with CSS until HTML has defined what it is. You cannot make something interactive with
+  JavaScript until HTML has actually put it on the page.</p>
+
+<p>Everything starts with HTML. Always.</p>
+
+<p>That is why it is called the foundation. Not because it is the flashiest part, it definitely is not. But because
+  without it nothing else works.</p>

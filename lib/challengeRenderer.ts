@@ -33,8 +33,8 @@ function initChallenge(el: HTMLElement): void {
 
   // Build target srcdoc — wrap solution in a minimal document
   const targetSrc = hasCssTab
-    ? `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;overflow:hidden;}${solution}</style></head><body>${starterHtml}</body></html>`
-    : `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;overflow:hidden;}</style></head><body>${solution}</body></html>`;
+    ? `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}${solution}</style></head><body>${starterHtml}</body></html>`
+    : `<!DOCTYPE html><html><head><style>body{margin:0;padding:16px;font-family:sans-serif;font-size:15px;line-height:1.6;}</style></head><body>${solution}</body></html>`;
 
   el.innerHTML = `
     <div class="challenge-header">
@@ -68,7 +68,7 @@ function initChallenge(el: HTMLElement): void {
     try {
       const body = targetFrame.contentDocument?.body;
       if (body) {
-        targetFrame.style.height = Math.max(80, Math.min(body.scrollHeight + 2, 360)) + "px";
+        targetFrame.style.height = Math.max(80, body.scrollHeight + 2) + "px";
       }
     } catch (_) { /* cross-origin guard */ }
   });

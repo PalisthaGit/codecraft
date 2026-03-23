@@ -1,87 +1,177 @@
 <div class="definition">
-  The <code>&lt;img&gt;</code> element embeds images into a web page. It's a self-closing tag — it has no content between opening and closing tags — and it requires at least two attributes: <code>src</code> and <code>alt</code>.
+  Images make web pages come alive. In this lesson you will learn how to display images, control their size, and make
+  them accessible for everyone.
 </div>
 
-<p>Images are one of the most powerful tools for communication on the web. A well-placed image can illustrate a concept better than a paragraph of text. Understanding how to use images correctly — including accessibility — is an essential HTML skill.</p>
+<p>Look at almost any website on the internet and you will notice something straight away.</p>
 
-<h2>Basic Image Syntax</h2>
+<p>Images.</p>
 
-<pre><code>&lt;img src="photo.jpg" alt="A mountain landscape at sunset"&gt;</code></pre>
+<p>They are everywhere. On news pages, product pages, social media, blogs. Sometimes they show something useful,
+  sometimes they explain a concept, and sometimes they just make the page more interesting to look at.</p>
 
-<p><code>src</code> is the path to the image file. <code>alt</code> is a text description of the image.</p>
+<p>Take a look at this page for example. Notice the photo sitting on the right side. It did not appear there by
+  accident. Someone wrote one line of HTML and the browser loaded and displayed it right there on the page.</p>
 
-<h2>The alt Attribute</h2>
+<p>That is what you are going to learn in this lesson.</p>
 
-<p>The <code>alt</code> attribute is not optional — it serves two critical purposes:</p>
+<div class="wiki-preview">
+  <div class="wiki-preview-label">👀 Here is what you see on the Wikipedia page</div>
+  <div class="wiki-preview-body">
+    <div class="wiki-preview-main">
+      <h1 class="wiki-preview-title">Nadia</h1>
+      <hr class="wiki-preview-hr">
+      <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American software engineer, web developer,
+        educator, and content creator. With over 10 years of professional experience in web development, she has become
+        one of the most influential voices in tech education.</p>
+    </div>
+    <div class="wiki-preview-sidebar">
+      <div class="wiki-preview-photo">
+        <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="wiki-preview-facts">
+        <p><strong>Born:</strong> 1988</p>
+        <p><strong>From:</strong> New York City</p>
+        <p><strong>Known for:</strong> Web dev education</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<ul>
-  <li><strong>Accessibility</strong> — screen readers read the alt text aloud for users who can't see the image</li>
-  <li><strong>Fallback</strong> — if the image fails to load, the alt text is shown in its place</li>
-</ul>
+<h2>How to Add an Image</h2>
 
-<p>Write alt text that describes what the image shows, not what it is:</p>
+<p>Just like we use tags for headings and paragraphs, HTML also gives us a tag to add images.</p>
 
-<pre><code>&lt;!-- Too vague --&gt;
-&lt;img src="dog.jpg" alt="image"&gt;
+<p>To display an image you use the <code>&lt;img&gt;</code> tag. But just writing <code>&lt;img&gt;</code> is not
+  enough. The browser knows you want an image but has no idea which one to show.</p>
 
-&lt;!-- Good --&gt;
-&lt;img src="dog.jpg" alt="A golden retriever playing fetch on a beach"&gt;</code></pre>
-
-<p>For decorative images that add no information, use an empty alt attribute so screen readers skip them:</p>
-
-<pre><code>&lt;img src="divider.png" alt=""&gt;</code></pre>
+<p>To tell it which image to show, you add the <code>src</code> attribute. <code>src</code> stands for source and it
+  simply tells the browser where the image is.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>Alt text is also used by search engines to understand image content. Good alt text improves your page's SEO as well as its accessibility.</p>
+  <p><code>src</code> is an attribute. Attributes give extra information to an HTML tag. They are always written inside
+    the opening tag. You can learn more in the <a href="/html/attributes">HTML Attributes</a> article.</p>
 </div>
 
-<h2>Width and Height</h2>
+<section class="try-example">
+  <template class="try-default-html"><img src="nadia.png"></template>
+</section>
 
-<p>Always specify <code>width</code> and <code>height</code> on images. This reserves space in the layout before the image loads, preventing the page from jumping around:</p>
+<p>This tells the browser to find a file called <code>nadia.png</code> and display it on the page. When the browser
+  reads <code>nadia.png</code> it looks in the same folder as the HTML file, finds the image, and displays it. The image
+  file must be in the same folder as your HTML file otherwise the browser will not find it.</p>
 
-<pre><code>&lt;img src="hero.jpg" alt="Code editor screenshot" width="800" height="450"&gt;</code></pre>
+<h2>Controlling the Size</h2>
 
-<p>These values are in pixels and should match the image's natural dimensions. CSS can still resize the image visually.</p>
+<p>As you can see the image is taking up a lot of space. To control the size you add <code>width</code> and
+  <code>height</code> attributes to the <code>&lt;img&gt;</code> tag.
+</p>
 
-<h2>Image Paths</h2>
+<section class="try-example">
+  <template class="try-default-html"><img src="nadia.png" width="250" height="250"></template>
+</section>
 
-<p>Like links, image paths can be relative or absolute:</p>
+<p>This does make the image smaller but there is a problem. You can see the image looks stretched or squished. That is
+  because we forced both the width and height to fixed numbers and the original proportions got broken.</p>
 
-<pre><code>&lt;!-- Relative path — image is in the same folder --&gt;
-&lt;img src="photo.jpg" alt="..."&gt;
+<p>To keep the original proportions of the image, set the height to <code>auto</code>.</p>
 
-&lt;!-- Relative path — image is in an images subfolder --&gt;
-&lt;img src="images/photo.jpg" alt="..."&gt;
+<section class="try-example">
+  <template class="try-default-html"><img src="nadia.png" width="250" height="auto"></template>
+</section>
 
-&lt;!-- Absolute URL — image hosted externally --&gt;
-&lt;img src="https://example.com/images/photo.jpg" alt="..."&gt;</code></pre>
+<p>Now the image will be 250 pixels wide and the browser will automatically figure out the correct height to keep the
+  proportions right. Clean and correctly proportioned.</p>
 
-<h2>Responsive Images</h2>
+<div class="tip">
+  <span>💡</span>
+  <p>If you remove the height attribute completely, the browser will automatically maintain the correct proportions. So
+    <code>height="auto"</code> and leaving it out entirely work the same way.
+  </p>
+</div>
 
-<p>To make sure images don't overflow their container on small screens, add this CSS:</p>
+<h2>Alt Text</h2>
 
-<pre><code>img {
-  max-width: 100%;
-  height: auto;
-}</code></pre>
+<p>Sometimes an image might fail to load. Maybe the internet connection is slow or the file path is wrong. When that
+  happens the user has no idea what the image was supposed to show.</p>
 
-<p>This ensures the image scales down to fit its container while maintaining its aspect ratio.</p>
+<p>That is where the <code>alt</code> attribute comes in. <code>alt</code> stands for alternative text. You add it
+  inside the <code>&lt;img&gt;</code> tag to describe what the image shows.</p>
 
-<h2>The figure and figcaption Elements</h2>
+<section class="try-example">
+  <template class="try-default-html"><img src="nadia. png" width="250" height="auto" alt="Photo of Nadia"></template>
+</section>
 
-<p>When an image needs a caption, wrap it in <code>&lt;figure&gt;</code> and add a <code>&lt;figcaption&gt;</code>:</p>
+<p>If the image does not load, users will see the message "Photo of Nadia" instead. They still know what was supposed to
+  be there.</p>
 
-<pre><code>&lt;figure&gt;
-  &lt;img src="html-diagram.png" alt="Diagram showing the structure of an HTML element" width="600" height="300"&gt;
-  &lt;figcaption&gt;An HTML element consists of an opening tag, content, and a closing tag.&lt;/figcaption&gt;
-&lt;/figure&gt;</code></pre>
+<p>But alt text is not just about failed images. People who are visually impaired often use screen readers to browse the
+  web. A screen reader reads the content of a page out loud. When it reaches an image it reads the alt text so the user
+  understands what the image shows even if they cannot see it.</p>
 
-<h2>Common Image Formats</h2>
+<p>It is a small thing but it makes a big difference. Make it a habit to add alt text to every image you write.</p>
 
-<ul>
-  <li><strong>JPEG (.jpg)</strong> — best for photographs and complex images with many colors</li>
-  <li><strong>PNG (.png)</strong> — best for images with transparency or sharp edges like logos and icons</li>
-  <li><strong>SVG (.svg)</strong> — vector format, scales perfectly at any size, ideal for icons and illustrations</li>
-  <li><strong>WebP (.webp)</strong> — modern format with better compression than JPEG and PNG, widely supported</li>
-</ul>
+<div class="tip">
+  <span>💡</span>
+  <p>Always include <code>alt</code> text on every image. It helps screen readers and shows a description when the image
+    fails to load.</p>
+</div>
+
+<h2>Keeping Things Organized</h2>
+
+<p>Right now we are keeping the image in the same folder as the HTML file. That works fine for a small project. But in
+  real projects you will have plenty of images and keeping everything in one place gets messy fast.</p>
+
+<p>The clean way to do it is to create a separate folder called <code>images</code> and put all your image files inside
+  it.</p>
+
+<p>Once you do that you need to update the path in your HTML to tell the browser where to look.</p>
+
+<section class="try-example">
+  <template class="try-default-html"><img src="images/nadia.png" width="250" height="auto"
+      alt="Photo of Nadia"></template>
+</section>
+
+<p>This tells the browser to go inside the <code>images</code> folder, find <code>nadia.png</code>, and display it.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>If you move an image to a different folder and forget to update the path, the image will disappear. The browser can
+    only find images if you tell it exactly where they are.</p>
+</div>
+
+<h2>Images From the Internet</h2>
+
+<p>So far we have been using images saved on our own computer. But you can also display images directly from the
+  internet.</p>
+
+<p>Instead of a file name you just use the full web address of the image as the source.</p>
+
+<section class="try-example">
+  <template class="try-default-html"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+      width="250" height="auto" alt="A mountain landscape from Unsplash"></template>
+</section>
+
+<p>The browser will go to that URL, load the image, and display it on your page. No file needed on your computer at all.
+</p>
+
+<p>A great place to find free images to practice with is <strong>Unsplash</strong>. Go to unsplash.com, find an image
+  you like, right click it, copy the image address, and paste it into your <code>src</code>.</p>
+
+<h2>Putting It All Together</h2>
+
+<p>Here is a complete image tag with everything from this lesson.</p>
+
+<section class="try-example">
+  <template class="try-default-html"><img src="nadia.png" width="250" height="auto" alt="Photo of Nadia"></template>
+</section>
+
+<div class="challenge" data-title="Add an image to your page"
+  data-description="Go to unsplash.com and find any free image you like. Right click it and copy the image address. Then add it to your page with a width of 300, height set to auto, and a short alt text describing what the image shows."
+  data-checks="img" data-solution="&lt;img
+  src=&quot;https://images.unsplash.com/photo-example.jpg&quot;
+  width=&quot;300&quot;
+  height=&quot;auto&quot;
+  alt=&quot;A short description of the image&quot;&gt;">
+</div>

@@ -384,6 +384,10 @@
           editHint.style.animation = 'none';
           editHint.offsetHeight;
           editHint.style.animation = 'te-hint-pop 0.35s ease forwards';
+          setTimeout(function () {
+            editHint.style.animation = 'te-hint-out 0.4s ease forwards';
+            setTimeout(function () { editHint.style.display = 'none'; }, 400);
+          }, 6000);
         } else {
           editorWrap.style.display = 'none';
           tryBtn.textContent = 'Try It Yourself';
@@ -463,7 +467,7 @@
       return [
         '<!DOCTYPE html><html><head>',
         css ? '<style>' + css + '</style>' : '',
-        '</head><body style="margin:0;padding:16px;font-family:sans-serif;">',
+        '</head><body style="margin:0;padding:16px;font-family:sans-serif;overflow-x:hidden;">',
         html,
         js ? '<scr' + 'ipt>' + js + '</scr' + 'ipt>' : '',
         '</body></html>'
