@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nadia Rivera - Wikipedia</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Linux Libertine", Georgia, serif;
+      background: #fff;
+      color: #202122;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .tabs-bar {
+      border-bottom: 1px solid #a2a9b1;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+    }
+    .tabs { display: flex; }
+    .tabs a {
+      display: inline-block;
+      padding: 10px 16px;
+      color: #36c;
+      text-decoration: none;
+      font-size: 13px;
+      font-family: sans-serif;
+    }
+    .tabs a.active {
+      color: #202122;
+      border-bottom: 2px solid #202122;
+    }
+    .tools { display: flex; gap: 16px; padding-right: 4px; }
+    .tools a, .tools span {
+      color: #36c;
+      text-decoration: none;
+      font-size: 13px;
+      font-family: sans-serif;
+      cursor: pointer;
+    }
+    .tools a.bold { color: #202122; font-weight: bold; }
+    .from-wiki {
+      font-size: 13px;
+      font-style: italic;
+      color: #54595d;
+      padding: 8px 20px 4px;
+      font-family: sans-serif;
+    }
+    .content { padding: 10px 20px 20px; }
+    h1 {
+      font-size: 28px;
+      font-weight: normal;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+      font-family: "Linux Libertine", Georgia, serif;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 2px;
+      margin: 20px 0 10px;
+      font-family: "Linux Libertine", Georgia, serif;
+    }
+    .infobox {
+      float: right;
+      width: 250px;
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      margin: 0 0 14px 20px;
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+    .infobox-title {
+      background: #cfe9ff;
+      padding: 8px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .infobox-img {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+    .infobox-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .infobox-caption {
+      padding: 5px 8px;
+      font-size: 11px;
+      color: #54595d;
+      text-align: center;
+      border-top: 1px solid #a2a9b1;
+    }
+    .infobox-row {
+      display: flex;
+      border-top: 1px solid #a2a9b1;
+      padding: 5px 8px;
+      gap: 6px;
+    }
+    .infobox-label { color: #54595d; min-width: 76px; font-weight: bold; }
+    p { margin-bottom: 14px; font-size: 14px; }
+    a { color: #36c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    b { font-weight: bold; }
+    ul { margin: 0 0 14px 24px; }
+    ul li { margin-bottom: 4px; font-size: 14px; }
+    table {
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 13px;
+      font-family: sans-serif;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #a2a9b1;
+      padding: 6px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #eaecf0; font-weight: bold; }
+    .toc {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      display: inline-block;
+      padding: 12px 20px;
+      margin-bottom: 16px;
+      font-family: sans-serif;
+      font-size: 13px;
+      min-width: 180px;
+    }
+    .toc-title { font-weight: bold; margin-bottom: 6px; }
+    .toc ol { margin: 0 0 0 18px; }
+    .toc li { margin-bottom: 2px; }
+    figure {
+      float: right;
+      clear: right;
+      margin: 0 0 14px 20px;
+      width: 200px;
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      padding: 4px;
+    }
+    figure img {
+      width: 100%;
+      display: block;
+    }
+    figcaption {
+      font-size: 11px;
+      font-family: sans-serif;
+      color: #54595d;
+      text-align: center;
+      padding: 4px 2px 2px;
+    }
+    .clearfix::after { content: ""; display: table; clear: both; }
+    form label { display: block; font-size: 13px; margin-bottom: 3px; font-family: sans-serif; }
+    form input, form textarea {
+      width: 100%;
+      border: 1px solid #a2a9b1;
+      padding: 5px 8px;
+      font-size: 13px;
+      border-radius: 2px;
+      font-family: sans-serif;
+      margin-bottom: 10px;
+    }
+    form textarea { resize: vertical; }
+    form button {
+      background: #36c;
+      color: #fff;
+      border: none;
+      padding: 6px 16px;
+      font-size: 13px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tabs-bar">
+    <div class="tabs">
+      <a href="#" class="active">Article</a>
+      <a href="#">Talk</a>
+    </div>
+    <div class="tools">
+      <a href="#" class="bold">Read</a>
+      <a href="#">View source</a>
+      <a href="#">View history</a>
+      <span>Tools ˅</span>
+    </div>
+  </div>
+
+  <div class="from-wiki">From Wikipedia, the free encyclopedia</div>
+
+  <div class="content clearfix">
+    <h1>Nadia Rivera</h1>
+
+    <div class="infobox">
+      <div class="infobox-title">Nadia Rivera</div>
+      <div class="infobox-img">
+        <img src="images/main-image.png" alt="Nadia Rivera" />
+      </div>
+      <div class="infobox-caption">Nadia Rivera in 2023</div>
+      <div class="infobox-row">
+        <span class="infobox-label">Born</span>
+        <span>March 14, 1993<br />New York City, USA</span>
+      </div>
+      <div class="infobox-row">
+        <span class="infobox-label">Occupation</span>
+        <span>Software engineer, educator, content creator</span>
+      </div>
+      <div class="infobox-row">
+        <span class="infobox-label">Known for</span>
+        <span>Web development education, open-source tooling</span>
+      </div>
+      <div class="infobox-row">
+        <span class="infobox-label">Website</span>
+        <span><a href="#">nadiarivers.dev</a></span>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#early-life">Early life and education</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#content">Content creation</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#talks">Talks and writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <p><b>Nadia Rivera</b> (born March 14, 1993) is an American <a href="#">software engineer</a>,
+      educator, and content creator based in <a href="#">New York City</a>. She is known for her work
+      in <a href="#">web development education</a> and her open-source contributions to front-end
+      tooling. Rivera has taught over 40,000 students through her online courses and has been featured
+      in <a href="#">Smashing Magazine</a> and <a href="#">CSS-Tricks</a>.</p>
+
+    <p>Rivera began programming at the age of 15 after building a fan page for her favourite band using
+      <a href="#">HTML</a> and <a href="#">CSS</a>. She went on to study computer science at
+      <a href="#">New York University</a>, where she graduated with honours in 2015. She currently works
+      as a senior software engineer at a technology company in Manhattan while maintaining her educational
+      content on the side.</p>
+
+    <h2 id="early-life">Early life and education</h2>
+
+    <figure>
+      <img src="images/early-career.png" alt="Nadia Rivera during her early career" />
+      <figcaption>Rivera speaking at a Brooklyn tech meetup, 2017</figcaption>
+    </figure>
+
+    <p>Rivera grew up in the <a href="#">Bronx</a>, New York, the daughter of a teacher and a civil
+      engineer. She attended <a href="#">Bronx Science High School</a>, where she first encountered
+      programming through an elective computing course. She credits her high school teacher, Mr. Delgado,
+      as the person who showed her that coding could be creative as well as technical.</p>
+
+    <p>She earned a <a href="#">Bachelor of Science in Computer Science</a> from New York University in
+      2015, graduating summa cum laude. During her studies she interned at two early-stage startups in
+      Brooklyn, where she developed her interest in front-end engineering and accessible design.</p>
+
+    <h2 id="career">Career</h2>
+
+    <p>After graduating, Rivera joined a fintech startup in lower Manhattan as a junior front-end
+      developer. She moved into a senior engineering role within three years, leading the company's
+      design system and accessibility initiatives.</p>
+
+    <p>In 2019 she launched her first online HTML and CSS course, which attracted over 10,000 enrolments
+      in its first month. Rivera is a strong advocate for <a href="#">web accessibility</a> and regularly
+      speaks at industry events about the importance of semantic HTML and inclusive design.</p>
+
+    <h2 id="content">Content creation</h2>
+
+    <figure>
+      <img src="images/youtube-image.png" alt="Nadia Rivera filming a YouTube tutorial" />
+      <figcaption>Rivera filming a tutorial for her YouTube channel</figcaption>
+    </figure>
+
+    <p>Rivera maintains a technical blog and a <a href="#">YouTube channel</a> with over 120,000
+      subscribers. Her videos cover HTML, CSS, and web accessibility for beginners. She is known for
+      her calm teaching style and her focus on building real projects rather than isolated examples.</p>
+
+    <p>Her most popular video series, <i>Build a Real Webpage</i>, walks viewers through creating a
+      Wikipedia-style portfolio page from scratch using only HTML. The series has been watched over
+      two million times.</p>
+
+    <h2 id="projects">Projects</h2>
+
+    <table>
+      <tr>
+        <th>Project</th>
+        <th>Year</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><a href="#">LayoutLab</a></td>
+        <td>2020</td>
+        <td>An open-source CSS Grid and Flexbox playground used by over 200,000 developers</td>
+      </tr>
+      <tr>
+        <td><a href="#">FormForge</a></td>
+        <td>2021</td>
+        <td>A visual HTML form builder that generates accessible, semantic markup</td>
+      </tr>
+      <tr>
+        <td><a href="#">HTMLFirst</a></td>
+        <td>2022</td>
+        <td>A free beginner curriculum teaching pure HTML before introducing CSS or JavaScript</td>
+      </tr>
+    </table>
+
+    <h2 id="talks">Talks and writing</h2>
+
+    <figure>
+      <img src="images/react-conf.png" alt="Nadia Rivera speaking at a conference" />
+      <figcaption>Rivera presenting at An Event Apart, 2022</figcaption>
+    </figure>
+
+    <ul>
+      <li>&ldquo;Why HTML Still Matters&rdquo; — <a href="#">CSSConf</a>, 2021</li>
+      <li>&ldquo;Accessible Forms from the Ground Up&rdquo; — <a href="#">An Event Apart</a>, 2022</li>
+      <li>&ldquo;Teaching Code Without the Overwhelm&rdquo; — <a href="#">SXSW EDU</a>, 2023</li>
+      <li><a href="#">Smashing Magazine</a> — &ldquo;The Case for Semantic HTML in 2024&rdquo;</li>
+    </ul>
+
+    <h2 id="contact">Contact</h2>
+
+    <p style="font-size:13px; color:#54595d; font-family:sans-serif;">
+      Send Nadia a message using the form below.
+    </p>
+
+    <form style="max-width:360px;">
+      <label for="name">Name</label>
+      <input id="name" type="text" />
+
+      <label for="email">Email</label>
+      <input id="email" type="email" />
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="4"></textarea>
+
+      <button type="submit">Send message</button>
+    </form>
+
+  </div>
+</body>
+</html>
