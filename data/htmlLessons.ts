@@ -12,7 +12,7 @@ export const htmlLessonGroups: LessonGroup[] = [
       {
         slug: "introduction",
         title: "Understanding HTML",
-        description: "Learn what HTML is and why it is the foundation of every web page.",
+        description: "Learn what HTML is and how it works. Understand the foundation of every webpage on the internet before writing your first line of code.",
         readTime: "5 min read",
         difficulty: "Beginner",
       },

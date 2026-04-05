@@ -1,95 +1,65 @@
 <div class="definition">
-  HTML is the language used to create web pages. It tells the browser what each thing on the page is.
+  HTML is the language browsers use to understand what is on a webpage. Every heading, every paragraph, every image you have ever seen online started with HTML.
 </div>
 
-<p>Every website you have ever visited, from Wikipedia to YouTube to Google, started with the same thing.</p>
+<p>You have been using websites your whole life.</p>
 
-<p>One simple language called HTML.</p>
+<p>Google. YouTube. Wikipedia. Instagram. You open them every single day without thinking twice about how they actually work.</p>
 
-<p>By the end of this lesson you will understand exactly how it works and why every single webpage on the internet is
-  built on it.</p>
+<p>But have you ever stopped and wondered what is actually happening behind the screen? How does the browser know where to put the title? How does it know that one thing is a heading and another is just a paragraph? How does it know an image goes on the right and text goes on the left?</p>
 
-<h2>Let's Start With Something You Already Know</h2>
+<p>That is exactly what this lesson is about.</p>
 
-<p>Open a browser. You know what a browser is. Chrome, Firefox, Safari. That app you use to go on the internet.</p>
-
-<p>Now imagine you search for Scarlett Johansson and click on her Wikipedia page. Go ahead and actually do it if you
-  want. Take a second and just look at what is on that screen.</p>
-
-<div class="wiki-preview">
-  <div class="wiki-preview-label">👀 Here is what you see on her Wikipedia page</div>
-  <div class="wiki-preview-body">
-    <div class="wiki-preview-main">
-      <h1 class="wiki-preview-title">Scarlett Johansson</h1>
-      <hr class="wiki-preview-hr">
-      <p class="wiki-preview-text">Scarlett Ingrid Johansson (born November 22, 1984) is an American actress and singer.
-        Her films as a leading actress have grossed over $15.1 billion worldwide, making her the highest-grossing lead
-        actor in history.</p>
-    </div>
-    <div class="wiki-preview-sidebar">
-      <div class="wiki-preview-photo">📷</div>
-      <div class="wiki-preview-facts">
-        <p><strong>Born:</strong> Nov 22, 1984</p>
-        <p><strong>From:</strong> New York City</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<p>Everything is organized. Everything is in its place. Nothing is randomly thrown on the screen.</p>
-
-<p>Now here is the question nobody really stops to think about.</p>
-
-<p>How does the browser know to put the title at the top? How does it know the photo goes on the right? How does it even
-  know what is a heading and what is just a paragraph of text?</p>
-
-<p>That is exactly what we are going to figure out right now.</p>
+<p>And by the end of it you will never look at a webpage the same way again.</p>
 
 <h2>A Webpage Has Three Layers</h2>
 
-<p>Every single webpage you have ever visited is made up of three different things working together.</p>
-
 <p>Think about building a house.</p>
 
-<p>First you lay the foundation and put up the walls. The structure. Without this nothing else can exist. You cannot
-  paint a wall that does not exist. Then once the structure is there you paint it, add furniture, make it look nice. And
-  then finally you add the things that actually do something. Light switches. Plugs. A doorbell.</p>
+<p>First you lay the foundation and put up the walls. The bare structure. Without this nothing else can exist. You cannot paint a wall that does not exist.</p>
 
-<p>Webpages work the exact same way.</p>
+<p>Then once the structure is there you paint it, add furniture, choose the colors. Make it feel like a home.</p>
 
-<ul>
-  <li><strong>HTML</strong> is the structure. The walls and the floors. It tells the browser what everything on the page
-    is. This is a heading. This is a paragraph. This is an image. This is a link. Without HTML there is nothing.</li>
-  <li><strong>CSS</strong> is the paint and the furniture. It controls how everything looks. Colors, font sizes,
-    spacing, layout. If HTML says "this is a heading," CSS decides how big it looks, what color it is, and exactly where
-    it sits on the screen.</li>
-  <li><strong>JavaScript</strong> is the light switches. It makes things interactive. When you click a button and
-    something happens, when you toggle dark mode and the whole page changes instantly, when you type in a search bar and
-    results start appearing as you type — that is JavaScript.</li>
-</ul>
+<p>And finally you add the things that actually do something. Light switches. A doorbell. A lock on the front door.</p>
 
-<p>Every website you have ever used has all three of these working together. Wikipedia, YouTube, Instagram, Google. All
-  of them. Built on the same foundation every single time.</p>
+<p>Webpages work exactly the same way.</p>
 
-<p>And that foundation is always HTML.</p>
+<figure class="layer-diagram" style="position: relative; display: inline-block; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+  <img
+    src="/images/html-css-js-layers.png"
+    alt="Three houses showing how web pages are built in layers: a bare structure representing HTML, a furnished and decorated home representing CSS, and a fully functional home with lights and a doorbell representing JavaScript. Caption reads: Every webpage starts with HTML, styled by CSS, and brought to life by JavaScript."
+    width="1200"
+    height="630"
+    loading="lazy"
+    decoding="async"
+    style="width: 100%; height: auto; display: block;"
+  />
+  <figcaption style="background: rgba(15, 23, 42, 0.72); color: #f1f5f9; font-size: 0.875rem; text-align: center; padding: 0.6rem 1rem; backdrop-filter: blur(4px);">
+    Every webpage starts with HTML, styled by CSS, and brought to life by JavaScript.
+  </figcaption>
+</figure>
+
+<p><strong>HTML</strong> is the structure. The walls and the floors. It tells the browser what everything on the page is. This is a heading. This is a paragraph. This is an image. Without HTML there is nothing.</p>
+
+<p><strong>CSS</strong> is the paint and furniture. It controls how everything looks. Colors, font sizes, spacing, layout. HTML says this is a heading. CSS decides how big it is, what color it is, where it sits on the screen.</p>
+
+<p><strong>JavaScript</strong> is the light switches. It makes things interactive. When you click a button and something happens, when dark mode turns on instantly, when search results appear as you type. That is JavaScript.</p>
+
+<p>Every website you have ever used has all three working together. And they always start with the same thing.</p>
+
+<p>HTML.</p>
 
 <h2>So What Actually is HTML</h2>
 
 <p>HTML stands for HyperText Markup Language.</p>
 
-<p>Do not let that name put you off. It sounds more complicated than it is.</p>
+<p>Do not let that name put you off. It is simpler than it sounds.</p>
 
-<p>Think of HTML as a labeling system. You write some content and you put a label around it that tells the browser what
-  that content is. Those labels are called tags.</p>
+<p>Think of HTML as a labeling system. You write some content and you wrap a label around it that tells the browser what that content is. Those labels are called tags.</p>
 
-<ul>
-  <li>If something is a heading you put it inside a heading tag</li>
-  <li>If something is a paragraph you put it inside a paragraph tag</li>
-  <li>The browser reads those tags and knows exactly what to do with everything</li>
-</ul>
+<p>If something is a heading you wrap it in a heading tag. If something is a paragraph you wrap it in a paragraph tag. The browser reads those labels and knows exactly what to do with everything.</p>
 
-<p>Without tags the browser just sees a wall of plain text. No structure. No headings. No organization. Everything runs
-  together in one messy block and nothing looks the way it should.</p>
+<p>Without tags the browser just sees a wall of plain text. No structure. No headings. No organization. Everything runs together in one messy block.</p>
 
 <p>With tags everything falls into place.</p>
 
@@ -98,14 +68,64 @@
   <p>Tags are the core idea behind HTML. Everything else you learn builds on top of this one concept.</p>
 </div>
 
+<h2>See it For Yourself</h2>
+
+<p>Here is what a webpage looks like without any HTML tags. Just raw text, nothing else:</p>
+
+<section class="try-example">
+  <template class="try-default-html">Nadia
+Nadia is a software engineer and educator from New York.
+She has been building websites for over ten years.</template>
+</section>
+
+<p>Everything is squished together. No structure. No breathing room. It looks nothing like a real webpage.</p>
+
+<p>Now add two tags and watch what happens:</p>
+
+<section class="try-example">
+  <template class="try-default-html"><h1>Nadia</h1>
+<p>Nadia is a software engineer and educator from New York.</p>
+<p>She has been building websites for over ten years.</p></template>
+</section>
+
+<p>That right there is HTML. Two tags. And suddenly the page has structure.</p>
+
+<p>That is the power of HTML. And you just wrote your first line of it.</p>
+
 <h2>Why HTML Always Comes First</h2>
 
-<p>Here is something worth remembering.</p>
-
-<p>You cannot style something with CSS until HTML has defined what it is. You cannot make something interactive with
-  JavaScript until HTML has actually put it on the page.</p>
+<p>You cannot style something with CSS until HTML has defined what it is. You cannot make something interactive with JavaScript until HTML has put it on the page.</p>
 
 <p>Everything starts with HTML. Always.</p>
 
-<p>That is why it is called the foundation. Not because it is the flashiest part, it definitely is not. But because
-  without it nothing else works.</p>
+<p>That is why it is the foundation. Not because it is the flashiest part. But because without it nothing else works.</p>
+
+<h2>What You Are Going to Build</h2>
+
+<p>Now you know what HTML is. Here is what you are going to build with it.</p>
+
+<div class="wiki-preview">
+  <div class="wiki-preview-label">👀 Nadia's finished page — you will build this yourself</div>
+  <div class="wiki-preview-body">
+    <div class="wiki-preview-main">
+      <h1 class="wiki-preview-title">Nadia</h1>
+      <hr class="wiki-preview-hr">
+      <p class="wiki-preview-text">Nadia is a software engineer and educator from New York. She has been building websites for over ten years and teaches thousands of beginners how to code.</p>
+    </div>
+    <div class="wiki-preview-sidebar">
+      <div class="wiki-preview-photo">📷</div>
+      <div class="wiki-preview-facts">
+        <p><strong>Born:</strong> New York City</p>
+        <p><strong>Occupation:</strong> Software Engineer</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>This is Nadia. A fictional software engineer and educator from New York. Over the course of these lessons you are going to build her entire Wikipedia-style portfolio page from scratch. One concept at a time. One piece at a time.</p>
+
+<p>Every single thing on that page — the heading, the image, the table, the links, the sections — you are going to build all of it yourself. And by the time you are done you will understand every line of it completely.</p>
+
+<p>Then you put your name on it.</p>
+
+<p>In the next lesson you will write your very first HTML file and open it in a real browser. That is where it begins.</p>
