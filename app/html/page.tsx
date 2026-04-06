@@ -9,62 +9,52 @@ export const metadata = {
 
 // Lessons that have pages and should be linked
 const LINKED: Record<string, string> = {
-  Introduction: "/html/introduction",
-  Tags: "/html/tags",
-  Headings: "/html/headings",
+  "What is HTML": "/html/introduction",
+  "Setting Up HTML": "/html/setting-up",
+  "HTML Tags": "/html/tags",
+  "HTML Headings": "/html/headings",
   Images: "/html/images",
   "Figure and Caption": "/html/figure",
-  Forms: "/html/forms",
-  Links: "/html/link",
   Lists: "/html/list",
   Tables: "/html/table",
-  "Document Structure": "/html/document-structure",
-  Abbreviations: "/html/abbr",
+  Links: "/html/link",
+  Forms: "/html/forms",
+  "Divs and Spans": "/html/divs-and-spans",
+  "Semantic HTML": "/html/semantic-html",
 };
 
 const chapters = [
   {
     title: "Getting Started",
-    lessons: ["Introduction", "Tags", "Setting Up HTML"],
+    lessons: ["What is HTML", "Setting Up HTML"],
   },
   {
-    title: "Chapter 1 — Text",
-    lessons: ["Headings", "Paragraphs", "Bold and Italic", "Horizontal Lines"],
+    title: "Text",
+    lessons: ["HTML Tags", "HTML Headings"],
   },
   {
-    title: "Chapter 2 — Images",
-    lessons: [
-      "Images",
-      "Image Size and Proportions",
-      "Alt Text",
-      "Local vs Online Images",
-      "Figure and Caption",
-    ],
+    title: "Images",
+    lessons: ["Images", "Figure and Caption"],
   },
   {
-    title: "Chapter 3 — Links",
-    lessons: [
-      "Links",
-      "Opening in a New Tab",
-      "Jumping to a Section",
-      "Clickable Images",
-    ],
+    title: "Lists",
+    lessons: ["Lists"],
   },
   {
-    title: "Chapter 4 — Lists",
-    lessons: ["Lists", "Ordered Lists", "Nested Lists"],
+    title: "Tables",
+    lessons: ["Tables"],
   },
   {
-    title: "Chapter 5 — Tables",
-    lessons: ["Tables", "Table Head Body and Footer", "Colspan and Rowspan"],
+    title: "Links",
+    lessons: ["Links"],
   },
   {
-    title: "Chapter 6 — Forms",
-    lessons: ["Forms", "Input Types", "Dropdowns and Textareas"],
+    title: "Forms",
+    lessons: ["Forms"],
   },
   {
-    title: "Chapter 7 — Structure",
-    lessons: ["Document Structure", "Divs and Spans", "Semantic HTML"],
+    title: "Structure",
+    lessons: ["Divs and Spans", "Semantic HTML"],
   },
 ];
 

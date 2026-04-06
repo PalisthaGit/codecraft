@@ -61,8 +61,8 @@ const tracks = [
   {
     title: "HTML Basics",
     description:
-      "Understand how web pages are structured using HTML elements, documents, and forms.",
-    lessons: 3,
+      "Learn HTML by building a real project. Beginner friendly — by the end you will have your own webpage.",
+    lessons: 12,
     href: "/html",
   },
   {

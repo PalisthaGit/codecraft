@@ -1,0 +1,228 @@
+<div class="definition">
+  Semantic HTML tags describe the meaning of the content inside them. They tell the browser, search engines, and screen readers exactly what each part of your page is.
+</div>
+
+<p>In the last lesson you learned about div and span. You used them to group and organize content on Nadia's page.</p>
+
+<p>div works. But it does not tell you anything about what is inside it. You see a div in your code and you have no idea if it is a header, a sidebar, a footer, or something else entirely. You have to read the content to figure it out.</p>
+
+<p>Semantic HTML fixes that. Instead of wrapping everything in generic boxes, you use tags that actually describe what each part of your page is.</p>
+
+<p>By the end of this lesson Nadia's page will have real meaningful structure. The kind that browsers, search engines, and screen readers all understand perfectly.</p>
+
+<h2>What Are Semantic HTML Tags</h2>
+
+<p>A semantic tag is a tag whose name tells you exactly what kind of content is inside it.</p>
+
+<p>You have already been using semantic tags without realising it.</p>
+
+<p><code>h1</code> tells you this is the main heading. <code>p</code> tells you this is a paragraph. <code>img</code> tells you this is an image. <code>table</code> tells you this is tabular data. The tag name itself describes the content. That is what makes it semantic.</p>
+
+<p>Now compare that to <code>div</code>. What does div tell you about what is inside it? Nothing. It is just a box. You have to read the content or add a comment to know what it is.</p>
+
+<p>That is the difference between semantic and non-semantic.</p>
+
+<h2>The Problem With Divs Everywhere</h2>
+
+<p>Here is what Nadia's page looks like organized with only div elements:</p>
+
+<pre><code class="language-html">&lt;div&gt;
+  &lt;h1&gt;Nadia&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;a href="#early-life"&gt;Early Life&lt;/a&gt;
+  &lt;a href="#career"&gt;Career&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;div id="early-life"&gt;
+    &lt;h2&gt;Early Life&lt;/h2&gt;
+    &lt;p&gt;Nadia was born in New York City in 1988.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;p&gt;Born: 1988&lt;/p&gt;
+  &lt;p&gt;Occupation: Software Engineer&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;p&gt;Last updated: 2025&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<p>It works. But look at it. Five div elements. No way to tell which one is the header, which one is the navigation, which one is the main content, which one is the sidebar. You have to read every single line to figure out what is what.</p>
+
+<p>Now let us do it the right way.</p>
+
+<h2>Semantic Layout Tags</h2>
+
+<p>HTML gives us a set of tags specifically designed to describe the layout of a page. Here is what each one means:</p>
+
+<ul>
+  <li><code>header</code> — The top section of the page. Usually holds the main title or logo.</li>
+  <li><code>nav</code> — Navigation links. The table of contents or menu that helps users move around the page.</li>
+  <li><code>main</code> — The core content of the page. There should only ever be one main on a page.</li>
+  <li><code>section</code> — A thematic group of content. Like the Early Life section or the Career section on Nadia's page.</li>
+  <li><code>aside</code> — Extra information that sits alongside the main content. Like the info box on a Wikipedia page.</li>
+  <li><code>footer</code> — The bottom of the page. Usually holds things like last updated date or copyright info.</li>
+</ul>
+
+<h2>Building Nadia's Page With Semantic Tags</h2>
+
+<p>Now let us take those same five div elements and replace them with proper semantic tags. Watch how much clearer the code becomes:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<header>
+  <h1>Nadia</h1>
+</header>
+
+<nav>
+  <a href="#early-life">Early Life</a>
+  <a href="#career">Career</a>
+</nav>
+
+<main>
+  <section id="early-life">
+    <h2>Early Life</h2>
+    <p>Nadia was born in New York City in 1988.</p>
+    <p>She grew up with a strong curiosity about technology and how things worked.</p>
+  </section>
+
+  <section id="career">
+    <h2>Career</h2>
+    <p>She started her career as a junior web developer in 2010.</p>
+    <p>Within two years she was promoted to senior developer.</p>
+  </section>
+</main>
+
+<aside>
+  <p>Born: 1988</p>
+  <p>From: New York City</p>
+  <p>Occupation: Software Engineer</p>
+</aside>
+
+<footer>
+  <p>Last updated: 2025</p>
+</footer>
+  </template>
+</section>
+
+<p>The page looks exactly the same in the browser. But look at the code. You can read it like a map. Header at the top. Navigation below it. Main content in the middle with sections inside. Sidebar information in the aside. Footer at the bottom.</p>
+
+<p>No comments needed. No guessing. The tags say exactly what everything is.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Semantic tags do not change how your page looks. They change what your page means. That meaning matters to search engines, screen readers, and anyone else who reads your code.</p>
+</div>
+
+<h2>Why Semantic HTML Actually Matters</h2>
+
+<p>This is not just about making your code look nice. There are three real reasons semantic HTML matters.</p>
+
+<p><strong>It helps search engines.</strong></p>
+
+<p>When Google reads your page it uses your HTML structure to understand what the page is about. A header tag tells it this is the title area. A main tag tells it this is the core content. A nav tag tells it these are navigation links. The better Google understands your page the better it can rank it.</p>
+
+<p><strong>It helps screen readers.</strong></p>
+
+<p>People who are visually impaired use screen readers to browse the web. A screen reader reads your HTML out loud. If your page uses semantic tags the screen reader can jump straight to the main content, skip the nav, or go directly to a specific section. With only div elements it has no idea where anything is.</p>
+
+<p><strong>It helps you and other developers.</strong></p>
+
+<p>Six months from now when you open your code again, semantic tags tell you instantly what each part of the page is. No hunting through lines of div elements trying to remember what was what.</p>
+
+<h2>Putting It All Together</h2>
+
+<p>Here is the complete Nadia page with full semantic structure:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<header>
+  <h1>Nadia</h1>
+  <hr>
+</header>
+
+<nav>
+  <a href="#early-life">Early Life</a>
+  <a href="#career">Career</a>
+  <a href="#teaching">Teaching</a>
+</nav>
+
+<main>
+  <section id="early-life">
+    <h2>Early Life</h2>
+    <p>Nadia was born in New York City in 1988.</p>
+    <p>She grew up with a strong curiosity about technology and how things worked.</p>
+  </section>
+
+  <section id="career">
+    <h2>Career</h2>
+    <p>She started her career as a junior web developer in 2010.</p>
+    <p>Within two years she was promoted to senior developer.</p>
+  </section>
+
+  <section id="teaching">
+    <h2>Teaching</h2>
+    <p>She began teaching online in 2015 and has since helped thousands of beginners.</p>
+    <p>Her courses are known for being clear, practical, and beginner friendly.</p>
+  </section>
+</main>
+
+<aside>
+  <p>Born: 1988</p>
+  <p>From: New York City</p>
+  <p>Occupation: Software Engineer, Educator</p>
+  <p>Years active: 2010 to present</p>
+</aside>
+
+<footer>
+  <p>Last updated: 2025</p>
+</footer>
+  </template>
+</section>
+
+<p>Try editing it. Add a new section for Recognition or Personal Life. Move something into the aside. See how the structure stays clear no matter how much content you add.</p>
+
+<div class="challenge" data-title="Give your own page semantic structure"
+  data-description="Take the page you have been building about yourself and give it proper semantic structure. Your page should have: a header with your name as the main heading and a horizontal line below it, a nav with links to at least two sections on your page, a main with at least two section elements inside (each section should have a heading and at least one paragraph), an aside with a few quick facts about yourself, and a footer with a last updated date."
+  data-checks="header,nav,main,section,aside,footer"
+  data-solution="&lt;header&gt;
+  &lt;h1&gt;Alex&lt;/h1&gt;
+  &lt;hr&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href=&quot;#about&quot;&gt;About Me&lt;/a&gt;
+  &lt;a href=&quot;#hobbies&quot;&gt;Hobbies&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main&gt;
+  &lt;section id=&quot;about&quot;&gt;
+    &lt;h2&gt;About Me&lt;/h2&gt;
+    &lt;p&gt;My name is Alex. I am learning to code.&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section id=&quot;hobbies&quot;&gt;
+    &lt;h2&gt;Hobbies&lt;/h2&gt;
+    &lt;p&gt;I enjoy reading, hiking, and building small projects.&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;aside&gt;
+  &lt;p&gt;From: New York&lt;/p&gt;
+  &lt;p&gt;Learning: HTML and CSS&lt;/p&gt;
+&lt;/aside&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;Last updated: 2025&lt;/p&gt;
+&lt;/footer&gt;">
+</div>
+
+<p>You now know how to give your page real meaningful structure. Semantic tags. Proper layout. Clean organized code.</p>
+
+<p>In the next lesson we bring everything together. You will learn about the full HTML page structure, the parts that wrap around everything you have written so far, and how to build a complete proper HTML document from top to bottom.</p>
+
+<p>Next — <a href="/html/document-structure">HTML Page Structure</a></p>

@@ -1,0 +1,239 @@
+<div class="definition">
+  Div and span are HTML elements that help you group and organize content on your page. Div groups blocks of content. Span groups small pieces of text inside a line.
+</div>
+
+<p>Look at Nadia's Wikipedia page for a moment.</p>
+
+<p>It is not just one endless wall of text. It is divided into sections. Early Life. Career. Teaching. Recognition. Each section sits clearly on its own. Easy to find. Easy to read.</p>
+
+<p>That kind of organization does not happen by accident. In HTML we use an element called div to create those divisions. And when we want to mark up just a small piece of text inside a line we use something called span.</p>
+
+<p>These two elements do not add any visible structure on their own. But they are the foundation of how real webpages are organized and styled. By the end of this lesson you will understand exactly what they do and why they matter.</p>
+
+<h2>What is a Div</h2>
+
+<p>The word div is short for division. It is a container. You use it to wrap related elements together into one group.</p>
+
+<p>Right now on Nadia's page the Early Life section has a heading and some paragraphs. They are just sitting there separately with nothing connecting them. Let us wrap them all inside a div:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div>
+  <h2>Early Life</h2>
+  <p>Nadia was born in New York City in 1988.</p>
+  <p>She grew up with a strong curiosity about technology and how things worked.</p>
+</div>
+  </template>
+</section>
+
+<p>Nothing looks different yet. That is completely normal. A div is invisible by default. It has no color, no border, no style of its own.</p>
+
+<p>But something important just happened in your code. Those elements are now grouped together. They belong to one division. And that matters more than it looks right now.</p>
+
+<h2>Seeing the Div in Action</h2>
+
+<p>To actually see the div at work let us add a tiny bit of CSS. Do not worry about learning CSS right now. We will cover it properly in a later course. For now just follow along and see what happens.</p>
+
+<p>CSS always goes inside a style tag. Add this to your page:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div>
+  <h2>Early Life</h2>
+  <p>Nadia was born in New York City in 1988.</p>
+  <p>She grew up with a strong curiosity about technology and how things worked.</p>
+</div>
+
+<style>
+  div {
+    background-color: lightyellow;
+  }
+</style>
+  </template>
+</section>
+
+<p>Now you can see it. The entire Early Life section has a light yellow background behind it. The heading, the paragraphs, all of it inside the div is highlighted together as one block.</p>
+
+<p>That is what a div does. It groups things together so you can treat them as one unit. Later when you learn CSS you will be able to style an entire section in one go instead of targeting each element separately.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>You will learn CSS in detail in a later course. For now just notice how the div groups content together. That is the important idea.</p>
+</div>
+
+<h2>Adding Divs to Nadia's Page</h2>
+
+<p>Now let us organize the rest of Nadia's page properly. Each section gets its own div. This keeps the code clean and makes the page much easier to work with later.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div>
+  <h2>Early Life</h2>
+  <p>Nadia was born in New York City in 1988.</p>
+  <p>She grew up with a strong curiosity about technology and how things worked.</p>
+</div>
+
+<div>
+  <h2>Career</h2>
+  <p>She started her career as a junior web developer in 2010.</p>
+  <p>Within two years she was promoted to senior developer.</p>
+</div>
+
+<div>
+  <h2>Teaching</h2>
+  <p>She began teaching online in 2015 and has since helped thousands of beginners.</p>
+  <p>Her courses are known for being clear, practical, and beginner friendly.</p>
+</div>
+
+<style>
+  div {
+    background-color: lightyellow;
+  }
+</style>
+  </template>
+</section>
+
+<p>Each section is now its own clearly defined block. Early Life. Career. Teaching. All organized. All grouped. All ready to be styled individually when you get to CSS.</p>
+
+<h2>What is a Span</h2>
+
+<p>Just like div groups blocks of content, span groups small pieces of text inside a line.</p>
+
+<p>The difference is important. A div is for big chunks of content that sit on their own. A span is for a word or a phrase sitting inside a paragraph.</p>
+
+<p>Here is an example. On Nadia's page there is a line that mentions the technologies she works with. We want to highlight just those words, not the whole paragraph. That is where span comes in:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<p>
+  She has worked extensively with
+  <span>React</span> and
+  <span>Node.js</span> throughout her career.
+</p>
+  </template>
+</section>
+
+<p>Nothing looks different yet. Just like div, a span is invisible on its own. But now those two words are marked up separately from the rest of the text. We can target them with CSS and style just them.</p>
+
+<p>Let us add a little CSS to see it:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<p>
+  She has worked extensively with
+  <span>React</span> and
+  <span>Node.js</span> throughout her career.
+</p>
+
+<style>
+  span {
+    background-color: lightblue;
+  }
+</style>
+  </template>
+</section>
+
+<p>Only React and Node.js are highlighted. The rest of the paragraph stays exactly the same. That is span. It lets you reach inside a line and mark up just the part you want.</p>
+
+<h2>Block and Inline Elements</h2>
+
+<p>Now that you have seen both div and span in action there is one important concept worth understanding. The difference between block and inline elements.</p>
+
+<p>Block elements always take up the full width of the page even if the content inside is short. They always start on a new line and push everything else below them.</p>
+
+<p>div is a block element. When you added the yellow background you could see it stretched all the way across the page, not just behind the text. That is block behavior.</p>
+
+<p>p is also a block element. Every paragraph starts on a new line and pushes the next one below it.</p>
+
+<p>Inline elements only take up as much space as the content inside them. They sit within the line of text without breaking it.</p>
+
+<p>span is an inline element. When you highlighted React and Node.js the background only appeared behind those exact words. The rest of the sentence stayed on the same line. That is inline behavior.</p>
+
+<p>Here is a simple way to remember it:</p>
+
+<p>Block elements are like paragraphs in a book. Each one starts on its own line and takes up the full width.</p>
+
+<p>Inline elements are like highlighting a word with a marker. Only that word gets highlighted. Everything around it stays exactly where it was.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Most HTML elements are either block or inline. As you learn more elements you will start to naturally recognise which type each one is.</p>
+</div>
+
+<h2>Putting It All Together</h2>
+
+<p>Here is Nadia's page with everything from this lesson. Sections organized with div, key terms marked up with span, and a little CSS so you can see it all working:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Nadia</h1>
+<hr>
+
+<div>
+  <h2>Early Life</h2>
+  <p>Nadia was born in New York City in 1988.</p>
+  <p>She grew up with a strong curiosity about technology and how things worked.</p>
+</div>
+
+<div>
+  <h2>Career</h2>
+  <p>She started her career as a junior web developer in 2010.</p>
+  <p>
+    She has worked extensively with
+    <span>React</span> and
+    <span>Node.js</span> throughout her career.
+  </p>
+</div>
+
+<div>
+  <h2>Teaching</h2>
+  <p>She began teaching online in 2015 and has since helped thousands of beginners.</p>
+  <p>Her courses are known for being clear, practical, and beginner friendly.</p>
+</div>
+
+<style>
+  div {
+    background-color: lightyellow;
+  }
+  span {
+    background-color: lightblue;
+  }
+</style>
+  </template>
+</section>
+
+<p>Try editing it yourself. Add another div for a new section. Wrap a different word in a span and change its background color. The more you experiment the more it clicks.</p>
+
+<div class="challenge" data-title="Organize your own page with divs and spans"
+  data-description="Your task has two parts. Part 1: Create a simple page about yourself with three sections — About Me, Skills, and Hobbies. Wrap each section in its own div. Each div should have a heading and at least one paragraph. Part 2: Inside the Skills section, wrap two of your skills in a span each. Add CSS to give each div a light yellow background and each span a light blue background."
+  data-checks="div,span,style"
+  data-solution="&lt;div&gt;
+  &lt;h2&gt;About Me&lt;/h2&gt;
+  &lt;p&gt;My name is Alex. I am learning to code.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;h2&gt;Skills&lt;/h2&gt;
+  &lt;p&gt;I have been learning &lt;span&gt;HTML&lt;/span&gt; and &lt;span&gt;CSS&lt;/span&gt; this month.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;h2&gt;Hobbies&lt;/h2&gt;
+  &lt;p&gt;I enjoy reading, hiking, and building small projects.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  div {
+    background-color: lightyellow;
+  }
+  span {
+    background-color: lightblue;
+  }
+&lt;/style&gt;">
+</div>
+
+<p>Your page is really taking shape now. You have headings, paragraphs, images, links, lists, tables, forms, and now proper divisions.</p>
+
+<p>In the next lesson we are going to give your page real meaningful structure using semantic HTML. Instead of just grouping things with div, you will learn how to tell the browser exactly what each part of the page actually is.</p>
+
+<p>Next — <a href="/html/semantic-html">Semantic HTML</a></p>

@@ -7,29 +7,46 @@ export interface LessonGroup {
 
 export const htmlLessonGroups: LessonGroup[] = [
   {
-    title: "HTML Basics",
+    title: "Getting Started",
     lessons: [
       {
         slug: "introduction",
-        title: "Understanding HTML",
+        title: "What is HTML",
         description: "Learn what HTML is and how it works. Understand the foundation of every webpage on the internet before writing your first line of code.",
         readTime: "5 min read",
         difficulty: "Beginner",
       },
       {
-        slug: "tags",
+        slug: "setting-up",
         title: "Setting Up HTML",
-        description: "Learn how HTML tags work and how to write your first HTML code.",
+        description: "Learn how to set up your HTML environment. Write your first HTML file and open it in a browser. Step by step guide for Windows and Mac.",
         readTime: "4 min read",
         difficulty: "Beginner",
       },
+    ],
+  },
+  {
+    title: "Text",
+    lessons: [
       {
-        slug: "test",
-        title: "Text Basics",
-        description: "Structure your content with headings, paragraphs, bold, italic, and other text elements.",
+        slug: "tags",
+        title: "HTML Tags",
+        description: "Learn what HTML tags are and how they work. Understand opening tags, closing tags, and self closing tags with simple hands on examples.",
+        readTime: "8 min read",
+        difficulty: "Beginner",
+      },
+      {
+        slug: "headings",
+        title: "HTML Headings",
+        description: "Learn how to use HTML heading tags h1 through h6 to structure your page with titles and sections.",
         readTime: "5 min read",
         difficulty: "Beginner",
       },
+    ],
+  },
+  {
+    title: "Images",
+    lessons: [
       {
         slug: "images",
         title: "Images",
@@ -38,26 +55,17 @@ export const htmlLessonGroups: LessonGroup[] = [
         difficulty: "Beginner",
       },
       {
-        slug: "setup-vscode",
-        title: "Setting Up VS Code",
-        description: "Install and configure VS Code so you can write HTML on your own computer.",
-        readTime: "4 min read",
-        difficulty: "Beginner",
-      },
-      {
-        slug: "headings",
-        title: "Adding Images from Your Folder",
-        description: "Learn how to organise your images into a folder and link to them correctly.",
-        readTime: "5 min read",
-        difficulty: "Beginner",
-      },
-      {
         slug: "figure",
-        title: "Figure and Figure Caption",
+        title: "Figure and Caption",
         description: "Group images with captions using the figure and figcaption elements.",
         readTime: "4 min read",
         difficulty: "Beginner",
       },
+    ],
+  },
+  {
+    title: "Lists",
+    lessons: [
       {
         slug: "list",
         title: "Lists",
@@ -65,16 +73,26 @@ export const htmlLessonGroups: LessonGroup[] = [
         readTime: "5 min read",
         difficulty: "Beginner",
       },
+    ],
+  },
+  {
+    title: "Tables",
+    lessons: [
       {
         slug: "table",
-        title: "HTML Tables",
+        title: "Tables",
         description: "Display data in rows and columns using HTML table elements.",
         readTime: "6 min read",
         difficulty: "Beginner",
       },
+    ],
+  },
+  {
+    title: "Links",
+    lessons: [
       {
         slug: "link",
-        title: "HTML Links",
+        title: "Links",
         description: "Connect pages together using anchor tags and learn about relative and absolute URLs.",
         readTime: "5 min read",
         difficulty: "Beginner",
@@ -82,7 +100,7 @@ export const htmlLessonGroups: LessonGroup[] = [
     ],
   },
   {
-    title: "HTML Forms",
+    title: "Forms",
     lessons: [
       {
         slug: "forms",
@@ -94,13 +112,20 @@ export const htmlLessonGroups: LessonGroup[] = [
     ],
   },
   {
-    title: "HTML Structure",
+    title: "Structure",
     lessons: [
       {
-        slug: "document-structure",
-        title: "Basic HTML Page Structure",
-        description: "Understand the head and body structure that every HTML document follows.",
-        readTime: "6 min read",
+        slug: "divs-and-spans",
+        title: "Divs and Spans",
+        description: "Learn what div and span are in HTML and when to use them. Understand block and inline elements with simple hands on examples.",
+        readTime: "7 min read",
+        difficulty: "Beginner",
+      },
+      {
+        slug: "semantic-html",
+        title: "Semantic HTML",
+        description: "Learn what semantic HTML tags are and why they matter. Understand header, nav, main, section, aside, and footer with simple hands on examples.",
+        readTime: "7 min read",
         difficulty: "Beginner",
       },
     ],
