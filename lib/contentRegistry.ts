@@ -8,6 +8,7 @@ export interface ContentMeta {
   description: string;
   readTime: string;
   difficulty: string;
+  ogImage?: string;
 }
 
 export interface ContentSection {

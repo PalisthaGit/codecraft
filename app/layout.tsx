@@ -15,6 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.codingbanana.com"),
   title: "CodingBanana",
   description: "Learn Coding Without Feeling Overwhelmed",
 };

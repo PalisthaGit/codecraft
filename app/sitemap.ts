@@ -4,7 +4,7 @@ import { cssLessons } from '@/data/cssLessons'
 import { javascriptLessons } from '@/data/javascriptLessons'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://codingbanana.com'
+  const base = 'https://www.codingbanana.com'
 
   const htmlPages = htmlLessons.map((lesson) => ({
     url: `${base}/html/${lesson.slug}`,

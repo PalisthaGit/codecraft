@@ -15,6 +15,7 @@ export const htmlLessonGroups: LessonGroup[] = [
         description: "Learn what HTML is and how it works. Understand the foundation of every webpage on the internet before writing your first line of code.",
         readTime: "5 min read",
         difficulty: "Beginner",
+        ogImage: "/images/html-css-js-layers.png",
       },
       {
         slug: "setting-up",

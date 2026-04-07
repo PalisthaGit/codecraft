@@ -213,11 +213,7 @@ export default function HtmlIndexPage() {
         Learn HTML for beginners by building real projects
       </h2>
       <div className="space-y-4 text-[0.95rem] leading-[1.8] text-[#374151] mb-6">
-        <p>
-          This is a free, structured HTML course for complete beginners. You
-          learn every core concept step by step and use it on a real page right
-          away. No experience needed. Nothing to install.
-        </p>
+
         <div className="bg-[#f8f7ff] border-l-4 border-[#6367ff] rounded-r-[10px] px-5 py-4 space-y-3 text-[0.93rem] leading-[1.8] text-[#374151] italic">
           <p>
             I remember learning HTML for the first time. Tutorial after tutorial,

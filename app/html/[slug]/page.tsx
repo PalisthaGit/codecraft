@@ -35,6 +35,10 @@ export async function generateMetadata({
     }
   }
 
+  const ogImage = lesson.ogImage
+    ? [{ url: lesson.ogImage, width: 1200, height: 630, alt: lesson.title }]
+    : undefined
+
   return {
     title: `${lesson.title} | HTML Tutorial | CodingBanana`,
     description: lesson.description,
@@ -44,11 +48,13 @@ export async function generateMetadata({
       url: `https://www.codingbanana.com/html/${lesson.slug}`,
       siteName: 'CodingBanana',
       type: 'article',
+      ...(ogImage && { images: ogImage }),
     },
     twitter: {
-      card: 'summary',
+      card: ogImage ? 'summary_large_image' : 'summary',
       title: `${lesson.title} | CodingBanana`,
       description: lesson.description,
+      ...(ogImage && { images: [lesson.ogImage!] }),
     },
     alternates: {
       canonical: `https://www.codingbanana.com/html/${lesson.slug}`,
@@ -67,8 +73,31 @@ export default async function HtmlLessonPage({ params }: Props) {
   const prev = getPrevContent("html", slug);
   const next = getNextContent("html", slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: meta.title,
+    description: meta.description,
+    url: `https://www.codingbanana.com/html/${slug}`,
+    author: {
+      "@type": "Organization",
+      name: "CodingBanana",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CodingBanana",
+      url: "https://www.codingbanana.com",
+    },
+    educationalLevel: "Beginner",
+    ...(meta.ogImage && { image: `https://www.codingbanana.com${meta.ogImage}` }),
+  };
+
   return (
     <article className="max-w-3xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <nav className="flex items-center gap-1.5 text-xs text-[#64748b] mb-6">
         <Link href="/" className="text-[#6367ff] font-semibold hover:underline">Tutorial</Link>
         <span className="text-[#e5e7eb]">›</span>
