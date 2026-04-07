@@ -4,32 +4,24 @@ import { useState } from "react";
 
 const faqs = [
   {
-    q: "Do I need any experience to start this course?",
-    a: "No. This course is built for absolute beginners. If you have never written a single line of code in your life, this is exactly the right place to start. We begin from zero and build up slowly, one concept at a time.",
+    q: "Will I actually learn HTML or just follow along?",
+    a: "You will genuinely learn it. This is a structured course, which means every concept builds on the one before it, and every lesson has a challenge at the end where you apply what you learned with no help at all. If you can complete the challenge, you understood the concept. By the time you finish all eight lessons, HTML will actually be in your head because you used it, not just read about it.",
   },
   {
-    q: "How long does it take to learn HTML?",
-    a: "With this course you can get through the basics in a weekend. Each lesson is short and focused. Most people complete the full course in a few days to a week depending on how much time they spend practicing.",
-  },
-  {
-    q: "What will I have at the end?",
-    a: "A real working Wikipedia-style portfolio page built entirely in HTML. Not a toy project. A real page with your name, your story, and your work on it. Something you can actually show people.",
+    q: "I have never written a line of code. Is this really for me?",
+    a: "Yes, genuinely. This course was built for complete beginners who have never touched code before. We do not assume you know anything. Lesson one starts from what HTML actually is and builds up from there, one small step at a time. If you have never written a single tag in your life, you are exactly who this is for.",
   },
   {
     q: "Do I need to install anything?",
-    a: "No. Everything runs in your browser. Open the site, start the lesson, write code, see the result. That is it.",
+    a: "Nothing at all. The code editor is built right into each lesson. You open the page in your browser and you are ready to go. That is it.",
   },
   {
-    q: "Is this course free?",
-    a: "Yes. Every lesson, every exercise, every challenge. Free. Always.",
+    q: "Does the course cover HTML forms, tables, links and images?",
+    a: "Yes. The course covers all the core HTML concepts including headings, paragraphs, images, lists, tables, links, forms, and semantic structure. Every single one is used on a real project, not just shown in an isolated example.",
   },
   {
-    q: "What can I build with just HTML?",
-    a: "More than you think. HTML is the foundation of every single webpage on the internet. With just HTML you can build portfolio pages, personal websites, simple blog pages, and project showcases. Once you have HTML down, adding CSS and JavaScript on top becomes so much easier.",
-  },
-  {
-    q: "I have tried learning HTML before and always gave up halfway. Will this be different?",
-    a: "Yes. Because here you are not learning in isolation. Every concept connects to the real page you are building. You always know why you are learning something. You always see it working in front of you. That is what makes it stick.",
+    q: "Is this free?",
+    a: "Completely free. No account needed, no credit card, nothing. Open the first lesson and start building.",
   },
 ];
 
