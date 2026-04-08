@@ -1,36 +1,29 @@
-<div class="definition">
-    Links connect pages together. They are what makes the web a web. In HTML you create a link with the
-    <code>&lt;a&gt;</code> tag.
-</div>
-
-<p>You have seen plenty of websites up to now.</p>
-
-<p>Have you ever noticed that some text on a page is blue and underlined? You hover over it and your cursor changes. You
-    click it and it takes you somewhere else. Another page, another website, or even just a different section on the
-    same page.</p>
-
-<p>Those are links. And they are everywhere. Take a look at this page.</p>
+<p>You have seen plenty of websites up to now. Have you ever noticed that some text is blue and looks a little different
+    from the rest? Take a look at this page right here:</p>
 
 <div class="wiki-preview">
     <div class="wiki-preview-label">👀 Here is what you see on the page</div>
     <div class="wiki-preview-body">
         <div class="wiki-preview-main">
-            <h1 class="wiki-preview-title">Nadia</h1>
+            <h1 class="wiki-preview-title">Nadia Rivera</h1>
             <hr class="wiki-preview-hr">
-            <p class="wiki-preview-text"><strong>Nadia</strong> (born 1988) is an American <a href="#"
-                    style="color:#3366cc;">software engineer</a>, <a href="#" style="color:#3366cc;">web developer</a>,
-                <a href="#" style="color:#3366cc;">educator</a>, and <a href="#" style="color:#3366cc;">content
-                    creator</a>. With over 10 years of professional experience in <a href="#" style="color:#3366cc;">web
-                    development</a>, she has become one of the most influential voices in <a href="#"
-                    style="color:#3366cc;">tech education</a>.
+            <p class="wiki-preview-text">
+                <strong>Nadia Rivera</strong> (born March 14, 1993) is an American
+                <a href="#" style="color:#3366cc;">software engineer</a>,
+                educator, and content creator based in
+                <a href="#" style="color:#3366cc;">New York City</a>.
+                She is known for her work in
+                <a href="#" style="color:#3366cc;">web development</a> education.
+                Rivera began programming at the age of 15 after building a fan page
+                using <a href="#" style="color:#3366cc;">HTML</a> and CSS.
             </p>
         </div>
         <div class="wiki-preview-sidebar">
             <div class="wiki-preview-photo">
-                <img src="nadia.png" alt="Nadia" style="width:100%;height:100%;object-fit:cover" />
+                <img src="nadia.png" alt="Nadia Rivera" style="width:100%;height:100%;object-fit:cover" />
             </div>
             <div class="wiki-preview-facts">
-                <p><strong>Born:</strong> 1988</p>
+                <p><strong>Born:</strong> March 14, 1993</p>
                 <p><strong>From:</strong> <a href="#" style="color:#3366cc;">New York City</a></p>
                 <p><strong>Known for:</strong> <a href="#" style="color:#3366cc;">Web dev education</a></p>
             </div>
@@ -38,131 +31,264 @@
     </div>
 </div>
 
-<p>See all that blue text? Every single one of those is a link. Click any of them and you go somewhere. That is the
-    whole idea behind links. They connect pages together. They are literally what makes the web a web.</p>
+<p>See those blue words like "software engineer", "New York City", and "HTML"? Those are links. You can click them and
+    they will take you somewhere else. Could be another page, a different website, or just another section on the same
+    page you are already on.</p>
 
-<p>Now let us learn how to make them.</p>
+<p>So how do you make one of those in HTML?</p>
 
-<h2>The a Tag</h2>
+<p>You use the <code>&lt;a&gt;</code> tag. The "a" stands for anchor. Think of it like saying "this text is pointing
+    somewhere." Here is the basic format:</p>
 
-<p>To create a link you use the <code>&lt;a&gt;</code> tag. The <code>a</code> stands for anchor. Think of it like
-    saying "this text points somewhere."</p>
+<pre><code class="language-html">&lt;a href="URL"&gt;Link Text&lt;/a&gt;</code></pre>
 
-<p>Here is the basic format:</p>
+<p><code>href</code> is where the link goes. Whatever you put between the <code>&lt;a&gt;</code> and
+    <code>&lt;/a&gt;</code> is what the user sees and clicks.</p>
 
-<pre><code class="language-html">&lt;a href="https://example.com"&gt;Click here&lt;/a&gt;</code></pre>
+<h2>Add a Link to Your Webpage</h2>
 
-<p>Two things are happening here. <code>href</code> is where the link goes. And whatever you put between the opening and
-    closing tag is the clickable text.</p>
-
-<section class="try-example">
-    <template class="try-default-html">
-        <p>Nadia is a <a href="https://en.wikipedia.org/wiki/Software_engineering">software engineer</a> and coding
-            teacher.</p>
-    </template>
-</section>
-
-<p>Click the link and it takes you there. That is all there is to it.</p>
-
-<h2>Opening in a New Tab</h2>
-
-<p>By default when you click a link it opens in the same tab. Your current page disappears and the new one takes over.
-</p>
-
-<p>Sometimes you do not want that. Sometimes you want the link to open in a new tab so your page stays open. For that
-    you add the <code>target</code> attribute with a value of <code>_blank</code>.</p>
+<p>Look at the first paragraph on the Nadia page. It says she used HTML and CSS to build her first fan page. Those words
+    are just sitting there as plain text right now. Let's turn "HTML" into a link that goes to the HTML course page.</p>
 
 <section class="try-example">
     <template class="try-default-html">
-        <p>Nadia is a <a href="https://en.wikipedia.org/wiki/Software_engineering" target="_blank">software engineer</a>
-            and coding teacher.</p>
+        <p>
+            Rivera began programming at the age of 15 after building a fan page for her
+            favourite band using
+            <a href="https://www.codingbanana.com/html">HTML</a>
+            and CSS.
+        </p>
+    </template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
     </template>
 </section>
 
-<p>Now when someone clicks the link it opens in a new tab and your page stays exactly where it was.</p>
+<p>Now clicking "HTML" takes the user to the HTML course page.</p>
 
-<div class="tip">
-    <span>💡</span>
-    <p>By default the browser treats every link as if you wrote <code>target="_self"</code> which means open in the
-        current tab. So these two are exactly the same: <code>&lt;a href="..."&gt;</code> and
-        <code>&lt;a href="..." target="_self"&gt;</code>.
-    </p>
+
+
+<div class="challenge" data-intercept-links="true" data-title="Turn CSS into a link"
+    data-description="Do the same for &quot;CSS.&quot; Turn it into a link that goes to the CSS course page. The link you need is: https://www.codingbanana.com/css"
+    data-checks="a[href='https://www.codingbanana.com/css']" data-solution="&lt;p&gt;
+  Rivera began programming at the age of 15 after building a fan page for her
+  favourite band using
+  &lt;a href=&quot;https://www.codingbanana.com/html&quot;&gt;HTML&lt;/a&gt;
+  and
+  &lt;a href=&quot;https://www.codingbanana.com/css&quot;&gt;CSS&lt;/a&gt;.
+  She went on to study computer science at New York University.
+&lt;/p&gt;">
+</div>
+
+<h2>The target Attribute</h2>
+
+<p>By default when someone clicks a link it opens in the same tab. Your page disappears and they are taken somewhere
+    else.</p>
+
+<p>Sometimes you do not want that. That is where the <code>target</code> attribute comes in. To open a link in a new
+    tab, just add <code>target="_blank"</code> like this:</p>
+
+<section class="try-example">
+    <template class="try-default-html"><a href="https://www.codingbanana.com/html" target="_blank">HTML</a></template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
+    </template>
+</section>
+<p>Now when someone clicks "HTML" a new tab opens and the Nadia page stays right where it is.</p>
+
+
+
+<h2>How Links Open by Default</h2>
+
+<p>By default a link opens in the same tab. You do not have to write anything special to make that happen. Behind the
+    scenes the browser is treating your link like this:</p>
+
+<pre><code class="language-html">&lt;a href="..." target="_self"&gt;Link&lt;/a&gt;</code></pre>
+
+<p>It assumes <code>target="_self"</code> even if you do not write it. It just means "open this in the current tab." So
+    you only need to add <code>target</code> when you want something different.</p>
+
+<div class="challenge" data-intercept-links="true" data-title="Open both links in a new tab"
+    data-description="The Nadia page mentions she used HTML and CSS to build her first project. Turn both of those links into ones that open in a new tab."
+    data-checks="a[target='_blank']" data-solution="&lt;p&gt;
+  Rivera began programming at the age of 15 after building a fan page for her
+  favourite band using
+  &lt;a href=&quot;https://www.codingbanana.com/html&quot; target=&quot;_blank&quot;&gt;HTML&lt;/a&gt;
+  and
+  &lt;a href=&quot;https://www.codingbanana.com/css&quot; target=&quot;_blank&quot;&gt;CSS&lt;/a&gt;.
+  She went on to study computer science at New York University.
+&lt;/p&gt;">
 </div>
 
 <h2>Jumping to a Section on the Same Page</h2>
 
-<p>You know how on a long page there is sometimes a table of contents at the top? You click "Early Life" and the page
-    instantly scrolls you down to that section without loading a new page.</p>
+<p>Look at the Contents box on the Nadia page up there. It has items like "Early life and education", "Career", "Content
+    creation" and so on. When you click one of those it scrolls you straight down to that section without loading a new
+    page at all.</p>
 
-<p>That is called an internal link. Instead of giving the link a full URL you just use a <code>#</code> followed by the
-    ID of the section you want to scroll to.</p>
+<p>That is internal linking. You use a regular <code>&lt;a&gt;</code> tag but instead of a full URL you just use a hash
+    <code>#</code> followed by the ID of the section you want to scroll to:</p>
 
-<p>Then on the section you want to jump to you add a matching <code>id</code> attribute. When someone clicks the link
-    the browser looks for an element on the page with that ID and scrolls straight to it.</p>
+<pre><code class="language-html">&lt;a href="#career"&gt;Career&lt;/a&gt;</code></pre>
+
+<p>This is telling the browser: scroll to whatever element on this page has the ID <code>career</code>. Then you go to
+    that section heading and give it that ID:</p>
+
+<pre><code class="language-html">&lt;h2 id="career"&gt;Career&lt;/h2&gt;</code></pre>
+
+<p>Now clicking the link scrolls the user right down to that heading.</p>
 
 <section class="try-example">
-    <template class="try-default-html"><a href="#career">Jump to Career</a>
-
-        <h2>Early Life</h2>
-        <p>She started coding at the age of 15 and never looked back.</p>
+    <template class="try-default-html"><a href="#career">Career</a>
 
         <h2 id="career">Career</h2>
-        <p>Today she helps thousands of beginners learn to build for the web.</p>
+        <p>Rivera began her career as a front-end developer.</p>
+    </template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
     </template>
 </section>
 
-<h2>Link Inside an Image</h2>
+<div class="challenge" data-intercept-links="true" data-title="Link to the Content Creation section"
+    data-description="Create a link that says &quot;Content creation&quot; and when clicked scrolls down to that section on the page. Remember to add a matching id to the heading."
+    data-checks="a[href='#content-creation'],#content-creation" data-solution="&lt;a href=&quot;#content-creation&quot;&gt;Content creation&lt;/a&gt;
 
-<p>You know how sometimes you click on a photo and it takes you to another page? That is just a regular link. But
-    instead of wrapping text inside the <code>&lt;a&gt;</code> tag you wrap an image. Same idea, different content
-    inside.</p>
+&lt;h2 id=&quot;early-life&quot;&gt;Early life and education&lt;/h2&gt;
+&lt;p&gt;Nadia Rivera was born on March 14, 1993 in New York City.&lt;/p&gt;
 
-<section class="try-example">
-    <template class="try-default-html"><a href="https://en.wikipedia.org/wiki/Web_development" target="_blank">
-            <img src="nadia.png" width="250" height="auto" alt="Photo of Nadia">
-        </a></template>
-</section>
+&lt;h2 id=&quot;career&quot;&gt;Career&lt;/h2&gt;
+&lt;p&gt;Rivera began her career as a front-end developer.&lt;/p&gt;
 
-<p>Click the image and it takes you to the link. Clean and simple.</p>
-
-<h2>Absolute and Relative Links</h2>
-
-<p>You have actually been using two types of links already without realising it.</p>
-
-<p>An absolute link has the full web address including <code>https://</code>. No matter where your HTML file is it will
-    always point to the exact same place.</p>
-
-<pre><code class="language-html">&lt;a href="https://en.wikipedia.org/wiki/Nadia"&gt;Nadia on Wikipedia&lt;/a&gt;</code></pre>
-
-<p>A relative link does not have <code>https://</code> or a domain name. The browser looks in the same folder as your
-    HTML file and finds it from there.</p>
-
-<pre><code class="language-html">&lt;img src="images/nadia.png"&gt;</code></pre>
-
-<p>If the file is not in the right folder the browser cannot find it. That is why it is called relative. It is always
-    relative to where your HTML file lives.</p>
+&lt;h2 id=&quot;content-creation&quot;&gt;Content creation&lt;/h2&gt;
+&lt;p&gt;Rivera runs one of the most popular web development channels online.&lt;/p&gt;">
+</div>
 
 <div class="tip">
     <span>💡</span>
-    <p>Use absolute links for external websites. Use relative links for files on your own computer like images and other
-        pages you built yourself.</p>
+    <p>The IDs in your links and your headings have to match exactly, including lowercase letters and hyphens. If they
+        do not match, nothing will happen when you click.</p>
 </div>
 
-<div class="challenge" data-title="Build a table of contents for your profile"
-    data-description="Add a Table of Contents section to your profile page. Give it an h2 heading and add an unordered list with links to each section on your page. Then add matching id attributes to each of your section headings so the links actually scroll to the right place when clicked."
-    data-checks="a,ul,li" data-solution="&lt;h2&gt;Table of Contents&lt;/h2&gt;
+<h2>Assignment – Build the Full Table of Contents</h2>
+
+<p>Look at the Contents box on the Nadia page. That whole thing is just a list of internal links. Your job is to build
+    that exact same thing for your page.</p>
+
+<div class="challenge" data-intercept-links="true" data-title="Build the full table of contents"
+    data-description="Add a Contents section with an unordered list of internal links for: Early life and education, Career, Content creation, Projects, Talks and writing, and Contact. Add matching id attributes to each section heading."
+    data-checks="ul,li,a[href^='#']" data-solution="&lt;h2&gt;Contents&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;#background&quot;&gt;Background&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#work&quot;&gt;Work&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#skills&quot;&gt;Skills&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#early-life&quot;&gt;Early life and education&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#career&quot;&gt;Career&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#content-creation&quot;&gt;Content creation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#projects&quot;&gt;Projects&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#talks-and-writing&quot;&gt;Talks and writing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
-&lt;p&gt;Where you are from and how you got started.&lt;/p&gt;
+&lt;h2 id=&quot;early-life&quot;&gt;Early life and education&lt;/h2&gt;
+&lt;p&gt;Nadia Rivera was born on March 14, 1993 in New York City.&lt;/p&gt;
 
-&lt;h2 id=&quot;work&quot;&gt;Work&lt;/h2&gt;
-&lt;p&gt;What you do or what you are learning.&lt;/p&gt;
+&lt;h2 id=&quot;career&quot;&gt;Career&lt;/h2&gt;
+&lt;p&gt;Rivera began her career as a front-end developer.&lt;/p&gt;
 
-&lt;h2 id=&quot;skills&quot;&gt;Skills&lt;/h2&gt;
-&lt;p&gt;Things you know or are working on.&lt;/p&gt;">
+&lt;h2 id=&quot;content-creation&quot;&gt;Content creation&lt;/h2&gt;
+&lt;p&gt;Rivera runs one of the most popular web development channels online.&lt;/p&gt;
+
+&lt;h2 id=&quot;projects&quot;&gt;Projects&lt;/h2&gt;
+&lt;p&gt;She has contributed to several open-source front-end tools.&lt;/p&gt;
+
+&lt;h2 id=&quot;talks-and-writing&quot;&gt;Talks and writing&lt;/h2&gt;
+&lt;p&gt;Rivera has spoken at conferences across the United States.&lt;/p&gt;
+
+&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;You can reach Nadia through her website or social media profiles.&lt;/p&gt;">
 </div>
+
+<h2>Link Inside an Image</h2>
+
+<p>You know how sometimes you click a photo and it takes you somewhere? That is just a regular link wrapped around an
+    image instead of text. Same idea, just a different tag inside.</p>
+
+<p>On the Nadia page there is a photo of her in the sidebar. Let's turn that into a link. When someone clicks her photo
+    it should take them to her wiki page.</p>
+
+<section class="try-example">
+    <template class="try-default-html">
+        <figure>
+            <a href="https://www.codingbanana.com/html/nadia-wiki" target="_blank">
+                <img src="nadia.png" width="300" height="auto" alt="Nadia Rivera in 2023" />
+            </a>
+            <figcaption>Nadia Rivera in 2023</figcaption>
+        </figure>
+    </template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
+    </template>
+</section>
+
+<p>Now clicking her photo opens her wiki page in a new tab.</p>

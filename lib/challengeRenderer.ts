@@ -4,6 +4,26 @@ declare global {
   }
 }
 
+const LINK_INTERCEPT_JS = `document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal
+    ? 'Jumped to section: ' + href
+    : isNewTab ? 'Opens in a new tab \u2192 ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});`;
+
 function escHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
@@ -26,10 +46,13 @@ function initChallenge(el: HTMLElement): void {
   const lang        = el.dataset.lang ?? "html";         // "html" | "css"
   const hasCssTab   = lang === "css" || "starterCss" in el.dataset;
 
+  const interceptLinks = !!el.dataset.interceptLinks;
+
   // Build the try-example attributes — add data-css so the CSS tab appears
+  const hiddenJsAttr = interceptLinks ? ` data-hidden-js="${escHtml(LINK_INTERCEPT_JS)}"` : "";
   const editorAttrs = hasCssTab
-    ? `data-mode="edit" data-html="${escHtml(starterHtml)}" data-css="${escHtml(starterCss)}"`
-    : `data-mode="edit" data-html="${escHtml(starterHtml)}"`;
+    ? `data-mode="edit" data-html="${escHtml(starterHtml)}" data-css="${escHtml(starterCss)}"${hiddenJsAttr}`
+    : `data-mode="edit" data-html="${escHtml(starterHtml)}"${hiddenJsAttr}`;
 
   // Build target srcdoc — wrap solution in a minimal document
   const targetSrc = hasCssTab
@@ -72,6 +95,31 @@ function initChallenge(el: HTMLElement): void {
       }
     } catch (_) { /* cross-origin guard */ }
   });
+  if (interceptLinks) {
+    targetFrame.addEventListener("load", () => {
+      try {
+        const doc = targetFrame.contentDocument;
+        if (!doc) return;
+        doc.addEventListener("click", (e: MouseEvent) => {
+          const link = (e.target as Element).closest("a");
+          if (!link) return;
+          const href = link.getAttribute("href");
+          if (!href) return;
+          e.preventDefault();
+          const isInternal = href.startsWith("#");
+          const existing = document.getElementById("__link-toast");
+          if (existing) existing.remove();
+          const isNewTab = (link as HTMLAnchorElement).target === "_blank";
+          const toast = document.createElement("div");
+          toast.id = "__link-toast";
+          toast.textContent = isInternal ? `Jumped to section: ${href}` : isNewTab ? `Opens in a new tab → ${href}` : `Link goes to: ${href}`;
+          toast.style.cssText = "position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);";
+          document.body.appendChild(toast);
+          setTimeout(() => toast.remove(), 3000);
+        });
+      } catch (_) { /* cross-origin guard */ }
+    });
+  }
 
   const checkBtn   = el.querySelector<HTMLButtonElement>(".challenge-check-btn")!;
   const resultDiv  = el.querySelector<HTMLElement>(".challenge-result")!;

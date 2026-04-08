@@ -135,13 +135,15 @@
 
     // Read defaults from <template> elements (HTML lesson files)
     // or fall back to data-* attributes (React component usage)
-    var tplHtml = section.querySelector('template.try-default-html');
-    var tplCss  = section.querySelector('template.try-default-css');
-    var tplJs   = section.querySelector('template.try-default-js');
+    var tplHtml     = section.querySelector('template.try-default-html');
+    var tplCss      = section.querySelector('template.try-default-css');
+    var tplJs       = section.querySelector('template.try-default-js');
+    var tplHiddenJs = section.querySelector('template.try-hidden-js');
 
-    var HTML_DEFAULT = tplHtml ? dedent(tplHtml.innerHTML) : (section.dataset.html || '');
-    var CSS_DEFAULT  = tplCss  ? dedent(tplCss.innerHTML)  : (section.dataset.css  || '');
-    var JS_DEFAULT   = tplJs   ? dedent(tplJs.innerHTML)   : (section.dataset.js   || '');
+    var HTML_DEFAULT = tplHtml     ? dedent(tplHtml.innerHTML)     : (section.dataset.html || '');
+    var CSS_DEFAULT  = tplCss      ? dedent(tplCss.innerHTML)      : (section.dataset.css  || '');
+    var JS_DEFAULT   = tplJs       ? dedent(tplJs.innerHTML)       : (section.dataset.js   || '');
+    var HIDDEN_JS    = tplHiddenJs ? dedent(tplHiddenJs.innerHTML) : (section.dataset.hiddenJs || '');
 
     var hasCss    = tplCss !== null || section.hasAttribute('data-css');
     var hasJs     = tplJs  !== null || section.hasAttribute('data-js');
@@ -461,15 +463,16 @@
     // ── Build srcdoc ─────────────────────────────────────────────────────
     function buildSrc() {
       var html = htmlPane.ta.value;
-      if (!hasCss && !hasJs) return html;
+      if (!hasCss && !hasJs && !HIDDEN_JS) return html;
       var css = cssPane ? cssPane.ta.value : '';
       var js  = jsPane  ? jsPane.ta.value  : '';
+      var allJs = (js || '') + (HIDDEN_JS ? '\n' + HIDDEN_JS : '');
       return [
         '<!DOCTYPE html><html><head>',
         css ? '<style>' + css + '</style>' : '',
         '</head><body style="margin:0;padding:16px;font-family:sans-serif;overflow-x:hidden;">',
         html,
-        js ? '<scr' + 'ipt>' + js + '</scr' + 'ipt>' : '',
+        allJs ? '<scr' + 'ipt>' + allJs + '</scr' + 'ipt>' : '',
         '</body></html>'
       ].join('');
     }
