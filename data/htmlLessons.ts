@@ -98,6 +98,13 @@ export const htmlLessonGroups: LessonGroup[] = [
         readTime: "5 min read",
         difficulty: "Beginner",
       },
+      {
+        slug: "absolute-relative-links",
+        title: "Absolute vs Relative Links",
+        description: "Understand the difference between absolute and relative links in HTML and know when to use each one.",
+        readTime: "6 min read",
+        difficulty: "Beginner",
+      },
     ],
   },
   {

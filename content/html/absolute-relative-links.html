@@ -1,0 +1,228 @@
+<p>An absolute link includes the full URL starting with <code>https://</code>, so it works from anywhere on the
+    web. A relative link contains only a file path — no domain — so the browser resolves it relative to where your
+    current HTML file is saved. Both appear in <code>&lt;a href="..."&gt;</code> and <code>&lt;img src="..."&gt;</code>
+    tags, and knowing when to use each one is a foundational HTML skill.</p>
+
+<h2>What is an absolute link in HTML?</h2>
+
+<p>An absolute link (also called an absolute URL) contains the full web address of a resource — the protocol, the
+    domain name, and the file path. Here is an example in an anchor tag:</p>
+
+<pre><code class="language-html">&lt;a href="https://www.codingbanana.com/html"&gt;HTML&lt;/a&gt;</code></pre>
+
+<p>And for images:</p>
+
+<pre><code class="language-html">&lt;img
+  src="https://www.codingbanana.com/images/nadia-2023.jpg"
+  alt="Nadia Rivera in 2023"
+/&gt;</code></pre>
+
+<p>Because the full address is written out, the browser always knows exactly where to go. It does not matter where your
+    HTML file is saved on your computer, or which folder it lives in. The link will work the same way every time.</p>
+
+<div class="tip">
+    <span>💡</span>
+    <p>Use absolute links when linking to external websites, images hosted on another domain or CDN, or resources that
+        live outside your own project folder.</p>
+</div>
+
+<section class="try-example">
+    <template class="try-default-html"><a href="https://www.codingbanana.com/html">HTML course</a>
+
+<img
+  src="https://www.codingbanana.com/images/nadia-2023.jpg"
+  alt="Nadia Rivera in 2023"
+/></template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
+    </template>
+</section>
+
+<h2>What is a relative link in HTML?</h2>
+
+<p>A relative link (also called a relative URL or relative file path) contains only the path to a file — no
+    <code>https://</code>, no domain name. Here is an example:</p>
+
+<pre><code class="language-html">&lt;img
+  src="images/nadia.jpg"
+  alt="Nadia Rivera in 2023"
+/&gt;</code></pre>
+
+<p>The browser looks at the folder where your current HTML file is saved, then navigates from there. If your HTML file
+    is in a folder called <code>my-site/</code> and your image is saved at <code>my-site/images/nadia.jpg</code>, the
+    relative path <code>images/nadia.jpg</code> leads the browser straight to it.</p>
+
+<p>If the file is not where the path expects it to be, the link breaks — the image will not load, or the page will not
+    open.</p>
+
+<div class="tip">
+    <span>💡</span>
+    <p>Use relative links when linking to other pages within your own project, images, CSS files, or JavaScript files
+        saved in your own folders, or any resource that lives in the same project as your HTML file.</p>
+</div>
+
+<section class="try-example">
+    <template class="try-default-html"><img
+  src="images/nadia.jpg"
+  alt="Nadia Rivera in 2023"
+/></template>
+    <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href) return;
+  var isInternal = href.startsWith('#');
+  if (!isInternal) e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var isNewTab = link.target === '_blank';
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = isInternal ? 'Jumped to section: ' + href : isNewTab ? 'Opens in a new tab → ' + href : 'Link goes to: ' + href;
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
+    </template>
+</section>
+
+<h2>Absolute vs relative links: quick comparison</h2>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Absolute link</th>
+                <th>Relative link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Starts with</strong></td>
+                <td><code>https://</code> and a domain</td>
+                <td>A folder name or filename</td>
+            </tr>
+            <tr>
+                <td><strong>Includes domain?</strong></td>
+                <td>Yes</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><strong>Works from anywhere?</strong></td>
+                <td>Yes</td>
+                <td>Only if your file structure is correct</td>
+            </tr>
+            <tr>
+                <td><strong>Best for</strong></td>
+                <td>External sites, hosted images</td>
+                <td>Your own pages and local assets</td>
+            </tr>
+            <tr>
+                <td><strong>Breaks if you move files?</strong></td>
+                <td>No</td>
+                <td>Yes, if paths change</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h2>Identifying absolute and relative links: a worked example</h2>
+
+<p>Here are links from the Nadia page, sorted by type.</p>
+
+<p>Absolute links — each one starts with <code>https://</code>:</p>
+
+<pre><code class="language-html">&lt;a href="https://www.codingbanana.com/html"&gt;HTML&lt;/a&gt;
+
+&lt;a href="https://www.codingbanana.com/css"&gt;CSS&lt;/a&gt;
+
+&lt;a href="https://www.codingbanana.com/html/nadia-wiki"&gt;
+  &lt;img
+    src="images/nadia.jpg"
+    alt="Nadia Rivera in 2023"
+  /&gt;
+&lt;/a&gt;</code></pre>
+
+<p>Relative links — file paths with no domain:</p>
+
+<pre><code class="language-html">&lt;img
+  src="images/nadia.jpg"
+  alt="Nadia Rivera in 2023"
+/&gt;
+
+&lt;img
+  src="images/nyu-campus.jpg"
+  alt="New York University campus"
+/&gt;</code></pre>
+
+<p>Notice that the third absolute example wraps a relative image inside an absolute anchor tag. The
+    <code>&lt;a href="..."&gt;</code> is absolute because it points to an external URL. The
+    <code>&lt;img src="..."&gt;</code> inside it is still relative because it points to a local file.</p>
+
+<div class="challenge" data-intercept-links="true" data-title="Spot the absolute link"
+    data-description="Write an anchor tag that links to https://www.codingbanana.com/css and displays the text CSS. This is an absolute link because it includes the full URL."
+    data-checks="a[href='https://www.codingbanana.com/css']"
+    data-solution="&lt;a href=&quot;https://www.codingbanana.com/css&quot;&gt;CSS&lt;/a&gt;">
+</div>
+
+<div class="challenge" data-intercept-links="true" data-title="Write a relative image path"
+    data-description="Add an img tag that loads images/nyu-campus.jpg with the alt text &quot;New York University campus&quot;. Use a relative path — no https://, no domain."
+    data-checks="img[src='images/nyu-campus.jpg']"
+    data-solution="&lt;img src=&quot;images/nyu-campus.jpg&quot; alt=&quot;New York University campus&quot; /&gt;">
+</div>
+
+<h2>Frequently asked questions</h2>
+
+<h3>When should I use an absolute link vs a relative link?</h3>
+
+<p>Use relative links for everything inside your own project — your own pages, your CSS file, your images. Use absolute
+    links whenever you are pointing to something outside your project, like another website or a hosted image.</p>
+
+<h3>Do relative links break when you move files?</h3>
+
+<p>Yes. If you move your HTML file into a different folder without updating the paths, your relative links will point to
+    the wrong place and stop working. Absolute links are not affected by this because they always reference the full web
+    address.</p>
+
+<h3>Can I use relative links to link to external websites?</h3>
+
+<p>No. Relative links only work for files within your own project. To link to another website, you always need an
+    absolute link with the full <code>https://</code> address.</p>
+
+<h3>What does <code>../</code> mean in a relative link?</h3>
+
+<p>The <code>../</code> in a relative path means "go up one folder level." So <code>../images/photo.jpg</code> tells
+    the browser to go up one level from the current folder, then look for an <code>images</code> folder containing
+    <code>photo.jpg</code>. You can chain these: <code>../../</code> goes up two levels.</p>
+
+<pre><code class="language-html">&lt;!-- Go up one level, then into images/ --&gt;
+&lt;img src="../images/photo.jpg" alt="A photo" /&gt;
+
+&lt;!-- Go up two levels, then into assets/ --&gt;
+&lt;img src="../../assets/logo.png" alt="Logo" /&gt;</code></pre>
+
+<h2>What to remember</h2>
+
+<p>The difference comes down to one question: does the path start with <code>https://</code>? If yes, it is absolute.
+    If no, it is relative, and the browser will look for that file starting from wherever your HTML file lives.</p>
+
+<p>As you build more complex projects with multiple pages and folders, getting comfortable with relative paths becomes
+    one of the most practical skills in HTML.</p>
