@@ -82,7 +82,7 @@ export default function ContactPage() {
           </div>
           <h2 className="text-lg font-extrabold text-[#0f172a] mb-2">Message sent!</h2>
           <p className="text-sm text-[#64748b] leading-relaxed">
-            Thanks! Your message has been sent. We'll get back to you soon.
+            Thanks! Your message has been sent. We&apos;ll get back to you soon.
           </p>
           <button
             onClick={() => setFormState("idle")}

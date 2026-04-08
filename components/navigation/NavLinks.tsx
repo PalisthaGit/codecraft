@@ -220,7 +220,7 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
   const [completed, setCompleted] = useState<Set<string>>(new Set());
   const prevPathRef = useRef<string | null>(null);
 
-  // Hydrate from localStorage on mount
+  // Load persisted progress after mount to avoid SSR/client mismatch
   useEffect(() => {
     setCompleted(loadCompleted());
   }, []);

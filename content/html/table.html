@@ -1,12 +1,17 @@
 <div class="definition">
-    A table is a way to show information in rows and columns. Each row is a horizontal line of data, each column lines
-    up related values, and each individual box is called a cell.
+    A table organizes information into rows (horizontal lines) and columns (vertical lines). Where a row and column
+    meet,
+    you get a cell, and that is where your actual data lives.
 </div>
 
-<p>You have seen plenty of websites up to now.</p>
+<p>Look at the right side of any Wikipedia page. There is always a little box sitting there with a name at the top, rows
+    of facts below, and sometimes a signature at the bottom. That box is just an HTML table.</p>
 
-<p>Look at the right side of any Wikipedia page. There is always a box sitting there with facts laid out neatly. Name at
-    the top. Rows of information like birthday, occupation, years active. A signature at the bottom.</p>
+<p>Tables are perfect when you have structured information that people need to scan quickly. Think birthdays, job
+    titles,
+    prices, stats, anything that belongs in a grid.</p>
+
+<p>The infobox on the right is exactly what we are going to build together, step by step.</p>
 
 <div class="wiki-preview">
     <div class="wiki-preview-label">👀 Here is what you see on the page</div>
@@ -54,53 +59,52 @@
     </div>
 </div>
 
-<p>That box on the right is a table. Name at the top as the header. Rows of facts in the middle. All laid out neatly in
-    rows and columns.</p>
+<h2>Your First Table</h2>
 
-<p>Tables are great for showing structured data in a way that is easy to scan. Let us learn how to build one.</p>
+<p>Every table starts with the <code>&lt;table&gt;</code> tag. Just like any HTML element, it opens and closes.</p>
 
-<h2>Adding a Table</h2>
+<pre><code class="language-html">&lt;table&gt;&lt;/table&gt;</code></pre>
 
-<p>To create a table you use the <code>&lt;table&gt;</code> tag. On its own it just creates an empty table. You will not
-    see anything yet.</p>
+<p>Right now that gives you nothing, an invisible, empty table. To actually see something, you need to add rows and
+    cells
+    inside it.</p>
 
-<p>To actually show data you need to add rows and cells. Each row is made with <code>&lt;tr&gt;</code>. Inside a row you
-    add cells using <code>&lt;td&gt;</code>.</p>
+<h3>Rows and Cells</h3>
 
-<p>Here is a simple two column table:</p>
+<p>A row is made with <code>&lt;tr&gt;</code>, think of it as one horizontal line of data. Inside that row, each piece
+    of data gets its own cell using <code>&lt;td&gt;</code>.</p>
 
 <section class="try-example">
     <template class="try-default-html">
         <table>
             <tr>
                 <td>Born</td>
-                <td>1988, New York City</td>
+                <td>1988</td>
             </tr>
         </table>
     </template>
 </section>
 
-<p>It is working but it does not really look like a table yet. To make it clearer you can add a border using the
-    <code>border</code> attribute on the <code>&lt;table&gt;</code> tag.
-</p>
+<p>That creates one row with two cells. Still hard to see though, so let us add a border to make it visible.</p>
+
+<p>The <code>border</code> attribute adds a visible edge to your table. Modern projects use CSS for this, but while you
+    are learning the structure, <code>border="1"</code> is the quickest way to actually see what you are building.</p>
 
 <section class="try-example">
     <template class="try-default-html">
         <table border="1">
             <tr>
                 <td>Born</td>
-                <td>1988, New York City</td>
+                <td>1988</td>
             </tr>
         </table>
     </template>
 </section>
-
-<p>Now you can actually see the rows and columns clearly.</p>
 
 <h2>Adding More Rows</h2>
 
-<p>To add more data you just create another row with <code>&lt;tr&gt;</code> and add cells inside with
-    <code>&lt;td&gt;</code>. That is all there is to it.
+<p>Want more data? Just add another <code>&lt;tr&gt;</code> with more <code>&lt;td&gt;</code> cells inside. Each new
+    <code>&lt;tr&gt;</code> is a new row, and it is that simple.
 </p>
 
 <section class="try-example">
@@ -108,43 +112,45 @@
         <table border="1">
             <tr>
                 <td>Born</td>
-                <td>1988, New York City</td>
+                <td>1988</td>
             </tr>
             <tr>
                 <td>Nationality</td>
                 <td>American</td>
             </tr>
-            <tr>
-                <td>Occupation</td>
-                <td>Software Engineer, Educator</td>
-            </tr>
-            <tr>
-                <td>Years active</td>
-                <td>2010 to present</td>
-            </tr>
         </table>
     </template>
 </section>
 
-<h2>Table Header and Footer</h2>
+<div class="challenge" data-title="Add more rows to the table"
+    data-description="The table below has two rows. Add three more: Occupation → Software Engineer, Educator; Years active → 2010 to present; Works → Performances · Discography."
+    data-starter-html="&lt;table border=&quot;1&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Born&lt;/td&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Nationality&lt;/td&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;" data-checks="tr,td" data-solution="&lt;table border=&quot;1&quot;&gt;
+  &lt;tr&gt;&lt;td&gt;Born&lt;/td&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Nationality&lt;/td&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Occupation&lt;/td&gt;&lt;td&gt;Software Engineer, Educator&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Years active&lt;/td&gt;&lt;td&gt;2010 to present&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Works&lt;/td&gt;&lt;td&gt;Performances · Discography&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;">
+</div>
 
-<p>Right now the table is just a bunch of rows. But a well structured table has three parts.</p>
+<h2>Header, Body, and Footer</h2>
+
+<p>Your table is working, but it is just one big block of rows right now. Let us give it real structure.</p>
+
+<p>Think about the Wikipedia infobox again. The name at the very top is not just a regular row, it is a heading. And the
+    signature at the bottom belongs separately from the main facts. So we split the table into three named sections:</p>
 
 <ul>
-    <li>A header at the top for the title</li>
-    <li>A body in the middle for the main data</li>
-    <li>A footer at the bottom for things like a note or signature</li>
+    <li><code>&lt;thead&gt;</code> — the top (title, heading)</li>
+    <li><code>&lt;tbody&gt;</code> — the middle (your actual data)</li>
+    <li><code>&lt;tfoot&gt;</code> — the bottom (signature, totals, notes)</li>
 </ul>
 
-<p>This helps the browser, search engines, and screen readers understand what each part of the table actually is.</p>
-
-<p>For the header you wrap the top row in a <code>&lt;thead&gt;</code> tag and use <code>&lt;th&gt;</code> instead of
-    <code>&lt;td&gt;</code> which makes the text bold and marks it as a heading.
-</p>
-
-<p>For the body you wrap all the middle rows in a <code>&lt;tbody&gt;</code> tag.</p>
-
-<p>For the footer you wrap the bottom row in a <code>&lt;tfoot&gt;</code> tag.</p>
+<p>Inside <code>&lt;thead&gt;</code>, swap <code>&lt;td&gt;</code> for <code>&lt;th&gt;</code>. That makes the text bold
+    automatically and tells the browser this cell is a heading, not just data.</p>
 
 <section class="try-example">
     <template class="try-default-html">
@@ -157,37 +163,41 @@
             <tbody>
                 <tr>
                     <td>Born</td>
-                    <td>1988, New York City</td>
+                    <td>1988</td>
                 </tr>
                 <tr>
                     <td>Nationality</td>
                     <td>American</td>
                 </tr>
-                <tr>
-                    <td>Occupation</td>
-                    <td>Software Engineer, Educator</td>
-                </tr>
-                <tr>
-                    <td>Years active</td>
-                    <td>2010 to present</td>
-                </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td>Made with HTML</td>
+                    <td>Signature</td>
                 </tr>
             </tfoot>
         </table>
     </template>
 </section>
 
-<h2>colspan</h2>
+<div class="tip">
+    <span>💡</span>
+    <p>You can put an image inside any <code>&lt;td&gt;</code> by using an <code>&lt;img&gt;</code> tag inside it. This
+        is exactly how Wikipedia shows a signature in the footer row.</p>
+</div>
 
-<p>You might notice the header row only takes up one column while the rest of the table has two. That looks unbalanced.
+<h2>Colspan — Stretch Across Columns</h2>
+
+<p>Here is a problem. Your table has two columns, one for the label and one for the value. But the name "Nadia" in the
+    header only takes up one of those columns. It looks unbalanced.</p>
+
+<p>What you really want is for that header cell to stretch across both columns. That is exactly what
+    <code>colspan</code> does. It tells a cell to cover more than one column.
 </p>
 
-<p>To make a cell stretch across multiple columns you use <code>colspan</code>. Add <code>colspan="2"</code> to a cell
-    and it will cover two columns instead of one.</p>
+<pre><code class="language-html">&lt;th colspan="2"&gt;Nadia&lt;/th&gt;</code></pre>
+
+<p>The number you give <code>colspan</code> is how many columns you want that cell to cover. Since the table has two
+    columns, <code>colspan="2"</code> makes it fill the full width.</p>
 
 <section class="try-example">
     <template class="try-default-html">
@@ -200,7 +210,7 @@
             <tbody>
                 <tr>
                     <td>Born</td>
-                    <td>1988, New York City</td>
+                    <td>1988</td>
                 </tr>
                 <tr>
                     <td>Nationality</td>
@@ -217,22 +227,72 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">Made with HTML</td>
+                    <td>Signature</td>
                 </tr>
             </tfoot>
         </table>
     </template>
 </section>
 
-<p>Now the header and footer both stretch across both columns and the table looks balanced.</p>
+<div class="challenge" data-title="Stretch the footer across both columns"
+    data-description="The footer cell looks squished to one side. Add colspan=&quot;2&quot; to it so it stretches across both columns, just like the header does."
+    data-starter-html="&lt;table border=&quot;1&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;Nadia&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Born&lt;/td&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Nationality&lt;/td&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Occupation&lt;/td&gt;&lt;td&gt;Software Engineer, Educator&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Years active&lt;/td&gt;&lt;td&gt;2010 to present&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td&gt;Signature&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;" data-checks="colspan,tfoot" data-solution="&lt;table border=&quot;1&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;Nadia&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Born&lt;/td&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Nationality&lt;/td&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Occupation&lt;/td&gt;&lt;td&gt;Software Engineer, Educator&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Years active&lt;/td&gt;&lt;td&gt;2010 to present&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Signature&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;">
+</div>
 
-<h2>rowspan</h2>
+<h2>Rowspan — Stretch Down Rows</h2>
 
-<p>Sometimes you want a label on the left to stretch down over multiple rows. Like when you have two values for the same
-    field.</p>
+<p>Now look at the "Born" section. You might have all three pieces of info, full name, date, and city, crammed into one
+    cell. It works, but it is hard to read.</p>
 
-<p>For example instead of putting "United States, Denmark" in one cell you can give each country its own row and let the
-    "Citizenship" label span both rows. That is what <code>rowspan</code> does.</p>
+<p>What if each piece had its own row, but the "Born" label only appeared once and stretched down the left side? That is
+    <code>rowspan</code>. Instead of stretching across columns like <code>colspan</code>, it stretches down across rows.
+</p>
+
+<pre><code class="language-html">&lt;tr&gt;
+  &lt;td rowspan="3"&gt;Born&lt;/td&gt;
+  &lt;td&gt;Nadia&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;1988&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;United States&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+<p>Notice the second and third <code>&lt;tr&gt;</code> rows only have one <code>&lt;td&gt;</code> each. That is because
+    the "Born" cell is already occupying that left column space for all three rows, so you do not add it again.</p>
+
+<div class="tip">
+    <span>💡</span>
+    <p>When a cell uses <code>rowspan="3"</code>, the next two rows should each have one fewer <code>&lt;td&gt;</code>
+        than you might expect, because that space is already taken.</p>
+</div>
 
 <section class="try-example">
     <template class="try-default-html">
@@ -251,7 +311,7 @@
                     <td>1988</td>
                 </tr>
                 <tr>
-                    <td>New York City</td>
+                    <td>United States</td>
                 </tr>
                 <tr>
                     <td>Nationality</td>
@@ -268,19 +328,47 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">Made with HTML</td>
+                    <td colspan="2">Signature</td>
                 </tr>
             </tfoot>
         </table>
     </template>
 </section>
 
-<p>The label only shows once and each value has its own space. Much cleaner and more readable.</p>
-
-<div class="tip">
-    <span>💡</span>
-    <p><code>colspan</code> stretches a cell across multiple columns. <code>rowspan</code> stretches a cell down across
-        multiple rows.</p>
+<div class="challenge" data-title="Use rowspan for the Citizenship row"
+    data-description="The Citizenship cell below has both countries crammed into one cell. Split them into two separate rows and use rowspan=&quot;2&quot; on the Citizenship label so it spans both."
+    data-starter-html="&lt;table border=&quot;1&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;Nadia&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;3&quot;&gt;Born&lt;/td&gt;&lt;td&gt;Nadia&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;United States&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Citizenship&lt;/td&gt;&lt;td&gt;United States, Denmark&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Occupation&lt;/td&gt;&lt;td&gt;Software Engineer, Educator&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Years active&lt;/td&gt;&lt;td&gt;2010 to present&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Signature&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;" data-checks="rowspan" data-solution="&lt;table border=&quot;1&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th colspan=&quot;2&quot;&gt;Nadia&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;3&quot;&gt;Born&lt;/td&gt;&lt;td&gt;Nadia&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;1988&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;United States&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td rowspan=&quot;2&quot;&gt;Citizenship&lt;/td&gt;&lt;td&gt;United States&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Denmark&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Occupation&lt;/td&gt;&lt;td&gt;Software Engineer, Educator&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Years active&lt;/td&gt;&lt;td&gt;2010 to present&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Signature&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;">
 </div>
 
 <div class="challenge" data-title="Build an info table about yourself"
@@ -316,3 +404,5 @@
   &lt;/tfoot&gt;
 &lt;/table&gt;">
 </div>
+
+<p>Next, you will learn about adding links in HTML. <a href="/html/link">Continue to Links</a>.</p>
