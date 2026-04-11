@@ -1,4 +1,7 @@
 import type { ContentMeta } from "@/lib/contentRegistry";
+import userJavascriptLessonsJson from "./userJavascriptLessons.json";
+
+const userJavascriptLessons = userJavascriptLessonsJson as ContentMeta[];
 
 export const javascriptLessons: ContentMeta[] = [
   {
@@ -22,4 +25,5 @@ export const javascriptLessons: ContentMeta[] = [
     readTime: "9 min read",
     difficulty: "Beginner",
   },
+  ...userJavascriptLessons,
 ];

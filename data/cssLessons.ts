@@ -1,4 +1,7 @@
 import type { ContentMeta } from "@/lib/contentRegistry";
+import userCssLessonsJson from "./userCssLessons.json";
+
+const userCssLessons = userCssLessonsJson as ContentMeta[];
 
 export const cssLessons: ContentMeta[] = [
   {
@@ -71,4 +74,5 @@ export const cssLessons: ContentMeta[] = [
     readTime: "6 min read",
     difficulty: "Intermediate",
   },
+  ...userCssLessons,
 ];

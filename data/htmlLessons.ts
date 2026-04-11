@@ -1,9 +1,12 @@
 import type { ContentMeta } from "@/lib/contentRegistry";
+import userHtmlLessonsJson from "./userHtmlLessons.json";
 
 export interface LessonGroup {
   title: string;
   lessons: ContentMeta[];
 }
+
+const userHtmlLessons = userHtmlLessonsJson as ContentMeta[];
 
 export const htmlLessonGroups: LessonGroup[] = [
   {
@@ -202,4 +205,7 @@ export const htmlLessonGroups: LessonGroup[] = [
 ];
 
 // Flat list used by the registry for slug lookup and prev/next navigation
-export const htmlLessons: ContentMeta[] = htmlLessonGroups.flatMap((g) => g.lessons);
+export const htmlLessons: ContentMeta[] = [
+  ...htmlLessonGroups.flatMap((g) => g.lessons),
+  ...userHtmlLessons,
+];

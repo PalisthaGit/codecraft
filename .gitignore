@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local-only admin tool (never push)
+/app/admin/
+/app/api/admin/
+/middleware.ts
+/components/admin/
