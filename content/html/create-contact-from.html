@@ -1,0 +1,269 @@
+<p>A contact form is the perfect place to learn the remaining input types because it uses almost all of them. Every
+  website you have ever visited that had a "Get in touch" page was built with exactly what you are about to learn.</p>
+
+<p>Let us build it piece by piece, and by the end you will have a complete working form.</p>
+
+<h2>Labels</h2>
+
+<p>Before we start putting a real form together, there is one thing you need to know about first because everything else
+  depends on it.</p>
+
+<p>Every input on a page needs a label. A label is simply the text that tells the user what that input is for. "Full
+  Name". "Email Address". "Your Message". That kind of thing.</p>
+
+<p>You have probably been seeing text sitting next to inputs and thinking it is just text. Technically you can do that.
+  But the proper way is to use the <code>&lt;label&gt;</code> tag and actually connect it to its input.</p>
+
+<p>Here is how:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="username">Full Name</label>
+    <input type="text" id="username" placeholder="Enter your full name">
+  </template>
+</section>
+
+<p>The <code>for</code> attribute on the label must match the <code>id</code> on the input. That is the connection. When
+  they match, two things happen.</p>
+
+<p>First, clicking the label text will automatically focus the input. So if a user clicks the words "Full Name", the
+  cursor jumps straight into the text box. On checkboxes and radio buttons this is even more useful because clicking the
+  label text will tick the box, not just clicking the tiny box itself.</p>
+
+<p>Second, and more importantly, screen readers use labels to tell visually impaired users what each input is for.
+  Without a label, a screen reader just says "text box" and the user has no idea what they are supposed to type. With a
+  label, it says "Full Name, text box." That is the difference between a usable form and an unusable one.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always use labels. No exceptions.</p>
+</div>
+
+<h2>Text Input</h2>
+
+<p>The most basic input. A single line where the user can type something.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="name">Full Name</label> <br>
+    <input type="text" id="name" placeholder="Enter your full name">
+  </template>
+</section>
+
+<p>The placeholder is the grey hint text that sits inside the box until the user starts typing. It disappears the moment
+  they do. Use it to give an example of what to type, not to replace the label. A lot of beginners remove the label and
+  only keep the placeholder. Do not do that. The placeholder vanishes when the user starts typing, so if they get
+  confused halfway through, there is nothing left to remind them what the field was for.</p>
+
+<h2>Email Input</h2>
+
+<p>Looks identical to a text input. But it is smarter.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="email">Email Address</label> <br>
+    <input type="email" id="email" placeholder="your@email.com">
+  </template>
+</section>
+
+<p>When the user tries to submit the form, the browser checks that what they typed actually looks like an email address.
+  If there is no @ sign, the browser stops them and shows an error automatically. You get that for free just by writing
+  <code>type="email"</code> instead of <code>type="text"</code>.</p>
+
+<p>On mobile, it also pulls up the email keyboard with the @ key front and center. Small detail, but your users will
+  notice.</p>
+
+<h2>Textarea</h2>
+
+<p>A regular text input only gives one line. For longer responses like a message or a description, you need a textarea.
+  It gives the user a big open box to write as much as they want.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="message">Your Message</label> <br>
+    <textarea id="message" placeholder="Write your message here" rows="5" cols="40"></textarea>
+  </template>
+</section>
+
+<p>Notice that <code>textarea</code> is not self-closing like <code>input</code>. It has an opening and a closing tag.</p>
+
+<p><code>rows</code> controls how tall the box is and <code>cols</code> controls how wide. Think of rows as how many
+  lines tall, and cols as roughly how many characters wide. The user can also resize it by dragging the corner, which is
+  default browser behavior.</p>
+
+<h2>Dropdown Menu</h2>
+
+<p>When you want the user to pick one option from a list, but there are too many options to show as radio buttons, use a
+  dropdown. Radio buttons are great for two or three choices. Any more than that and a dropdown is the cleaner way to
+  go.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="topic">Topic</label> <br>
+    <select id="topic">
+      <option value="" disabled selected>Select a topic</option>
+      <option value="general">General Inquiry</option>
+      <option value="support">Support</option>
+      <option value="billing">Billing</option>
+      <option value="other">Other</option>
+    </select>
+  </template>
+</section>
+
+<p>The <code>&lt;select&gt;</code> tag is the container. Each <code>&lt;option&gt;</code> inside it is one item in the
+  list. The <code>value</code> is what gets recorded when that option is chosen, and the text between the tags is what
+  the user actually sees.</p>
+
+<p>That first option with <code>disabled selected</code> is a common pattern you will see everywhere. It makes the
+  dropdown start on a prompt like "Select a topic" instead of jumping straight to the first real option.
+  <code>disabled</code> means the user cannot actually choose it, it is just there as a label. <code>selected</code>
+  means it shows by default when the page loads.</p>
+
+<h2>Radio Buttons</h2>
+
+<p>When you have a small number of options and the user can only pick one, radio buttons are the right choice. They make
+  all the options visible at once, which is better for short lists.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p>Preferred Contact Method</p>
+
+    <input type="radio" name="contact-method" id="email-radio" value="email">
+    <label for="email-radio">Email</label> <br>
+
+    <input type="radio" name="contact-method" id="phone-radio" value="phone">
+    <label for="phone-radio">Phone</label> <br>
+
+    <input type="radio" name="contact-method" id="whatsapp-radio" value="whatsapp" checked>
+    <label for="whatsapp-radio">WhatsApp</label>
+  </template>
+</section>
+
+<p>All three share the same <code>name</code>, which is what groups them together and makes sure only one can be
+  selected at a time. Pick a different one and the previous one deselects automatically.</p>
+
+<p><code>checked</code> sets which one is selected by default when the page loads.</p>
+
+<h2>Checkbox</h2>
+
+<p>A checkbox is for situations where the user can pick multiple things at once, or just confirm something with a yes or
+  no. This is the key difference from radio buttons. Radio buttons are one from many. Checkboxes are any from many.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+    <label for="newsletter">Subscribe to our newsletter</label> <br>
+
+    <input type="checkbox" id="terms" name="terms" value="agreed">
+    <label for="terms">I agree to the terms and conditions</label>
+  </template>
+</section>
+
+<p>Each checkbox has its own <code>name</code> because each one is its own independent question. Ticking one has zero
+  effect on the other. That is what makes them different from radio buttons.</p>
+
+<h2>Submit Button</h2>
+
+<p>Every form needs a way to send the data. That is the submit button.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <input type="submit" value="Send Message">
+  </template>
+</section>
+
+<p>The <code>value</code> attribute controls what text appears on the button. Change it to whatever makes sense for your
+  form. "Send Message", "Submit Application", "Get Started", whatever fits.</p>
+
+<h2>The Full Contact Form</h2>
+
+<p>Now let us put everything together into one complete form, using every input type you just learned, in the order they
+  would naturally appear.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+
+      <label for="full-name">Full Name</label> <br>
+      <input type="text" id="full-name" placeholder="Enter your full name"> <br><br>
+
+      <label for="email-addr">Email Address</label> <br>
+      <input type="email" id="email-addr" placeholder="your@email.com"> <br><br>
+
+      <label for="topic">Topic</label> <br>
+      <select id="topic">
+        <option value="" disabled selected>Select a topic</option>
+        <option value="general">General Inquiry</option>
+        <option value="support">Support</option>
+        <option value="billing">Billing</option>
+        <option value="other">Other</option>
+      </select> <br><br>
+
+      <p>Preferred Contact Method</p>
+
+      <input type="radio" name="contact-method" id="email-radio" value="email">
+      <label for="email-radio">Email</label> <br>
+
+      <input type="radio" name="contact-method" id="phone-radio" value="phone">
+      <label for="phone-radio">Phone</label> <br>
+
+      <input type="radio" name="contact-method" id="whatsapp-radio" value="whatsapp" checked>
+      <label for="whatsapp-radio">WhatsApp</label> <br><br>
+
+      <label for="message">Your Message</label> <br>
+      <textarea id="message" placeholder="Write your message here" rows="5" cols="40"></textarea> <br><br>
+
+      <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+      <label for="newsletter">Subscribe to our newsletter</label> <br><br>
+
+      <input type="submit" value="Send Message">
+
+    </form>
+  </template>
+</section>
+
+<p>That is a real, complete contact form. Name, email, topic dropdown, preferred contact method, a message box, a
+  newsletter opt-in, and a submit button. This exact structure shows up on real websites every single day.</p>
+
+<div class="challenge"
+  data-title="Build a job application form"
+  data-description="Build a job application form with the following fields in this order: Full name (text input), Email address (email input), Position applying for (dropdown with at least three options), Availability (radio buttons with Full Time, Part Time, and Freelance as options), A short cover note (textarea), A checkbox confirming the applicant agrees to be contacted, A submit button that says &quot;Submit Application&quot;. Make sure every input has a proper label connected to it using for and id."
+  data-checks="form,input[type=text],input[type=email],select,input[type=radio],textarea,input[type=checkbox],input[type=submit]"
+  data-solution="&lt;form&gt;
+  &lt;label for=&quot;full-name&quot;&gt;Full Name&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;text&quot; id=&quot;full-name&quot; placeholder=&quot;Enter your full name&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;email&quot;&gt;Email Address&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;your@email.com&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;position&quot;&gt;Position Applying For&lt;/label&gt; &lt;br&gt;
+  &lt;select id=&quot;position&quot;&gt;
+    &lt;option value=&quot;&quot; disabled selected&gt;Select a position&lt;/option&gt;
+    &lt;option value=&quot;frontend&quot;&gt;Frontend Developer&lt;/option&gt;
+    &lt;option value=&quot;backend&quot;&gt;Backend Developer&lt;/option&gt;
+    &lt;option value=&quot;designer&quot;&gt;UI Designer&lt;/option&gt;
+  &lt;/select&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;p&gt;Availability&lt;/p&gt;
+
+  &lt;input type=&quot;radio&quot; name=&quot;availability&quot; id=&quot;full-time&quot; value=&quot;full-time&quot;&gt;
+  &lt;label for=&quot;full-time&quot;&gt;Full Time&lt;/label&gt; &lt;br&gt;
+
+  &lt;input type=&quot;radio&quot; name=&quot;availability&quot; id=&quot;part-time&quot; value=&quot;part-time&quot;&gt;
+  &lt;label for=&quot;part-time&quot;&gt;Part Time&lt;/label&gt; &lt;br&gt;
+
+  &lt;input type=&quot;radio&quot; name=&quot;availability&quot; id=&quot;freelance&quot; value=&quot;freelance&quot;&gt;
+  &lt;label for=&quot;freelance&quot;&gt;Freelance&lt;/label&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;cover-note&quot;&gt;Cover Note&lt;/label&gt; &lt;br&gt;
+  &lt;textarea id=&quot;cover-note&quot; placeholder=&quot;Write a short note about yourself&quot; rows=&quot;5&quot; cols=&quot;40&quot;&gt;&lt;/textarea&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;input type=&quot;checkbox&quot; id=&quot;contact-consent&quot; name=&quot;contact-consent&quot; value=&quot;yes&quot;&gt;
+  &lt;label for=&quot;contact-consent&quot;&gt;I agree to be contacted regarding my application&lt;/label&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;Submit Application&quot;&gt;
+&lt;/form&gt;">
+</div>
+
+<p>Up next you will learn form validation, how to make sure users fill out your form correctly before it ever gets
+  submitted.</p>

@@ -1,0 +1,252 @@
+<p>You have been building forms where all the inputs just sit one after another in a single long list. That works fine
+  when a form is short. But forms in the real world can get long. A job application. A checkout page. A user settings
+  page. When a form has fifteen or twenty fields, just stacking them all together starts to feel overwhelming for the
+  user.</p>
+
+<p>That is the problem that <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> solve.</p>
+
+<h2>What is a Fieldset</h2>
+
+<p>A <code>&lt;fieldset&gt;</code> is a way to group related inputs together inside a form. You wrap it around a set of
+  inputs that belong to the same idea, and the browser draws a box around them automatically.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <fieldset>
+        <input type="text" id="first-name" name="first-name">
+        <label for="first-name">First Name</label>
+      </fieldset>
+    </form>
+  </template>
+</section>
+
+<p>That box is not just decorative. It is a signal to the user that these inputs are connected to each other. They are
+  one group. They belong together.</p>
+
+<p>Think about a long checkout form. You have personal details at the top, then a shipping address section, then a
+  payment section. Each of those is a natural group. Wrapping each group in a <code>&lt;fieldset&gt;</code> makes it
+  visually obvious where one section ends and the next begins.</p>
+
+<h2>What is a Legend</h2>
+
+<p>A <code>&lt;legend&gt;</code> is the label for the whole fieldset. It sits at the very top of the group and tells the
+  user what this group of inputs is about.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <fieldset>
+        <legend>Personal Details</legend>
+
+        <label for="first-name">First Name</label> <br>
+        <input type="text" id="first-name" name="first-name"> <br><br>
+
+        <label for="last-name">Last Name</label> <br>
+        <input type="last-name" id="last-name" name="last-name"> <br><br>
+
+        <label for="email">Email Address</label> <br>
+        <input type="email" id="email" name="email">
+      </fieldset>
+    </form>
+  </template>
+</section>
+
+<p>The legend text appears right at the top edge of the box the fieldset draws. It works like a heading for that group.
+  The user can immediately see that everything inside this box belongs to the Personal Details section.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The <code>&lt;legend&gt;</code> must always be the very first thing inside a <code>&lt;fieldset&gt;</code>. Not
+    after the first input, not somewhere in the middle. Always first.</p>
+</div>
+
+<h2>Why This Matters Beyond Just Looks</h2>
+
+<p>Grouping inputs with fieldset does something important for screen readers too. When a visually impaired user navigates
+  into a fieldset, the screen reader announces the legend first. So instead of just hearing "First Name, text box" they
+  hear "Personal Details, First Name, text box." They always know which section they are in.</p>
+
+<p>This is the same principle you learned with labels. HTML gives you the tools to build forms that work for every single
+  user, not just the ones who can see the screen perfectly. Using fieldset and legend is part of that.</p>
+
+<h2>A Real Example with Multiple Groups</h2>
+
+<p>Here is where fieldset really starts to show its value. Imagine a shipping form broken into three clear sections.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/checkout" method="post">
+
+      <fieldset>
+        <legend>Personal Details</legend>
+
+        <label for="full-name">Full Name</label> <br>
+        <input type="text" id="full-name" name="full-name" required> <br><br>
+
+        <label for="email">Email Address</label> <br>
+        <input type="email" id="email" name="email" required>
+      </fieldset>
+
+      <br>
+
+      <fieldset>
+        <legend>Shipping Address</legend>
+
+        <label for="street">Street Address</label> <br>
+        <input type="text" id="street" name="street" required> <br><br>
+
+        <label for="city">City</label> <br>
+        <input type="text" id="city" name="city" required> <br><br>
+
+        <label for="postcode">Postcode</label> <br>
+        <input type="text" id="postcode" name="postcode" required>
+      </fieldset>
+
+      <br>
+
+      <fieldset>
+        <legend>Delivery Options</legend>
+
+        <input type="radio" id="standard" name="delivery" value="standard" checked>
+        <label for="standard">Standard Delivery (3 to 5 days)</label> <br>
+
+        <input type="radio" id="express" name="delivery" value="express">
+        <label for="express">Express Delivery (next day)</label>
+      </fieldset>
+
+      <br>
+
+      <input type="submit" value="Place Order">
+
+    </form>
+  </template>
+</section>
+
+<p>Look at how much clearer this is compared to just dumping all those inputs in a row. A user landing on this form
+  instantly understands the structure. Fill in your details, then your address, then pick a delivery option. Three
+  groups, three fieldsets, three legends. The form tells its own story.</p>
+
+<h2>Fieldset Works Great for Radio Buttons and Checkboxes</h2>
+
+<p>One of the most common places you will see fieldset used in the wild is around radio button groups and checkbox
+  groups. And it makes total sense when you think about it. A group of radio buttons is literally a group of related
+  inputs. They are all answering the same question.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <fieldset>
+      <legend>What is your experience level?</legend>
+
+      <input type="radio" id="beginner" name="level" value="beginner">
+      <label for="beginner">Beginner</label> <br>
+
+      <input type="radio" id="intermediate" name="level" value="intermediate">
+      <label for="intermediate">Intermediate</label> <br>
+
+      <input type="radio" id="advanced" name="level" value="advanced">
+      <label for="advanced">Advanced</label>
+    </fieldset>
+  </template>
+</section>
+
+<p>Without the fieldset and legend, a screen reader would just say "Beginner, radio button. Intermediate, radio button."
+  The user has no idea what question these options are answering. With the fieldset and legend, they hear "What is your
+  experience level, Beginner, radio button." Now it makes complete sense.</p>
+
+<p>This is one of those patterns that professional developers use on every single form they build. Now you know it too.
+</p>
+
+<h2>The disabled Attribute on a Fieldset</h2>
+
+<p>Here is a bonus that most beginners do not know about. You can put <code>disabled</code> on an entire fieldset and
+  every single input inside it gets disabled at once. You do not have to go through and add <code>disabled</code> to
+  each one individually.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <fieldset disabled>
+      <legend>Payment Details</legend>
+
+      <label for="card">Card Number</label> <br>
+      <input type="text" id="card" name="card"> <br><br>
+
+      <label for="expiry">Expiry Date</label> <br>
+      <input type="text" id="expiry" name="expiry">
+    </fieldset>
+  </template>
+</section>
+
+<p>Every input inside that fieldset is now greyed out and unclickable. This comes in handy when you have a section of a
+  form that should only become active after the user completes a previous step. You would use JavaScript to remove the
+  disabled attribute at the right moment, but the HTML structure that makes it possible is right here.</p>
+
+<div class="challenge"
+  data-title="Build a job application form"
+  data-description="Build a job application form split into three fieldsets. The first group should be called Personal Information and contain a full name field, an email field, and a phone number field. The second group should be called Application Details and contain a dropdown for the position being applied for with at least three options, a radio button group asking about availability with Full Time, Part Time, and Freelance as options, and a textarea for a short cover note. The third group should be called Agreement and contain a single checkbox where the applicant confirms they agree to be contacted. Add a submit button at the bottom that says Submit Application. Make sure every input has a label, a name attribute, and appropriate validation."
+  data-checks="fieldset,legend,input[name],select[name],textarea[name],input[type='checkbox'],input[type='submit']"
+  data-solution="&lt;form action=&quot;/apply&quot; method=&quot;post&quot;&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+
+    &lt;label for=&quot;full-name&quot;&gt;Full Name&lt;/label&gt; &lt;br&gt;
+    &lt;input type=&quot;text&quot; id=&quot;full-name&quot; name=&quot;full-name&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+    &lt;label for=&quot;email&quot;&gt;Email Address&lt;/label&gt; &lt;br&gt;
+    &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+    &lt;label for=&quot;phone&quot;&gt;Phone Number&lt;/label&gt; &lt;br&gt;
+    &lt;input type=&quot;tel&quot; id=&quot;phone&quot; name=&quot;phone&quot; required&gt;
+  &lt;/fieldset&gt;
+
+  &lt;br&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Application Details&lt;/legend&gt;
+
+    &lt;label for=&quot;position&quot;&gt;Position Applied For&lt;/label&gt; &lt;br&gt;
+    &lt;select id=&quot;position&quot; name=&quot;position&quot; required&gt;
+      &lt;option value=&quot;&quot;&gt;Select a position&lt;/option&gt;
+      &lt;option value=&quot;frontend&quot;&gt;Frontend Developer&lt;/option&gt;
+      &lt;option value=&quot;backend&quot;&gt;Backend Developer&lt;/option&gt;
+      &lt;option value=&quot;designer&quot;&gt;UI Designer&lt;/option&gt;
+    &lt;/select&gt; &lt;br&gt;&lt;br&gt;
+
+    &lt;fieldset&gt;
+      &lt;legend&gt;Availability&lt;/legend&gt;
+
+      &lt;input type=&quot;radio&quot; id=&quot;full-time&quot; name=&quot;availability&quot; value=&quot;full-time&quot; required&gt;
+      &lt;label for=&quot;full-time&quot;&gt;Full Time&lt;/label&gt; &lt;br&gt;
+
+      &lt;input type=&quot;radio&quot; id=&quot;part-time&quot; name=&quot;availability&quot; value=&quot;part-time&quot;&gt;
+      &lt;label for=&quot;part-time&quot;&gt;Part Time&lt;/label&gt; &lt;br&gt;
+
+      &lt;input type=&quot;radio&quot; id=&quot;freelance&quot; name=&quot;availability&quot; value=&quot;freelance&quot;&gt;
+      &lt;label for=&quot;freelance&quot;&gt;Freelance&lt;/label&gt;
+    &lt;/fieldset&gt;
+
+    &lt;br&gt;
+
+    &lt;label for=&quot;cover-note&quot;&gt;Cover Note&lt;/label&gt; &lt;br&gt;
+    &lt;textarea id=&quot;cover-note&quot; name=&quot;cover-note&quot; rows=&quot;4&quot; required&gt;&lt;/textarea&gt;
+  &lt;/fieldset&gt;
+
+  &lt;br&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Agreement&lt;/legend&gt;
+
+    &lt;input type=&quot;checkbox&quot; id=&quot;contact-consent&quot; name=&quot;contact-consent&quot; required&gt;
+    &lt;label for=&quot;contact-consent&quot;&gt;I agree to be contacted regarding my application&lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;br&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;Submit Application&quot;&gt;
+
+&lt;/form&gt;">
+</div>
+
+<p>Up next you will learn about the <code>&lt;input type="file"&gt;</code> which lets users upload files through a form,
+  and a few other specialist input types that come in very handy in real projects.</p>

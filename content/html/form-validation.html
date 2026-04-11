@@ -1,0 +1,207 @@
+<p>You just built a complete contact form. That felt great. But here is something worth thinking about.</p>
+
+<p>What stops someone from typing "aaaaaa" into the email field and clicking Send? Or leaving every single field blank
+  and submitting anyway? Right now, nothing. The form would happily accept garbage and there would be nothing you could
+  do about it.</p>
+
+<p>That is where form validation comes in. Validation means checking that the user filled out the form correctly before
+  the data gets sent anywhere. And the good news is that HTML does a lot of this for you with almost no extra work on
+  your part.</p>
+
+<p>Let us walk through it together.</p>
+
+<h2>The required Attribute</h2>
+
+<p>The simplest and most important validation tool you have is the <code>required</code> attribute. When you add it to
+  any input, the browser will refuse to submit the form if that field is empty. The user will get an error message
+  automatically, right on the page, without you writing a single line of extra code.</p>
+
+<p>Here is how you add it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="name">Full Name</label> <br>
+      <input type="text" id="name" required>
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p>That one word, <code>required</code>, is doing all the work. Try to submit the form without filling that field in and
+  the browser stops you cold and points right at the empty field.</p>
+
+<p>You can add <code>required</code> to text inputs, email inputs, textareas, dropdowns, checkboxes, and radio buttons.
+  Basically anything the user needs to fill in before submitting.</p>
+
+<h2>Email Validation is Already Built In</h2>
+
+<p>You actually already got this one for free in the last lesson. When you use <code>type="email"</code>, the browser
+  automatically checks that what the user typed looks like a valid email address. No @ symbol? The form will not submit
+  and the browser tells the user exactly what went wrong.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="email">Email Address</label> <br>
+      <input type="email" id="email" required>
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p>Notice that combining <code>type="email"</code> with <code>required</code> means the field has to be filled in AND it
+  has to be a valid email. That is two validations with just two attributes. Pretty efficient.</p>
+
+<h2>The minlength and maxlength Attributes</h2>
+
+<p>Sometimes you need the user to type a minimum amount. A password that is at least 8 characters. A username that is
+  at least 3 characters. That kind of thing.</p>
+
+<p><code>minlength</code> sets the minimum number of characters the field will accept. <code>maxlength</code> sets the
+  maximum.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="username">Username</label> <br>
+      <input type="text" id="username" minlength="3" maxlength="20" placeholder="3 to 20 characters">
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p>With <code>maxlength</code>, the browser physically stops the user from typing past the limit. The input just stops
+  accepting characters. With <code>minlength</code>, the browser waits until the user tries to submit and then flags it
+  if the input is too short.</p>
+
+<h2>Number Inputs with min and max</h2>
+
+<p>If you have a number field, you can set a floor and a ceiling on the values allowed.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="age">Your Age</label> <br>
+      <input type="number" id="age" min="18" max="120">
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p><code>min</code> and <code>max</code> do exactly what they sound like. The user cannot submit a number below the
+  minimum or above the maximum. This is great for things like ages, quantities, scores, or any other number that has to
+  fall within a sensible range.</p>
+
+<h2>The pattern Attribute</h2>
+
+<p>This one is a bit more advanced but worth knowing about. <code>pattern</code> lets you define a rule that the input
+  has to match, written as something called a regular expression.</p>
+
+<p>Do not let that term scare you. Here is a simple example. Say you want a phone number field that only accepts exactly
+  10 digits and nothing else.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="phone">Phone Number</label> <br>
+      <input type="text" id="phone" pattern="[0-9]{10}" placeholder="10 digits only">
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p>The pattern <code>[0-9]{10}</code> means "exactly 10 characters, each one must be a digit from 0 to 9." If the user
+  types letters or a number with the wrong length, the form will not submit.</p>
+
+<p>Regular expressions have a lot of depth to them and you will pick them up gradually over time. For now just know that
+  <code>pattern</code> exists and you can look up the right expression when you need it.</p>
+
+<h2>Giving Users a Helpful Hint with title</h2>
+
+<p>When validation fails, the browser shows a generic message. You can make that message more helpful by adding a
+  <code>title</code> attribute. Whatever you write in <code>title</code> gets added to the error message.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <label for="phone2">Phone Number</label> <br>
+      <input type="text" id="phone2" pattern="[0-9]{10}" title="Please enter exactly 10 digits with no spaces or dashes" placeholder="10 digits only">
+      <input type="submit" value="Submit">
+    </form>
+  </template>
+</section>
+
+<p>Now when someone types their phone number wrong, they get a message that actually explains what went wrong in plain
+  English. Your users will appreciate that.</p>
+
+<h2>Putting It All Together</h2>
+
+<p>Here is a form that uses everything you just learned. Read through each field and see if you can spot which
+  validation attributes are doing what.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+
+      <label for="full-name">Full Name</label> <br>
+      <input type="text" id="full-name" placeholder="Enter your full name" required minlength="2"> <br><br>
+
+      <label for="email-val">Email Address</label> <br>
+      <input type="email" id="email-val" placeholder="your@email.com" required> <br><br>
+
+      <label for="age-val">Your Age</label> <br>
+      <input type="number" id="age-val" min="18" max="99" required> <br><br>
+
+      <label for="phone-val">Phone Number</label> <br>
+      <input type="text" id="phone-val" pattern="[0-9]{10}" title="Enter exactly 10 digits with no spaces" placeholder="10 digits"> <br><br>
+
+      <label for="message-val">Your Message</label> <br>
+      <textarea id="message-val" rows="5" minlength="10" placeholder="At least 10 characters" required></textarea> <br><br>
+
+      <input type="submit" value="Send Message">
+
+    </form>
+  </template>
+</section>
+
+<p>Every field has at least one layer of protection. The name has to be at least 2 characters. The email has to look
+  like a real email. The age has to be between 18 and 99. The phone has to match the pattern. The message has to be at
+  least 10 characters. None of these required any JavaScript. Just HTML attributes.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>HTML validation is great and you should always use it. But it only runs in the browser. A clever or determined user
+    can bypass it. So for anything that really matters, like a login form or a payment form, you will eventually want to
+    validate on the server side too. That is a topic for much later in your journey. For now, HTML validation covers the
+    vast majority of real-world cases perfectly well and it is absolutely where you should start.</p>
+</div>
+
+<div class="challenge"
+  data-title="Add validation to the contact form"
+  data-description="Take the contact form from the last lesson and add validation to it. Make the full name field required with a minimum length of 2. Make the email field required. Make the topic dropdown required so the user cannot leave it on the placeholder. Make the message textarea required with a minimum length of 20 characters. Add a title to any field that has a pattern or special rule so the error message is helpful."
+  data-checks="input[required],input[minlength],select[required],textarea[required],textarea[minlength]"
+  data-solution="&lt;form&gt;
+
+  &lt;label for=&quot;full-name&quot;&gt;Full Name&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;text&quot; id=&quot;full-name&quot; placeholder=&quot;Enter your full name&quot; required minlength=&quot;2&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;email&quot;&gt;Email Address&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; placeholder=&quot;your@email.com&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;topic&quot;&gt;Topic&lt;/label&gt; &lt;br&gt;
+  &lt;select id=&quot;topic&quot; required&gt;
+    &lt;option value=&quot;&quot; disabled selected&gt;Select a topic&lt;/option&gt;
+    &lt;option value=&quot;general&quot;&gt;General Inquiry&lt;/option&gt;
+    &lt;option value=&quot;support&quot;&gt;Support&lt;/option&gt;
+    &lt;option value=&quot;billing&quot;&gt;Billing&lt;/option&gt;
+    &lt;option value=&quot;other&quot;&gt;Other&lt;/option&gt;
+  &lt;/select&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;message&quot;&gt;Your Message&lt;/label&gt; &lt;br&gt;
+  &lt;textarea id=&quot;message&quot; rows=&quot;5&quot; minlength=&quot;20&quot; placeholder=&quot;At least 20 characters&quot; required&gt;&lt;/textarea&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;Send Message&quot;&gt;
+
+&lt;/form&gt;">
+</div>

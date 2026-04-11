@@ -1,0 +1,527 @@
+<style>
+  .nadia-wiki * { box-sizing: border-box; }
+  .nadia-wiki { font-family: Arial, sans-serif; color: #222; }
+  .nadia-wiki h1 { font-size: 24px; margin-bottom: 6px; }
+  .nadia-wiki .subtitle { font-size: 14px; color: #666; margin-bottom: 24px; }
+  .nadia-wiki .step { background: #fff; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+  .nadia-wiki .step-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; background: #fff; }
+  .nadia-wiki .step-head:hover { background: #f5f5f5; }
+  .nadia-wiki .num { width: 28px; height: 28px; border-radius: 50%; background: #e8f0fe; color: #1a56db; font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .nadia-wiki .step-title { font-size: 15px; font-weight: bold; flex: 1; }
+  .nadia-wiki .arrow { font-size: 18px; color: #999; transition: transform 0.2s; }
+  .nadia-wiki .body { display: none; padding: 0 16px 16px; border-top: 1px solid #eee; }
+  .nadia-wiki .body.open { display: block; }
+  .nadia-wiki .task { font-size: 15px; font-weight: bold; color: #111; margin: 14px 0 6px; }
+  .nadia-wiki .explain { font-size: 13px; color: #555; margin-bottom: 10px; line-height: 1.7; }
+  .nadia-wiki .do-box { background: #f0f4ff; border-left: 4px solid #1a56db; border-radius: 0 8px 8px 0; padding: 12px 14px; margin: 10px 0; }
+  .nadia-wiki .do-label { font-size: 11px; font-weight: bold; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .nadia-wiki .do-line { font-size: 13px; color: #111; line-height: 2; }
+  .nadia-wiki .do-line code { font-family: monospace; font-size: 13px; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 1px 6px; color: #1a56db; }
+  .nadia-wiki .habit { font-size: 12px; background: #fff8e1; color: #7a5800; border-radius: 6px; padding: 8px 12px; margin: 10px 0; }
+  .nadia-wiki details { margin-top: 10px; }
+  .nadia-wiki summary { font-size: 13px; color: #1a56db; cursor: pointer; padding: 4px 0; font-weight: bold; list-style: none; }
+  .nadia-wiki summary::before { content: "▶ Show solution"; }
+  .nadia-wiki details[open] summary::before { content: "▼ Hide solution"; }
+  .nadia-wiki pre { background: #f4f4f4; border-radius: 6px; padding: 12px; font-size: 12px; font-family: monospace; margin-top: 8px; overflow-x: auto; line-height: 1.8; white-space: pre; }
+  .nadia-wiki .t { color: #1a56db; }
+  .nadia-wiki .v { color: #b91c1c; }
+  .nadia-wiki .learn { display: inline-block; font-size: 12px; color: #1a56db; margin-top: 10px; }
+</style>
+
+<div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;">
+<div style="flex:1;min-width:min(100%,340px);">
+<div class="nadia-wiki">
+
+<h1>Build a Wikipedia Page in HTML</h1>
+<p class="subtitle">Every step tells you exactly what to type. Click a step to open it.</p>
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">1</div>
+    <span class="step-title">Create the file and write the DOCTYPE</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Create a new file called index.html and type the page skeleton.</p>
+    <p class="explain">Every HTML page must start with these exact lines. Open VS Code, create a new file, save it as index.html, then type this:</p>
+    <div class="do-box">
+      <div class="do-label">Type this — line by line</div>
+      <div class="do-line">Line 1 → <code>&lt;!DOCTYPE html&gt;</code> — tells the browser this is an HTML5 file</div>
+      <div class="do-line">Line 2 → <code>&lt;html&gt;</code> — opens the whole page</div>
+      <div class="do-line">Line 3 → <code>&lt;head&gt;</code> — opens the invisible settings section</div>
+      <div class="do-line">Line 4 → <code>&lt;title&gt;Nadia — Wikipedia&lt;/title&gt;</code> — the name shown on the browser tab</div>
+      <div class="do-line">Line 5 → <code>&lt;/head&gt;</code> — closes the settings section</div>
+      <div class="do-line">Line 6 → <code>&lt;body&gt;</code> — opens the visible part of the page</div>
+      <div class="do-line">Line 7 → leave blank — all your content goes here</div>
+      <div class="do-line">Line 8 → <code>&lt;/body&gt;</code> — closes the visible section</div>
+      <div class="do-line">Line 9 → <code>&lt;/html&gt;</code> — closes the whole page</div>
+    </div>
+    <div class="habit">💡 Good habit — save your file as .html not .txt. Then open the file in Chrome to see your page live after every step.</div>
+    <details><summary></summary>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Nadia — Wikipedia&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+    </details>
+    <a class="learn" href="/html/introduction" target="_blank">Want to learn more? Read our Introduction to HTML article ›</a>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">2</div>
+    <span class="step-title">Add the page title — h1</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Add a heading 1 and write Nadia as the text.</p>
+    <p class="explain">Inside &lt;body&gt;, on the blank line, type your h1 tag. This is the biggest heading on the page — it is the article title, just like the large bold name at the top of every Wikipedia article.</p>
+    <div class="do-box">
+      <div class="do-label">Type this inside &lt;body&gt;</div>
+      <div class="do-line">→ <code>&lt;h1&gt;Nadia&lt;/h1&gt;</code></div>
+    </div>
+    <p class="explain">Save the file and open it in Chrome. You should see the word Nadia appear as a large bold heading at the top of the page.</p>
+    <div class="habit">💡 Good habit — only ever use h1 once per page. It is the main title, like the front cover of a book. Everything else uses h2, h3 and so on.</div>
+    <details><summary></summary>
+<pre>&lt;body&gt;
+  &lt;h1&gt;Nadia&lt;/h1&gt;
+&lt;/body&gt;</pre>
+    </details>
+    <a class="learn" href="/html/headings" target="_blank">Want to learn more? Read our Headings article ›</a>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">3</div>
+    <span class="step-title">Add all section headings — h2</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">After the h1, add 7 section headings using h2 — one for each section of the article.</p>
+    <p class="explain">These are the bold section titles you see on every Wikipedia page. Type each one on its own line, right after your &lt;h1&gt;Nadia&lt;/h1&gt;:</p>
+    <div class="do-box">
+      <div class="do-label">Type each of these after your h1</div>
+      <div class="do-line">→ <code>&lt;h2&gt;Early life&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;Career&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;Teaching and mentorship&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;YouTube channel&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;Recognition and awards&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;Personal life&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;References&lt;/h2&gt;</code></div>
+    </div>
+    <p class="explain">Save and refresh Chrome. You should now see 7 smaller headings appear below Nadia on the page.</p>
+    <div class="habit">💡 Good habit — write all your h2 headings first like a skeleton outline, then go back and fill content underneath each one.</div>
+    <details><summary></summary>
+<pre>&lt;h1&gt;Nadia&lt;/h1&gt;
+&lt;h2&gt;Early life&lt;/h2&gt;
+&lt;h2&gt;Career&lt;/h2&gt;
+&lt;h2&gt;Teaching and mentorship&lt;/h2&gt;
+&lt;h2&gt;YouTube channel&lt;/h2&gt;
+&lt;h2&gt;Recognition and awards&lt;/h2&gt;
+&lt;h2&gt;Personal life&lt;/h2&gt;
+&lt;h2&gt;References&lt;/h2&gt;</pre>
+    </details>
+    <a class="learn" href="/html/headings" target="_blank">Want to learn more? Read our Headings article ›</a>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">4</div>
+    <span class="step-title">Wrap in sections and add sub-headings — section and h3</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Wrap each h2 in a &lt;section&gt; tag, then add 3 h3 sub-headings inside the Career section.</p>
+    <p class="explain">A &lt;section&gt; tag groups related content together. Find your &lt;h2&gt;Career&lt;/h2&gt; line and wrap it like this. Then add the 3 sub-headings inside it:</p>
+    <div class="do-box">
+      <div class="do-label">Replace your Career h2 with this</div>
+      <div class="do-line">→ <code>&lt;section&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h2&gt;Career&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h3&gt;2010–2015: Early career and breakthrough&lt;/h3&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h3&gt;2015–2020: YouTube success and educational impact&lt;/h3&gt;</code></div>
+      <div class="do-line">→ <code>&lt;h3&gt;2020–present: FAANG achievement and continued excellence&lt;/h3&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/section&gt;</code></div>
+    </div>
+    <p class="explain">Do the same for all other h2 sections — wrap each one in &lt;section&gt;&lt;/section&gt;. Only Career needs h3 sub-headings for now.</p>
+    <div class="habit">💡 Good habit — always close your &lt;section&gt; tag. Every opening tag needs a matching closing tag or your page layout will break.</div>
+    <details><summary></summary>
+<pre>&lt;section&gt;
+  &lt;h2&gt;Career&lt;/h2&gt;
+  &lt;h3&gt;2010–2015: Early career and breakthrough&lt;/h3&gt;
+  &lt;h3&gt;2015–2020: YouTube success and educational impact&lt;/h3&gt;
+  &lt;h3&gt;2020–present: FAANG achievement and continued excellence&lt;/h3&gt;
+&lt;/section&gt;</pre>
+    </details>
+    <a class="learn" href="/html/semantic-html" target="_blank">Want to learn more? Read our Semantic HTML article ›</a>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">5</div>
+    <span class="step-title">Add paragraphs — p</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Go to the Early life section and add two paragraphs under the h2.</p>
+    <p class="explain">Body text always goes inside &lt;p&gt; tags. After your &lt;h2&gt;Early life&lt;/h2&gt;, type these two paragraphs. You can copy the exact text below, or write your own — just keep it inside &lt;p&gt;&lt;/p&gt;:</p>
+    <div class="do-box">
+      <div class="do-label">Type these after &lt;h2&gt;Early life&lt;/h2&gt;</div>
+      <div class="do-line">→ <code>&lt;p&gt;Nadia was born in 1988 and showed an early aptitude for technology and problem-solving. Growing up during the dawn of the internet age, she developed a fascination with how websites worked.&lt;/p&gt;</code></div>
+      <div class="do-line" style="margin-top:6px">→ <code>&lt;p&gt;Her academic excellence earned her a prestigious scholarship to attend university, where she pursued Computer Science with a focus on web technologies and software engineering.&lt;/p&gt;</code></div>
+    </div>
+    <div class="habit">💡 Good habit — never leave raw text floating inside &lt;body&gt; without a tag. Always wrap body text in &lt;p&gt;&lt;/p&gt;.</div>
+    <details><summary></summary>
+<pre>&lt;section&gt;
+  &lt;h2&gt;Early life&lt;/h2&gt;
+  &lt;p&gt;Nadia was born in 1988 and showed an early aptitude
+  for technology and problem-solving.&lt;/p&gt;
+  &lt;p&gt;Her academic excellence earned her a prestigious
+  scholarship to attend university.&lt;/p&gt;
+&lt;/section&gt;</pre>
+    </details>
+    <a class="learn" href="/html/tags" target="_blank">Want to learn more? Read our HTML Tags article ›</a>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">6</div>
+    <span class="step-title">Add images — img</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Inside the Career section, add two images using the img tag.</p>
+    <p class="explain">The img tag has no closing tag — it is self-closing. It needs src (the file name) and alt (a description of the image). Type these two lines inside your Career section:</p>
+    <div class="do-box">
+      <div class="do-label">Type these inside your Career section</div>
+      <div class="do-line">→ <code>&lt;img src="nadia-desk.jpg" alt="Nadia at her desk in 2012" width="300"&gt;</code></div>
+      <div class="do-line" style="margin-top:6px">→ <code>&lt;img src="nadia-reactconf.jpg" alt="Nadia speaking at ReactConf 2019" width="300"&gt;</code></div>
+    </div>
+    <p class="explain">The images will show as broken for now because the files don't exist yet — that is fine. Once you save a real photo with that name in the same folder, it will appear.</p>
+    <div class="habit">💡 Good habit — always write the alt text. It shows if the image is missing and it helps blind users who use screen readers to hear what the image is.</div>
+    <details><summary></summary>
+<pre>&lt;img src="nadia-desk.jpg"
+     alt="Nadia at her desk in 2012"
+     width="300"&gt;
+
+&lt;img src="nadia-reactconf.jpg"
+     alt="Nadia speaking at ReactConf 2019"
+     width="300"&gt;</pre>
+    </details>
+    <a class="learn" href="/html/images" target="_blank">Want to learn more? Read our Images article ›</a>
+  </div>
+</div>
+
+<!-- STEP 7 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">7</div>
+    <span class="step-title">Add lists — ol numbered and ul bullets</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Add a numbered list in Recognition and awards, and a bullet list in YouTube channel.</p>
+    <p class="explain">Use &lt;ol&gt; for a numbered list and &lt;ul&gt; for bullets. Each item inside both goes in an &lt;li&gt; tag. Type the numbered list first:</p>
+    <div class="do-box">
+      <div class="do-label">Type this in your Recognition and awards section</div>
+      <div class="do-line">→ <code>&lt;ol&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;Top 100 Tech Influencers — TechCrunch 2019, 2021, 2023&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;YouTube Creator Award for 1 million subscribers&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;Excellence in STEM Education — National Education Association&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/ol&gt;</code></div>
+    </div>
+    <p class="explain">Now type the bullet list in the YouTube channel section:</p>
+    <div class="do-box">
+      <div class="do-label">Type this in your YouTube channel section</div>
+      <div class="do-line">→ <code>&lt;ul&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;Build Real Projects&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;5-Minute Concepts&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;Interview Prep&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;Career Talks&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/ul&gt;</code></div>
+    </div>
+    <div class="habit">💡 Good habit — use ol when order matters like rankings or steps. Use ul when order does not matter like a list of features or series names.</div>
+    <details><summary></summary>
+<pre>&lt;ol&gt;
+  &lt;li&gt;Top 100 Tech Influencers — TechCrunch 2019, 2021, 2023&lt;/li&gt;
+  &lt;li&gt;YouTube Creator Award for 1 million subscribers&lt;/li&gt;
+  &lt;li&gt;Excellence in STEM Education&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Build Real Projects&lt;/li&gt;
+  &lt;li&gt;5-Minute Concepts&lt;/li&gt;
+  &lt;li&gt;Interview Prep&lt;/li&gt;
+  &lt;li&gt;Career Talks&lt;/li&gt;
+&lt;/ul&gt;</pre>
+    </details>
+    <a class="learn" href="/html/list" target="_blank">Want to learn more? Read our Lists article ›</a>
+  </div>
+</div>
+
+<!-- STEP 8 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">8</div>
+    <span class="step-title">Add a table — the sidebar info box</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Create a table with 5 rows showing Nadia's key info — just like the info box on the real Wikipedia page.</p>
+    <p class="explain">A table uses &lt;table&gt; to start it, &lt;tr&gt; for each row, &lt;th&gt; for the label cell on the left, and &lt;td&gt; for the value cell on the right. Type all of this:</p>
+    <div class="do-box">
+      <div class="do-label">Type this — you can put it anywhere on the page</div>
+      <div class="do-line">→ <code>&lt;table&gt;</code></div>
+      <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;Born&lt;/th&gt;&lt;td&gt;1988 (age 36–37)&lt;/td&gt;&lt;/tr&gt;</code></div>
+      <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;Nationality&lt;/th&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;</code></div>
+      <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;Occupation&lt;/th&gt;&lt;td&gt;Software Engineer, Educator, YouTuber&lt;/td&gt;&lt;/tr&gt;</code></div>
+      <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;Years active&lt;/th&gt;&lt;td&gt;2010–present&lt;/td&gt;&lt;/tr&gt;</code></div>
+      <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;Subscribers&lt;/th&gt;&lt;td&gt;2.5 million&lt;/td&gt;&lt;/tr&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/table&gt;</code></div>
+    </div>
+    <div class="habit">💡 Good habit — use &lt;th&gt; for label cells. It makes them bold automatically and tells screen readers those cells are headers, not data.</div>
+    <details><summary></summary>
+<pre>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Born&lt;/th&gt;&lt;td&gt;1988 (age 36–37)&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Nationality&lt;/th&gt;&lt;td&gt;American&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Occupation&lt;/th&gt;&lt;td&gt;Software Engineer, Educator, YouTuber&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Years active&lt;/th&gt;&lt;td&gt;2010–present&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Subscribers&lt;/th&gt;&lt;td&gt;2.5 million&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre>
+    </details>
+    <a class="learn" href="/html/table" target="_blank">Want to learn more? Read our Tables article ›</a>
+  </div>
+</div>
+
+<!-- STEP 9 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">9</div>
+    <span class="step-title">Add links — a href</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">In the References section, add two clickable links using the a tag.</p>
+    <p class="explain">A link uses &lt;a&gt; with an href attribute for the URL. The text between the tags is what the user clicks. Adding target="_blank" makes it open in a new tab. Type these in your References section:</p>
+    <div class="do-box">
+      <div class="do-label">Type this inside your References section</div>
+      <div class="do-line">→ <code>&lt;ul&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;&lt;a href="https://youtube.com" target="_blank"&gt;Nadia's YouTube Channel&lt;/a&gt;&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;li&gt;&lt;a href="https://github.com" target="_blank"&gt;Nadia's GitHub Profile&lt;/a&gt;&lt;/li&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/ul&gt;</code></div>
+    </div>
+    <p class="explain">Save and refresh. You should see two blue underlined links. Click them — they should open YouTube and GitHub in a new tab.</p>
+    <div class="habit">💡 Good habit — never write "click here" as the link text. Always describe where the link goes, like "Nadia's YouTube Channel". Screen readers read link text out loud to blind users.</div>
+    <details><summary></summary>
+<pre>&lt;section&gt;
+  &lt;h2&gt;References&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="https://youtube.com" target="_blank"&gt;Nadia's YouTube Channel&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com" target="_blank"&gt;Nadia's GitHub Profile&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</pre>
+    </details>
+    <a class="learn" href="/html/link" target="_blank">Want to learn more? Read our Links article ›</a>
+  </div>
+</div>
+
+<!-- STEP 10 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">10</div>
+    <span class="step-title">Add the search bar at the top — header and input</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">At the very top of &lt;body&gt;, before everything else, add a header with a search bar — just like Wikipedia's search at the top.</p>
+    <p class="explain">The &lt;header&gt; tag goes first inside &lt;body&gt;, before your h1. Inside it you put the site name, a text input, and a button. Type this as the very first thing inside &lt;body&gt;:</p>
+    <div class="do-box">
+      <div class="do-label">Type this as the first thing inside &lt;body&gt; — before your h1</div>
+      <div class="do-line">→ <code>&lt;header&gt;</code></div>
+      <div class="do-line">→ <code>&lt;strong&gt;Wikipedia&lt;/strong&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="text" placeholder="Search Wikipedia"&gt;</code></div>
+      <div class="do-line">→ <code>&lt;button&gt;Search&lt;/button&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/header&gt;</code></div>
+    </div>
+    <p class="explain">Save and refresh. You should see "Wikipedia", a text box, and a Search button appear at the top of the page.</p>
+    <div class="habit">💡 Good habit — &lt;header&gt; always goes at the top of the page. It holds the logo, navigation, and search bar — things that appear on every page of a website.</div>
+    <details><summary></summary>
+<pre>&lt;body&gt;
+  &lt;header&gt;
+    &lt;strong&gt;Wikipedia&lt;/strong&gt;
+    &lt;input type="text" placeholder="Search Wikipedia"&gt;
+    &lt;button&gt;Search&lt;/button&gt;
+  &lt;/header&gt;
+
+  &lt;h1&gt;Nadia&lt;/h1&gt;
+  ...
+&lt;/body&gt;</pre>
+    </details>
+    <a class="learn" href="/html/semantic-html" target="_blank">Want to learn more? Read our Semantic HTML article ›</a>
+  </div>
+</div>
+
+<!-- STEP 11 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">11</div>
+    <span class="step-title">Add radio buttons — page appearance options</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">Add a fieldset with 3 radio buttons letting the user pick a page appearance — Standard, Wide, or Compact.</p>
+    <p class="explain">Radio buttons let users pick one option from a group. They all share the same name so only one can be selected at a time. A &lt;fieldset&gt; groups them and &lt;legend&gt; gives them a title. Type this anywhere on your page — try it inside the header or just below it:</p>
+    <div class="do-box">
+      <div class="do-label">Type this — inside or below your header</div>
+      <div class="do-line">→ <code>&lt;fieldset&gt;</code></div>
+      <div class="do-line">→ <code>&lt;legend&gt;Page appearance&lt;/legend&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="radio" name="appearance" id="std" checked&gt;</code></div>
+      <div class="do-line">→ <code>&lt;label for="std"&gt;Standard&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="radio" name="appearance" id="wide"&gt;</code></div>
+      <div class="do-line">→ <code>&lt;label for="wide"&gt;Wide&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="radio" name="appearance" id="compact"&gt;</code></div>
+      <div class="do-line">→ <code>&lt;label for="compact"&gt;Compact&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/fieldset&gt;</code></div>
+    </div>
+    <p class="explain">Save and refresh. You should see a box with 3 radio buttons. Try clicking each one — only one can be selected at a time.</p>
+    <div class="habit">💡 Good habit — every radio button needs a matching &lt;label for="..."&gt; using the same id. This makes the label clickable and helps screen readers describe each option.</div>
+    <details><summary></summary>
+<pre>&lt;fieldset&gt;
+  &lt;legend&gt;Page appearance&lt;/legend&gt;
+  &lt;input type="radio" name="appearance" id="std" checked&gt;
+  &lt;label for="std"&gt;Standard&lt;/label&gt;
+  &lt;input type="radio" name="appearance" id="wide"&gt;
+  &lt;label for="wide"&gt;Wide&lt;/label&gt;
+  &lt;input type="radio" name="appearance" id="compact"&gt;
+  &lt;label for="compact"&gt;Compact&lt;/label&gt;
+&lt;/fieldset&gt;</pre>
+    </details>
+    <a class="learn" href="/html/fieldset-legend" target="_blank">Want to learn more? Read our Fieldset and Legend article ›</a>
+  </div>
+</div>
+
+<!-- STEP 12 -->
+<div class="step">
+  <div class="step-head" onclick="nadiaWikiTog(this)">
+    <div class="num">12</div>
+    <span class="step-title">Add a contact form with validation — form</span>
+    <span class="arrow">›</span>
+  </div>
+  <div class="body">
+    <p class="task">At the bottom of your page, add a contact form with 4 fields and a submit button. Add validation so the browser checks the inputs before submitting — no JavaScript needed.</p>
+    <p class="explain">A &lt;form&gt; holds all the input fields. Each field needs a &lt;label&gt; above it. Adding required means the field cannot be empty. Adding type="email" makes the browser check for an @ symbol. Type all of this at the bottom of your page before &lt;/body&gt;:</p>
+    <div class="do-box">
+      <div class="do-label">Type this near the bottom of your page</div>
+      <div class="do-line">→ <code>&lt;h2&gt;Contact&lt;/h2&gt;</code></div>
+      <div class="do-line">→ <code>&lt;form&gt;</code></div>
+      <div class="do-line" style="margin-top:8px">→ <code>&lt;label for="name"&gt;Full name&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="text" id="name" name="name" required minlength="2" placeholder="Your full name"&gt;</code></div>
+      <div class="do-line" style="margin-top:8px">→ <code>&lt;label for="email"&gt;Email address&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;input type="email" id="email" name="email" required placeholder="you@example.com"&gt;</code></div>
+      <div class="do-line" style="margin-top:8px">→ <code>&lt;label for="subject"&gt;Subject&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;select id="subject" name="subject"&gt;</code></div>
+      <div class="do-line">→ <code>&lt;option&gt;General enquiry&lt;/option&gt;</code></div>
+      <div class="do-line">→ <code>&lt;option&gt;Report an error&lt;/option&gt;</code></div>
+      <div class="do-line">→ <code>&lt;option&gt;Collaboration&lt;/option&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/select&gt;</code></div>
+      <div class="do-line" style="margin-top:8px">→ <code>&lt;label for="msg"&gt;Message&lt;/label&gt;</code></div>
+      <div class="do-line">→ <code>&lt;textarea id="msg" name="message" required minlength="10" placeholder="Write your message here..."&gt;&lt;/textarea&gt;</code></div>
+      <div class="do-line" style="margin-top:8px">→ <code>&lt;button type="submit"&gt;Send message&lt;/button&gt;</code></div>
+      <div class="do-line">→ <code>&lt;/form&gt;</code></div>
+    </div>
+    <p class="explain">Save and refresh. Try clicking Send message with empty fields — the browser will show an error message automatically. Try typing one letter in the name field — it will say the minimum is 2 characters. Try a bad email like "hello" — it will ask for an @ symbol.</p>
+    <div class="habit">💡 Good habit — use type="email" not type="text" for email fields. The browser validates the format automatically and on mobile it shows a keyboard with the @ key front and centre.</div>
+    <details><summary></summary>
+<pre>&lt;h2&gt;Contact&lt;/h2&gt;
+&lt;form&gt;
+  &lt;label for="name"&gt;Full name&lt;/label&gt;
+  &lt;input type="text" id="name" name="name"
+         required minlength="2"
+         placeholder="Your full name"&gt;
+
+  &lt;label for="email"&gt;Email address&lt;/label&gt;
+  &lt;input type="email" id="email" name="email"
+         required placeholder="you@example.com"&gt;
+
+  &lt;label for="subject"&gt;Subject&lt;/label&gt;
+  &lt;select id="subject" name="subject"&gt;
+    &lt;option&gt;General enquiry&lt;/option&gt;
+    &lt;option&gt;Report an error&lt;/option&gt;
+    &lt;option&gt;Collaboration&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;label for="msg"&gt;Message&lt;/label&gt;
+  &lt;textarea id="msg" name="message"
+            required minlength="10"
+            placeholder="Write your message here..."&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Send message&lt;/button&gt;
+&lt;/form&gt;</pre>
+    </details>
+    <a class="learn" href="/html/form-validation" target="_blank">Want to learn more? Read our Form Validation article ›</a>
+  </div>
+</div>
+
+</div>
+</div><!-- end left col -->
+
+<div style="flex:1;min-width:min(100%,340px);position:sticky;top:24px;">
+  <h2 style="margin:0 0 4px;font-size:18px;font-weight:800;color:#0f172a;">Your Workspace</h2>
+  <p style="font-size:13px;color:#64748b;margin:0 0 12px;">Your code is saved automatically — come back any time.</p>
+  <div class="try-example" data-mode="edit">
+    <template class="try-default-html"><!DOCTYPE html>
+<html>
+  <head>
+    <title>Nadia — Wikipedia</title>
+  </head>
+  <body>
+    <h1>Nadia</h1>
+
+    <!-- Add your sections below -->
+
+  </body>
+</html></template>
+    <template class="try-default-css">body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #222;
+}
+
+h1 { font-size: 28px; border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+h2 { font-size: 20px; border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 28px; }
+h3 { font-size: 16px; color: #444; }
+table { border-collapse: collapse; margin: 12px 0; }
+th, td { border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; }
+th { background: #f4f4f4; text-align: left; }
+img { max-width: 100%; border-radius: 6px; margin: 8px 0; }
+</template>
+  </div>
+</div><!-- end right col -->
+
+</div><!-- end flex wrapper -->
+
+<script>
+function nadiaWikiTog(head) {
+  var body = head.nextElementSibling;
+  var arrow = head.querySelector('.arrow');
+  var open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  arrow.style.transform = open ? '' : 'rotate(90deg)';
+}
+</script>

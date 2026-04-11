@@ -14,20 +14,21 @@ import HtmlContentRenderer from "@/components/ui/HtmlContentRenderer";
 import ArticleFeedback from "@/components/tutorial/ArticleFeedback";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string[] }>;
 }
 
 export async function generateStaticParams() {
-  return contentRegistry.html.lessons.map((l) => ({ slug: l.slug }));
+  return contentRegistry.html.lessons.map((l) => ({ slug: l.slug.split("/") }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string[] }>
 }): Promise<Metadata> {
   const { slug } = await params;
-  const lesson = htmlLessons.find((l) => l.slug === slug)
+  const slugStr = slug.join("/");
+  const lesson = htmlLessons.find((l) => l.slug === slugStr)
 
   if (!lesson) {
     return {
@@ -45,7 +46,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${lesson.title} | CodingBanana`,
       description: lesson.description,
-      url: `https://www.codingbanana.com/html/${lesson.slug}`,
+      url: `https://www.codingbanana.com/html/${slugStr}`,
       siteName: 'CodingBanana',
       type: 'article',
       ...(ogImage && { images: ogImage }),
@@ -57,28 +58,29 @@ export async function generateMetadata({
       ...(ogImage && { images: [lesson.ogImage!] }),
     },
     alternates: {
-      canonical: `https://www.codingbanana.com/html/${lesson.slug}`,
+      canonical: `https://www.codingbanana.com/html/${slugStr}`,
     },
   }
 }
 
 export default async function HtmlLessonPage({ params }: Props) {
   const { slug } = await params;
-  const meta = getContentMeta("html", slug);
+  const slugStr = slug.join("/");
+  const meta = getContentMeta("html", slugStr);
   if (!meta) notFound();
 
-  const html = loadHtmlContent("html", slug);
+  const html = loadHtmlContent("html", slugStr);
   if (!html) notFound();
 
-  const prev = getPrevContent("html", slug);
-  const next = getNextContent("html", slug);
+  const prev = getPrevContent("html", slugStr);
+  const next = getNextContent("html", slugStr);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: meta.title,
     description: meta.description,
-    url: `https://www.codingbanana.com/html/${slug}`,
+    url: `https://www.codingbanana.com/html/${slugStr}`,
     author: {
       "@type": "Organization",
       name: "CodingBanana",

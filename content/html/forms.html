@@ -1,20 +1,13 @@
-<div class="definition">
-  A form is a way for users to give information to a page. HTML gives us the <code>&lt;form&gt;</code> tag to wrap all
-  our inputs together.
-</div>
+<p>You have filled out a form more times than you probably realize.</p>
 
-<p>You have seen plenty of websites up to now.</p>
+<p>When you searched for something on Google, that was a form. When you logged into your email, that was a form. When you
+  typed a message to a friend, that was a form. You have been using them your whole life without even thinking about it.
+</p>
 
-<p>Think about the last time you searched for something online. You clicked on a box, typed something in, and hit enter.
-  The site took what you typed and did something with it.</p>
-
-<p>That is a form. A form is simply a way for you to give information and for the site to use that information to do
-  something.</p>
-
-<p>Take a look at this page for example.</p>
+<p>Even the search box at the top of a Wikipedia page is a form.</p>
 
 <div class="wiki-preview">
-  <div class="wiki-preview-label">👀 Here is what you see on the page</div>
+  <div class="wiki-preview-label">👀 Here is what you see on the Wikipedia page</div>
   <div class="wiki-preview-body">
     <div class="wiki-preview-main">
       <h1 class="wiki-preview-title">Nadia</h1>
@@ -40,17 +33,28 @@
   </div>
 </div>
 
-<p>See that search box at the bottom of the card? That is a form. You type something in, press search, and the page uses
-  what you typed to find results.</p>
+<p>You type something into that box and press Enter. The site takes what you typed and shows you results based on it.
+  That is the whole concept of a form. It is simply a way for you to give information to a website, and for the website
+  to use that information to do something.</p>
 
-<p>Let us learn how to build one.</p>
+<h2>The Basic Structure</h2>
 
-<h2>The form Tag</h2>
+<p>Every HTML form starts with a <code>&lt;form&gt;</code> tag. Everything inside that tag is part of your form. Think
+  of it like a container.</p>
 
-<p>All HTML forms are wrapped inside a <code>&lt;form&gt;</code> tag. That is the container. Inside it you decide what
-  kind of inputs you want.</p>
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      ... your inputs go here ...
+    </form>
+  </template>
+</section>
 
-<p>To create a text box you use the <code>&lt;input&gt;</code> tag with <code>type="text"</code>.</p>
+<p>Now let us talk about what goes inside.</p>
+
+<h2>Text Input</h2>
+
+<p>The most common thing inside a form is a text box. A place where someone can type something.</p>
 
 <section class="try-example">
   <template class="try-default-html">
@@ -60,8 +64,13 @@
   </template>
 </section>
 
-<p>But if you look at a real search box there is usually some grey hint text inside it. That is called a placeholder.
-  You add it with the <code>placeholder</code> attribute.</p>
+<p>You set <code>type="text"</code> because you want the user to type text. Simple as that.</p>
+
+<p>Now, if you look at the Wikipedia search box, you will notice there is some grey text inside it that says "Search
+  Wikipedia" before you start typing. That is called a placeholder. It is a hint that disappears the moment the user
+  starts typing.</p>
+
+<p>You add it like this:</p>
 
 <section class="try-example">
   <template class="try-default-html">
@@ -71,12 +80,14 @@
   </template>
 </section>
 
-<p>Now the box shows that hint text until the user starts typing.</p>
+<p>Now the box shows that hint until the user starts typing.</p>
 
-<h2>Adding a Submit Button</h2>
+<h2>The Submit Button</h2>
 
-<p>Now let us add a button so the user can actually submit the form. For that you use another <code>&lt;input&gt;</code>
-  but this time with <code>type="submit"</code>. You can give it a label using the <code>value</code> attribute.</p>
+<p>A form without a way to submit it is like a door with no handle. You need a button.</p>
+
+<p>For that, you use another <code>&lt;input&gt;</code>, but this time with <code>type="submit"</code>. You can control
+  what text appears on the button using the <code>value</code> attribute.</p>
 
 <section class="try-example">
   <template class="try-default-html">
@@ -87,132 +98,103 @@
   </template>
 </section>
 
-<p>Now you have a text box where the user can type, a placeholder that guides them, and a button that lets them send the
-  form.</p>
+<p>Put it all together and you have a working search bar — a text box, a placeholder guiding the user, and a button to
+  send the form. Just like Wikipedia.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>For now this form will not actually search anything or send data anywhere. That requires a backend. The goal here
-    is just to learn how to build the form itself.</p>
+  <p>This form will not actually search Wikipedia or send data anywhere yet. That is fine. Right now we are just learning
+    how to build the structure. The sending part comes later.</p>
+</div>
+
+<div class="challenge" data-title="Create a simple form"
+  data-description="Create a form with two things: A text box where the user can type their name. A button to submit the form."
+  data-checks="form,input"
+  data-solution="&lt;form&gt;
+  &lt;input type=&quot;text&quot; placeholder=&quot;Enter your name&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;">
 </div>
 
 <h2>Radio Buttons</h2>
 
-<p>Sometimes instead of letting users type freely you want to give them a fixed set of options to choose from. That is
-  where radio buttons come in. The user can only pick one option at a time.</p>
+<p>Now look at the right side of a Wikipedia page — the Appearance section. You will see something like this:</p>
 
-<p>Each radio button needs three things:</p>
+<div class="wiki-preview" style="max-width:260px;">
+  <div class="wiki-preview-label">👀 Wikipedia Appearance panel</div>
+  <div style="padding:16px;font-size:13px;font-family:sans-serif;border:1px solid #e0e0e0;border-radius:8px;background:#fff;">
+    <p style="margin:0 0 8px;font-weight:600;font-size:13px;">Text size</p>
+    <label style="display:block;margin-bottom:4px;"><input type="radio" name="wiki-size" value="small" style="margin-right:6px;">Small</label>
+    <label style="display:block;margin-bottom:4px;"><input type="radio" name="wiki-size" value="standard" checked style="margin-right:6px;">Standard</label>
+    <label style="display:block;margin-bottom:4px;"><input type="radio" name="wiki-size" value="large" style="margin-right:6px;">Large</label>
+  </div>
+</div>
+
+<p>You are giving input to the page, but not by typing anything. The page gives you a fixed list of options and you pick
+  one. That is a radio button.</p>
+
+<p>Here is what makes radio buttons work the way they do. Each option is its own input element, but they are all
+  connected through a shared <code>name</code> attribute. Because they share the same name, the browser knows they
+  belong to the same group and only lets you select one at a time. Pick a different one and the previous one deselects
+  automatically.</p>
+
+<p>To build a radio button you give it three things:</p>
 
 <ul>
-  <li><code>type="radio"</code> — tells the browser this is a radio button</li>
-  <li><code>name="group-name"</code> — groups them together so only one can be selected</li>
-  <li><code>value="something"</code> — the value that gets saved when selected</li>
+  <li><code>type="radio"</code> — to tell the browser what kind of input this is</li>
+  <li><code>name="group-name"</code> — to connect all the options in the same group</li>
+  <li><code>value="something"</code> — to store the actual answer when that option is selected</li>
 </ul>
 
 <div class="tip">
   <span>💡</span>
-  <p>Same <code>name</code> means same group. Only one option in the group can be picked at a time.</p>
+  <p>Same <code>name</code> means same group. Only one can be picked at a time. That is the whole rule.</p>
 </div>
+
+<p>Here is what a group looks like in practice:</p>
 
 <section class="try-example">
   <template class="try-default-html">
-    <form>
-      <p><strong>Text size</strong></p>
-      <input type="radio" name="text-size" value="small"> Small <br>
-      <input type="radio" name="text-size" value="standard" checked> Standard <br>
-      <input type="radio" name="text-size" value="large"> Large
-    </form>
+    <input type="radio" name="text-size" value="small"> Small <br>
+    <input type="radio" name="text-size" value="standard" checked> Standard <br>
+    <input type="radio" name="text-size" value="large"> Large
   </template>
 </section>
 
-<h2>Dropdown</h2>
+<p>Breaking it down:</p>
 
-<p>Sometimes you want a neat menu where the user clicks and chooses from a list. That is a dropdown. Instead of showing
-  all options at once like radio buttons you put them in one tidy menu.</p>
+<ul>
+  <li><code>type="radio"</code> makes it a circular option button</li>
+  <li><code>name="text-size"</code> groups all three together so only one can be selected</li>
+  <li><code>value="..."</code> is what gets recorded when that option is chosen</li>
+  <li><code>checked</code> sets which option is selected by default when the page loads</li>
+  <li><code>&lt;br&gt;</code> is a line break — it pushes the next element onto a new line</li>
+</ul>
 
-<p>You use two tags together. <code>&lt;select&gt;</code> creates the dropdown box and <code>&lt;option&gt;</code> is
-  each choice inside it.</p>
-
-<section class="try-example">
-  <template class="try-default-html">
-    <form>
-      <p><strong>Select your country</strong></p>
-      <select name="country">
-        <option>United States</option>
-        <option>India</option>
-        <option>United Kingdom</option>
-      </select>
-    </form>
-  </template>
-</section>
-
-<h2>Textarea</h2>
-
-<p>A regular text box is perfect for short input like a name or a search term. But what if you want the user to write
-  more? A comment, some feedback, or a longer answer.</p>
-
-<p>That is where <code>&lt;textarea&gt;</code> comes in. It creates a bigger box where users can type multiple lines.
-  You control the size with <code>rows</code> and <code>cols</code> attributes.</p>
-
-<section class="try-example">
-  <template class="try-default-html">
-    <form>
-      <p><strong>Leave your feedback</strong></p>
-      <textarea rows="4" cols="40"></textarea>
-    </form>
-  </template>
-</section>
-
-<div class="tip">
-  <span>💡</span>
-  <p><code>&lt;input type="text"&gt;</code> is for one line only. <code>&lt;textarea&gt;</code> lets users type multiple
-    lines and even expand the box.</p>
-</div>
-
-<h2>The action Attribute</h2>
-
-<p>In real forms you will usually see a <code>action</code> attribute on the <code>&lt;form&gt;</code> tag. This tells
-  the form where to send the data when the user clicks submit.</p>
-
-<pre><code class="language-html">&lt;form action="/submit"&gt;
-  &lt;input type="text"&gt;
-  &lt;input type="submit" value="Send"&gt;
-&lt;/form&gt;</code></pre>
-
-<p>When the user clicks Send the browser sends all the form data to that location. That could be a page, a file, or a
-  server.</p>
-
-<p>If you are just learning and do not have a backend yet that is completely fine. You can leave the action empty or
-  leave it out entirely and the form will still work for building and testing.</p>
-
-<div class="tip">
-  <span>💡</span>
-  <p>Leave <code>action=""</code> or just use <code>&lt;form&gt;</code> without an action while you are learning. You
-    can always add the real destination later.</p>
-</div>
-
-<div class="challenge" data-title="Build a profile form"
-  data-description="Build a form about yourself. Add a text input for your name with a placeholder. Add radio buttons for your experience level with at least three options like Beginner, Intermediate, and Advanced. Add a dropdown for your favourite programming language with at least three options. And add a textarea where you can write a short bio about yourself. Finish with a submit button."
-  data-checks="form,input,select,option,textarea" data-solution="&lt;form&gt;
-  &lt;p&gt;&lt;strong&gt;Your name&lt;/strong&gt;&lt;/p&gt;
-  &lt;input type=&quot;text&quot; placeholder=&quot;Enter your name&quot;&gt;
-
-  &lt;p&gt;&lt;strong&gt;Experience level&lt;/strong&gt;&lt;/p&gt;
-  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;beginner&quot;&gt; Beginner &lt;br&gt;
-  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;intermediate&quot;&gt; Intermediate &lt;br&gt;
-  &lt;input type=&quot;radio&quot; name=&quot;level&quot; value=&quot;advanced&quot;&gt; Advanced
-
-  &lt;p&gt;&lt;strong&gt;Favourite language&lt;/strong&gt;&lt;/p&gt;
-  &lt;select name=&quot;language&quot;&gt;
-    &lt;option&gt;HTML&lt;/option&gt;
-    &lt;option&gt;CSS&lt;/option&gt;
-    &lt;option&gt;JavaScript&lt;/option&gt;
-  &lt;/select&gt;
-
-  &lt;p&gt;&lt;strong&gt;About you&lt;/strong&gt;&lt;/p&gt;
-  &lt;textarea rows=&quot;4&quot; cols=&quot;40&quot; placeholder=&quot;Write a short bio&quot;&gt;&lt;/textarea&gt;
-
-  &lt;br&gt;&lt;br&gt;
-  &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+<div class="challenge" data-title="Create a Color section with radio buttons"
+  data-description="Inside a form, create a Color section with three radio buttons: Automatic, Light, and Dark. All three should be part of the same group so that only one can be selected at a time."
+  data-checks="form,input[type=radio]"
+  data-solution="&lt;form&gt;
+  &lt;p&gt;&lt;strong&gt;Color (beta)&lt;/strong&gt;&lt;/p&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;color&quot; value=&quot;auto&quot;&gt; Automatic &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;color&quot; value=&quot;light&quot;&gt; Light &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;color&quot; value=&quot;dark&quot; checked&gt; Dark
 &lt;/form&gt;">
 </div>
+
+<h2>There is More</h2>
+
+<p>So far you have seen three types of input:</p>
+
+<ul>
+  <li>A text box for typing</li>
+  <li>A submit button for sending the form</li>
+  <li>Radio buttons for picking one option from a group</li>
+</ul>
+
+<p>But forms can do a lot more than that. Think about the last time you signed up for something online. There was
+  probably a box for writing a longer message, a dropdown to pick your country, maybe checkboxes for your interests.
+  HTML has input types for all of those.</p>
+
+<p>Next, we are going to build a contact form using the most commonly used input types. This is where things start to
+  feel real.</p>

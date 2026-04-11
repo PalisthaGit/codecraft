@@ -1,0 +1,104 @@
+<p>So far every form you have written looks like this.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <!-- inputs here -->
+    </form>
+  </template>
+</section>
+
+<p>And that works fine for practicing. But if you ever peek at the source code of a real website and look at their
+  forms, you will almost always see something like this instead.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/submit">
+      <!-- inputs here -->
+    </form>
+  </template>
+</section>
+
+<p>That <code>action</code> attribute is new. So what does it do?</p>
+
+<h2>What action Actually Means</h2>
+
+<p>When a user fills out your form and clicks the submit button, the browser has to do something with all that
+  information. The name they typed, the email they entered, the message they wrote. It has to go somewhere.</p>
+
+<p>The <code>action</code> attribute is where you tell the browser exactly where to send it.</p>
+
+<p>Think of it like writing an address on an envelope. The form is the envelope. The data inside is the letter. The
+  <code>action</code> is the address on the front that tells the post office where to deliver it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/submit">
+      <label for="name">Your Name</label>
+      <input type="text" id="name">
+      <input type="submit" value="Send">
+    </form>
+  </template>
+</section>
+
+<p>When the user clicks Send in this example, the browser takes everything the user filled in and sends it off to
+  <code>/submit</code>. That destination could be a page on your website, a file on your server, or a script written
+  in a language like PHP or Python that processes the data and does something useful with it, like saving it to a
+  database or sending you an email notification.</p>
+
+<h2>You Do Not Need a Backend to Learn Forms</h2>
+
+<p>Here is something that trips up a lot of beginners. They see <code>action</code> and think they need a whole server
+  set up before they can even practice building forms. That is not true at all.</p>
+
+<p>If you are still learning and you do not have a backend yet, you can do either of these and your form will work
+  perfectly fine for practice purposes.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="">
+      <!-- inputs here -->
+    </form>
+  </template>
+</section>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <!-- inputs here -->
+    </form>
+  </template>
+</section>
+
+<p>Both of these just tell the browser not to send the data anywhere in particular. Your form will still look right,
+  your validation will still run, and you can test everything without needing a database or a server. A lot of real
+  front-end developers work this way for a long time before they ever touch a backend.</p>
+
+<h2>A Neat Little Trick for Testing</h2>
+
+<p>There is a free service called Formspree that a lot of developers use when they want to see their form actually do
+  something without building a backend. You put their URL in your <code>action</code> and they handle the rest,
+  forwarding the submission straight to your email.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="https://formspree.io/f/your-id">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" required>
+      <input type="submit" value="Send">
+    </form>
+  </template>
+</section>
+
+<p>You do not need to worry about setting this up right now. Just know it exists for when you want to see a real form
+  submission happen on a real project without writing any server code.</p>
+
+<h2>The Short Version</h2>
+
+<p>The <code>action</code> attribute tells the browser where to send the form data when the user submits. No
+  <code>action</code> means the data does not go anywhere, which is perfectly fine while you are learning. When you
+  eventually connect your form to a real backend, this is the attribute you will fill in to make that connection
+  happen.</p>
+
+<p>Up next you will meet the <code>method</code> attribute, which is the other half of this picture. It controls not
+  where the data goes but how it travels.</p>

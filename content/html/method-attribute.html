@@ -1,0 +1,243 @@
+<p>In the last lesson you learned that <code>action</code> tells the browser where to send your form data. Now meet
+  <code>method</code>, which answers a different question entirely.</p>
+
+<p>Not where. How.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/submit" method="post">
+      <!-- inputs here -->
+    </form>
+  </template>
+</section>
+
+<p>The <code>method</code> attribute controls the way the browser delivers your form data to the destination. There are
+  two options and you will use both of them throughout your career. They are called GET and POST.</p>
+
+<p>Let us understand both of them properly, from the ground up.</p>
+
+<h2>GET</h2>
+
+<p>GET is the default. If you write a form without any <code>method</code> attribute at all, the browser uses GET
+  automatically.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/search">
+      <label for="query">Search</label>
+      <input type="text" id="query" name="query">
+      <input type="submit" value="Search">
+    </form>
+  </template>
+</section>
+
+<p>When this form submits, something interesting happens in your browser's address bar. The URL changes to something like
+  this.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    /search?query=html+forms
+  </template>
+</section>
+
+<p>Do you see what happened there? The data the user typed into the form got attached directly onto the URL. That little
+  question mark is where the form data begins. Everything after it is called the query string, and it contains all the
+  field names and values from your form, packed into the URL itself.</p>
+
+<p>This is not a bug. This is exactly how GET is supposed to work.</p>
+
+<h2>When to use GET</h2>
+
+<p>GET is the right choice whenever the form is asking for information rather than sending information. Search bars are
+  the perfect example. When you type something into Google and hit Search, Google uses GET. That is why you can copy the
+  URL from your search results and paste it to a friend and they see the exact same results. The search is right there
+  in the URL.</p>
+
+<p>Use GET for things like search forms, filters, and sorting options. Basically any time submitting the form just asks
+  a question and does not change anything.</p>
+
+<h2>What GET is NOT good for</h2>
+
+<p>Passwords. Credit card numbers. Private messages. Anything sensitive at all.</p>
+
+<p>Because GET puts your data in the URL, it gets saved in the browser history, logged by web servers, and visible to
+  anyone looking over your shoulder. You would never want a password showing up in a URL like this.</p>
+
+<pre><code>/login?email=john@email.com&amp;password=mysecretpassword123</code></pre>
+
+<p>That would be a serious problem. For anything like that, you need POST.</p>
+
+<h2>POST</h2>
+
+<p>POST sends the data differently. Instead of attaching it to the URL, POST packages the data up and sends it in the
+  background, invisible in the address bar.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/login" method="post">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required> <br><br>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required> <br><br>
+
+      <input type="submit" value="Log In">
+    </form>
+  </template>
+</section>
+
+<p>When this form submits, the URL stays exactly as it is. Nothing gets added to it. The email and password travel
+  separately, tucked away in what is called the request body, which is not visible to the user at all.</p>
+
+<h2>When to use POST</h2>
+
+<p>POST is the right choice whenever the form is sending something that should change or be stored. Login forms,
+  registration forms, contact forms, payment forms, file uploads, anything where you are submitting real data that will
+  be saved, processed, or acted on.</p>
+
+<p>A good way to remember it is this. If submitting the form twice would cause a problem, use POST. Imagine submitting a
+  payment form twice. That would charge the customer twice, which is obviously bad. POST is designed for that kind of
+  form. If you try to refresh a page after a POST submission, the browser actually warns you and asks if you really want
+  to resubmit, specifically to prevent accidental duplicates.</p>
+
+<h2>GET vs POST Side by Side</h2>
+
+<p>Here is a simple way to see the difference between the two in your head.</p>
+
+<p>GET is like shouting your order across a restaurant. Everyone can hear it, it is quick, and it works fine for a cup
+  of coffee. POST is like handing the waiter a sealed note. The message gets delivered privately and nobody else at the
+  table can read it.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>GET</th>
+      <th>POST</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data location</td>
+      <td>In the URL</td>
+      <td>In the request body</td>
+    </tr>
+    <tr>
+      <td>Visible in browser history</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>Good for</td>
+      <td>Search, filters</td>
+      <td>Login, signup, contact forms</td>
+    </tr>
+    <tr>
+      <td>Safe for passwords</td>
+      <td>Never</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Bookmarkable</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>The name Attribute</h2>
+
+<p>While we are here, this is a great moment to talk about something you may have noticed in the examples above. Every
+  input has a <code>name</code> attribute.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <input type="text" id="query" name="query">
+  </template>
+</section>
+
+<p>You already know that <code>id</code> connects an input to its label. The <code>name</code> attribute does something
+  different. It is the label that the browser uses when it actually packages up your form data to send it.</p>
+
+<p>Think of it this way. When the form submits, the browser goes through every input and asks two things. What is the
+  name of this field, and what did the user type into it. It bundles those pairs together and sends them to the server.
+</p>
+
+<p>If you forget to add <code>name</code> to an input, that field gets completely ignored when the form submits. The
+  data just disappears. It will not cause an error, it just silently gets left out, which can be very confusing to debug
+  if you do not know about this.</p>
+
+<p>So the rule is simple. Every input that you want to actually capture needs both an <code>id</code> and a
+  <code>name</code>. The <code>id</code> is for the label connection and the browser's accessibility features. The
+  <code>name</code> is for the form submission.</p>
+
+<p>They can even be the same value, which is what most developers do to keep things simple.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email">
+  </template>
+</section>
+
+<h2>A Complete Example</h2>
+
+<p>Here is a full login form using everything from this lesson and the last one. Read through it and see how
+  <code>action</code>, <code>method</code>, <code>name</code>, and <code>id</code> are all working together.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/login" method="post">
+
+      <label for="email">Email Address</label> <br>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required> <br><br>
+
+      <label for="password">Password</label> <br>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required minlength="8"> <br><br>
+
+      <input type="submit" value="Log In">
+
+    </form>
+  </template>
+</section>
+
+<p>Walk through what happens when someone fills this out and clicks Log In.</p>
+
+<p>The browser looks at <code>action</code> and knows to send the data to <code>/login</code>. It looks at
+  <code>method</code> and knows to send it via POST, meaning nothing appears in the URL. It picks up the
+  <code>name</code> on each input and bundles the email and password together with their labels. The validation runs
+  first because of <code>required</code> and <code>minlength</code>. If everything passes, the data goes off to the
+  server.</p>
+
+<p>That is a real login form. The same logic powers almost every login page on the internet.</p>
+
+<div class="challenge"
+  data-title="Build a registration form"
+  data-description="Build a registration form for a new user account. It should have a full name field, an email field, a password field, and a confirm password field. Use POST as the method and point the action to /register. Make sure every field has a proper label, a name attribute, and appropriate validation. The password should be at least 8 characters. Add a checkbox that the user must tick to agree to the terms and conditions, and make it required. When you are done, open the form in your browser and try submitting it empty. Then try submitting it with a badly formatted email. Then try a password that is too short. Watch the browser catch each one."
+  data-checks="form[method='post'],form[action='/register'],input[name],input[type='email'],input[type='password'][minlength='8'],input[type='checkbox'][required]"
+  data-solution="&lt;form action=&quot;/register&quot; method=&quot;post&quot;&gt;
+
+  &lt;label for=&quot;fullname&quot;&gt;Full Name&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;text&quot; id=&quot;fullname&quot; name=&quot;fullname&quot; placeholder=&quot;Enter your full name&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;email&quot;&gt;Email Address&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;your@email.com&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;At least 8 characters&quot; required minlength=&quot;8&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;confirm-password&quot;&gt;Confirm Password&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;password&quot; id=&quot;confirm-password&quot; name=&quot;confirm-password&quot; placeholder=&quot;Repeat your password&quot; required minlength=&quot;8&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;terms&quot; required&gt;
+    I agree to the terms and conditions
+  &lt;/label&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;Create Account&quot;&gt;
+
+&lt;/form&gt;">
+</div>
+
+<p>Up next you are going to meet the <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> tags, which give you
+  a clean way to group related inputs together inside a form.</p>

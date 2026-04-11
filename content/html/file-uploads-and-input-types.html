@@ -1,0 +1,291 @@
+<p>You have learned all the core input types that make up most forms on the internet. But HTML has a few more input
+  types that solve very specific problems really elegantly. By the end of this lesson your toolkit is going to feel a
+  lot more complete.</p>
+
+<p>Let us go through them one by one.</p>
+
+<h2>File Upload</h2>
+
+<p>Sometimes you do not just want text from the user. You want an actual file. A profile photo. A CV. A document. The
+  <code>type="file"</code> input handles all of that.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="resume">Upload Your CV</label> <br>
+    <input type="file" id="resume" name="resume">
+  </template>
+</section>
+
+<p>When the user clicks this, their operating system's file picker opens up. They browse to the file they want, select
+  it, and it gets attached to the form ready to be submitted.</p>
+
+<h2>Accepting Only Certain File Types</h2>
+
+<p>By default the file input accepts any file at all. If you only want images, or only PDFs, or only certain formats,
+  you can use the <code>accept</code> attribute to restrict what shows up in the file picker.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="photo">Profile Photo</label> <br>
+    <input type="file" id="photo" name="photo" accept="image/*">
+  </template>
+</section>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="document">Upload PDF Only</label> <br>
+    <input type="file" id="document" name="document" accept=".pdf">
+  </template>
+</section>
+
+<p>The value <code>image/*</code> means any image format at all. You can also be specific with things like
+  <code>accept=".jpg, .png"</code> if you only want those exact formats.</p>
+
+<h2>Allowing Multiple Files at Once</h2>
+
+<p>If you want the user to be able to select more than one file in a single click, add the <code>multiple</code>
+  attribute.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="photos">Upload Photos</label> <br>
+    <input type="file" id="photos" name="photos" accept="image/*" multiple>
+  </template>
+</section>
+
+<p>Now the user can hold Ctrl or Cmd while selecting files and pick several at once.</p>
+
+<h2>One Important Thing About File Uploads</h2>
+
+<p>When your form includes a file upload, you need to add one extra attribute to the <code>&lt;form&gt;</code> tag
+  itself.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="resume">Upload Your CV</label> <br>
+      <input type="file" id="resume" name="resume">
+    </form>
+  </template>
+</section>
+
+<p>That <code>enctype</code> attribute tells the browser to package the form data in a special way that can actually
+  carry file contents. Without it, the file does not get sent properly. Just text fields alone do not need it, but the
+  moment you add a file input, you need this on your form tag.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>File input present? Add <code>enctype="multipart/form-data"</code> to the form. Every single time. No exceptions.
+  </p>
+</div>
+
+<h2>Date Input</h2>
+
+<p>Asking users to type a date into a plain text field is a recipe for chaos. Some people write 01/03/2025. Others
+  write March 1st 2025. Others write 2025-03-01. You end up with completely inconsistent data that is a nightmare to
+  work with.</p>
+
+<p>The <code>type="date"</code> input solves this perfectly.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="birthday">Date of Birth</label> <br>
+    <input type="date" id="birthday" name="birthday">
+  </template>
+</section>
+
+<p>The browser renders a proper date picker. The user clicks it, a calendar pops up, they pick a date, and it gets
+  recorded in a consistent format every single time. No ambiguity, no messy text to clean up.</p>
+
+<p>You can also combine it with <code>min</code> and <code>max</code> to restrict which dates are selectable.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="appointment">Choose an Appointment Date</label> <br>
+    <input type="date" id="appointment" name="appointment" min="2025-01-01" max="2025-12-31">
+  </template>
+</section>
+
+<p>The dates in <code>min</code> and <code>max</code> must be written in the format <code>YYYY-MM-DD</code>. Any date
+  outside that range will be greyed out and unselectable in the calendar.</p>
+
+<h2>Time Input</h2>
+
+<p>Similar to date, <code>type="time"</code> gives the user a proper time picker instead of a free text field.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="meeting-time">Preferred Meeting Time</label> <br>
+    <input type="time" id="meeting-time" name="meeting-time">
+  </template>
+</section>
+
+<p>The user gets a clean hour and minute selector. No more trying to parse whether someone meant 3pm or 15:00.</p>
+
+<h2>Color Picker</h2>
+
+<p>This one is genuinely fun. <code>type="color"</code> opens up a full color picker right in the browser.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="theme-color">Choose Your Theme Color</label> <br>
+    <input type="color" id="theme-color" name="theme-color" value="#ff0000">
+  </template>
+</section>
+
+<p>The <code>value</code> sets the default color that the picker starts on. It has to be written as a hex color code,
+  which is that six character code starting with a hash that represents a color. <code>#ff0000</code> is red.
+  <code>#0000ff</code> is blue. <code>#000000</code> is black. <code>#ffffff</code> is white.</p>
+
+<p>When the user picks a color and submits the form, the value that gets sent is the hex code of whatever they chose.
+  This is useful for things like profile customization, theme builders, or any situation where you want the user to
+  pick a color.</p>
+
+<h2>Range Slider</h2>
+
+<p>A range input gives the user a draggable slider to pick a number within a range. It is perfect for things like
+  volume controls, ratings, price filters, or any situation where picking an exact number matters less than picking
+  roughly how much.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="satisfaction">Satisfaction Level</label> <br>
+    <input type="range" id="satisfaction" name="satisfaction" min="1" max="10" value="5">
+  </template>
+</section>
+
+<p><code>min</code> and <code>max</code> set the two ends of the slider. <code>value</code> sets where the handle
+  starts. The user drags it left or right and the number between min and max gets recorded.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The slider does not show the current value on screen by default. In practice you will almost always pair this with
+    a bit of JavaScript to display the number as the user drags. But the HTML alone is still valid and fully
+    functional.</p>
+</div>
+
+<h2>Hidden Input</h2>
+
+<p>This one is invisible to the user completely. They never see it, they cannot interact with it, but it gets included
+  in the form submission just like any other field.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/contact" method="post">
+      <input type="hidden" name="source" value="homepage">
+      <label for="message">Message</label> <br>
+      <textarea id="message" name="message"></textarea> <br><br>
+      <input type="submit" value="Send">
+    </form>
+  </template>
+</section>
+
+<p>You might wonder why you would ever want an invisible input. Here is a real example. Say you have the same contact
+  form on multiple pages of your website. When someone submits it you want to know which page they were on when they
+  did it. You can put a hidden input on each version of the form with the page name as the value. The user never sees
+  it, but when the form data arrives at your server you can see exactly where it came from.</p>
+
+<p>Hidden inputs are also commonly used for security tokens and tracking IDs behind the scenes.</p>
+
+<h2>Password Input</h2>
+
+<p>You have probably already seen this one in the wild but here it is properly explained. <code>type="password"</code>
+  works exactly like a text input except every character the user types gets replaced with a dot or asterisk on screen.
+  This prevents anyone nearby from reading the password over the user's shoulder.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <label for="password">Password</label> <br>
+    <input type="password" id="password" name="password" minlength="8" required>
+  </template>
+</section>
+
+<p>The actual value still gets sent with the form, the masking is purely visual. And as you learned in the method
+  lesson, you should always use <code>method="post"</code> on any form containing a password input so it does not end
+  up visible in the URL.</p>
+
+<h2>A Full Example Bringing It All Together</h2>
+
+<p>Here is a profile setup form that uses several of these new input types together.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form action="/setup-profile" method="post" enctype="multipart/form-data">
+
+      <fieldset>
+        <legend>Your Details</legend>
+
+        <label for="name">Full Name</label> <br>
+        <input type="text" id="name" name="name" required> <br><br>
+
+        <label for="birthday">Date of Birth</label> <br>
+        <input type="date" id="birthday" name="birthday" required> <br><br>
+
+        <label for="password">Choose a Password</label> <br>
+        <input type="password" id="password" name="password" minlength="8" required>
+      </fieldset>
+
+      <br>
+
+      <fieldset>
+        <legend>Customize Your Profile</legend>
+
+        <label for="avatar">Profile Photo</label> <br>
+        <input type="file" id="avatar" name="avatar" accept="image/*"> <br><br>
+
+        <label for="theme">Profile Color</label> <br>
+        <input type="color" id="theme" name="theme" value="#6c63ff"> <br><br>
+
+        <label for="mood">Current Mood (1 to 10)</label> <br>
+        <input type="range" id="mood" name="mood" min="1" max="10" value="5">
+      </fieldset>
+
+      <br>
+
+      <input type="hidden" name="source" value="onboarding">
+      <input type="submit" value="Save Profile">
+
+    </form>
+  </template>
+</section>
+
+<p>Notice the <code>enctype</code> on the form tag because of the file input. Notice the hidden input at the bottom
+  that the user never sees. Notice each fieldset grouping related things together. Every pattern from the last few
+  lessons is showing up here working together naturally.</p>
+
+<div class="challenge"
+  data-title="Build a photography booking form"
+  data-description="Build a booking form for a photography session. It should have a full name field, an email field, a date picker for the session date restricted to dates within the current year, a time picker for the preferred session time, a file input that accepts images only so the client can upload reference photos they like, a range slider from 1 to 5 asking how many hours they need, a dropdown with at least three types of photography sessions such as portrait, wedding, and event, and a submit button that says Book Session. Make sure the form uses POST, includes enctype=&quot;multipart/form-data&quot; because of the file input, and every field has a proper label and name attribute."
+  data-checks="input[type='file'],input[type='date'],input[type='time'],input[type='range'],select[name],input[type='submit'],label,input[name]"
+  data-solution="&lt;form action=&quot;/book-session&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+
+  &lt;label for=&quot;full-name&quot;&gt;Full Name&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;text&quot; id=&quot;full-name&quot; name=&quot;full-name&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;email&quot;&gt;Email Address&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;session-date&quot;&gt;Session Date&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;date&quot; id=&quot;session-date&quot; name=&quot;session-date&quot; min=&quot;2026-01-01&quot; max=&quot;2026-12-31&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;session-time&quot;&gt;Preferred Session Time&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;time&quot; id=&quot;session-time&quot; name=&quot;session-time&quot; required&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;reference-photos&quot;&gt;Reference Photos&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;file&quot; id=&quot;reference-photos&quot; name=&quot;reference-photos&quot; accept=&quot;image/*&quot; multiple&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;hours&quot;&gt;Hours Needed (1 to 5)&lt;/label&gt; &lt;br&gt;
+  &lt;input type=&quot;range&quot; id=&quot;hours&quot; name=&quot;hours&quot; min=&quot;1&quot; max=&quot;5&quot; value=&quot;3&quot;&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;label for=&quot;session-type&quot;&gt;Session Type&lt;/label&gt; &lt;br&gt;
+  &lt;select id=&quot;session-type&quot; name=&quot;session-type&quot; required&gt;
+    &lt;option value=&quot;&quot;&gt;Select a session type&lt;/option&gt;
+    &lt;option value=&quot;portrait&quot;&gt;Portrait&lt;/option&gt;
+    &lt;option value=&quot;wedding&quot;&gt;Wedding&lt;/option&gt;
+    &lt;option value=&quot;event&quot;&gt;Event&lt;/option&gt;
+  &lt;/select&gt; &lt;br&gt;&lt;br&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;Book Session&quot;&gt;
+
+&lt;/form&gt;">
+</div>
