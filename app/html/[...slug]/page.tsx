@@ -11,6 +11,7 @@ import {
 } from "@/lib/contentRegistry";
 import ContentNavigation from "@/components/tutorial/ContentNavigation";
 import HtmlContentRenderer from "@/components/ui/HtmlContentRenderer";
+import ProjectEditor from "@/components/ui/ProjectEditor";
 import ArticleFeedback from "@/components/tutorial/ArticleFeedback";
 
 interface Props {
@@ -93,6 +94,51 @@ export default async function HtmlLessonPage({ params }: Props) {
     educationalLevel: "Beginner",
     ...(meta.ogImage && { image: `https://www.codingbanana.com${meta.ogImage}` }),
   };
+
+  const isProject = slugStr.startsWith("projects/");
+
+  if (isProject) {
+    return (
+      <div className="flex flex-col h-screen bg-[#f8fafc]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* Top header bar */}
+        <header className="flex items-center gap-3 px-5 h-12 bg-white border-b border-[#e5e7eb] shrink-0">
+          <Link
+            href="/html"
+            className="flex items-center gap-1.5 text-sm text-[#6367ff] font-semibold hover:underline"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </Link>
+          <span className="text-[#e5e7eb]">|</span>
+          <span className="text-sm font-bold text-[#0f172a] truncate">{meta.title}</span>
+          <span className="ml-auto flex items-center gap-3 text-xs text-[#64748b] font-semibold">
+            <span>⏱ {meta.readTime}</span>
+            <span>📖 {meta.difficulty}</span>
+          </span>
+        </header>
+
+        {/* Split: Instructions (left) | Editor (right) */}
+        <div className="flex flex-1 overflow-hidden">
+          {/* Left: Instructions — independent scroll */}
+          <div className="w-1/2 overflow-y-auto p-6 bg-white border-r border-[#e5e7eb]">
+            <HtmlContentRenderer html={html} />
+          </div>
+
+          {/* Right: Code editor + preview — independent scroll managed internally */}
+          <div className="w-1/2 overflow-hidden">
+            <ProjectEditor />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <article className="max-w-3xl mx-auto">

@@ -14,7 +14,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  if (pathname.startsWith("/compiler")) {
+  if (pathname.startsWith("/compiler") || pathname.startsWith("/html/projects/")) {
     return <>{children}</>;
   }
 
