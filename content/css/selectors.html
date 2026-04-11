@@ -1,167 +1,193 @@
 <div class="definition">
-  A CSS selector tells the browser <em>which HTML elements</em> to apply styles to. Mastering selectors is the key to
-  writing precise, efficient CSS.
+  A CSS selector tells the browser which HTML elements to apply styles to. Tag selectors target every element of a type — class selectors let you target specific elements by name.
 </div>
 
-<p>Before you can style anything, you need to be able to <em>select</em> it. CSS gives you a rich set of selectors —
-  from the simple to the very specific.</p>
+<p>So far, every time we wrote <code>h1 { color: white; }</code>, it affected every single <code>&lt;h1&gt;</code> on the page. That's fine when the page is simple. But what happens when you have a Netflix logo in the top bar and another heading in the hero section? They can't both have the same styles.</p>
 
-<h2>Element Selectors</h2>
+<p>That's why classes exist.</p>
 
-<p>The most basic selector targets all elements of a given type:</p>
+<h2>Tag Selectors</h2>
 
-<pre><code class="language-css">p {
-  color: #374151;
-  line-height: 1.7;
+<p>You've been using these already. A tag selector targets every element of that type on the page.</p>
+
+<pre><code class="language-css">h1 {
+  color: white;
 }
 
-h1 {
-  font-size: 2rem;
-  font-weight: 900;
+p {
+  font-size: 18px;
 }</code></pre>
-
-<p>This applies the styles to <em>every</em> <code>&lt;p&gt;</code> and <code>&lt;h1&gt;</code> on the page.</p>
 
 <h2>Class Selectors</h2>
 
-<p>Class selectors let you target specific elements by their <code>class</code> attribute. Prefix the class name with a
-  dot:</p>
+<p>A class lets you name a specific group of elements and target only those. You add a class to HTML with the <code>class</code> attribute, and target it in CSS with a dot (<code>.</code>).</p>
 
-<pre><code class="language-css">.card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+<p>In HTML:</p>
+
+<pre><code class="language-html">&lt;div class="hero"&gt;
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+  &lt;p&gt;Watch anywhere.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<p>In CSS:</p>
+
+<pre><code class="language-css">.hero {
+  background-color: black;
+  padding: 60px;
+  text-align: center;
 }</code></pre>
 
-<p>Then in your HTML:</p>
-
-<pre><code>&lt;div class="card"&gt;I am a card!&lt;/div&gt;</code></pre>
-
-<p>One element can have multiple classes, and multiple elements can share the same class.</p>
-
-<h2>ID Selectors</h2>
-
-<p>ID selectors target a <em>single unique element</em> by its <code>id</code> attribute. Prefix with a <code>#</code>:
-</p>
-
-<pre><code class="language-css">#header {
-  background: #0f172a;
-  padding: 1rem 2rem;
-}</code></pre>
-
-<pre><code>&lt;header id="header"&gt;...&lt;/header&gt;</code></pre>
+<p>The dot before <code>hero</code> is what tells CSS it's a class. Without the dot, CSS would look for an HTML tag called <code>hero</code> — which doesn't exist.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>IDs should be unique — only use each ID once per page. For reusable styles, always prefer classes over IDs. Reserve
-    IDs for JavaScript targeting or unique structural landmarks.</p>
+  <p>Click <strong>Try It Yourself</strong> to see how adding a class to the hero section lets you style it separately from the rest of the page.</p>
 </div>
 
-<h2>Attribute Selectors</h2>
+<section class="try-example">
+  <template class="try-default-html">
+<div class="top-bar">
+  <span>NETFLIX</span>
+  <button>Sign In</button>
+</div>
 
-<p>You can target elements based on their attributes:</p>
-
-<pre><code class="language-css">/* Links that open in a new tab */
-a[target="_blank"] {
-  color: #6367ff;
-}
-
-/* Inputs of type email */
-input[type="email"] {
-  border: 1.5px solid #e5e7eb;
-}</code></pre>
-
-<h2>Descendant and Child Selectors</h2>
-
-<p>Target elements that are <em>inside</em> other elements:</p>
-
-<pre><code class="language-css">/* Any p inside a .card (descendant) */
-.card p {
-  font-size: 0.9rem;
-}
-
-/* Only direct children */
-.nav > a {
-  font-weight: 600;
-}</code></pre>
-
-<h2>Pseudo-classes</h2>
-
-<p>Pseudo-classes apply styles based on element state or position:</p>
-
-<pre><code class="language-css">a:hover {
-  color: #5254e8;
-  text-decoration: underline;
-}
-
-button:focus {
-  outline: 2px solid #6367ff;
-  outline-offset: 2px;
-}
-
-li:first-child {
-  font-weight: bold;
-}
-
-li:last-child {
-  border-bottom: none;
-}</code></pre>
-
-<h2>Combining Selectors</h2>
-
-<p>You can apply the same styles to multiple selectors at once by separating them with commas:</p>
-
-<pre><code class="language-css">h1, h2, h3 {
-  font-family: sans-serif;
-  color: #0f172a;
-}</code></pre>
-
-<h2>Putting It All Together</h2>
-
-<p>Here's how selectors work in practice — a card component styled with multiple selector types:</p>
-
-<section class="try-css-example">
-  <pre class="try-initial-html"><code>&lt;div class="card"&gt;
-  &lt;h2&gt;CSS Selectors&lt;/h2&gt;
-  &lt;p&gt;Selectors tell the browser &lt;em&gt;which elements&lt;/em&gt; to style.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-  <pre class="t11y-initial-css"><code>.card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  font-family: sans-serif;
-  max-width: 320px;
-}
-
-.card h2 {
-  font-size: 1.2rem;
-  color: #0f172a;
-  margin: 0 0 8px;
-}
-
-.card p {
-  color: #64748b;
-  line-height: 1.6;
+<div class="hero">
+  <h1>Unlimited movies, TV shows, and more</h1>
+  <p>Starts at USD 2.99. Cancel anytime.</p>
+</div>
+  </template>
+  <template class="try-default-css">
+body {
   margin: 0;
+  font-family: sans-serif;
+  color: white;
+}
+
+.top-bar {
+  background-color: transparent;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar span {
+  color: #e50914;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.top-bar button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hero {
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 18px;
+}
+  </template>
+</section>
+
+<h2>ID Selectors</h2>
+
+<p>An ID works like a class, but it should only be used once per page. You add it with the <code>id</code> attribute in HTML and target it with a hash (<code>#</code>) in CSS.</p>
+
+<pre><code class="language-html">&lt;div id="main-header"&gt;...&lt;/div&gt;</code></pre>
+
+<pre><code class="language-css">#main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }</code></pre>
-</section>
 
-<section class="try-css-example">
+<div class="tip">
+  <span>💡</span>
+  <p>Use classes for styling — they can be reused on multiple elements. Use IDs sparingly, and only when an element is truly unique on the page.</p>
+</div>
 
-  <pre class="try-initial-html"><code>
-<h1>My Favourite Recipe</h1>
+<h2>Grouping Selectors</h2>
 
-<p>This is my <strong>all-time favourite</strong> pasta dish.
-It's <em>incredibly</em> simple to make.</p>
+<p>If two selectors share the same styles, you can combine them with a comma to avoid repeating yourself:</p>
 
-<h2>Ingredients</h2>
-<p>You'll need spaghetti, garlic, olive oil, and parmesan.</p>
+<pre><code class="language-css">/* Instead of writing the same thing twice... */
+h1 { color: white; }
+h2 { color: white; }
 
-<h2>Instructions</h2>
-<p>Cook the pasta. Meanwhile, fry the garlic in oil.
-Combine and serve.</p>
-</code></pre>
+/* ...write it once */
+h1, h2 {
+  color: white;
+}</code></pre>
 
-</section>
+<h2>Descendant Selectors</h2>
+
+<p>You can target elements that are inside a specific parent. This is useful when you want to style a heading inside the hero section differently from headings elsewhere.</p>
+
+<pre><code class="language-css">/* Only h1 tags inside .hero */
+.hero h1 {
+  font-size: 48px;
+}
+
+/* Only p tags inside .top-bar */
+.top-bar p {
+  font-size: 14px;
+}</code></pre>
+
+<div class="challenge"
+  data-title="Add a class and style it"
+  data-description="Wrap the heading and paragraph in a div with class 'hero'. Then style .hero to have a black background, white text, center-aligned text, and 60px of padding."
+  data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;h2&gt;Unlimited movies, TV shows, and more&lt;/h2&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;"
+  data-starter-css="body {
+  margin: 0;
+  font-family: sans-serif;
+}"
+  data-checks="h1,h2,p"
+  data-lang="css"
+  data-solution=".hero {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.hero h2 {
+  font-size: 22px;
+}
+
+.hero p {
+  font-size: 18px;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: our sections have classes, but they still don't have the right spacing. Learn how padding, margin, and borders control the space inside and around every element.</p>
+  <a href="/css/box-model">Learn about the box model →</a>
+</div>

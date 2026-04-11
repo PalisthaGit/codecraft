@@ -1,0 +1,146 @@
+<div class="definition">
+  The <code>font-family</code> property controls which font appears on your page. You can use system fonts or load custom fonts from Google Fonts — for free.
+</div>
+
+<p>Right now our Netflix page uses whatever default font the browser picks. That's fine, but it doesn't look like Netflix. Let's fix that.</p>
+
+<h2>font-family</h2>
+
+<p>The <code>font-family</code> property tells the browser which font to use for the text on your page. Here's the basic syntax:</p>
+
+<pre><code class="language-css">body {
+  font-family: Arial;
+}</code></pre>
+
+<p>That one line changes the font for everything on the page. But what happens if the user's computer doesn't have Arial installed?</p>
+
+<h2>Fallback Fonts</h2>
+
+<p>You can give the browser a list of backup fonts to try. This is called a <strong>font stack</strong>. The browser reads the list left to right and uses the first one it finds.</p>
+
+<pre><code class="language-css">body {
+  font-family: "Bebas Neue", Arial, sans-serif;
+}</code></pre>
+
+<p>Here the browser tries <code>Bebas Neue</code> first. If it's not available, it tries <code>Arial</code>. If that's not available either, it falls back to any <code>sans-serif</code> font the system has.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always end your font stack with a generic family — <code>serif</code>, <code>sans-serif</code>, or <code>monospace</code>. This guarantees something readable always shows up.</p>
+</div>
+
+<h2>Google Fonts</h2>
+
+<p>Most custom fonts aren't installed on people's computers by default. Google Fonts lets you load any font for free over the internet.</p>
+
+<p>Here's how to add the <strong>Bebas Neue</strong> font — it gives your heading a bold, cinematic look, similar to what Netflix uses.</p>
+
+<p>Step 1 — add this <code>&lt;link&gt;</code> tag inside the <code>&lt;head&gt;</code> of your HTML, before your stylesheet:</p>
+
+<pre><code class="language-html">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet"&gt;</code></pre>
+
+<p>Step 2 — use it in your CSS:</p>
+
+<pre><code class="language-css">h1 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+}</code></pre>
+
+<p>We're using two fonts here on purpose. <strong>Bebas Neue</strong> is bold and condensed — great for the big Netflix headline. <strong>Roboto</strong> is clean and readable — perfect for body text and paragraphs.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to see the font change. Notice how "Netflix" instantly looks more dramatic with Bebas Neue.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<h1>Netflix</h1>
+<h2>Unlimited movies, TV shows, and more</h2>
+<p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  margin: 0;
+  padding: 40px;
+  font-family: "Roboto", Arial, sans-serif;
+  color: white;
+}
+
+h1 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  color: #e50914;
+}
+
+h2 {
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Roboto", Arial, sans-serif;
+}
+  </template>
+</section>
+
+<h2>font-family for Different Elements</h2>
+
+<p>You don't have to use the same font for everything. A common pattern is to use a display font (like Bebas Neue) for headings only and a clean readable font for everything else:</p>
+
+<pre><code class="language-css">/* Headings get the bold cinematic font */
+h1, h2 {
+  font-family: "Bebas Neue", Arial, sans-serif;
+}
+
+/* Body text stays clean and easy to read */
+body {
+  font-family: "Roboto", Arial, sans-serif;
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Put quotation marks around font names that have spaces in them — like <code>"Bebas Neue"</code> or <code>"Times New Roman"</code>. Single-word fonts like <code>Arial</code> don't need quotes.</p>
+</div>
+
+<div class="challenge"
+  data-title="Apply a Google Font"
+  data-description="The page below uses default browser fonts. Apply Bebas Neue to the h1 heading and Roboto to the body text. Don't forget to include the Google Fonts link in the HTML head."
+  data-starter-html="&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;"
+  data-starter-css="body {
+  background-color: #000;
+  color: white;
+  padding: 30px;
+  margin: 0;
+}"
+  data-checks="h1,p"
+  data-lang="css"
+  data-solution="h1 {
+  font-family: 'Bebas Neue', Arial, sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: white;
+  padding: 30px;
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: the font is set — now let's control the size, weight, and spacing of the text to make the Netflix hero look bold and cinematic.</p>
+  <a href="/css/typography">Learn about typography →</a>
+</div>

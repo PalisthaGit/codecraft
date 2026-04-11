@@ -1,109 +1,184 @@
 <div class="definition">
-  <strong>CSS Grid</strong> is a two-dimensional layout system that lets you place elements into rows and columns simultaneously. Where Flexbox is best for one-dimensional layouts (a row or a column), Grid excels at full page layouts and complex two-dimensional arrangements.
+  CSS Grid is a two-dimensional layout system that places elements into rows and columns at the same time. Where Flexbox handles a single row or column, Grid handles the full layout — perfect for card grids.
 </div>
 
-<p>Grid is one of the most powerful tools in CSS. Once you understand it, designing page layouts becomes dramatically easier and more predictable.</p>
+<p>Flexbox lined up our movie row horizontally. But what if we want a proper grid of movie cards that wraps into multiple rows — like Netflix's "More to Watch" section? That's Grid's job.</p>
 
-<h2>Enabling Grid</h2>
+<h2>display: grid</h2>
 
-<p>Add <code>display: grid</code> to a container. Its direct children become grid items.</p>
+<p>To create a grid, set <code>display: grid</code> on the parent container. Its direct children automatically become grid items.</p>
 
-<pre><code>.container {
+<pre><code class="language-css">.movie-grid {
   display: grid;
 }</code></pre>
 
-<h2>Defining Columns and Rows</h2>
+<p>On its own, this doesn't do much. You also need to define the columns.</p>
 
-<p>Use <code>grid-template-columns</code> to define how many columns the grid has and how wide each one is:</p>
+<h2>grid-template-columns</h2>
 
-<pre><code>/* Three equal columns */
-.container {
+<p>This property defines how many columns the grid has and how wide each one is.</p>
+
+<pre><code class="language-css">/* Three equal columns */
+.movie-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* Shorthand with repeat() */
-.container {
+/* Same thing, shorter */
+.movie-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }</code></pre>
 
-<p>The <code>fr</code> unit stands for <strong>fraction</strong> — it divides the available space proportionally. <code>1fr 2fr</code> gives you one column that is twice as wide as the other.</p>
-
-<pre><code>/* Two columns: sidebar + main content */
-.layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 2rem;
-}</code></pre>
+<p>The <code>fr</code> unit stands for "fraction." One <code>fr</code> takes up one equal share of the available space. Three columns of <code>1fr</code> each gives you three equal columns.</p>
 
 <h2>gap</h2>
 
-<p>Use <code>gap</code> to add space between grid tracks (rows and columns):</p>
+<p>The <code>gap</code> property adds space between grid rows and columns — without needing margins:</p>
 
-<pre><code>.grid {
+<pre><code class="language-css">.movie-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;           /* same gap in all directions */
-}
-
-/* Or set row and column gap separately */
-.grid {
-  row-gap: 2rem;
-  column-gap: 1rem;
+  gap: 12px;
 }</code></pre>
-
-<h2>auto-fill and auto-fit</h2>
-
-<p>These keywords let the grid automatically create as many columns as will fit — perfect for responsive card grids:</p>
-
-<pre><code>.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-}</code></pre>
-
-<p>This creates columns that are at least 250px wide. The grid adds as many columns as the container allows, and they each grow to fill the remaining space.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p><code>auto-fill</code> vs <code>auto-fit</code>: use <code>auto-fill</code> to keep empty column tracks, and <code>auto-fit</code> to collapse them. For most card grids, <code>auto-fill</code> is the right choice.</p>
+  <p>Click <strong>Try It Yourself</strong> to see the grid in action. Try changing the number in <code>repeat(3, 1fr)</code> to 2, 4, or 5 to see how the grid reflows.</p>
 </div>
 
-<h2>Spanning Columns and Rows</h2>
-
-<p>Grid items can span multiple columns or rows:</p>
-
-<pre><code>.featured {
-  grid-column: span 2;   /* takes up 2 columns */
+<section class="try-example">
+  <template class="try-default-html">
+<h2 class="row-title">More Like This</h2>
+<div class="movie-grid">
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVgzdeZGRAwCEa709VhH3rjzGTNzIDlWer-mLr3GaH6qm10zCfxxN-E1-JYCA8CxkoBD74MIuxW1agaVLL4kUpFTtsZPIuTfAV1ljNzcrTPup4487rDCgRuZm-Jn8fUi1cVx.jpg?r=d90" alt="Movie 4">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABUvQbIPXgpCDdCjDU1Ln9Hz_T9K4QWOeRqDC0_AqSS0EoDHnd3HZNvdU660QoLXfYN1J1onlnVJ6me4utt0EuPA35nq3AvkxOz4.jpg?r=00a" alt="Movie 5">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 6">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.banner {
-  grid-column: 1 / -1;  /* spans the full width (1 to last line) */
-}</code></pre>
+body {
+  background-color: #141414;
+  color: white;
+  font-family: sans-serif;
+  padding: 24px 40px;
+}
 
-<h2>Placing Items Explicitly</h2>
+.row-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
 
-<pre><code>.item {
-  grid-column: 2 / 4;   /* starts at column line 2, ends at line 4 */
-  grid-row: 1 / 3;      /* starts at row line 1, ends at line 3 */
-}</code></pre>
-
-<h2>A Complete Page Layout</h2>
-
-<pre><code>.page {
+.movie-grid {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "sidebar header"
-    "sidebar main"
-    "sidebar footer";
-  min-height: 100vh;
-  gap: 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
-.sidebar { grid-area: sidebar; }
-.header  { grid-area: header; }
-.main    { grid-area: main; }
-.footer  { grid-area: footer; }</code></pre>
+.movie-card {
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<h2>auto-fill and minmax</h2>
+
+<p>The real power of Grid is creating a layout that automatically adjusts the number of columns based on available space. This makes your grid respond to any screen size without media queries.</p>
+
+<pre><code class="language-css">.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}</code></pre>
+
+<p>Breaking this down:</p>
+
+<ul>
+  <li><code>auto-fill</code> — create as many columns as will fit</li>
+  <li><code>minmax(200px, 1fr)</code> — each column is at least 200px wide, but can grow to fill available space</li>
+</ul>
+
+<p>Result: on a wide screen you get 5 or 6 columns. On a narrow screen you automatically get 2 or 3. No media queries needed.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>aspect-ratio: 16 / 9</code> keeps cards in widescreen ratio automatically — much cleaner than setting a fixed height.</p>
+</div>
+
+<div class="challenge"
+  data-title="Build a movie grid"
+  data-description="Style the .movie-grid to have 3 equal columns and 8px gap between cards. Make each .movie-card have a border-radius of 4px, overflow hidden, and a 16/9 aspect ratio."
+  data-starter-html="&lt;div class=&quot;movie-grid&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVgzdeZGRAwCEa709VhH3rjzGTNzIDlWer-mLr3GaH6qm10zCfxxN-E1-JYCA8CxkoBD74MIuxW1agaVLL4kUpFTtsZPIuTfAV1ljNzcrTPup4487rDCgRuZm-Jn8fUi1cVx.jpg?r=d90&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABUvQbIPXgpCDdCjDU1Ln9Hz_T9K4QWOeRqDC0_AqSS0EoDHnd3HZNvdU660QoLXfYN1J1onlnVJ6me4utt0EuPA35nq3AvkxOz4.jpg?r=00a&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  color: white;
+  font-family: sans-serif;
+  padding: 24px;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}"
+  data-checks="div"
+  data-lang="css"
+  data-solution=".movie-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.movie-card {
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: the grid looks great, but the navbar scrolls away with the page. Learn how to make it stay fixed at the top — and how to overlay text on top of images.</p>
+  <a href="/css/positioning">Learn about CSS positioning →</a>
+</div>

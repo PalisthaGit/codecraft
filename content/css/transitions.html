@@ -1,112 +1,264 @@
 <div class="definition">
-  CSS <strong>transitions</strong> smoothly animate a property from one value to another when it changes. <strong>Animations</strong> (using <code>@keyframes</code>) let you define multi-step sequences that run automatically or on a loop.
+  CSS transitions animate property changes smoothly over time. When you hover over a Netflix movie card and it scales up slightly — that's a transition.
 </div>
 
-<p>Without transitions, property changes happen instantly — a button turns blue the moment you hover. With transitions, changes animate over time, making your UI feel polished and alive.</p>
+<p>Right now our movie cards respond instantly when hovered. With transitions, changes animate over a fraction of a second, making the whole page feel polished and alive.</p>
 
 <h2>The transition Property</h2>
 
-<p>Add <code>transition</code> to an element to animate changes to its properties:</p>
+<p>Add <code>transition</code> to an element, and CSS will animate any property change instead of jumping to the new value instantly.</p>
 
-<pre><code>.button {
-  background-color: #6367ff;
-  transition: background-color 200ms ease;
-}
-
-.button:hover {
-  background-color: #5254e8;
+<pre><code class="language-css">.movie-card {
+  transition: transform 0.3s ease;
 }</code></pre>
 
-<p>The shorthand takes: <code>property duration timing-function delay</code></p>
+<p>This means: "When <code>transform</code> changes, animate it over 0.3 seconds using the <code>ease</code> timing curve."</p>
 
-<pre><code>transition: all 200ms ease;
-transition: background-color 300ms ease-in-out;
-transition: transform 200ms ease, opacity 150ms ease;</code></pre>
+<p>The syntax:</p>
 
-<h2>Timing Functions</h2>
+<pre><code class="language-css">transition: [property] [duration] [timing-function];</code></pre>
 
-<pre><code>transition-timing-function: ease;         /* slow start, fast middle, slow end (default) */
-transition-timing-function: linear;       /* constant speed */
-transition-timing-function: ease-in;      /* slow start */
-transition-timing-function: ease-out;     /* slow end */
-transition-timing-function: ease-in-out;  /* slow start and end */</code></pre>
+<ul>
+  <li><strong>property</strong> — which CSS property to animate (<code>transform</code>, <code>opacity</code>, <code>background-color</code>, or <code>all</code>)</li>
+  <li><strong>duration</strong> — how long the animation takes (<code>0.3s</code>, <code>500ms</code>)</li>
+  <li><strong>timing-function</strong> — the speed curve (<code>ease</code>, <code>linear</code>, <code>ease-in</code>, <code>ease-out</code>)</li>
+</ul>
+
+<h2>transform: scale()</h2>
+
+<p><code>transform: scale()</code> makes an element larger or smaller. A value of <code>1</code> is normal. <code>1.1</code> is 10% bigger. <code>0.9</code> is 10% smaller.</p>
+
+<pre><code class="language-css">.movie-card:hover {
+  transform: scale(1.05);
+}</code></pre>
+
+<p>Combined with a transition, this creates the Netflix card hover effect — the card grows slightly when you hover over it.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p><code>ease-out</code> feels the most natural for most UI interactions — elements that enter the screen should decelerate as they arrive. Reserve <code>ease-in</code> for elements leaving the screen.</p>
+  <p>Click <strong>Try It Yourself</strong> and hover over a movie card to see the scale transition in action.</p>
 </div>
 
-<h2>Transitioning Multiple Properties</h2>
-
-<pre><code>.card {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 200ms ease, box-shadow 200ms ease;
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(99,103,255,0.15);
-}</code></pre>
-
-<h2>CSS Animations with @keyframes</h2>
-
-<p>For more complex, multi-step animations, use <code>@keyframes</code>:</p>
-
-<pre><code>@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  background-color: #141414;
+  padding: 40px;
 }
 
-.hero {
-  animation: fadeIn 400ms ease-out forwards;
-}</code></pre>
-
-<p>The <code>animation</code> shorthand: <code>name duration timing delay iteration direction fill-mode</code></p>
-
-<h2>Animation Properties</h2>
-
-<pre><code>.spinner {
-  animation-name: spin;
-  animation-duration: 800ms;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;  /* loop forever */
+.movie-row {
+  display: flex;
+  gap: 8px;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}</code></pre>
-
-<h2>Keyframe Percentages</h2>
-
-<p>Use percentages to define intermediate steps:</p>
-
-<pre><code>@keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
+.movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.notification {
-  animation: pulse 2s ease-in-out infinite;
+.movie-card:hover {
+  transform: scale(1.08);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<h2>opacity Transitions</h2>
+
+<p><code>opacity</code> controls how see-through an element is. Transitioning it creates smooth fade effects.</p>
+
+<pre><code class="language-css">.movie-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
 }</code></pre>
 
-<h2>Reducing Motion</h2>
+<p>On hover, the overlay fades in. When the cursor moves away, it fades out.</p>
 
-<p>Always respect users who prefer reduced motion — some people experience motion sickness from animations:</p>
+<h2>Combining Transitions</h2>
 
-<pre><code>@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+<p>You can animate multiple properties at once by separating them with commas, or using <code>all</code>:</p>
+
+<pre><code class="language-css">.movie-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
 }</code></pre>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
+    <div class="movie-overlay">
+      <span>The Witcher</span>
+    </div>
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
+    <div class="movie-overlay">
+      <span>Squid Game</span>
+    </div>
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
+    <div class="movie-overlay">
+      <span>Breaking Bad</span>
+    </div>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 40px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 8px;
+}
+
+.movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  padding: 20px 10px 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
+}
+
+.movie-overlay span {
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+  </template>
+</section>
+
+<div class="challenge"
+  data-title="Add a hover scale effect"
+  data-description="Add a transition to .movie-card so it smoothly scales up to 1.08 when hovered. The transition should take 0.3 seconds and use the ease timing function."
+  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 40px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 8px;
+}
+
+.movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}"
+  data-checks="div"
+  data-lang="css"
+  data-solution=".movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: the hover effects look great on desktop. Now let's make the whole Netflix clone look good on mobile too, using media queries.</p>
+  <a href="/css/responsive">Learn about responsive design →</a>
+</div>

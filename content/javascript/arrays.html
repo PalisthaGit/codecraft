@@ -1,0 +1,219 @@
+<div class="definition">
+  An <strong>array</strong> is an ordered list of values. Arrays are one of the most-used data structures in JavaScript — you'll use them to store lists of items and transform them with powerful built-in methods.
+</div>
+
+<p>Whether you're showing a list of products, filtering search results, or calculating totals — you'll be working with arrays constantly.</p>
+
+<h2>Creating Arrays</h2>
+
+<pre><code class="language-javascript">const fruits = ["apple", "banana", "cherry"];
+const numbers = [1, 2, 3, 4, 5];
+const mixed = ["hello", 42, true, null];   // can mix types
+
+// Access items by index (starts at 0)
+console.log(fruits[0]);   // "apple"
+console.log(fruits[2]);   // "cherry"
+
+// Last item
+console.log(fruits[fruits.length - 1]);   // "cherry"</code></pre>
+
+<h2>Adding and Removing Items</h2>
+
+<pre><code class="language-javascript">const colors = ["red", "green"];
+
+colors.push("blue");       // add to the end
+console.log(colors);       // ["red", "green", "blue"]
+
+colors.pop();              // remove from the end
+console.log(colors);       // ["red", "green"]
+
+colors.unshift("yellow");  // add to the beginning
+console.log(colors);       // ["yellow", "red", "green"]
+
+colors.shift();            // remove from the beginning
+console.log(colors);       // ["red", "green"]</code></pre>
+
+<h2>forEach — loop over items</h2>
+
+<p><code>forEach</code> runs a function once for each item in the array:</p>
+
+<pre><code class="language-javascript">const fruits = ["apple", "banana", "cherry"];
+
+fruits.forEach((fruit) => {
+  console.log("I like " + fruit);
+});
+// I like apple
+// I like banana
+// I like cherry</code></pre>
+
+<h2>map — transform items</h2>
+
+<p><code>map</code> creates a <strong>new array</strong> by transforming each item:</p>
+
+<pre><code class="language-javascript">const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map((n) => n * 2);
+console.log(doubled);   // [2, 4, 6, 8, 10]
+
+const prices = [9.99, 14.99, 4.99];
+const withTax = prices.map((price) => (price * 1.2).toFixed(2));
+console.log(withTax);   // ["11.99", "17.99", "5.99"]</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>map</code>, <code>filter</code>, and <code>reduce</code> never modify the original array — they always return a new one. This is an important JavaScript pattern.</p>
+</div>
+
+<h2>filter — keep matching items</h2>
+
+<p><code>filter</code> creates a new array with only the items that pass a test:</p>
+
+<pre><code class="language-javascript">const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const evens = numbers.filter((n) => n % 2 === 0);
+console.log(evens);   // [2, 4, 6, 8]
+
+const scores = [45, 82, 67, 91, 38, 74];
+const passing = scores.filter((score) => score >= 60);
+console.log(passing);   // [82, 67, 91, 74]</code></pre>
+
+<h2>reduce — combine into one value</h2>
+
+<p><code>reduce</code> condenses an array into a single value:</p>
+
+<pre><code class="language-javascript">const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((total, n) => total + n, 0);
+console.log(sum);   // 15
+
+const cart = [
+  { name: "Shirt", price: 29.99 },
+  { name: "Jeans", price: 59.99 },
+  { name: "Shoes", price: 89.99 },
+];
+
+const total = cart.reduce((sum, item) => sum + item.price, 0);
+console.log(total.toFixed(2));   // "179.97"</code></pre>
+
+<h2>find and findIndex</h2>
+
+<pre><code class="language-javascript">const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Charlie" },
+];
+
+// find — returns the first matching item
+const user = users.find((u) => u.id === 2);
+console.log(user);   // { id: 2, name: "Bob" }
+
+// findIndex — returns the position of the first match
+const index = users.findIndex((u) => u.name === "Charlie");
+console.log(index);   // 2</code></pre>
+
+<h2>includes and indexOf</h2>
+
+<pre><code class="language-javascript">const fruits = ["apple", "banana", "cherry"];
+
+console.log(fruits.includes("banana"));   // true
+console.log(fruits.includes("mango"));    // false
+
+console.log(fruits.indexOf("cherry"));    // 2
+console.log(fruits.indexOf("mango"));     // -1 (not found)</code></pre>
+
+<h2>sort and reverse</h2>
+
+<pre><code class="language-javascript">const letters = ["c", "a", "b"];
+letters.sort();
+console.log(letters);   // ["a", "b", "c"]
+
+const numbers = [10, 1, 5, 3];
+// Numbers need a compare function
+numbers.sort((a, b) => a - b);   // ascending
+console.log(numbers);   // [1, 3, 5, 10]
+
+numbers.reverse();
+console.log(numbers);   // [10, 5, 3, 1]</code></pre>
+
+<h2>Chaining Methods</h2>
+
+<p>You can chain array methods together for powerful one-liners:</p>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Alice", grade: 88 },
+  { name: "Bob", grade: 55 },
+  { name: "Charlie", grade: 92 },
+  { name: "Dana", grade: 45 },
+];
+
+// Get names of students who passed, sorted alphabetically
+const passed = students
+  .filter((s) => s.grade >= 60)
+  .sort((a, b) => a.name.localeCompare(b.name))
+  .map((s) => s.name);
+
+console.log(passed);   // ["Alice", "Charlie"]</code></pre>
+
+<h2>Try It Yourself</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h2>Shopping Cart</h2>
+<ul id="cartList"></ul>
+<p id="total"></p>
+<button onclick="showCart()">Show Cart</button>
+  </template>
+  <template class="try-default-js">const cart = [
+  { name: 'Laptop', price: 999 },
+  { name: 'Mouse', price: 25 },
+  { name: 'Keyboard', price: 75 },
+  { name: 'Monitor', price: 350 },
+];
+
+function showCart() {
+  const list = document.getElementById('cartList');
+  list.innerHTML = '';
+
+  cart.forEach((item) => {
+    const li = document.createElement('li');
+    li.textContent = item.name + ' — $' + item.price;
+    list.appendChild(li);
+  });
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  document.getElementById('total').textContent = 'Total: $' + total;
+}</template>
+</section>
+
+<div class="challenge"
+  data-title="Filter and sum"
+  data-description="Given the prices array, use filter() to keep only prices above 10, then use reduce() to calculate the total of those prices. Log the total."
+  data-starter-html="&lt;p&gt;Open the console to see the result!&lt;/p&gt;"
+  data-starter-js="const prices = [5, 12, 3, 25, 8, 50, 1, 30];
+
+// Step 1: filter to keep prices > 10
+const expensive = prices.filter(/* your code */);
+
+// Step 2: sum the filtered prices
+const total = expensive.reduce(/* your code */, 0);
+
+console.log(total);   // should be 117"
+  data-lang="js">
+</div>
+
+<div class="challenge"
+  data-title="Transform a name list"
+  data-description="Use map() to convert the names array so every name is uppercase. Then use filter() to keep only names longer than 4 characters. Log the result."
+  data-starter-html="&lt;p&gt;Open the console to see the result!&lt;/p&gt;"
+  data-starter-js="const names = ['Alice', 'Bob', 'Charlie', 'Eve', 'Diana'];
+
+// Step 1: map to uppercase
+// Step 2: filter names longer than 4 characters
+// Log the final result"
+  data-lang="js">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: arrays store ordered data, but objects store named data. Learn how to use objects and destructuring.</p>
+  <a href="/javascript/objects">Learn about Objects →</a>
+</div>

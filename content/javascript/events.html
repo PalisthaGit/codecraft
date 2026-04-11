@@ -1,0 +1,187 @@
+<div class="definition">
+  <strong>Events</strong> are things that happen in the browser — a click, a keypress, a form submission, the page loading. JavaScript lets you listen for these events and run code in response.
+</div>
+
+<p>Events are what make web pages truly interactive. Every button click, form submission, and hover effect is powered by the event system.</p>
+
+<h2>addEventListener</h2>
+
+<p>The main way to respond to events is <code>addEventListener</code>:</p>
+
+<pre><code class="language-javascript">const button = document.querySelector("button");
+
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});
+
+// Using an arrow function (more common)
+button.addEventListener("click", () => {
+  console.log("Button clicked!");
+});</code></pre>
+
+<p>The two arguments are: the <strong>event type</strong> (a string) and the <strong>callback</strong> (the function to run).</p>
+
+<h2>Common Event Types</h2>
+
+<pre><code class="language-javascript">// Mouse events
+element.addEventListener("click", handler);
+element.addEventListener("dblclick", handler);
+element.addEventListener("mouseover", handler);
+element.addEventListener("mouseout", handler);
+element.addEventListener("mousemove", handler);
+
+// Keyboard events
+document.addEventListener("keydown", handler);
+document.addEventListener("keyup", handler);
+
+// Form events
+input.addEventListener("input", handler);      // fires on every keystroke
+input.addEventListener("change", handler);     // fires when focus is lost
+form.addEventListener("submit", handler);
+
+// Page events
+window.addEventListener("load", handler);
+window.addEventListener("resize", handler);</code></pre>
+
+<h2>The Event Object</h2>
+
+<p>Every event handler receives an event object with details about what happened:</p>
+
+<pre><code class="language-javascript">document.addEventListener("keydown", (event) => {
+  console.log(event.key);     // "Enter", "ArrowUp", "a", etc.
+  console.log(event.code);    // "Enter", "ArrowUp", "KeyA"
+  console.log(event.ctrlKey); // true if Ctrl was held
+});
+
+document.addEventListener("click", (event) => {
+  console.log(event.target);  // the element that was clicked
+  console.log(event.clientX); // X position of the click
+  console.log(event.clientY); // Y position of the click
+});</code></pre>
+
+<h2>Preventing Default Behaviour</h2>
+
+<p>Some elements have default behaviour — links navigate, forms reload the page. Use <code>event.preventDefault()</code> to stop that:</p>
+
+<pre><code class="language-javascript">const form = document.querySelector("form");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();   // stop the page from reloading
+
+  const input = document.querySelector("input");
+  console.log("Form submitted with: " + input.value);
+});</code></pre>
+
+<h2>Reacting to Input</h2>
+
+<p>The <code>input</code> event fires every time the user types in a field — great for live feedback:</p>
+
+<pre><code class="language-javascript">const nameInput = document.querySelector("#name");
+const preview = document.querySelector("#preview");
+
+nameInput.addEventListener("input", () => {
+  preview.textContent = "Hello, " + nameInput.value + "!";
+});</code></pre>
+
+<h2>Event Delegation</h2>
+
+<p>Instead of adding a listener to every item in a list, add one listener to the parent. Use <code>event.target</code> to identify which child was clicked:</p>
+
+<pre><code class="language-javascript">const list = document.querySelector("ul");
+
+list.addEventListener("click", (event) => {
+  if (event.target.tagName === "LI") {
+    event.target.classList.toggle("done");
+  }
+});</code></pre>
+
+<p>This is more efficient and works even for items added dynamically later.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Event delegation is a key pattern in JavaScript. Instead of attaching dozens of listeners, attach one to a parent element and check <code>event.target</code> to know which child triggered it.</p>
+</div>
+
+<h2>Removing Event Listeners</h2>
+
+<p>You can remove a listener with <code>removeEventListener</code>. The function must be the same reference:</p>
+
+<pre><code class="language-javascript">function handleClick() {
+  console.log("Clicked!");
+}
+
+button.addEventListener("click", handleClick);
+button.removeEventListener("click", handleClick);   // removed</code></pre>
+
+<h2>Running Code Once</h2>
+
+<p>Use the <code>{ once: true }</code> option to run a listener only once, then automatically remove it:</p>
+
+<pre><code class="language-javascript">button.addEventListener("click", () => {
+  console.log("This only runs once!");
+}, { once: true });</code></pre>
+
+<h2>Try It Yourself</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h2 id="preview">Start typing...</h2>
+<input type="text" id="nameInput" placeholder="Type your name">
+<br><br>
+<div id="keyDisplay" style="padding:12px;background:#f1f5f9;border-radius:8px;margin-top:8px;">
+  Press any key
+</div>
+  </template>
+  <template class="try-default-js">const input = document.getElementById('nameInput');
+const preview = document.getElementById('preview');
+const keyDisplay = document.getElementById('keyDisplay');
+
+input.addEventListener('input', () => {
+  if (input.value) {
+    preview.textContent = 'Hello, ' + input.value + '!';
+  } else {
+    preview.textContent = 'Start typing...';
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  keyDisplay.textContent = 'You pressed: ' + event.key;
+});</template>
+</section>
+
+<div class="challenge"
+  data-title="Click counter"
+  data-description="Create a button that counts how many times it has been clicked. Display the count in a paragraph below it. Every time the button is clicked, increment the count and update the text."
+  data-starter-html="&lt;button id=&quot;btn&quot;&gt;Click me&lt;/button&gt;
+&lt;p id=&quot;counter&quot;&gt;Clicks: 0&lt;/p&gt;"
+  data-starter-js="let count = 0;
+const btn = document.getElementById('btn');
+const counter = document.getElementById('counter');
+
+btn.addEventListener('click', () => {
+  // increment count and update counter text
+});"
+  data-lang="js">
+</div>
+
+<div class="challenge"
+  data-title="Live character counter"
+  data-description="Add an input listener to the textarea. As the user types, show the remaining characters (limit: 100). Display it as 'X characters remaining'. If over 100, show the text in red."
+  data-starter-html="&lt;textarea id=&quot;msg&quot; placeholder=&quot;Type here...&quot; rows=&quot;4&quot; cols=&quot;30&quot;&gt;&lt;/textarea&gt;
+&lt;p id=&quot;charCount&quot;&gt;100 characters remaining&lt;/p&gt;"
+  data-starter-js="const msg = document.getElementById('msg');
+const charCount = document.getElementById('charCount');
+const LIMIT = 100;
+
+msg.addEventListener('input', () => {
+  const remaining = LIMIT - msg.value.length;
+  charCount.textContent = remaining + ' characters remaining';
+  // Change color to red if over the limit
+});"
+  data-lang="js">
+</div>
+
+<div class="next-lesson">
+  <p>Now you know all the building blocks. Let's put everything together and build a real project — a fully working To-Do App!</p>
+  <a href="/javascript/todo-app">Build the To-Do App Project →</a>
+</div>

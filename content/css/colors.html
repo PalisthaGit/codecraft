@@ -1,129 +1,220 @@
 <div class="definition">
-  CSS gives you several ways to specify color — hex codes, RGB, HSL, and named colors. Each format has its strengths, and knowing when to use each one makes working with color much easier.
+  CSS gives you multiple ways to define colors — hex codes, RGB, RGBA, and named colors. RGBA also lets you control transparency, which is essential for overlays and tinted backgrounds.
 </div>
 
-<p>Color is one of the most expressive tools in CSS. You'll use it for text, backgrounds, borders, shadows, and gradients. Understanding color formats lets you write cleaner, more maintainable styles.</p>
+<p>Our page is starting to look like Netflix. Now let's add a form with an email input and a Get Started button — just like the real Netflix homepage.</p>
 
-<h2>Hex Colors</h2>
+<p>Add this to your HTML:</p>
 
-<p>Hex (hexadecimal) is the most common color format in CSS. It represents red, green, and blue channels as two-digit hex values:</p>
+<pre><code class="language-html">&lt;form&gt;
+  &lt;input type="email" placeholder="Email address"&gt;
+  &lt;button type="submit"&gt;Get Started &gt;&lt;/button&gt;
+&lt;/form&gt;</code></pre>
 
-<pre><code>color: #0f172a;       /* dark navy */
-color: #6367ff;       /* brand purple */
-color: #e5e7eb;       /* light gray */
-color: #ffffff;       /* white */
-color: #000000;       /* black */</code></pre>
+<h2>Hex Codes</h2>
 
-<p>You can also use 3-digit shorthand when each pair repeats:</p>
+<p>Hex codes are the most common way to define colors in CSS. They start with <code>#</code> followed by six characters that represent the red, green, and blue values of a color.</p>
 
-<pre><code>color: #fff;   /* same as #ffffff */
-color: #000;   /* same as #000000 */</code></pre>
+<pre><code class="language-css">button {
+  background-color: #e50914;
+}</code></pre>
 
-<h2>RGB and RGBA</h2>
+<p>That's Netflix red. Hex codes are popular because they're precise and universally recognized by browsers and designers.</p>
 
-<p>RGB defines colors using red, green, and blue values from 0 to 255. RGBA adds an alpha (opacity) channel from 0 (transparent) to 1 (opaque):</p>
+<h2>Named Colors and RGB</h2>
 
-<pre><code>color: rgb(99, 103, 255);
-background: rgba(99, 103, 255, 0.1);   /* 10% opacity */
-border: rgba(99, 103, 255, 0.25);      /* 25% opacity */</code></pre>
+<p>You can also use basic color names or RGB values:</p>
 
-<p>The alpha channel is particularly useful for overlays, hover states, and subtle tints.</p>
+<pre><code class="language-css">/* Named color */
+button {
+  color: white;
+}
 
-<h2>HSL and HSLA</h2>
+/* RGB — same result, using numbers 0–255 */
+button {
+  background-color: rgb(229, 9, 20);
+}</code></pre>
 
-<p>HSL stands for Hue, Saturation, Lightness. Many designers find it more intuitive than hex because you can reason about colors in human terms:</p>
-
-<pre><code>/* hsl(hue, saturation%, lightness%) */
-color: hsl(238, 100%, 69%);   /* purple */
-color: hsl(142, 76%, 36%);    /* green */
-color: hsl(0, 84%, 60%);      /* red */
-
-/* Adjust lightness to create tints and shades */
-.light { background: hsl(238, 100%, 95%); }
-.dark  { background: hsl(238, 100%, 30%); }</code></pre>
+<p>All three formats work. Hex is the most common in production code.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>HSL makes it easy to create color scales. Keep the hue and saturation the same, and adjust only the lightness to get lighter tints and darker shades of the same color.</p>
+  <p>Click <strong>Try It Yourself</strong> to experiment with button colors. Try switching between hex, rgb(), and named colors.</p>
 </div>
 
-<h2>Named Colors</h2>
-
-<p>CSS has 140+ named colors like <code>red</code>, <code>blue</code>, <code>tomato</code>, <code>coral</code>, and <code>steelblue</code>. They're convenient for quick prototyping but too imprecise for production work:</p>
-
-<pre><code>color: tomato;
-background: aliceblue;
-border-color: steelblue;</code></pre>
-
-<h2>currentColor</h2>
-
-<p>The special keyword <code>currentColor</code> inherits the element's current <code>color</code> value. It's handy for SVG icons and borders that should match the text color:</p>
-
-<pre><code>.icon {
-  color: #6367ff;
-  fill: currentColor;   /* SVG fills with the same purple */
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+<p>Unlimited movies, TV shows, and more.</p>
+<form>
+  <input type="email" placeholder="Email address">
+  <button type="submit">Get Started &gt;</button>
+</form>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+  padding: 40px;
 }
 
-.button {
-  color: #6367ff;
-  border: 1.5px solid currentColor;  /* border matches text */
-}</code></pre>
-
-<h2>Opacity vs. Alpha</h2>
-
-<p>There are two ways to make something semi-transparent:</p>
-
-<pre><code>/* opacity affects the element AND all its children */
-.overlay {
-  background: #0f172a;
-  opacity: 0.5;
+h1 {
+  color: #e50914;
 }
 
-/* rgba/hsla only affects the specific property */
-.overlay {
-  background: rgba(15, 23, 42, 0.5);  /* only background is transparent */
-}</code></pre>
-
-<h2>Gradients</h2>
-
-<p>CSS supports linear and radial gradients as background values:</p>
-
-<pre><code>.hero {
-  background: linear-gradient(135deg, #6367ff, #c9beff);
+button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
+  </template>
+</section>
 
-.card {
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 219, 253, 0.4),
-    rgba(201, 190, 255, 0.25)
-  );
+<h2>transparent</h2>
+
+<p>You can also set a background to fully transparent — meaning it has no color at all and you can see whatever is behind it.</p>
+
+<pre><code class="language-css">input[type="email"] {
+  background-color: transparent;
 }</code></pre>
 
+<p>This makes the email input blend into the dark background instead of showing a white box.</p>
 
 <div class="challenge"
-  data-title="Style a card with color"
-  data-description="Use CSS to style the card below. Give it a light background color, a colored heading, a subtle border, some padding, and a border-radius. Use any color format you like — hex, rgb(), or named colors."
-  data-starter-html="&lt;div class=&quot;card&quot;&gt;
-  &lt;h2&gt;My Styled Card&lt;/h2&gt;
-  &lt;p&gt;Use CSS colors to make this look great.&lt;/p&gt;
-&lt;/div&gt;"
-  data-checks="div"
+  data-title="Style the button"
+  data-description="Make the button background red (#e50914) and the button text white."
+  data-starter-html="&lt;form&gt;
+  &lt;input type=&quot;email&quot; placeholder=&quot;Email address&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Get Started &gt;&lt;/button&gt;
+&lt;/form&gt;"
+  data-starter-css="body {
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+  padding: 20px;
+}"
+  data-checks="button"
   data-lang="css"
-  data-solution=".card {
-  background: #f0f4ff;
-  border: 1.5px solid #c7d2fe;
-  border-radius: 12px;
-  padding: 24px;
+  data-solution="button {
+  background-color: #e50914;
+  color: white;
+}">
+</div>
+
+<h2>Background Images</h2>
+
+<p>You can also use an image as the background instead of a solid color. For that, we use <code>background-image</code>:</p>
+
+<pre><code class="language-css">body {
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+}</code></pre>
+
+<p>Now the full background of the page is the Netflix hero image.</p>
+
+<h2>Making Text Readable Over an Image</h2>
+
+<p>After adding the background image, the text can become hard to read. We can fix this by adding a dark, semi-transparent layer over the image — like tinted glass over a photo.</p>
+
+<p>To do that, we use RGBA colors.</p>
+
+<h2>RGBA</h2>
+
+<p>RGBA works like RGB but adds a fourth value — the alpha channel — which controls opacity:</p>
+
+<pre><code class="language-css">/* rgba(red, green, blue, opacity) */
+rgba(0, 0, 0, 0.75)</code></pre>
+
+<ul>
+  <li>The first three numbers are red, green, and blue (0–255)</li>
+  <li>The last number is opacity — from <code>0</code> (fully transparent) to <code>1</code> (fully solid)</li>
+</ul>
+
+<p>So <code>rgba(0, 0, 0, 0.75)</code> means black at 75% opacity. That's perfect for a dark tint over our background image.</p>
+
+<h2>Blending the Color and Image</h2>
+
+<p>To blend the dark color and the background image together, we use <code>background-blend-mode</code>:</p>
+
+<pre><code class="language-css">body {
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url('...');
+  background-blend-mode: multiply;
+}</code></pre>
+
+<p>Now the dark tint and the image blend together. The background still looks rich, but the white text is easy to read against it.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to see the blend mode in action. Try changing the opacity value — 0.3 for a lighter tint, 0.9 for a very dark one.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+<p>Unlimited movies, TV shows, and more.</p>
+<p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px;
+  font-family: sans-serif;
 }
 
-h2 {
-  color: #6367ff;
-  margin: 0 0 8px;
+h1 {
+  color: white;
+  font-size: 40px;
 }
 
 p {
-  color: #64748b;
+  color: white;
+}
+  </template>
+</section>
+
+<div class="challenge"
+  data-title="Add a background image with tint"
+  data-description="Set the body background to the Netflix image. Then add a dark RGBA overlay (rgba(0, 0, 0, 0.75)) and use background-blend-mode: multiply to blend them together. Make all text white."
+  data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;p&gt;Unlimited movies, TV shows, and more&lt;/p&gt;"
+  data-starter-css="body {
+  padding: 40px;
+  font-family: sans-serif;
+  min-height: 100vh;
   margin: 0;
+}"
+  data-checks="body"
+  data-lang="css"
+  data-solution="body {
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
 }">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: the text looks great but the font is still the browser default. Let's give your Netflix clone a real custom font.</p>
+  <a href="/css/fonts">Learn about CSS fonts →</a>
 </div>

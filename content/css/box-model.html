@@ -1,138 +1,229 @@
-<p>DOM (Document Object Model) is a JavaScript representation of your HTML page. It lets you read and change HTML
-  elements, attributes, and content using JavaScript.
-</p>
-<p>When a browser loads an HTML page, it builds a tree of objects that represent every element in the page. JavaScript
-  can access that tree, find elements, and modify them. This is what makes web pages interactive.
-</p>
-<h2>Selecting Elements
-</h2>
-<p>The most common way to find elements is querySelector, which accepts any CSS selector.
-</p>
-<pre><code class="language-javascript">
-// Select the first matching element
-const heading = document.querySelector("h1");
-const button = document.querySelector(".btn");
-const input = document.querySelector("#email");
+<div class="definition">
+  Every HTML element is a rectangular box. The CSS box model describes the four layers of that box: content, padding, border, and margin. Understanding this is fundamental to controlling layout and spacing.
+</div>
 
-// Select all matching elements (returns a NodeList)
-const paragraphs = document.querySelectorAll("p");
-Reading and Changing Content
-const heading = document.querySelector("h1");
+<p>Our Netflix page has the right colors, fonts, and classes. But the spacing is all wrong — everything is squished together. That's what the box model fixes.</p>
 
-// Read text content
-console.log(heading.textContent);   // "Hello, World!"
+<h2>The Four Layers</h2>
 
-// Change text content
-heading.textContent = "Welcome to CodingBanana";
-// innerHTML lets you set HTML, not just text
-const container = document.querySelector(".container");
-container.innerHTML = "<p>New <strong>content</strong></p>";
-</code></pre>
+<p>Every element on the page is a box with four layers around it:</p>
+
+<ul>
+  <li><strong>Content</strong> — the actual text or image inside the element</li>
+  <li><strong>Padding</strong> — space between the content and the border (inside the box)</li>
+  <li><strong>Border</strong> — a visible or invisible line around the padding</li>
+  <li><strong>Margin</strong> — space between this element and other elements (outside the box)</li>
+</ul>
+
+<pre><code class="language-css">.hero {
+  padding: 60px;      /* space inside */
+  border: 2px solid white;  /* visible edge */
+  margin: 20px;       /* space outside */
+}</code></pre>
+
+<h2>The Browser Default Problem</h2>
+
+<p>By default, browsers add margin and padding to elements like <code>&lt;body&gt;</code>, <code>&lt;h1&gt;</code>, and <code>&lt;p&gt;</code>. This creates gaps you didn't ask for.</p>
+
+<p>The fix is a CSS reset — applied to everything at the very top of your CSS file:</p>
+
+<pre><code class="language-css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</code></pre>
+
+<p>The <code>*</code> selector targets every single element on the page. Setting <code>margin</code> and <code>padding</code> to zero removes all default spacing. <code>box-sizing: border-box</code> makes width and height include padding and border — which makes sizing much more predictable.</p>
 
 <div class="tip">
-  <span>💡</span> Tip: Prefer textContent when inserting plain text. innerHTML parses HTML and can create security risks
-  if the content comes from user input.
-
+  <span>💡</span>
+  <p>Always start your CSS file with this reset. Every professional project does it.</p>
 </div>
-<h2>Changing Styles
-</h2>
-<pre><code class="language-javascript">
-const box = document.querySelector(".box");
 
-// Set individual styles
-box.style.backgroundColor = "#6367ff";
-box.style.padding = "1rem";
-box.style.borderRadius = "12px";
-</code></pre>
-<h2>Working with Classes
-</h2>
-<p>The classList API makes it easy to manage CSS classes.
-</p>
-<pre><code class="language-javascript">
-const card = document.querySelector(".card");
+<h2>padding</h2>
 
-card.classList.add("active");       // add a class
-card.classList.remove("active");    // remove a class
-card.classList.toggle("active");    // add if missing, remove if present
-card.classList.contains("active");  // returns true or false
-Changing Attributes
-const link = document.querySelector("a");
+<p>Padding is the breathing room inside an element. Without it, content touches the edges of the box.</p>
 
-link.getAttribute("href");              // read an attribute
-link.setAttribute("href", "/about");    // set an attribute
-link.removeAttribute("target");         // remove an attribute
-</code></pre>
-<h2>Event Listeners
-</h2>
-<p>Events allow JavaScript to respond to user actions like clicks, typing, and form submissions.
-</p>
-<pre><code class="language-javascript">
-const button = document.querySelector("button");
+<pre><code class="language-css">/* Same on all four sides */
+.hero {
+  padding: 60px;
+}
 
-button.addEventListener("click", function() {
-  console.log("Button clicked!");
-});
+/* Different on each side: top right bottom left */
+.hero {
+  padding: 80px 40px 60px 40px;
+}
 
-</code></pre>
-<h2>Using an arrow function:
-</h2>
-<pre><code class="language-javascript">
-button.addEventListener("click", () => {
-  button.textContent = "Clicked!";
-  button.style.backgroundColor = "#4ade80";
-});
-</code></pre>
-<h2>The Event Object
-</h2>
-<p>The event callback receives an event object with details about the event.
-</p>
-<pre><code class="language-javascript">
-document.addEventListener("keydown", (event) => {
-  console.log(event.key);   // key that was pressed
-});
+/* Or target sides individually */
+.hero {
+  padding-top: 80px;
+  padding-bottom: 60px;
+  padding-left: 40px;
+  padding-right: 40px;
+}</code></pre>
 
-const form = document.querySelector("form");
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();   // prevent page reload
-  console.log("Form submitted!");
-});
-Creating and Inserting Elements
-// Create a new element
-const item = document.createElement("li");
-item.textContent = "New item";
-
-// Add it to the page
-const list = document.querySelector("ul");
-list.appendChild(item);
-Removing Elements
-const element = document.querySelector(".remove-me");
-element.remove();
-</code></pre>
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> and adjust the padding on the hero section. Watch how the content moves away from the edges.</p>
+</div>
 
 <section class="try-example">
   <template class="try-default-html">
-    <div class="box">
-      <h2 id="title">Hello, DOM!</h2>
-      <p id="desc">Click the button below.</p>
-      <button id="btn">Change Text</button>
-    </div>
+<div class="hero">
+  <h1>Netflix</h1>
+  <h2>Unlimited movies, TV shows, and more</h2>
+  <p>Starts at USD 2.99. Cancel anytime.</p>
+</div>
   </template>
-
   <template class="try-default-css">
-    Example JavaScript:
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  </template>
-  <template class="try-default-js">
-    var btn = document.getElementById('btn');
-    var title = document.getElementById('title');
-    var desc = document.getElementById('desc');
+body {
+  font-family: sans-serif;
+  color: white;
+}
 
-    btn.addEventListener('click', function () {
-    title.textContent = 'Text Changed!';
-    desc.textContent = 'The DOM was updated by JavaScript.';
-    btn.textContent = 'Click again';
-    btn.style.background = '#22c55e';
-    });
+.hero {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  padding: 80px 40px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.6;
+}
   </template>
 </section>
+
+<h2>margin</h2>
+
+<p>Margin creates space between elements. It pushes things apart from the outside.</p>
+
+<pre><code class="language-css">h1 {
+  margin-bottom: 16px;   /* push the next element down */
+}
+
+.hero {
+  margin-top: 60px;      /* push the hero down from the top */
+}</code></pre>
+
+<p>One useful trick: <code>margin: 0 auto</code> centers a block element horizontally inside its parent (as long as it has a fixed width):</p>
+
+<pre><code class="language-css">.content {
+  width: 600px;
+  margin: 0 auto;    /* 0 top/bottom, auto left/right = centered */
+}</code></pre>
+
+<h2>border</h2>
+
+<p>Borders draw a visible line around an element. The syntax is: size style color.</p>
+
+<pre><code class="language-css">.card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card {
+  border-bottom: 2px solid #e50914;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}</code></pre>
+
+<p><code>border-radius</code> rounds the corners of an element. Netflix uses this on buttons and input fields.</p>
+
+<h2>width and height</h2>
+
+<p>You can set explicit sizes on any block element:</p>
+
+<pre><code class="language-css">.hero {
+  min-height: 100vh;    /* at least the full viewport height */
+  width: 100%;          /* full width of the parent */
+}
+
+.movie-card {
+  width: 200px;
+  height: 120px;
+}</code></pre>
+
+<p><code>100vh</code> means 100% of the viewport height — basically the full screen. Using <code>min-height</code> instead of <code>height</code> means the section can grow taller if there's more content.</p>
+
+<div class="challenge"
+  data-title="Space out the hero section"
+  data-description="Apply the CSS reset (* { margin: 0; padding: 0; box-sizing: border-box; }) to the page. Then give the .hero section 80px top/bottom padding and 40px left/right padding. Set min-height to 100vh. Add 16px margin-bottom to h1 and 12px to h2."
+  data-starter-html="&lt;div class=&quot;hero&quot;&gt;
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+  &lt;h2&gt;Unlimited movies, TV shows, and more&lt;/h2&gt;
+  &lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;/div&gt;"
+  data-starter-css="body {
+  font-family: sans-serif;
+  color: white;
+}
+
+.hero {
+  background-color: #000;
+  text-align: center;
+}"
+  data-checks="h1,h2,p"
+  data-lang="css"
+  data-solution="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  color: white;
+}
+
+.hero {
+  background-color: #000;
+  text-align: center;
+  padding: 80px 40px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: the hero section is spaced out perfectly. Now let's build the Netflix top bar — logo on the left, button on the right — using Flexbox.</p>
+  <a href="/css/flexbox">Learn about Flexbox layout →</a>
+</div>

@@ -1,0 +1,642 @@
+<div class="definition">
+  In this project you'll build a <strong>To-Do App</strong> step by step — from a blank page to a fully working app where you can add tasks, mark them complete, delete them, and even save them so they persist when you close the browser.
+</div>
+
+<p>This project uses everything you've learned: variables, functions, arrays, objects, DOM manipulation, and events. By the end, you'll have a real app you can show to others.</p>
+
+<div class="tip">
+  <span>🎯</span>
+  <p>Follow each step in order. Each step builds on the previous one. After each step, try the <strong>Try It Yourself</strong> section to experiment with what you've built.</p>
+</div>
+
+<!-- ─── STEP 1 ─────────────────────────────────────────── -->
+
+<h2>Step 1 — HTML Structure</h2>
+
+<p>Every app needs a structure. Create the HTML skeleton first — an input field, a button, and a list to hold the tasks:</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;To-Do App&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="app"&gt;
+    &lt;h1&gt;My Tasks&lt;/h1&gt;
+
+    &lt;div class="input-row"&gt;
+      &lt;input type="text" id="taskInput" placeholder="Add a new task..."&gt;
+      &lt;button id="addBtn"&gt;Add&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;ul id="taskList"&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>This gives us:</p>
+<ul>
+  <li>A <code>div.app</code> wrapper to center everything</li>
+  <li>An <code>input</code> where users type new tasks</li>
+  <li>An <strong>Add</strong> button</li>
+  <li>An empty <code>ul</code> where tasks will appear</li>
+</ul>
+
+<!-- ─── STEP 2 ─────────────────────────────────────────── -->
+
+<h2>Step 2 — Styling</h2>
+
+<p>Add CSS to make the app look clean and polished. Create a <code>style.css</code> file:</p>
+
+<pre><code class="language-css">* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  min-height: 100vh;
+}
+
+.app {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+}
+
+h1 {
+  font-size: 1.75rem;
+  color: #0f172a;
+  margin-bottom: 24px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: #6367ff;
+}
+
+button {
+  background: #6367ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+button:hover {
+  background: #8494ff;
+}
+
+ul {
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-check {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #6367ff;
+  border-radius: 6px;
+  cursor: pointer;
+  background: white;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.task-check.checked {
+  background: #6367ff;
+}
+
+.task-check.checked::after {
+  content: "✓";
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #0f172a;
+  transition: color 0.2s;
+}
+
+.task-text.done {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  background: none;
+  color: #ef4444;
+}</code></pre>
+
+<!-- ─── STEP 3 ─────────────────────────────────────────── -->
+
+<h2>Step 3 — Adding Tasks</h2>
+
+<p>Create <code>app.js</code> and start by wiring up the Add button. When clicked, it should create a new task and add it to the list:</p>
+
+<pre><code class="language-javascript">// Select the elements we need
+const taskInput = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
+
+// Our tasks are stored as an array of objects
+let tasks = [];
+
+// Add a task
+function addTask() {
+  const text = taskInput.value.trim();
+
+  if (!text) return;   // do nothing if input is empty
+
+  const task = {
+    id: Date.now(),    // unique ID based on timestamp
+    text: text,
+    done: false,
+  };
+
+  tasks.push(task);
+  taskInput.value = "";   // clear the input
+  renderTasks();
+}
+
+// Render all tasks to the page
+function renderTasks() {
+  taskList.innerHTML = "";   // clear the list
+
+  tasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.className = "task-item";
+    li.innerHTML = `
+      &lt;div class="task-check ${task.done ? 'checked' : ''}" data-id="${task.id}"&gt;&lt;/div&gt;
+      &lt;span class="task-text ${task.done ? 'done' : ''}"&gt;${task.text}&lt;/span&gt;
+      &lt;button class="delete-btn" data-id="${task.id}"&gt;&times;&lt;/button&gt;
+    `;
+    taskList.appendChild(li);
+  });
+}
+
+// Listen for button click
+addBtn.addEventListener("click", addTask);
+
+// Also allow pressing Enter to add
+taskInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") addTask();
+});</code></pre>
+
+<p>Now when you click <strong>Add</strong> or press <strong>Enter</strong>, a new task appears in the list.</p>
+
+<!-- ─── STEP 4 ─────────────────────────────────────────── -->
+
+<h2>Step 4 — Completing Tasks</h2>
+
+<p>Add click handling so users can tick off tasks. Use event delegation on the list — one listener handles all checkboxes:</p>
+
+<pre><code class="language-javascript">// Toggle a task's done state
+function toggleTask(id) {
+  tasks = tasks.map((task) =>
+    task.id === id ? { ...task, done: !task.done } : task
+  );
+  renderTasks();
+}
+
+// Listen for clicks on the task list
+taskList.addEventListener("click", (event) => {
+  const check = event.target.closest(".task-check");
+  const deleteBtn = event.target.closest(".delete-btn");
+
+  if (check) {
+    const id = Number(check.dataset.id);
+    toggleTask(id);
+  }
+
+  if (deleteBtn) {
+    const id = Number(deleteBtn.dataset.id);
+    deleteTask(id);
+  }
+});</code></pre>
+
+<p>Clicking the checkbox now toggles the task between done and not done, with a strikethrough style.</p>
+
+<!-- ─── STEP 5 ─────────────────────────────────────────── -->
+
+<h2>Step 5 — Deleting Tasks</h2>
+
+<p>Add the delete function. The × button removes a task from the array:</p>
+
+<pre><code class="language-javascript">// Remove a task by id
+function deleteTask(id) {
+  tasks = tasks.filter((task) => task.id !== id);
+  renderTasks();
+}</code></pre>
+
+<p>Now clicking × removes the task immediately. Notice we're using <code>filter</code> to create a new array without that task — a clean, immutable pattern.</p>
+
+<h2>Try It Yourself — Steps 1–5</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="app">
+  <h1>My Tasks</h1>
+  <div class="input-row">
+    <input type="text" id="taskInput" placeholder="Add a new task...">
+    <button id="addBtn">Add</button>
+  </div>
+  <ul id="taskList"></ul>
+</div>
+  </template>
+  <template class="try-default-css">* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; background: #f8fafc; display: flex; justify-content: center; padding: 40px 16px; }
+.app { background: white; border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+h1 { font-size: 1.75rem; color: #0f172a; margin-bottom: 24px; }
+.input-row { display: flex; gap: 8px; margin-bottom: 24px; }
+input[type="text"] { flex: 1; padding: 10px 14px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; outline: none; }
+input[type="text"]:focus { border-color: #6367ff; }
+button { background: #6367ff; color: white; border: none; border-radius: 10px; padding: 10px 18px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+button:hover { background: #8494ff; }
+ul { list-style: none; }
+.task-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+.task-check { width: 22px; height: 22px; border: 2px solid #6367ff; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.task-check.checked { background: #6367ff; }
+.task-check.checked::after { content: "✓"; color: white; font-size: 14px; font-weight: 700; }
+.task-text { flex: 1; color: #0f172a; }
+.task-text.done { text-decoration: line-through; color: #94a3b8; }
+.delete-btn { background: none; border: none; color: #cbd5e1; font-size: 1.4rem; cursor: pointer; padding: 0 4px; line-height: 1; }
+.delete-btn:hover { background: none; color: #ef4444; }</template>
+  <template class="try-default-js">const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
+const taskList = document.getElementById('taskList');
+
+let tasks = [];
+
+function addTask() {
+  const text = taskInput.value.trim();
+  if (!text) return;
+  tasks.push({ id: Date.now(), text, done: false });
+  taskInput.value = '';
+  renderTasks();
+}
+
+function toggleTask(id) {
+  tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
+  renderTasks();
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  renderTasks();
+}
+
+function renderTasks() {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.className = 'task-item';
+    li.innerHTML = `
+      <div class="task-check ${task.done ? 'checked' : ''}" data-id="${task.id}"></div>
+      <span class="task-text ${task.done ? 'done' : ''}">${task.text}</span>
+      <button class="delete-btn" data-id="${task.id}">&times;</button>
+    `;
+    taskList.appendChild(li);
+  });
+}
+
+taskList.addEventListener('click', event => {
+  const check = event.target.closest('.task-check');
+  const del = event.target.closest('.delete-btn');
+  if (check) toggleTask(Number(check.dataset.id));
+  if (del) deleteTask(Number(del.dataset.id));
+});
+
+addBtn.addEventListener('click', addTask);
+taskInput.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });</template>
+</section>
+
+<!-- ─── STEP 6 ─────────────────────────────────────────── -->
+
+<h2>Step 6 — Saving to localStorage</h2>
+
+<p>Right now, tasks disappear when you refresh the page. Fix that with <code>localStorage</code> — a simple browser storage that persists across sessions:</p>
+
+<pre><code class="language-javascript">// Save tasks to localStorage
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Load tasks from localStorage
+function loadTasks() {
+  const saved = localStorage.getItem("tasks");
+  if (saved) {
+    tasks = JSON.parse(saved);
+    renderTasks();
+  }
+}
+
+// Call saveTasks after every change
+function addTask() {
+  const text = taskInput.value.trim();
+  if (!text) return;
+  tasks.push({ id: Date.now(), text, done: false });
+  taskInput.value = "";
+  renderTasks();
+  saveTasks();   // ← add this
+}
+
+function toggleTask(id) {
+  tasks = tasks.map((task) =>
+    task.id === id ? { ...task, done: !task.done } : task
+  );
+  renderTasks();
+  saveTasks();   // ← add this
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter((task) => task.id !== id);
+  renderTasks();
+  saveTasks();   // ← add this
+}
+
+// Load saved tasks when the page opens
+loadTasks();</code></pre>
+
+<p><code>localStorage.setItem</code> stores a string — so we convert our array to JSON with <code>JSON.stringify</code>. When loading, <code>JSON.parse</code> converts it back to an array.</p>
+
+<!-- ─── STEP 7 ─────────────────────────────────────────── -->
+
+<h2>Step 7 — Task Counter</h2>
+
+<p>Add a small counter showing how many tasks are remaining:</p>
+
+<pre><code class="language-javascript">// Add this to your HTML above the ul:
+// &lt;p id="taskCount"&gt;&lt;/p&gt;
+
+function updateCount() {
+  const remaining = tasks.filter((t) => !t.done).length;
+  const total = tasks.length;
+  const countEl = document.getElementById("taskCount");
+
+  if (total === 0) {
+    countEl.textContent = "No tasks yet. Add one above!";
+  } else {
+    countEl.textContent = `${remaining} of ${total} remaining`;
+  }
+}
+
+// Call updateCount() inside renderTasks()
+function renderTasks() {
+  taskList.innerHTML = "";
+  tasks.forEach((task) => { /* ... same as before ... */ });
+  updateCount();   // ← add this
+}</code></pre>
+
+<!-- ─── COMPLETE FILE ─────────────────────────────────── -->
+
+<h2>Complete app.js</h2>
+
+<p>Here's the full final version of your JavaScript file:</p>
+
+<pre><code class="language-javascript">const taskInput = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
+const taskCount = document.getElementById("taskCount");
+
+let tasks = [];
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+  const saved = localStorage.getItem("tasks");
+  if (saved) tasks = JSON.parse(saved);
+}
+
+function updateCount() {
+  const remaining = tasks.filter((t) => !t.done).length;
+  const total = tasks.length;
+  if (total === 0) {
+    taskCount.textContent = "No tasks yet. Add one above!";
+  } else {
+    taskCount.textContent = `${remaining} of ${total} remaining`;
+  }
+}
+
+function renderTasks() {
+  taskList.innerHTML = "";
+
+  tasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.className = "task-item";
+    li.innerHTML = `
+      &lt;div class="task-check ${task.done ? "checked" : ""}" data-id="${task.id}"&gt;&lt;/div&gt;
+      &lt;span class="task-text ${task.done ? "done" : ""}"&gt;${task.text}&lt;/span&gt;
+      &lt;button class="delete-btn" data-id="${task.id}"&gt;&times;&lt;/button&gt;
+    `;
+    taskList.appendChild(li);
+  });
+
+  updateCount();
+}
+
+function addTask() {
+  const text = taskInput.value.trim();
+  if (!text) return;
+  tasks.push({ id: Date.now(), text, done: false });
+  taskInput.value = "";
+  renderTasks();
+  saveTasks();
+}
+
+function toggleTask(id) {
+  tasks = tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t));
+  renderTasks();
+  saveTasks();
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter((t) => t.id !== id);
+  renderTasks();
+  saveTasks();
+}
+
+taskList.addEventListener("click", (event) => {
+  const check = event.target.closest(".task-check");
+  const del = event.target.closest(".delete-btn");
+  if (check) toggleTask(Number(check.dataset.id));
+  if (del) deleteTask(Number(del.dataset.id));
+});
+
+addBtn.addEventListener("click", addTask);
+taskInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTask();
+});
+
+loadTasks();
+renderTasks();</code></pre>
+
+<h2>Challenges</h2>
+
+<div class="challenge"
+  data-title="Add an empty state message"
+  data-description="When there are no tasks, show a friendly message like 'Nothing to do! Add a task above 🎉' inside the task list. Remove the message as soon as a task is added."
+  data-starter-html="&lt;div class=&quot;app&quot;&gt;
+  &lt;h1&gt;My Tasks&lt;/h1&gt;
+  &lt;div class=&quot;input-row&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;taskInput&quot; placeholder=&quot;Add a task...&quot;&gt;
+    &lt;button id=&quot;addBtn&quot;&gt;Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul id=&quot;taskList&quot;&gt;&lt;/ul&gt;
+&lt;/div&gt;"
+  data-starter-js="const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
+const taskList = document.getElementById('taskList');
+let tasks = [];
+
+function renderTasks() {
+  taskList.innerHTML = '';
+  if (tasks.length === 0) {
+    // Show a friendly empty-state message
+  }
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.textContent = task.text;
+    taskList.appendChild(li);
+  });
+}
+
+function addTask() {
+  const text = taskInput.value.trim();
+  if (!text) return;
+  tasks.push({ id: Date.now(), text, done: false });
+  taskInput.value = '';
+  renderTasks();
+}
+
+addBtn.addEventListener('click', addTask);
+renderTasks();"
+  data-lang="js">
+</div>
+
+<div class="challenge"
+  data-title="Clear all completed"
+  data-description="Add a 'Clear completed' button that removes all tasks where done is true. Only show the button when there is at least one completed task."
+  data-starter-html="&lt;div class=&quot;app&quot;&gt;
+  &lt;h1&gt;My Tasks&lt;/h1&gt;
+  &lt;div class=&quot;input-row&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;taskInput&quot; placeholder=&quot;Add a task...&quot;&gt;
+    &lt;button id=&quot;addBtn&quot;&gt;Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul id=&quot;taskList&quot;&gt;&lt;/ul&gt;
+  &lt;button id=&quot;clearBtn&quot; style=&quot;display:none;margin-top:12px;background:#ef4444&quot;&gt;Clear completed&lt;/button&gt;
+&lt;/div&gt;"
+  data-starter-js="const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addBtn');
+const taskList = document.getElementById('taskList');
+const clearBtn = document.getElementById('clearBtn');
+let tasks = [];
+
+function renderTasks() {
+  taskList.innerHTML = '';
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <input type='checkbox' ${task.done ? 'checked' : ''} data-id='${task.id}'>
+      <span style='${task.done ? 'text-decoration:line-through;color:#94a3b8' : ''}'>${task.text}</span>
+    `;
+    taskList.appendChild(li);
+  });
+  // Show/hide clear button based on completed tasks
+  const hasCompleted = tasks.some(t => t.done);
+  clearBtn.style.display = hasCompleted ? 'block' : 'none';
+}
+
+taskList.addEventListener('change', e => {
+  const id = Number(e.target.dataset.id);
+  tasks = tasks.map(t => t.id === id ? { ...t, done: e.target.checked } : t);
+  renderTasks();
+});
+
+// Wire up the clear button
+clearBtn.addEventListener('click', () => {
+  // Remove all completed tasks and re-render
+});
+
+function addTask() {
+  const text = taskInput.value.trim();
+  if (!text) return;
+  tasks.push({ id: Date.now(), text, done: false });
+  taskInput.value = '';
+  renderTasks();
+}
+
+addBtn.addEventListener('click', addTask);
+renderTasks();"
+  data-lang="js">
+</div>
+
+<div class="tip">
+  <span>🎉</span>
+  <p>Congratulations! You've built a fully working To-Do app using HTML, CSS, and JavaScript. You've used variables, arrays, objects, DOM manipulation, events, and localStorage. These are the core skills of frontend web development.</p>
+</div>

@@ -1,121 +1,219 @@
 <div class="definition">
-  <strong>Pseudo-elements</strong> let you style specific parts of an element — like the first line of a paragraph or content inserted before or after an element — without adding extra HTML. They're written with a double colon: <code>::before</code>, <code>::after</code>, <code>::first-line</code>, <code>::placeholder</code>.
+  Pseudo-elements let you style specific parts of an element, or insert decorative content before and after it — without adding extra HTML. They're written with a double colon: <code>::before</code>, <code>::after</code>.
 </div>
 
-<p>Pseudo-elements are one of CSS's most powerful features. They let you add decorative content, style text fragments, and create visual effects that would otherwise require extra HTML elements.</p>
+<p>Every Netflix movie card has a gradient that fades from transparent at the top to dark at the bottom. That's not a separate HTML element — it's created with CSS using <code>::before</code> or <code>::after</code>. No extra divs needed.</p>
 
 <h2>::before and ::after</h2>
 
-<p><code>::before</code> inserts generated content <em>before</em> an element's content. <code>::after</code> inserts it <em>after</em>. Both require a <code>content</code> property — even if it's empty.</p>
+<p>These pseudo-elements insert a virtual element <em>before</em> or <em>after</em> the content of an element. They must have a <code>content</code> property to appear — even if it's empty.</p>
 
-<pre><code>.quote::before {
-  content: "\201C";  /* opening curly quote */
-  color: #6367ff;
-  font-size: 1.5em;
-}
-
-.quote::after {
-  content: "\201D";  /* closing curly quote */
-  color: #6367ff;
-  font-size: 1.5em;
-}</code></pre>
-
-<h2>Decorative Effects with ::before and ::after</h2>
-
-<p>A common use is creating decorative shapes or underlines without extra markup:</p>
-
-<pre><code>/* Animated underline on hover */
-.link {
-  position: relative;
-  text-decoration: none;
-}
-
-.link::after {
-  content: "";
+<pre><code class="language-css">.movie-card::after {
+  content: "";              /* required — can be empty */
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #6367ff;
-  transition: width 200ms ease;
-}
-
-.link:hover::after {
-  width: 100%;
+  inset: 0;                 /* shorthand for top/right/bottom/left: 0 */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    transparent 60%
+  );
 }</code></pre>
 
-<pre><code>/* Accent dot before a list item */
-.feature-item::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: #6367ff;
-  border-radius: 50%;
-  margin-right: 8px;
-  vertical-align: middle;
-}</code></pre>
+<p>Combined with <code>position: absolute</code>, this creates a gradient layer that sits on top of the movie thumbnail — without any extra HTML.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p>When <code>content: ""</code> is set and the pseudo-element is positioned absolutely, it becomes a blank canvas you can size and style freely — no extra HTML needed.</p>
+  <p>Click <strong>Try It Yourself</strong> and hover over the cards. The gradient overlay is created entirely with <code>::after</code> — there's no extra div in the HTML.</p>
 </div>
 
-<h2>::first-line and ::first-letter</h2>
-
-<pre><code>/* Style just the first line of a paragraph */
-p::first-line {
-  font-weight: 600;
-  color: #0f172a;
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
+    <span class="movie-title">The Witcher</span>
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
+    <span class="movie-title">Squid Game</span>
+  </div>
+  <div class="movie-card">
+    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
+    <span class="movie-title">Breaking Bad</span>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Drop cap effect */
-.article p:first-child::first-letter {
-  font-size: 3rem;
-  font-weight: 900;
-  float: left;
-  line-height: 1;
-  margin-right: 0.1em;
-  color: #6367ff;
+body {
+  background-color: #141414;
+  padding: 40px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 8px;
+}
+
+.movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+  z-index: 1;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gradient overlay using ::after */
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover::after {
+  opacity: 1;
+}
+
+.movie-title {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-title {
+  opacity: 1;
+}
+  </template>
+</section>
+
+<h2>Pseudo-classes: :hover, :nth-child</h2>
+
+<p>Pseudo-classes target elements in a specific state or position. Unlike pseudo-elements, they use a single colon.</p>
+
+<pre><code class="language-css">/* Applies when the user hovers */
+.movie-card:hover {
+  transform: scale(1.08);
+}
+
+/* Targets every other card */
+.movie-card:nth-child(even) {
+  opacity: 0.9;
+}
+
+/* Targets only the first card */
+.movie-card:first-child {
+  border-left: 3px solid #e50914;
+}
+
+/* Targets only the last card */
+.movie-card:last-child {
+  border-right: 3px solid #e50914;
 }</code></pre>
 
 <h2>::placeholder</h2>
 
-<p>Style the placeholder text inside form inputs:</p>
+<p>Style the placeholder text inside input fields — like the "Email address" hint on Netflix's form:</p>
 
-<pre><code>input::placeholder {
-  color: #94a3b8;
-  font-style: italic;
+<pre><code class="language-css">input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}</code></pre>
+
+<div class="challenge"
+  data-title="Add a gradient overlay with ::after"
+  data-description="Add a ::after pseudo-element to .movie-card that creates a gradient overlay from rgba(0,0,0,0.85) at the bottom to transparent at the top. Make it appear on hover using opacity transition."
+  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-input:focus::placeholder {
-  color: #cbd5e1;
-}</code></pre>
+body {
+  background-color: #141414;
+  padding: 40px;
+}
 
-<h2>::selection</h2>
+.movie-row {
+  display: flex;
+  gap: 8px;
+}
 
-<p>Style the text highlight when a user selects text on the page:</p>
+.movie-card {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-<pre><code>::selection {
-  background-color: #6367ff;
-  color: white;
-}</code></pre>
+.movie-card:hover {
+  transform: scale(1.08);
+  z-index: 1;
+}
 
-<h2>::marker</h2>
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}"
+  data-checks="div"
+  data-lang="css"
+  data-solution=".movie-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-<p>Style the bullet points or numbers of list items:</p>
+.movie-card:hover::after {
+  opacity: 1;
+}">
+</div>
 
-<pre><code>li::marker {
-  color: #6367ff;
-  font-weight: bold;
-}</code></pre>
-
-<h2>Pseudo-elements vs Pseudo-classes</h2>
-
-<p>It's easy to confuse the two. Remember:</p>
-
-<ul>
-  <li><strong>Pseudo-elements</strong> (double colon <code>::</code>) — target a <em>part</em> of an element: <code>::before</code>, <code>::after</code>, <code>::first-line</code></li>
-  <li><strong>Pseudo-classes</strong> (single colon <code>:</code>) — target an element in a certain <em>state</em>: <code>:hover</code>, <code>:focus</code>, <code>:nth-child()</code></li>
-</ul>
+<div class="next-lesson">
+  <p>You've learned everything you need. Now let's put it all together and build the complete Netflix clone from scratch — step by step.</p>
+  <a href="/css/netflix-clone">Build the Netflix Clone →</a>
+</div>

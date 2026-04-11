@@ -1,0 +1,172 @@
+<div class="definition">
+  There are three ways to add CSS to an HTML page: inline, internal, and external. Most real websites use external CSS — a separate file that keeps styles organized and reusable.
+</div>
+
+<p>We're going to add CSS to our HTML. Since we're building a Netflix clone, let's start by creating a simple page that just says Netflix.</p>
+
+<p>Create a new file called <code>index.html</code> and add this:</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Netflix Clone&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Save it and open in your browser. You'll see plain text on a white background. That's our starting point — no styling yet.</p>
+
+<h2>1. Inline CSS</h2>
+
+<p>The simplest way to add CSS is directly inside an HTML tag using the <code>style</code> attribute.</p>
+
+<pre><code class="language-html">&lt;h1 style="color: red;"&gt;Netflix&lt;/h1&gt;</code></pre>
+
+<p>The <code>style</code> attribute tells the browser "I'm about to write some CSS directly for this element." Inside the quotes, you write CSS — here, <code>color: red</code> makes the text red.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to see inline CSS in action. Try changing <code>red</code> to another color.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1 style="color: red;">Netflix</h1>
+  </template>
+</section>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Inline CSS works, but it gets messy fast. We only use it for quick tests or one-off tweaks, not for building a full page.</p>
+</div>
+
+<h2>2. Internal CSS</h2>
+
+<p>You can also write CSS inside the HTML page using a <code>&lt;style&gt;</code> tag. This goes inside the <code>&lt;head&gt;</code> section.</p>
+
+<pre><code class="language-html">&lt;head&gt;
+  &lt;style&gt;
+    h1 {
+      color: red;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+
+<p>Inside the <code>&lt;style&gt;</code> tag, <code>h1</code> means "target the heading." The curly brackets hold the styles. Here we're saying "make the heading text red."</p>
+
+<h2>3. External CSS</h2>
+
+<p>This is how real websites are built. You keep all your CSS in a separate <code>.css</code> file and link it to the HTML.</p>
+
+<p>Create a new file called <code>style.css</code> and add this:</p>
+
+<pre><code class="language-css">h1 {
+  color: red;
+}</code></pre>
+
+<p>Now connect it to your HTML by adding a <code>&lt;link&gt;</code> tag inside the <code>&lt;head&gt;</code>:</p>
+
+<pre><code class="language-html">&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>From here on, we'll use external CSS for everything. It's the method used in real projects — it keeps your HTML and CSS clean and separate.</p>
+</div>
+
+<h2>The color Property</h2>
+
+<p>The <code>color</code> property changes the text color. You can use color names like <code>red</code>, <code>blue</code>, or <code>green</code>, but in real projects we usually use hex codes.</p>
+
+<p>A hex code starts with <code>#</code> followed by six characters. Each code represents one exact color:</p>
+
+<pre><code class="language-css">h1 {
+  color: #E50914;
+}</code></pre>
+
+<p>That's the Netflix red. Hex codes are precise — every browser reads them the same way.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> and change <code>#E50914</code> to a different hex code. Try <code>#ffffff</code> for white or <code>#0000ff</code> for blue.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+  </template>
+  <template class="try-default-css">
+h1 {
+  color: #E50914;
+}
+  </template>
+</section>
+
+<h2>background-color</h2>
+
+<p>To change the background color, use the <code>background-color</code> property. We want the whole page to be black, so we'll apply it to the <code>body</code> tag. The <code>body</code> covers the entire webpage, so anything set here affects the full screen.</p>
+
+<pre><code class="language-css">body {
+  background-color: #000000;
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to see the black background. Try changing the color value.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+<h2>Unlimited movies, TV shows, and more</h2>
+<p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #000000;
+}
+
+h1 {
+  color: #E50914;
+}
+
+h2 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+  </template>
+</section>
+
+<div class="challenge"
+  data-title="Color the text white"
+  data-description="Change the font color of both the headings (h1) and paragraphs (p) to white using CSS. The background should be black."
+  data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;h1&gt;Unlimited movies, TV shows, and more&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;p&gt;Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;"
+  data-starter-css="body {
+  background-color: #000000;
+}"
+  data-checks="h1,p"
+  data-lang="css"
+  data-solution="h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: you'll learn hex codes, RGBA, background images — and give your Netflix page a real dark cinematic look.</p>
+  <a href="/css/colors">Learn about CSS colors →</a>
+</div>

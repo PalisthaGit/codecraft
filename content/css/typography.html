@@ -1,111 +1,244 @@
 <div class="definition">
-  CSS typography controls how text looks — the font family, size, weight, line height, spacing, and color. Good typography is the foundation of readable, professional-looking pages.
+  Typography is how you control the size, weight, spacing, and alignment of text. Good typography is what makes the difference between a page that feels designed and one that feels thrown together.
 </div>
 
-<p>Most of what users read on a web page is text. Getting typography right makes the difference between a page that feels polished and one that feels off, even if the reader can't say why.</p>
+<p>We have the right font. Now let's make the text actually look like Netflix — big bold headings, readable subtitles, and text that sits exactly where we want it.</p>
 
-<h2>Font Family</h2>
+<h2>font-size</h2>
 
-<p>The <code>font-family</code> property sets the typeface. Always provide fallbacks in case the first font isn't available:</p>
+<p>The <code>font-size</code> property controls how big the text is. The most common unit is <code>px</code> (pixels).</p>
 
-<pre><code>body {
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+<pre><code class="language-css">h1 {
+  font-size: 48px;
+}
+
+p {
+  font-size: 18px;
 }</code></pre>
 
-<p>The browser tries each font in order and uses the first one it can find. The final value (<code>sans-serif</code>) is a generic fallback built into every browser.</p>
+<p>The browser has default sizes — headings are larger than paragraphs — but they're rarely big enough for a real design. Netflix's hero heading is huge. Let's match that.</p>
 
-<h2>Font Size</h2>
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> and change the font sizes. Notice how the page feel changes dramatically just by making the heading bigger.</p>
+</div>
 
-<p>Use <code>rem</code> units for font sizes. <code>1rem</code> equals the root element's font size (typically 16px). This makes your sizes scale predictably:</p>
-
-<pre><code>h1 { font-size: 2.25rem; }   /* 36px */
-h2 { font-size: 1.5rem; }    /* 24px */
-p  { font-size: 1rem; }      /* 16px */
-small { font-size: 0.875rem; } /* 14px */</code></pre>
-
-<h2>Font Weight</h2>
-
-<p>Font weight ranges from 100 (thin) to 900 (black). Common values:</p>
-
-<pre><code>font-weight: 400;   /* regular / normal */
-font-weight: 500;   /* medium */
-font-weight: 600;   /* semibold */
-font-weight: 700;   /* bold */
-font-weight: 800;   /* extrabold */
-font-weight: 900;   /* black / heavy */</code></pre>
-
-<h2>Line Height</h2>
-
-<p><code>line-height</code> controls the vertical space between lines of text. A unitless value is recommended — it scales relative to the font size:</p>
-
-<pre><code>p {
-  line-height: 1.7;  /* comfortable for body text */
+<section class="try-example">
+  <template class="try-default-html">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<h1>Netflix</h1>
+<h2>Unlimited movies, TV shows, and more</h2>
+<p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #000;
+  color: white;
+  padding: 40px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 h1 {
-  line-height: 1.2;  /* tighter for headings */
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 64px;
+  color: white;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+p {
+  font-size: 18px;
+}
+  </template>
+</section>
+
+<h2>font-weight</h2>
+
+<p>The <code>font-weight</code> property controls how thick or thin the text looks.</p>
+
+<pre><code class="language-css">h1 {
+  font-weight: bold;    /* thick */
+}
+
+p {
+  font-weight: normal;  /* regular */
+}
+
+h2 {
+  font-weight: 700;     /* same as bold — using a number */
+}</code></pre>
+
+<p>Font weight can be a keyword (<code>normal</code>, <code>bold</code>) or a number from <code>100</code> (thinnest) to <code>900</code> (heaviest). Most fonts support 400 (normal) and 700 (bold). Some fonts like Roboto have in-between weights like 300 or 500.</p>
+
+<h2>line-height</h2>
+
+<p>Line height controls the space between lines of text. Without it, lines can feel packed together and hard to read.</p>
+
+<pre><code class="language-css">p {
+  line-height: 1.6;
+}</code></pre>
+
+<p>The value is a multiplier of the font size. If your text is 18px, a line-height of 1.6 makes the spacing about 29px between lines. Most websites use between 1.5 and 1.8 for body text.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<p>Watch anywhere. Cancel anytime. Join today and get access to thousands of award-winning TV shows, movies, anime, documentaries, and more on any device you own.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #000;
+  color: white;
+  padding: 30px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+  </template>
+</section>
+
+<h2>text-align</h2>
+
+<p>The <code>text-align</code> property controls where text sits inside its container.</p>
+
+<pre><code class="language-css">h1 {
+  text-align: center;
+}
+
+p {
+  text-align: left;    /* default */
+}
+
+p {
+  text-align: right;
+}</code></pre>
+
+<p>Netflix centers all the hero text — the big heading, the subtitle, and the email form. Let's do the same.</p>
+
+<h2>letter-spacing</h2>
+
+<p>Letter spacing adds or removes space between individual characters. A small positive value makes text feel cleaner and more intentional.</p>
+
+<pre><code class="language-css">h2 {
+  letter-spacing: 2px;
+}
+
+p {
+  letter-spacing: 0.5px;
+}</code></pre>
+
+<h2>text-transform</h2>
+
+<p>You can change text case entirely in CSS — without touching the HTML.</p>
+
+<pre><code class="language-css">h1 {
+  text-transform: uppercase;    /* ALL CAPS */
+}
+
+p {
+  text-transform: capitalize;   /* First Letter Of Each Word */
+}
+
+p {
+  text-transform: lowercase;    /* everything lowercase */
 }</code></pre>
 
 <div class="tip">
   <span>💡</span>
-  <p>For body text, a line height between 1.5 and 1.8 is usually ideal. Headings look better tighter, around 1.1–1.3. Long lines of text need more line height to remain scannable.</p>
+  <p>Click <strong>Try It Yourself</strong> to see all these properties working together on our Netflix page.</p>
 </div>
 
-<h2>Letter Spacing</h2>
-
-<p><code>letter-spacing</code> adds or removes space between characters. Use it subtly — a small amount goes a long way:</p>
-
-<pre><code>/* Slightly tighter for large headings */
-h1 {
-  letter-spacing: -0.02em;
+<section class="try-example">
+  <template class="try-default-html">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<h1>Netflix</h1>
+<h2>Unlimited movies, TV shows, and more</h2>
+<p>Starts at USD 2.99. Cancel anytime.</p>
+<p>Ready to watch? Enter your email to get started.</p>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  margin: 0;
+  padding: 60px 40px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
-/* Wider for small uppercase labels */
-.label {
-  font-size: 0.75rem;
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 64px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}</code></pre>
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
 
-<h2>Text Transform</h2>
-
-<pre><code>text-transform: uppercase;    /* ALL CAPS */
-text-transform: lowercase;    /* all lowercase */
-text-transform: capitalize;   /* First Letter Of Each Word */</code></pre>
-
-<h2>Text Alignment</h2>
-
-<pre><code>text-align: left;    /* default */
-text-align: center;
-text-align: right;
-text-align: justify; /* spread text to fill the full width */</code></pre>
-
-<h2>Color</h2>
-
-<p>Use <code>color</code> for text color. Prefer hex values or HSL for predictable results:</p>
-
-<pre><code>body {
-  color: #0f172a;         /* near-black for main text */
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
 }
 
 p {
-  color: #374151;         /* slightly softer for body copy */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+  </template>
+</section>
+
+<div class="challenge"
+  data-title="Style the Netflix hero text"
+  data-description="Style the heading and paragraph to look like the Netflix hero. Make the h1 center-aligned, 64px, and bold. Make the h2 24px with 1px letter-spacing. Make the paragraph 18px with a line-height of 1.6."
+  data-starter-html="&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;h2&gt;Unlimited movies, TV shows, and more&lt;/h2&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;"
+  data-starter-css="body {
+  background-color: #000;
+  color: white;
+  padding: 60px 40px;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}"
+  data-checks="h1,h2,p"
+  data-lang="css"
+  data-solution="h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
 }
 
-.muted {
-  color: #64748b;         /* muted gray for secondary text */
-}</code></pre>
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}
 
-<h2>Loading Web Fonts</h2>
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: center;
+}">
+</div>
 
-<p>To use a custom font like Inter or Nunito, load it from Google Fonts in your HTML <code>&lt;head&gt;</code>:</p>
-
-<pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"&gt;</code></pre>
-
-<p>Then reference it in your CSS:</p>
-
-<pre><code>body {
-  font-family: "Inter", sans-serif;
-}</code></pre>
+<div class="next-lesson">
+  <p>Next up: right now we're styling everything with tag selectors. Learn how to use classes so you can style specific sections without affecting the whole page.</p>
+  <a href="/css/selectors">Learn about CSS selectors →</a>
+</div>

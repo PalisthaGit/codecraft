@@ -1,0 +1,158 @@
+<div class="definition">
+  <strong>Operators</strong> are symbols that perform operations on values. JavaScript has operators for math, comparisons, logical decisions, and assigning values to variables.
+</div>
+
+<p>You use operators constantly in JavaScript — every calculation, every comparison, every condition relies on them.</p>
+
+<h2>Arithmetic Operators</h2>
+
+<p>These perform math on numbers:</p>
+
+<pre><code class="language-javascript">const a = 10;
+const b = 3;
+
+console.log(a + b);   // 13  — addition
+console.log(a - b);   // 7   — subtraction
+console.log(a * b);   // 30  — multiplication
+console.log(a / b);   // 3.33... — division
+console.log(a % b);   // 1   — remainder (modulo)
+console.log(a ** b);  // 1000 — exponent (10³)</code></pre>
+
+<p>The <strong>modulo</strong> operator (<code>%</code>) gives the remainder after division. It's very useful for checking if a number is even or odd:</p>
+
+<pre><code class="language-javascript">console.log(10 % 2);   // 0 — even
+console.log(7 % 2);    // 1 — odd</code></pre>
+
+<h2>Increment and Decrement</h2>
+
+<p>These shortcuts add or subtract 1 from a variable:</p>
+
+<pre><code class="language-javascript">let count = 0;
+count++;   // count is now 1
+count++;   // count is now 2
+count--;   // count is now 1
+
+// Same as:
+count = count + 1;</code></pre>
+
+<h2>Assignment Operators</h2>
+
+<p>Assignment operators update a variable's value in one step:</p>
+
+<pre><code class="language-javascript">let score = 10;
+
+score += 5;   // score = score + 5  → 15
+score -= 3;   // score = score - 3  → 12
+score *= 2;   // score = score * 2  → 24
+score /= 4;   // score = score / 4  → 6
+score **= 2;  // score = score ** 2 → 36</code></pre>
+
+<h2>Comparison Operators</h2>
+
+<p>Comparison operators compare two values and return <code>true</code> or <code>false</code>:</p>
+
+<pre><code class="language-javascript">console.log(5 > 3);    // true
+console.log(5 < 3);    // false
+console.log(5 >= 5);   // true
+console.log(5 <= 4);   // false
+console.log(5 === 5);  // true  — strict equal (checks value AND type)
+console.log(5 !== 3);  // true  — strict not equal</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always use <code>===</code> (triple equals) for comparisons in JavaScript, not <code>==</code>. Triple equals checks both value and type, preventing subtle bugs. For example: <code>"5" == 5</code> is <code>true</code>, but <code>"5" === 5</code> is <code>false</code>.</p>
+</div>
+
+<h2>Logical Operators</h2>
+
+<p>Logical operators combine multiple conditions:</p>
+
+<pre><code class="language-javascript">const age = 20;
+const hasTicket = true;
+
+// && (AND) — both must be true
+console.log(age >= 18 && hasTicket);   // true
+
+// || (OR) — at least one must be true
+console.log(age < 18 || hasTicket);    // true
+
+// ! (NOT) — flips true to false, and vice versa
+console.log(!hasTicket);               // false</code></pre>
+
+<p>A practical example — checking if someone can enter:</p>
+
+<pre><code class="language-javascript">const age = 20;
+const hasID = true;
+
+if (age >= 18 && hasID) {
+  console.log("Welcome in!");
+} else {
+  console.log("Sorry, you can't enter.");
+}</code></pre>
+
+<h2>String Concatenation</h2>
+
+<p>The <code>+</code> operator joins strings together:</p>
+
+<pre><code class="language-javascript">const first = "Coding";
+const second = "Banana";
+
+console.log(first + second);       // "CodingBanana"
+console.log(first + " " + second); // "Coding Banana"</code></pre>
+
+<p>But mixing types can cause surprises:</p>
+
+<pre><code class="language-javascript">console.log("5" + 3);    // "53"  — number is converted to string
+console.log("5" - 3);    // 2     — string is converted to number
+console.log(true + 1);   // 2     — true is treated as 1</code></pre>
+
+<h2>Try It Yourself</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<p id="result">Result will appear here</p>
+<button onclick="calculate()">Calculate</button>
+  </template>
+  <template class="try-default-js">function calculate() {
+  const a = 15;
+  const b = 4;
+
+  const sum = a + b;
+  const remainder = a % b;
+  const isEven = a % 2 === 0;
+
+  document.getElementById('result').textContent =
+    a + ' + ' + b + ' = ' + sum +
+    ' | Remainder: ' + remainder +
+    ' | Is even: ' + isEven;
+}</template>
+</section>
+
+<div class="challenge"
+  data-title="Score calculator"
+  data-description="Create a variable called score starting at 0. Then add 10 to it using +=, multiply it by 3 using *=, then log the final score to the console."
+  data-starter-html="&lt;p&gt;Open the console to see your score!&lt;/p&gt;"
+  data-starter-js="let score = 0;
+// Add 10 using +=
+// Multiply by 3 using *=
+// Log the final score"
+  data-lang="js">
+</div>
+
+<div class="challenge"
+  data-title="Check if a number is even"
+  data-description="Write a function called isEven(n) that returns true if n is even and false if it is odd. Use the modulo operator. Test it with console.log(isEven(4)) and console.log(isEven(7))."
+  data-starter-html="&lt;p&gt;Open the console to see the results!&lt;/p&gt;"
+  data-starter-js="function isEven(n) {
+  // return true if n is even, false otherwise
+}
+
+console.log(isEven(4));   // should print: true
+console.log(isEven(7));   // should print: false"
+  data-lang="js">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: now that you can compare values, learn how to make decisions in your code with conditionals.</p>
+  <a href="/javascript/conditionals">Learn about Conditionals →</a>
+</div>

@@ -1,101 +1,294 @@
 <div class="definition">
-  CSS <strong>positioning</strong> controls where an element sits on the page relative to its normal flow, its parent, or the viewport. The <code>position</code> property accepts five values: <code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, and <code>sticky</code>.
+  CSS positioning controls where an element sits on the page. With <code>position: fixed</code>, elements stay in place as the user scrolls. With <code>position: absolute</code>, elements can be placed precisely inside a parent.
 </div>
 
-<p>Most elements follow the normal document flow — block elements stack vertically, inline elements sit side by side. Positioning lets you step outside that flow and place elements exactly where you need them.</p>
+<p>When you scroll down on Netflix, the black navbar stays at the top. The movie title text sits on top of the thumbnail image. Both of these are done with CSS positioning.</p>
 
-<h2>static (default)</h2>
+<h2>position: static</h2>
 
-<p>Every element is <code>position: static</code> by default. It follows normal document flow and is not affected by <code>top</code>, <code>right</code>, <code>bottom</code>, or <code>left</code>.</p>
+<p>This is the default. Every element starts here — it just sits in the normal flow of the page, one after another.</p>
 
-<pre><code>.box {
-  position: static; /* default — no need to write this */
+<pre><code class="language-css">/* You'll never actually write this — it's the default */
+.element {
+  position: static;
 }</code></pre>
 
-<h2>relative</h2>
+<h2>position: relative</h2>
 
-<p>The element stays in normal flow but can be nudged using offset properties. The space it originally occupied is preserved.</p>
+<p><code>relative</code> lets you nudge an element from where it would normally sit, without affecting the layout around it. It also creates a positioning context for any <code>absolute</code> children inside it.</p>
 
-<pre><code>.nudged {
+<pre><code class="language-css">.movie-card {
+  position: relative;   /* makes this the anchor for absolute children */
+}</code></pre>
+
+<h2>position: absolute</h2>
+
+<p><code>absolute</code> removes an element from the normal flow and places it precisely inside its nearest <code>relative</code> (or <code>fixed</code>) parent using <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>.</p>
+
+<pre><code class="language-css">.movie-card {
   position: relative;
-  top: 10px;    /* move down 10px from its normal position */
-  left: 20px;   /* move right 20px */
-}</code></pre>
-
-<p><code>position: relative</code> is also used to create a <strong>positioning context</strong> for absolutely positioned children.</p>
-
-<h2>absolute</h2>
-
-<p>The element is removed from normal flow and positioned relative to its nearest ancestor that has a non-static <code>position</code>. If no such ancestor exists, it positions relative to the page.</p>
-
-<pre><code>.card {
-  position: relative; /* positioning context */
 }
 
-.badge {
+.movie-title {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  bottom: 8px;
+  left: 8px;
+  color: white;
+  font-size: 14px;
 }</code></pre>
 
 <div class="tip">
   <span>💡</span>
-  <p>The most common pattern: set <code>position: relative</code> on a parent and <code>position: absolute</code> on a child to pin the child to a corner or edge of the parent.</p>
+  <p>Click <strong>Try It Yourself</strong> to see text overlaid on a movie card using absolute positioning. Try changing <code>bottom</code> and <code>left</code> to move the text around.</p>
 </div>
 
-<h2>fixed</h2>
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-card">
+  <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="The Witcher">
+  <div class="movie-overlay">
+    <span class="movie-title">The Witcher</span>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<p>The element is removed from normal flow and positioned relative to the <strong>viewport</strong>. It stays in place when the page scrolls — ideal for sticky headers, floating buttons, and overlays.</p>
+body {
+  background-color: #141414;
+  padding: 20px;
+}
 
-<pre><code>.navbar {
+.movie-card {
+  position: relative;
+  width: 240px;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  padding: 20px 10px 8px;
+}
+
+.movie-title {
+  color: white;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+  </template>
+</section>
+
+<h2>position: fixed</h2>
+
+<p><code>fixed</code> locks an element to the viewport — it stays in place as the user scrolls. This is exactly what Netflix uses for its navbar.</p>
+
+<pre><code class="language-css">.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;            /* stretches to full width */
+  z-index: 100;        /* sits above all other content */
+  background-color: rgba(0, 0, 0, 0.9);
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When you fix the navbar, the page content starts at the top behind it. Add padding-top to the body equal to the navbar height to prevent overlap.</p>
+</div>
+
+<h2>z-index</h2>
+
+<p><code>z-index</code> controls which element appears on top when elements overlap. Higher numbers sit in front.</p>
+
+<pre><code class="language-css">.top-bar {
+  position: fixed;
+  z-index: 100;      /* always on top */
+}
+
+.hero {
+  z-index: 1;        /* below the nav */
+}
+
+.modal {
+  z-index: 999;      /* above everything */
+}</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>z-index</code> only works on elements that have a <code>position</code> set (anything other than <code>static</code>).</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<nav class="top-bar">
+  <div class="logo">NETFLIX</div>
+  <button class="sign-in-btn">Sign In</button>
+</nav>
+
+<div class="hero">
+  <h1>Unlimited movies, TV shows, and more</h1>
+  <p>Scroll down to see the nav stay fixed.</p>
+</div>
+
+<div class="content">
+  <p>The navbar stays at the top even as you scroll past the hero section.</p>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  color: white;
+  background-color: #141414;
+}
+
+.top-bar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-}</code></pre>
-
-<h2>sticky</h2>
-
-<p>A hybrid of <code>relative</code> and <code>fixed</code>. The element scrolls normally until it hits a threshold, then sticks in place.</p>
-
-<pre><code>.section-header {
-  position: sticky;
-  top: 0;             /* sticks when it reaches the top of the viewport */
-  background: white;
-  z-index: 10;
-}</code></pre>
-
-<h2>z-index</h2>
-
-<p>When positioned elements overlap, <code>z-index</code> controls which one appears on top. Higher values sit in front of lower values.</p>
-
-<pre><code>.modal {
-  position: fixed;
-  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
-.overlay {
-  position: fixed;
-  z-index: 999;
+.logo {
+  color: #e50914;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
 
-.navbar {
-  position: sticky;
+.sign-in-btn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hero {
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
+  background-blend-mode: multiply;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  max-width: 500px;
+  margin-bottom: 16px;
+}
+
+.content {
+  padding: 60px 40px;
+  font-size: 18px;
+  line-height: 1.8;
+  background-color: #1a1a1a;
+  min-height: 200px;
+}
+  </template>
+</section>
+
+<div class="challenge"
+  data-title="Fix the navbar to the top"
+  data-description="Make the .top-bar stay fixed at the top of the page as the user scrolls. Position it at top: 0, stretch it full width, and give it a z-index of 100."
+  data-starter-html="&lt;nav class=&quot;top-bar&quot;&gt;
+  &lt;div class=&quot;logo&quot;&gt;NETFLIX&lt;/div&gt;
+  &lt;button&gt;Sign In&lt;/button&gt;
+&lt;/nav&gt;
+&lt;div class=&quot;hero&quot;&gt;
+  &lt;h1&gt;Scroll down&lt;/h1&gt;
+  &lt;p&gt;See if the nav stays fixed.&lt;/p&gt;
+&lt;/div&gt;"
+  data-starter-css="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  color: white;
+  background-color: #141414;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.logo {
+  color: #e50914;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.hero {
+  background-color: #222;
+  min-height: 200vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 40px;
+}"
+  data-checks="nav"
+  data-lang="css"
+  data-solution=".top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-}</code></pre>
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: rgba(0,0,0,0.9);
+}">
+</div>
 
-<p><code>z-index</code> only works on elements with a <code>position</code> other than <code>static</code>.</p>
-
-<h2>Centering with absolute positioning</h2>
-
-<pre><code>.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}</code></pre>
-
-<p>This is a classic trick — offset by 50% then pull back by half the element's own size using <code>transform</code>.</p>
+<div class="next-lesson">
+  <p>Next up: the layout is complete. Now let's bring it to life — add smooth hover animations to the movie cards using CSS transitions.</p>
+  <a href="/css/transitions">Learn about CSS transitions →</a>
+</div>

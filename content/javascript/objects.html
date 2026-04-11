@@ -1,0 +1,215 @@
+<div class="definition">
+  An <strong>object</strong> is a collection of named values called <strong>properties</strong>. Each property has a key and a value. Objects let you group related data and behaviour together in one place.
+</div>
+
+<p>While arrays store ordered lists, objects store structured data with meaningful names. A user, a product, a blog post — these are all naturally represented as objects.</p>
+
+<h2>Creating Objects</h2>
+
+<pre><code class="language-javascript">const user = {
+  name: "Alice",
+  age: 25,
+  isAdmin: false,
+  city: "London",
+};
+
+// Access properties with dot notation
+console.log(user.name);   // "Alice"
+console.log(user.age);    // 25
+
+// Or bracket notation (useful for dynamic keys)
+const key = "city";
+console.log(user[key]);   // "London"</code></pre>
+
+<h2>Adding and Updating Properties</h2>
+
+<pre><code class="language-javascript">const product = {
+  name: "Headphones",
+  price: 79.99,
+};
+
+// Update an existing property
+product.price = 69.99;
+
+// Add a new property
+product.inStock = true;
+
+console.log(product);
+// { name: "Headphones", price: 69.99, inStock: true }</code></pre>
+
+<h2>Methods</h2>
+
+<p>Properties that are functions are called <strong>methods</strong>:</p>
+
+<pre><code class="language-javascript">const calculator = {
+  add: function(a, b) {
+    return a + b;
+  },
+  subtract: (a, b) => a - b,   // arrow function shorthand
+};
+
+console.log(calculator.add(3, 5));       // 8
+console.log(calculator.subtract(10, 4)); // 6</code></pre>
+
+<p>Inside a regular method, <code>this</code> refers to the object:</p>
+
+<pre><code class="language-javascript">const counter = {
+  count: 0,
+  increment() {
+    this.count++;
+  },
+  reset() {
+    this.count = 0;
+  },
+};
+
+counter.increment();
+counter.increment();
+console.log(counter.count);   // 2</code></pre>
+
+<h2>Destructuring</h2>
+
+<p>Destructuring lets you extract properties into variables in one step:</p>
+
+<pre><code class="language-javascript">const user = { name: "Alice", age: 25, city: "London" };
+
+// Instead of:
+const name = user.name;
+const age = user.age;
+
+// Use destructuring:
+const { name, age, city } = user;
+console.log(name);   // "Alice"
+console.log(age);    // 25</code></pre>
+
+<p>You can rename variables and set defaults:</p>
+
+<pre><code class="language-javascript">const { name: fullName, age = 18, role = "user" } = user;
+console.log(fullName);   // "Alice"
+console.log(role);       // "user" (default value)</code></pre>
+
+<p>Destructuring works in function parameters too:</p>
+
+<pre><code class="language-javascript">function greet({ name, age }) {
+  return `Hi ${name}, you are ${age} years old.`;
+}
+
+console.log(greet({ name: "Bob", age: 30 }));
+// "Hi Bob, you are 30 years old."</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Destructuring in function parameters is a very common pattern in React. When a component receives a <code>props</code> object, you'll often see <code>function Button({ label, onClick })</code> instead of <code>function Button(props)</code>.</p>
+</div>
+
+<h2>Spread Operator</h2>
+
+<p>The spread operator (<code>...</code>) copies properties from one object into another:</p>
+
+<pre><code class="language-javascript">const defaults = { theme: "light", language: "en", fontSize: 16 };
+const userSettings = { theme: "dark", fontSize: 18 };
+
+// Merge objects — later properties override earlier ones
+const settings = { ...defaults, ...userSettings };
+console.log(settings);
+// { theme: "dark", language: "en", fontSize: 18 }</code></pre>
+
+<p>Spread is also great for creating a modified copy without mutating the original:</p>
+
+<pre><code class="language-javascript">const user = { name: "Alice", age: 25 };
+const olderUser = { ...user, age: 26 };
+
+console.log(user);       // { name: "Alice", age: 25 }   — unchanged
+console.log(olderUser);  // { name: "Alice", age: 26 }</code></pre>
+
+<h2>Object.keys, Object.values, Object.entries</h2>
+
+<pre><code class="language-javascript">const scores = { Alice: 88, Bob: 72, Charlie: 95 };
+
+Object.keys(scores);
+// ["Alice", "Bob", "Charlie"]
+
+Object.values(scores);
+// [88, 72, 95]
+
+Object.entries(scores);
+// [["Alice", 88], ["Bob", 72], ["Charlie", 95]]
+
+// Loop over entries
+Object.entries(scores).forEach(([name, score]) => {
+  console.log(`${name}: ${score}`);
+});</code></pre>
+
+<h2>Arrays of Objects</h2>
+
+<p>One of the most common patterns: an array where each item is an object:</p>
+
+<pre><code class="language-javascript">const products = [
+  { id: 1, name: "Laptop", price: 999 },
+  { id: 2, name: "Mouse", price: 25 },
+  { id: 3, name: "Keyboard", price: 75 },
+];
+
+// Find a product
+const laptop = products.find((p) => p.name === "Laptop");
+console.log(laptop.price);   // 999
+
+// Get all names
+const names = products.map((p) => p.name);
+console.log(names);   // ["Laptop", "Mouse", "Keyboard"]
+
+// Filter by price
+const affordable = products.filter((p) => p.price < 100);
+console.log(affordable.length);   // 2</code></pre>
+
+<h2>Try It Yourself</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h2>User Card</h2>
+<div id="card"></div>
+<button onclick="showUser()">Show User</button>
+  </template>
+  <template class="try-default-js">const user = {
+  name: 'Alice Johnson',
+  role: 'Frontend Developer',
+  skills: ['HTML', 'CSS', 'JavaScript'],
+  location: 'London, UK',
+};
+
+function showUser() {
+  const { name, role, skills, location } = user;
+
+  document.getElementById('card').innerHTML = `
+    <h3>${name}</h3>
+    <p><strong>Role:</strong> ${role}</p>
+    <p><strong>Location:</strong> ${location}</p>
+    <p><strong>Skills:</strong> ${skills.join(', ')}</p>
+  `;
+}</template>
+</section>
+
+<div class="challenge"
+  data-title="Merge settings"
+  data-description="Create a defaultConfig object with properties: theme='light', fontSize=14, notifications=true. Create a userConfig object with theme='dark' and fontSize=18. Use the spread operator to merge them into a finalConfig, with userConfig overriding defaults. Log finalConfig."
+  data-starter-html="&lt;p&gt;Open the console to see the result!&lt;/p&gt;"
+  data-starter-js="const defaultConfig = {
+  // add: theme, fontSize, notifications
+};
+
+const userConfig = {
+  // add: theme, fontSize
+};
+
+// Merge with spread operator
+const finalConfig = { /* spread both */ };
+
+console.log(finalConfig);
+// { theme: 'dark', fontSize: 18, notifications: true }"
+  data-lang="js">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: now that you know variables, functions, arrays, and objects — it's time to make your page interactive with the DOM.</p>
+  <a href="/javascript/dom">Learn about DOM Manipulation →</a>
+</div>

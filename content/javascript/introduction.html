@@ -1,0 +1,106 @@
+<div class="definition">
+  <strong>JavaScript</strong> is the programming language of the web. It runs in the browser and makes pages interactive — responding to clicks, updating content, validating forms, and much more.
+</div>
+
+<p>HTML gives a page structure. CSS gives it style. JavaScript gives it behavior. Every time you click a button and something changes without the page reloading — that's JavaScript at work.</p>
+
+<h2>Adding JavaScript to a Page</h2>
+
+<p>You include JavaScript in HTML using a <code>&lt;script&gt;</code> tag. The best place for it is at the bottom of the <code>&lt;body&gt;</code>, after all your HTML content:</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+
+    &lt;script&gt;
+      console.log("JavaScript is running!");
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Placing the script at the bottom ensures the HTML elements exist before JavaScript tries to interact with them.</p>
+
+<h2>External Script Files</h2>
+
+<p>For larger projects, you write JavaScript in a separate <code>.js</code> file and link to it:</p>
+
+<pre><code class="language-html">&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>This keeps your code organised and easy to maintain.</p>
+
+<h2>console.log</h2>
+
+<p><code>console.log()</code> is your best friend when learning JavaScript. It prints values to the browser's developer console so you can see what's happening:</p>
+
+<pre><code class="language-javascript">console.log("Hello, World!");
+console.log(42);
+console.log(true);
+console.log(2 + 3);   // 5</code></pre>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Open the browser console by pressing <strong>F12</strong> (or Cmd+Option+I on Mac), then click the <strong>Console</strong> tab. This is where all your <code>console.log</code> messages appear.</p>
+</div>
+
+<h2>Your First Script</h2>
+
+<p>Let's write a script that changes the text on a page when you click a button:</p>
+
+<pre><code class="language-html">&lt;h1 id="title"&gt;Hello!&lt;/h1&gt;
+&lt;button onclick="changeText()"&gt;Click me&lt;/button&gt;
+
+&lt;script&gt;
+  function changeText() {
+    document.getElementById("title").textContent = "You clicked the button!";
+  }
+&lt;/script&gt;</code></pre>
+
+<p>Don't worry if you don't understand every part yet — you'll learn all of it step by step. For now, notice that JavaScript can <strong>find elements</strong> on the page and <strong>change them</strong>.</p>
+
+<h2>Try It Yourself</h2>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1 id="title">Hello!</h1>
+<p id="desc">Click the button below.</p>
+<button onclick="changeText()">Click me</button>
+  </template>
+  <template class="try-default-js">function changeText() {
+  document.getElementById("title").textContent = "You clicked it!";
+  document.getElementById("desc").textContent = "JavaScript changed this text.";
+}</template>
+</section>
+
+<div class="challenge"
+  data-title="Log a message"
+  data-description="Add a console.log() inside the changeText() function so it prints 'Button clicked!' to the console when the button is pressed."
+  data-starter-html="&lt;h1 id=&quot;title&quot;&gt;Hello!&lt;/h1&gt;
+&lt;button onclick=&quot;changeText()&quot;&gt;Click me&lt;/button&gt;"
+  data-starter-js="function changeText() {
+  document.getElementById('title').textContent = 'Clicked!';
+  // Add your console.log here
+}"
+  data-lang="js">
+</div>
+
+<h2>Comments</h2>
+
+<p>Comments are notes in your code that the browser ignores. Use them to explain what your code does:</p>
+
+<pre><code class="language-javascript">// This is a single-line comment
+
+/*
+  This is a
+  multi-line comment
+*/
+
+console.log("This runs");   // inline comment</code></pre>
+
+<div class="next-lesson">
+  <p>Next up: learn how to store data in variables — the building blocks of every JavaScript program.</p>
+  <a href="/javascript/variables">Learn about Variables & Types →</a>
+</div>
