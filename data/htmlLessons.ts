@@ -190,6 +190,13 @@ export const htmlLessonGroups: LessonGroup[] = [
         readTime: "15 min read",
         difficulty: "Beginner",
       },
+      {
+        slug: "projects/create-wiki-style-portfolio",
+        title: "Build a Wiki-Style Portfolio",
+        description: "Build a Wikipedia-style portfolio page using headings, paragraphs, images, lists, tables, and links.",
+        readTime: "15 min read",
+        difficulty: "Beginner",
+      },
     ],
   },
 ];

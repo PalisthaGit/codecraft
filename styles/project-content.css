@@ -1,0 +1,273 @@
+/* ============================================================
+   Shared styles for HTML/CSS/JS project content files.
+   Wrap your project HTML in: <div class="project-content">
+   Then use these class names freely — no CSS needed in the file.
+   ============================================================ */
+
+.project-content * {
+    box-sizing: border-box;
+}
+
+.project-content {
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+.project-content h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+
+.project-content .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+/* ── Step accordion ─────────────────────────── */
+
+.project-content .step {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+
+.project-content .step-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.project-content .step-head:hover {
+    background: #f5f5f5;
+}
+
+.project-content .num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e8f0fe;
+    color: #1a56db;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.project-content .step-title {
+    font-size: 15px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.project-content .arrow {
+    font-size: 18px;
+    color: #999;
+    transition: transform 0.2s;
+}
+
+.project-content .body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid #eee;
+}
+
+.project-content .body.open {
+    display: block;
+}
+
+/* ── Body text ──────────────────────────────── */
+
+.project-content .task {
+    font-size: 15px;
+    font-weight: bold;
+    color: #111;
+    margin: 14px 0 6px;
+}
+
+.project-content .explain {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+/* ── Do box (blue — what to type) ───────────── */
+
+.project-content .do-box {
+    background: #f0f4ff;
+    border-left: 4px solid #1a56db;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    margin: 10px 0;
+}
+
+.project-content .do-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.project-content .do-line {
+    font-size: 13px;
+    color: #111;
+    line-height: 2;
+}
+
+.project-content .do-line code {
+    font-family: monospace;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #1a56db;
+    word-break: break-all;
+}
+
+/* ── You box (green — personalise it) ───────── */
+
+.project-content .you-box {
+    background: #f0fff4;
+    border-left: 4px solid #16a34a;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    margin: 10px 0;
+}
+
+.project-content .you-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #16a34a;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.project-content .you-line {
+    font-size: 13px;
+    color: #111;
+    line-height: 2;
+}
+
+.project-content .you-line code {
+    font-family: monospace;
+    font-size: 13px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #16a34a;
+}
+
+/* ── Habit tip (yellow) ─────────────────────── */
+
+.project-content .habit {
+    font-size: 12px;
+    background: #fff8e1;
+    color: #7a5800;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 10px 0;
+}
+
+/* ── Show/hide solution toggle ──────────────── */
+
+.project-content details {
+    margin-top: 10px;
+}
+
+.project-content summary {
+    font-size: 13px;
+    color: #1a56db;
+    cursor: pointer;
+    padding: 4px 0;
+    font-weight: bold;
+    list-style: none;
+}
+
+.project-content summary::before {
+    content: "▶ Show solution";
+}
+
+.project-content details[open] summary::before {
+    content: "▼ Hide solution";
+}
+
+/* ── Code block ─────────────────────────────── */
+
+.project-content pre {
+    background: #1E293B;
+    color: #E2E8F0;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 12px;
+    font-family: monospace;
+    margin-top: 8px;
+    overflow-x: auto;
+    line-height: 1.8;
+    white-space: pre;
+}
+
+/* Syntax colour helpers inside pre */
+.project-content .t { color: #93C5FD; } /* tag  */
+.project-content .v { color: #FCA5A5; } /* value */
+
+/* ── Learn more link ────────────────────────── */
+
+.project-content .learn {
+    display: inline-block;
+    font-size: 12px;
+    color: #1a56db;
+    margin-top: 10px;
+}
+
+/* ── Tag badge (e.g. "You built this") ──────── */
+
+.project-content .tag-you {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* ── Mobile responsive ──────────────────────── */
+
+@media (max-width: 600px) {
+    .project-content h1 {
+        font-size: 20px;
+    }
+
+    .project-content .step-head {
+        padding: 12px 14px;
+    }
+
+    .project-content .body {
+        padding: 0 12px 14px;
+    }
+
+    .project-content .do-box,
+    .project-content .you-box {
+        padding: 10px 12px;
+    }
+
+    .project-content pre {
+        font-size: 11px;
+        padding: 10px;
+    }
+}

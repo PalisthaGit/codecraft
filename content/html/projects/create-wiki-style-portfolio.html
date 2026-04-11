@@ -1,0 +1,542 @@
+<div style="display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;">
+    <div style="flex:1;min-width:min(100%,340px);">
+        <div class="project-content">
+
+            <h1>Build Your Own Portfolio Page in HTML</h1>
+            <p class="subtitle">Every step tells you exactly what to type — and what to replace with your own info. Click a step to open it.</p>
+
+            <!-- STEP 1 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">1</div>
+                    <span class="step-title">Create the file and write the DOCTYPE</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Create a new file called index.html and type the page skeleton.</p>
+                    <p class="explain">Every HTML page must start with these exact lines. Open VS Code, create a new file, save it as index.html, then type this:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this — line by line</div>
+                        <div class="do-line">Line 1 → <code>&lt;!DOCTYPE html&gt;</code> — tells the browser this is HTML</div>
+                        <div class="do-line">Line 2 → <code>&lt;html&gt;</code> — opens the whole page</div>
+                        <div class="do-line">Line 3 → <code>&lt;head&gt;</code> — opens the invisible settings section</div>
+                        <div class="do-line">Line 4 → <code>&lt;title&gt;Your Name — Portfolio&lt;/title&gt;</code> — shown on the browser tab</div>
+                        <div class="do-line">Line 5 → <code>&lt;/head&gt;</code> — closes settings</div>
+                        <div class="do-line">Line 6 → <code>&lt;body&gt;</code> — opens the visible page</div>
+                        <div class="do-line">Line 7 → leave blank — all your content goes here</div>
+                        <div class="do-line">Line 8 → <code>&lt;/body&gt;</code> — closes the visible section</div>
+                        <div class="do-line">Line 9 → <code>&lt;/html&gt;</code> — closes the whole page</div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">On line 4, replace <code>Your Name</code> with your actual name. For example if your name is Sarah, write: <code>&lt;title&gt;Sarah — Portfolio&lt;/title&gt;</code></div>
+                    </div>
+                    <div class="habit">💡 Good habit — save your file as .html not .txt. Open it in Chrome after every step to see your changes live.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Sarah — Portfolio&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/introduction" target="_blank">Want to learn more? Read our Introduction to HTML article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">2</div>
+                    <span class="step-title">Add your name as the page title — h1</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Add a heading 1 and write your own name as the text.</p>
+                    <p class="explain">Inside &lt;body&gt;, on the blank line, add your h1. This is the biggest heading on the page — on a portfolio it is your name, big and bold at the very top.</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this inside &lt;body&gt;</div>
+                        <div class="do-line">→ <code>&lt;h1&gt;Your Name&lt;/h1&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace <code>Your Name</code> with your actual full name. For example: <code>&lt;h1&gt;Sarah Johnson&lt;/h1&gt;</code></div>
+                        <div class="you-line">Save and open in Chrome. You should see your name appear as a large bold heading.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — only ever use h1 once per page. It is your main title — like your name on a business card.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;body&gt;
+  &lt;h1&gt;Sarah Johnson&lt;/h1&gt;
+&lt;/body&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/headings" target="_blank">Want to learn more? Read our Headings article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">3</div>
+                    <span class="step-title">Add all section headings — h2</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">After the h1, add 6 section headings using h2 — one for each section of your portfolio.</p>
+                    <p class="explain">These are the main sections every portfolio needs. Type each one on its own line after your h1:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type each of these after your h1</div>
+                        <div class="do-line">→ <code>&lt;h2&gt;About me&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;My skills&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;My projects&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;Work experience&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;Education&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;Contact me&lt;/h2&gt;</code></div>
+                    </div>
+                    <p class="explain">Save and refresh Chrome. You should now see 6 headings appear below your name on the page.</p>
+                    <div class="habit">💡 Good habit — write all your h2 headings first as a skeleton outline, then go back and fill content underneath each one.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;h1&gt;Sarah Johnson&lt;/h1&gt;
+&lt;h2&gt;About me&lt;/h2&gt;
+&lt;h2&gt;My skills&lt;/h2&gt;
+&lt;h2&gt;My projects&lt;/h2&gt;
+&lt;h2&gt;Work experience&lt;/h2&gt;
+&lt;h2&gt;Education&lt;/h2&gt;
+&lt;h2&gt;Contact me&lt;/h2&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/headings" target="_blank">Want to learn more? Read our Headings article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">4</div>
+                    <span class="step-title">Wrap in sections and add sub-headings — section and h3</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Wrap each h2 in a &lt;section&gt; tag. Then inside Work experience, add h3 sub-headings for each job.</p>
+                    <p class="explain">A &lt;section&gt; wraps each group of related content together. Find your Work experience h2 and wrap it like this, then add h3 for each job role you have had:</p>
+                    <div class="do-box">
+                        <div class="do-label">Replace your Work experience h2 with this</div>
+                        <div class="do-line">→ <code>&lt;section&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h2&gt;Work experience&lt;/h2&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h3&gt;Job Title — Company Name (Year–Year)&lt;/h3&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;h3&gt;Job Title — Company Name (Year–Year)&lt;/h3&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/section&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace the h3 text with your real job titles and companies. For example: <code>&lt;h3&gt;Frontend Developer — Acme Studio (2022–2024)&lt;/h3&gt;</code></div>
+                        <div class="you-line">If you have not worked yet, write: <code>&lt;h3&gt;Freelance Projects (2023–present)&lt;/h3&gt;</code></div>
+                        <div class="you-line">Do the same for all other h2 sections — wrap each in &lt;section&gt;&lt;/section&gt;.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — always close your &lt;section&gt; tag. Every opening tag needs a matching closing tag or the page layout will break.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;Work experience&lt;/h2&gt;
+  &lt;h3&gt;Frontend Developer — Acme Studio (2022–2024)&lt;/h3&gt;
+  &lt;h3&gt;Web Design Intern — BlueCo (2021–2022)&lt;/h3&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/semantic-html" target="_blank">Want to learn more? Read our Semantic HTML article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">5</div>
+                    <span class="step-title">Write about yourself — p paragraphs</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Go to the About me section and add two paragraphs using p tags — introduce yourself in your own words.</p>
+                    <p class="explain">Body text always goes inside &lt;p&gt; tags. After your &lt;h2&gt;About me&lt;/h2&gt;, type two paragraphs. You can copy the example below to get started, then edit it to be about you:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this structure after &lt;h2&gt;About me&lt;/h2&gt;</div>
+                        <div class="do-line">→ <code>&lt;p&gt;Your first paragraph here.&lt;/p&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;p&gt;Your second paragraph here.&lt;/p&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours — write about yourself</div>
+                        <div class="you-line">Para 1 — who you are: <code>&lt;p&gt;Hi, I'm Sarah — a web developer based in London with a passion for building clean, fast, and accessible websites.&lt;/p&gt;</code></div>
+                        <div class="you-line">Para 2 — what you do or love: <code>&lt;p&gt;I love turning ideas into real products. When I'm not coding I enjoy photography and hiking.&lt;/p&gt;</code></div>
+                        <div class="you-line">Replace Sarah with your name, London with your city, and change the interests to your own.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — never leave raw text floating in &lt;body&gt; without a tag. Always wrap all text in &lt;p&gt;&lt;/p&gt;.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;About me&lt;/h2&gt;
+  &lt;p&gt;Hi, I'm Sarah — a web developer based in London
+  with a passion for building clean, accessible websites.&lt;/p&gt;
+  &lt;p&gt;I love turning ideas into real products. When I'm
+  not coding I enjoy photography and hiking.&lt;/p&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/tags" target="_blank">Want to learn more? Read our HTML Tags article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 6 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">6</div>
+                    <span class="step-title">Add your photo — img</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Add your profile photo using an img tag inside the About me section.</p>
+                    <p class="explain">The img tag is self-closing — no closing tag needed. It needs src (the file name) and alt (a text description of the image). Type this inside your About me section:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this inside your About me section</div>
+                        <div class="do-line">→ <code>&lt;img src="photo.jpg" alt="A photo of Sarah Johnson" width="200"&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Save a photo of yourself in the same folder as index.html. Name it <code>photo.jpg</code>.</div>
+                        <div class="you-line">Change the alt text to describe your photo — for example: <code>alt="A photo of me smiling in a park"</code></div>
+                        <div class="you-line">Change the width number to make the photo bigger or smaller — for example <code>width="300"</code> for bigger.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — always write the alt text. It shows as text if the image is missing, and screen readers read it aloud to blind users.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;About me&lt;/h2&gt;
+  &lt;img src="photo.jpg"
+       alt="A photo of Sarah Johnson"
+       width="200"&gt;
+  &lt;p&gt;Hi, I'm Sarah...&lt;/p&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/images" target="_blank">Want to learn more? Read our Images article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 7 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">7</div>
+                    <span class="step-title">List your skills — ul bullets and ol numbered</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">In the My skills section add a bullet list of your skills. In the My projects section add a numbered list of your top projects.</p>
+                    <p class="explain">Use &lt;ul&gt; for bullets and &lt;ol&gt; for numbered. Each item goes in &lt;li&gt;. Type the skills list first:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this in your My skills section</div>
+                        <div class="do-line">→ <code>&lt;ul&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;HTML &amp;amp; CSS&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;JavaScript&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;React&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;Figma&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/ul&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace the skill names with your real skills. Add or remove &lt;li&gt; lines as needed.</div>
+                    </div>
+                    <p class="explain">Now type the projects list:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this in your My projects section</div>
+                        <div class="do-line">→ <code>&lt;ol&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;Project name — one sentence about what it does&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;Project name — one sentence about what it does&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;li&gt;Project name — one sentence about what it does&lt;/li&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/ol&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace each item with a real project you have made. If you have no projects yet write: <code>&lt;li&gt;Coming soon — currently learning HTML&lt;/li&gt;</code></div>
+                    </div>
+                    <div class="habit">💡 Good habit — use ul when order does not matter (skills). Use ol when order matters (top projects ranked by importance).</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;My skills&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;HTML &amp; CSS&lt;/li&gt;
+    &lt;li&gt;JavaScript&lt;/li&gt;
+    &lt;li&gt;React&lt;/li&gt;
+    &lt;li&gt;Figma&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;My projects&lt;/h2&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Portfolio website — my personal site built with HTML and CSS&lt;/li&gt;
+    &lt;li&gt;Weather app — shows live weather using a public API&lt;/li&gt;
+    &lt;li&gt;To-do list — a simple task manager built in JavaScript&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/list" target="_blank">Want to learn more? Read our Lists article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 8 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">8</div>
+                    <span class="step-title">Add a table — your education details</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">In the Education section, create a table showing your school, degree, and years.</p>
+                    <p class="explain">A table uses &lt;table&gt; to start, &lt;tr&gt; for each row, &lt;th&gt; for column headers, and &lt;td&gt; for data cells. Type this in your Education section:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this in your Education section</div>
+                        <div class="do-line">→ <code>&lt;table&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;tr&gt;&lt;th&gt;School&lt;/th&gt;&lt;th&gt;Qualification&lt;/th&gt;&lt;th&gt;Years&lt;/th&gt;&lt;/tr&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;tr&gt;&lt;td&gt;University Name&lt;/td&gt;&lt;td&gt;BSc Computer Science&lt;/td&gt;&lt;td&gt;2019–2022&lt;/td&gt;&lt;/tr&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;tr&gt;&lt;td&gt;School Name&lt;/td&gt;&lt;td&gt;A-levels&lt;/td&gt;&lt;td&gt;2017–2019&lt;/td&gt;&lt;/tr&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/table&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace each &lt;td&gt; value with your real school name, qualification, and years. Add more &lt;tr&gt; rows if you have more qualifications.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — use &lt;th&gt; for the header row so the browser makes it bold automatically and screen readers know those are column titles.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;Education&lt;/h2&gt;
+  &lt;table&gt;
+    &lt;tr&gt;
+      &lt;th&gt;School&lt;/th&gt;
+      &lt;th&gt;Qualification&lt;/th&gt;
+      &lt;th&gt;Years&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;University of London&lt;/td&gt;
+      &lt;td&gt;BSc Computer Science&lt;/td&gt;
+      &lt;td&gt;2019–2022&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;City College&lt;/td&gt;
+      &lt;td&gt;A-levels&lt;/td&gt;
+      &lt;td&gt;2017–2019&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/table" target="_blank">Want to learn more? Read our Tables article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 9 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">9</div>
+                    <span class="step-title">Add links to your work — a href</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">In the My projects section, turn each project name into a clickable link to the live project or GitHub repo.</p>
+                    <p class="explain">A link uses &lt;a&gt; with an href for the URL. Adding target="_blank" opens it in a new tab. Replace your plain &lt;li&gt; text with a link like this:</p>
+                    <div class="do-box">
+                        <div class="do-label">Replace plain text items with linked items like this</div>
+                        <div class="do-line">→ <code>&lt;li&gt;&lt;a href="https://github.com/yourname/project" target="_blank"&gt;Weather App — shows live weather using a public API&lt;/a&gt;&lt;/li&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace the href URL with the real link to your project on GitHub. If it is not online yet use <code>href="#"</code> as a placeholder.</div>
+                    </div>
+                    <div class="habit">💡 Good habit — never write "click here" as link text. Always describe what the link is — screen readers read link text out loud to blind users.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section&gt;
+  &lt;h2&gt;My projects&lt;/h2&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;a href="https://github.com/sarah/weather-app" target="_blank"&gt;
+        Weather app — shows live weather using a public API
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href="https://github.com/sarah/todo" target="_blank"&gt;
+        To-do list — a task manager built in JavaScript
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/link" target="_blank">Want to learn more? Read our Links article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 10 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">10</div>
+                    <span class="step-title">Add a navigation bar at the top — header and nav</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">At the very top of &lt;body&gt;, before everything else, add a header with your name and a nav bar with links to each section.</p>
+                    <p class="explain">The &lt;header&gt; goes first inside &lt;body&gt;. Inside it, put your name in a &lt;strong&gt; tag and a &lt;nav&gt; with links. Type this as the very first thing inside &lt;body&gt;:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this as the first thing inside &lt;body&gt; — before your h1</div>
+                        <div class="do-line">→ <code>&lt;header&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;strong&gt;Your Name&lt;/strong&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;nav&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;a href="#about"&gt;About&lt;/a&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;a href="#skills"&gt;Skills&lt;/a&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;a href="#projects"&gt;Projects&lt;/a&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;a href="#contact"&gt;Contact&lt;/a&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/nav&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/header&gt;</code></div>
+                    </div>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Replace <code>Your Name</code> in the &lt;strong&gt; tag with your real name — for example: <code>&lt;strong&gt;Sarah Johnson&lt;/strong&gt;</code></div>
+                        <div class="you-line">To make anchor links work, add <code>id="about"</code> to your About me section: <code>&lt;section id="about"&gt;</code></div>
+                    </div>
+                    <div class="habit">💡 Good habit — &lt;header&gt; always goes at the top of the page. &lt;nav&gt; goes inside it and holds your navigation links.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;header&gt;
+  &lt;strong&gt;Sarah Johnson&lt;/strong&gt;
+  &lt;nav&gt;
+    &lt;a href="#about"&gt;About&lt;/a&gt;
+    &lt;a href="#skills"&gt;Skills&lt;/a&gt;
+    &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+    &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/semantic-html" target="_blank">Want to learn more? Read our Semantic HTML article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 11 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">11</div>
+                    <span class="step-title">Add radio buttons — choose a theme</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">Add a fieldset with 3 radio buttons letting visitors pick a colour theme for your portfolio — Light, Dark, or Auto.</p>
+                    <p class="explain">Radio buttons let users pick one option from a group. They all share the same name so only one can be selected at a time. Type this inside your header or just below it:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this inside your header or below it</div>
+                        <div class="do-line">→ <code>&lt;fieldset&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;legend&gt;Theme&lt;/legend&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;input type="radio" name="theme" id="light" checked&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;label for="light"&gt;Light&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;input type="radio" name="theme" id="dark"&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;label for="dark"&gt;Dark&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;input type="radio" name="theme" id="auto"&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;label for="auto"&gt;Auto&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/fieldset&gt;</code></div>
+                    </div>
+                    <p class="explain">Save and refresh. You should see a box with 3 radio buttons. Try clicking each one — only one can be selected at a time.</p>
+                    <div class="habit">💡 Good habit — every radio button needs a matching &lt;label for="..."&gt; with the same id. This makes the label text clickable too, not just the small circle.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;fieldset&gt;
+  &lt;legend&gt;Theme&lt;/legend&gt;
+  &lt;input type="radio" name="theme" id="light" checked&gt;
+  &lt;label for="light"&gt;Light&lt;/label&gt;
+  &lt;input type="radio" name="theme" id="dark"&gt;
+  &lt;label for="dark"&gt;Dark&lt;/label&gt;
+  &lt;input type="radio" name="theme" id="auto"&gt;
+  &lt;label for="auto"&gt;Auto&lt;/label&gt;
+&lt;/fieldset&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/fieldset-legend" target="_blank">Want to learn more? Read our Fieldset and Legend article ›</a>
+                </div>
+            </div>
+
+            <!-- STEP 12 -->
+            <div class="step">
+                <div class="step-head" onclick="wikiPortfolioTog(this)">
+                    <div class="num">12</div>
+                    <span class="step-title">Add a contact form with validation — form</span>
+                    <span class="arrow">›</span>
+                </div>
+                <div class="body">
+                    <p class="task">In the Contact me section, add a form with 4 fields and a submit button. Add validation so the browser checks the inputs — no JavaScript needed.</p>
+                    <p class="explain">A &lt;form&gt; holds all the input fields. Each field needs a &lt;label&gt; above it. Adding required means the field cannot be empty. Adding type="email" makes the browser check for an @ symbol automatically. Type all of this in your Contact me section:</p>
+                    <div class="do-box">
+                        <div class="do-label">Type this inside your Contact me section</div>
+                        <div class="do-line">→ <code>&lt;form&gt;</code></div>
+                        <div class="do-line" style="margin-top:6px">→ <code>&lt;label for="name"&gt;Your name&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;input type="text" id="name" name="name" required minlength="2" placeholder="Your full name"&gt;</code></div>
+                        <div class="do-line" style="margin-top:6px">→ <code>&lt;label for="email"&gt;Your email&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;input type="email" id="email" name="email" required placeholder="you@example.com"&gt;</code></div>
+                        <div class="do-line" style="margin-top:6px">→ <code>&lt;label for="reason"&gt;Reason for contact&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;select id="reason" name="reason"&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;option&gt;Job opportunity&lt;/option&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;option&gt;Freelance project&lt;/option&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;option&gt;Just saying hi&lt;/option&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/select&gt;</code></div>
+                        <div class="do-line" style="margin-top:6px">→ <code>&lt;label for="msg"&gt;Your message&lt;/label&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;textarea id="msg" name="message" required minlength="10" placeholder="Write your message here..."&gt;&lt;/textarea&gt;</code></div>
+                        <div class="do-line" style="margin-top:6px">→ <code>&lt;button type="submit"&gt;Send message&lt;/button&gt;</code></div>
+                        <div class="do-line">→ <code>&lt;/form&gt;</code></div>
+                    </div>
+                    <p class="explain">Save and refresh. Try clicking Send message with empty fields — the browser shows an error automatically. Try a bad email like "hello" — it asks for an @ symbol.</p>
+                    <div class="you-box">
+                        <div class="you-label">Make it yours</div>
+                        <div class="you-line">Change the &lt;option&gt; values in the dropdown to whatever reasons make sense for you.</div>
+                        <div class="you-line">Change the placeholder text to sound like you — for example: <code>placeholder="Tell me about your project..."</code></div>
+                    </div>
+                    <div class="habit">💡 Good habit — use type="email" not type="text" for email fields. The browser validates the format automatically and on mobile shows the @ key on the keyboard.</div>
+                    <details>
+                        <summary></summary>
+                        <pre>&lt;section id="contact"&gt;
+  &lt;h2&gt;Contact me&lt;/h2&gt;
+  &lt;form&gt;
+    &lt;label for="name"&gt;Your name&lt;/label&gt;
+    &lt;input type="text" id="name" name="name"
+           required minlength="2"
+           placeholder="Your full name"&gt;
+
+    &lt;label for="email"&gt;Your email&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"
+           required placeholder="you@example.com"&gt;
+
+    &lt;label for="reason"&gt;Reason for contact&lt;/label&gt;
+    &lt;select id="reason" name="reason"&gt;
+      &lt;option&gt;Job opportunity&lt;/option&gt;
+      &lt;option&gt;Freelance project&lt;/option&gt;
+      &lt;option&gt;Just saying hi&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;label for="msg"&gt;Your message&lt;/label&gt;
+    &lt;textarea id="msg" name="message"
+              required minlength="10"
+              placeholder="Write your message here..."&gt;&lt;/textarea&gt;
+
+    &lt;button type="submit"&gt;Send message&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</pre>
+                    </details>
+                    <a class="learn" href="/html/forms" target="_blank">Want to learn more? Read our Forms article ›</a>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- end left col -->
+</div><!-- end flex wrapper -->
+
+<script>
+    function wikiPortfolioTog(head) {
+        var body = head.nextElementSibling;
+        var arrow = head.querySelector('.arrow');
+        var open = body.classList.contains('open');
+        body.classList.toggle('open', !open);
+        arrow.style.transform = open ? '' : 'rotate(90deg)';
+    }
+</script>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import hljs from "highlight.js";
 import { renderChallenges } from "@/lib/challengeRenderer";
 
@@ -10,6 +10,36 @@ interface HtmlContentRendererProps {
 
 export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) {
   const ref = useRef<HTMLDivElement>(null);
+
+  // If the HTML is a full document, extract <style> blocks from <head> and
+  // <body> content to avoid invalid nesting (e.g. <body> inside a div) which
+  // causes browser HTML parser quirks and React hydration mismatches.
+  // Also strip <script> tags before SSR; scripts are executed in useEffect.
+  const { strippedHtml, scriptContents } = useMemo(() => {
+    let processed = html;
+
+    // Detect full HTML document
+    if (/<body[\s>]/i.test(html)) {
+      const styles: string[] = [];
+      // Extract <style> blocks from anywhere (typically in <head>)
+      processed = processed.replace(
+        /<style\b[^>]*>([\s\S]*?)<\/style>/gi,
+        (match) => { styles.push(match); return ""; }
+      );
+      // Extract body content
+      const bodyMatch = processed.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      processed = bodyMatch ? bodyMatch[1] : processed;
+      // Re-prepend styles so CSS still applies
+      if (styles.length) processed = styles.join("\n") + processed;
+    }
+
+    const scriptContents: string[] = [];
+    const strippedHtml = processed.replace(
+      /<script\b[^>]*>([\s\S]*?)<\/script>/gi,
+      (_, content) => { scriptContents.push(content); return ""; }
+    );
+    return { strippedHtml, scriptContents };
+  }, [html]);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -31,11 +61,11 @@ export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) 
       }
     });
 
-    // Execute any <script> tags injected via dangerouslySetInnerHTML
-    ref.current.querySelectorAll<HTMLScriptElement>("script").forEach((oldScript) => {
-      const newScript = document.createElement("script");
-      newScript.textContent = oldScript.textContent;
-      oldScript.replaceWith(newScript);
+    // Execute scripts extracted from the HTML content
+    scriptContents.forEach((content) => {
+      const script = document.createElement("script");
+      script.textContent = content;
+      document.head.appendChild(script);
     });
   }, [html]);
 
@@ -43,7 +73,7 @@ export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) 
     <div
       ref={ref}
       className="html-content"
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: strippedHtml }}
       suppressHydrationWarning
     />
   );

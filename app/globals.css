@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/editor.css";
+@import "../styles/project-content.css";
 
 @theme inline {
   --font-sans: var(--font-nunito);
