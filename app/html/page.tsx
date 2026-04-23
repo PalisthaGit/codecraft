@@ -349,6 +349,27 @@ export default function HtmlIndexPage() {
             )
           )}
         </div>
+
+        {/* Cheat sheet link */}
+        <div className="mt-6 pt-6 border-t border-[#e5e7eb]">
+          <Link
+            href="/html/cheat-sheet"
+            className="group flex items-center justify-between bg-[#f0f0ff] rounded-[12px] border-[1.5px] border-[#6367ff]/25 px-5 py-4 hover:border-[#6367ff] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(99,103,255,0.12)] transition-all duration-200"
+          >
+            <div className="flex items-center gap-4">
+              <span className="shrink-0 text-[0.72rem] font-black tracking-[0.06em] text-[#6367ff] w-7">⚡</span>
+              <div>
+                <div className="font-semibold text-[0.93rem] text-[#0f172a] group-hover:text-[#6367ff] transition-colors duration-200">
+                  HTML Cheat Sheet
+                </div>
+                <div className="text-xs text-[#94a3b8] mt-0.5">All 11 elements — one page, try each one live</div>
+              </div>
+            </div>
+            <span className="text-[0.72rem] font-bold tracking-wide uppercase text-[#6367ff] shrink-0">
+              Reference →
+            </span>
+          </Link>
+        </div>
       </section>
 
       {/* ── Section 4: Your Portfolio Page ───────────────────────── */}

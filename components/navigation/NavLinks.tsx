@@ -134,6 +134,20 @@ function GroupedSectionNav({
       >
         {backLabel}
       </Link>
+      {basePath === "/html" && (
+        <div>
+          <SectionHeading title="Reference" />
+          <ul className="space-y-1">
+            <NavItem
+              href="/html/cheat-sheet"
+              label="HTML Cheat Sheet"
+              isActive={pathname === "/html/cheat-sheet"}
+              isCompleted={false}
+              onNavigate={onNavigate}
+            />
+          </ul>
+        </div>
+      )}
       {groups.map((group) => (
         <div key={group.title}>
           <SectionHeading title={group.title} />
