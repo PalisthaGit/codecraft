@@ -40,7 +40,7 @@ export default function ContactPage() {
     setFormState("submitting");
 
     try {
-      const res = await fetch("https://formspree.io/f/xdawzrqb", {
+      const res = await fetch(`https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ name, email, message }),
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Something went wrong. Please try again or email us directly at{" "}
-              <a href="mailto:hello@codecraft.dev" className="font-semibold underline ml-1">hello@codecraft.dev</a>.
+              <a href="mailto:codingbanana123@gmail.com" className="font-semibold underline ml-1">codingbanana123@gmail.com</a>.
             </div>
           )}
 
