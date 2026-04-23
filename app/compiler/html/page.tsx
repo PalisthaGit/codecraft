@@ -189,7 +189,15 @@ function highlightJS(code: string, dark: boolean) {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function HtmlEditorPage() {
-  const [htmlCode, setHtmlCode]   = useState(DEFAULT_HTML);
+  const [htmlCode, setHtmlCode]   = useState(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash.length > 1) {
+        try { return atob(hash.slice(1)); } catch {}
+      }
+    }
+    return DEFAULT_HTML;
+  });
   const [cssCode, setCssCode]     = useState(DEFAULT_CSS);
   const [jsCode, setJsCode]       = useState(DEFAULT_JS);
   const [langTab, setLangTab]     = useState<"html" | "css" | "js">("html");
