@@ -1,0 +1,274 @@
+<div class="definition">
+  Visibility is the third way to hide things in CSS. <code>visibility: hidden</code> makes an element invisible while
+  keeping its space in the layout — unlike <code>display: none</code> which removes it entirely, and
+  <code>opacity: 0</code> which hides it but still allows interaction.
+</div>
+
+<p>You already know two ways to hide something in CSS.</p>
+
+<p><code>display: none</code> removes it completely. The element is gone from the layout. Nothing. No space. Other
+  elements move to fill the gap.</p>
+
+<p><code>opacity: 0</code> makes it invisible but keeps the space. The layout is unchanged. And — crucially — the
+  element is still technically there. You can still click it.</p>
+
+<p>Visibility is the third option. And it sits right between the other two in terms of behavior.</p>
+
+<h2>How Visibility Works</h2>
+
+<pre><code class="language-css">.element {
+  visibility: visible; /* shown — this is the default */
+}
+
+.element {
+  visibility: hidden; /* invisible but space is kept */
+}</code></pre>
+
+<p>When you set <code>visibility: hidden</code> the element disappears visually but its space in the layout is
+  completely preserved. Everything around it stays exactly where it is.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card hidden">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card.hidden {
+    visibility: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The second card is completely invisible. But the gap where it sits is still there. The first and third cards have
+  not moved at all.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>visibility: hidden</code> — the card is invisible. You cannot see it, you cannot click it, screen readers
+  ignore it. But its 160px width and 100px height are still sitting there in the layout holding space.</p>
+
+<h2>The Three Ways to Hide Things — Side by Side</h2>
+
+<p>This is the comparison that makes everything clear.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="row">
+      <div class="box">One</div>
+      <div class="box display-none">Two</div>
+      <div class="box">Three</div>
+    </div>
+
+    <div class="row">
+      <div class="box">One</div>
+      <div class="box visibility-hidden">Two</div>
+      <div class="box">Three</div>
+    </div>
+
+    <div class="row">
+      <div class="box">One</div>
+      <div class="box opacity-zero">Two</div>
+      <div class="box">Three</div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: #141414;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    }
+
+    .row {
+    display: flex;
+    gap: 12px;
+    background-color: #1a1a1a;
+    padding: 16px;
+    border-radius: 8px;
+    }
+
+    .box {
+    width: 100px;
+    height: 60px;
+    background-color: #E50914;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    }
+
+    .display-none {
+    display: none;
+    }
+
+    .visibility-hidden {
+    visibility: hidden;
+    }
+
+    .opacity-zero {
+    opacity: 0;
+    }
+  </template>
+</section>
+
+<p>Look at the three rows carefully.</p>
+
+<p><strong>Row 1 — display: none</strong> — the Two box is completely gone. One and Three sit right next to each
+  other. No gap. The box does not exist in the layout at all.</p>
+
+<p><strong>Row 2 — visibility: hidden</strong> — the Two box is invisible but the gap is there. One and Three are
+  separated by empty space where Two used to be. The layout is unchanged.</p>
+
+<p><strong>Row 3 — opacity: 0</strong> — exactly the same as visibility: hidden visually. The Two box is invisible but
+  the space is kept. One and Three are separated.</p>
+
+<p>Here is what is happening in each case.</p>
+
+<p><code>display: none</code> — removes the element from the layout entirely. It takes up zero space. Other elements
+  move to fill the gap.</p>
+
+<p><code>visibility: hidden</code> — hides the element visually but keeps it in the layout. Space is reserved. Nothing
+  moves.</p>
+
+<p><code>opacity: 0</code> — makes the element fully transparent. Space is kept. Nothing moves. But unlike
+  <code>visibility: hidden</code> the element is still technically there — you can still click it and interact with it
+  even though you cannot see it.</p>
+
+<h2>When to Use Each One</h2>
+
+<p>Here is the honest guide for which to reach for.</p>
+
+<p><code>display: none</code> — when you want to completely remove something from the page. Menus that close, modals
+  that dismiss, elements that toggle on and off. This is the most common one.</p>
+
+<p><code>visibility: hidden</code> — when you want to hide something but keep its space. Like hiding a card in a grid
+  while keeping the grid structure intact. Or temporarily hiding a column in a table without collapsing the table
+  layout.</p>
+
+<p><code>opacity: 0</code> — almost always paired with a transition for fade animations. You fade something from
+  opacity 1 to opacity 0 smoothly. Then use <code>display: none</code> after the animation finishes if you want to
+  remove it from layout too.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The most powerful pattern is combining opacity and visibility together for smooth hide and show animations. Set
+    <code>opacity: 0</code> and <code>visibility: hidden</code> on the hidden state. Set <code>opacity: 1</code> and
+    <code>visibility: visible</code> on the shown state. Add <code>transition: opacity 0.3s, visibility 0.3s</code>.
+    This gives you a smooth fade while also making the element truly non-interactive when hidden — unlike
+    <code>opacity: 0</code> alone where invisible elements are still clickable.</p>
+</div>
+
+<pre><code class="language-css">.tooltip {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.tooltip.show {
+  opacity: 1;
+  visibility: visible;
+}</code></pre>
+
+<div class="challenge"
+  data-title="Hide a card without collapsing the layout"
+  data-description="Make the second movie card invisible while keeping its space in the layout. The first and third cards must not move."
+  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;movie-card hidden&quot;&gt;
+    &lt;img src=&quot;/images/movie2.png&quot; alt=&quot;Movie 2&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie3.png&quot; alt=&quot;Movie 3&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}"
+  data-css-checks=".movie-card.hidden|visibility|hidden"
+  data-lang="css"
+  data-solution=".movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.movie-card.hidden {
+  visibility: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up — CSS Normalize. You have been using a reset throughout this course. Normalize is a different philosophy
+    that fixes browser inconsistencies while keeping useful defaults. Let us look at both side by side.</p>
+  <a href="/css/normalize">Learn about CSS Normalize →</a>
+</div>

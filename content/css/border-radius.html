@@ -1,0 +1,324 @@
+<div class="definition">
+  The border-radius property controls how rounded the corners of an element are. The higher the value the more rounded
+  the corners become — from slightly softened edges all the way to perfect circles.
+</div>
+
+<pre><code>button {
+  border-radius: 4px;
+}
+
+.avatar {
+  border-radius: 50%;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever noticed that almost no modern website uses perfectly sharp square corners anymore? Buttons are slightly
+  rounded. Cards have soft edges. Profile pictures are perfect circles. Search bars are fully pill shaped.</p>
+
+<p>That softness is not accidental. Rounded corners feel friendlier, more modern, and more approachable than sharp
+  edges. And it is all done with one single CSS property — border-radius.</p>
+
+<h2>What is Border Radius</h2>
+
+<p>Border radius controls how rounded the corners of an element are. The higher the value the more rounded the corners
+  become.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    }
+  </template>
+</section>
+
+<p>The button now has slightly rounded corners. Subtle but immediately softer than a sharp edged button.</p>
+
+<p>Try increasing that value and watch what happens.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 24px;
+    }
+  </template>
+</section>
+
+<p>Now the button is fully pill shaped. The corners are so rounded they curve into each other creating that smooth oval
+  look you see on a lot of modern buttons.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>There is no single right amount of border radius. It depends on your design. A value of 4px to 8px feels
+    professional and modern. Around 12px to 16px feels friendly and approachable. Full pill shape feels playful and
+    bold. Match the border radius to the personality of what you are building.</p>
+</div>
+
+<h2>Border Radius on Individual Corners</h2>
+
+<p>Just like padding and margin you can control each corner separately. The order goes top left, top right, bottom
+  right, bottom left — clockwise starting from the top left.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+    }
+  </template>
+</section>
+
+<p>The top two corners are rounded and the bottom two are sharp. This is exactly the pattern used for modal windows and
+  bottom sheets on mobile apps — rounded at the top, flat at the bottom where it meets the screen edge.</p>
+
+<p>You can also use the individual properties.</p>
+
+<pre><code>.card {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}</code></pre>
+
+<p>Same result, more explicit. Use whichever feels cleaner to you.</p>
+
+<h2>Creating a Perfect Circle</h2>
+
+<p>Here is one of the most used tricks in CSS. If you have an element that is the same width and height — a perfect
+  square — and you set border-radius to 50% it becomes a perfect circle.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="avatar"></div>
+  </template>
+  <template class="try-default-css">
+    .avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #E50914;
+    border-radius: 50%;
+    }
+  </template>
+</section>
+
+<p>A perfect red circle. This is exactly how profile pictures, avatars, and circular icons are made on every website
+  and app you have ever used.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When using <code>border-radius: 50%</code> to create a circle the element must have equal width and height. If the
+    width and height are different you will get an oval instead of a circle. Always double check both dimensions are the
+    same.</p>
+</div>
+
+<h2>Border Radius on Images</h2>
+
+<p>Border radius works on images too. This is how you get those rounded profile photos.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Scarlett_Johansson-8588.jpg/800px-Scarlett_Johansson-8588.jpg" alt="Profile photo">
+  </template>
+  <template class="try-default-css">
+    img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The image is now a perfect circle. That <code>object-fit: cover</code> makes sure the image fills the circular
+  space without stretching — we will cover object-fit in detail in its own lesson.</p>
+
+<h2>Using Percentage vs px</h2>
+
+<p>You can set border-radius using either px or percentage.</p>
+
+<p><code>px</code> gives you a fixed amount of rounding. <code>border-radius: 8px</code> always rounds by exactly 8
+  pixels no matter how big or small the element is.</p>
+
+<p><code>%</code> gives you rounding relative to the element size. <code>border-radius: 50%</code> always creates a
+  perfect circle or oval shape relative to the element dimensions.</p>
+
+<p>For buttons and cards use px. For circles and avatars use 50%.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A value of <code>border-radius: 999px</code> is a trick a lot of developers use instead of 50% for pill shaped
+    buttons. It works because 999px is always larger than any reasonable button height so the browser just rounds the
+    corners as much as possible giving you a perfect pill shape without needing to know the exact dimensions.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us round some corners on our Netflix clone. The buttons and the input field will feel much more modern with a
+  little border radius.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin: 60px 0 16px 0;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 4px;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 0;
+    border-radius: 4px;
+    }
+
+    input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    }
+  </template>
+</section>
+
+<p>Everything has a consistent 4px border radius now. The buttons feel modern and clickable. The input field matches.
+  It is a small detail but it makes the whole thing feel more cohesive and designed.</p>
+
+<div class="challenge" data-title="Round the button and make a circle"
+  data-description="Give the button a border radius of 4px. Make the avatar div a perfect circle — it is already 80px by 80px."
+  data-starter-html="&lt;button&gt;Get Started&lt;/button&gt;
+&lt;div class=&quot;avatar&quot;&gt;&lt;/div&gt;"
+  data-starter-css="button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+  border: none;
+
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #E50914;
+
+}"
+  data-css-checks="button|border-radius|4px,.avatar|border-radius|50%"
+  data-lang="css"
+  data-solution="button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #E50914;
+  border-radius: 50%;
+}">
+</div>
+
+<a class="also-read" href="/css/outline">
+  <div>
+    <div class="also-read-label">Also Read</div>
+    <div class="also-read-title">CSS Outline — Focus Rings, Accessibility, and the Box-Shadow Trick</div>
+  </div>
+  <span class="also-read-icon">→</span>
+</a>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you box shadow — how to add depth and dimension to your elements and make
+    cards, buttons and sections feel like they are lifted off the page. Come on in.</p>
+  <a href="/css/box-shadow">Learn about Box Shadow →</a>
+</div>

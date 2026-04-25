@@ -1,0 +1,624 @@
+<div class="definition">
+  Z-index controls which layer an element sits on when elements overlap. Higher number means closer to you. Lower number
+  means further away. It only works on elements that have a <code>position</code> value set.
+</div>
+
+<pre><code>.navbar {
+  position: fixed;
+  z-index: 9999;
+}
+
+.badge {
+  position: absolute;
+  z-index: 10;
+}
+
+.movie-card {
+  position: relative;
+  z-index: 1;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever had two elements overlapping on your page and the wrong one was showing on top? You had a dropdown menu
+  appearing behind a card. Or a badge getting hidden underneath an image. Or a modal popping up but sitting behind the
+  navbar.</p>
+
+<p>That is a z-index problem. And once you understand how it works you will be able to fix these situations instantly
+  instead of scratching your head wondering why things are stacking the wrong way.</p>
+
+<h2>What is Z-index</h2>
+
+<p>Think of your webpage as a stack of layers. Every element sits on one of these layers. Elements on higher layers
+  appear on top of elements on lower layers.</p>
+
+<p>Z-index controls which layer an element sits on. Higher number means closer to you. Lower number means further away.</p>
+
+<p>Think of it like a stack of cards on a table. If you put card number 3 on top of card number 1 you see card number
+  3. Z-index works exactly the same way.</p>
+
+<h2>How to Use Z-index</h2>
+
+<p>Z-index only works on elements that have a position set. So the element needs
+  <code>position: relative</code>, <code>absolute</code>, <code>fixed</code>, or <code>sticky</code> before z-index
+  does anything.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <div class="movie-card card-one">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card card-two">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-section {
+    position: relative;
+    background-color: #f0f0f0;
+    padding: 16px;
+    height: 150px;
+    }
+
+    .movie-card {
+    position: absolute;
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .card-one {
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    }
+
+    .card-two {
+    top: 30px;
+    left: 80px;
+    z-index: 2;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The second card sits on top of the first where they overlap because it has a higher z-index.</p>
+
+<p>Here is what is happening.</p>
+
+<p>Both cards have <code>position: absolute</code> — this is required. Z-index does nothing without a position value
+  set.</p>
+
+<p><code>card-one</code> has <code>z-index: 1</code> — it sits on layer one.</p>
+
+<p><code>card-two</code> has <code>z-index: 2</code> — it sits on layer two which is above layer one, so it appears on
+  top where the cards overlap.</p>
+
+<p>Now try swapping the z-index values. Give <code>card-one</code> z-index: 2 and <code>card-two</code> z-index: 1.
+  The first card jumps on top. That is z-index in action.</p>
+
+<h2>Z-index With Negative Values</h2>
+
+<p>You can also use negative z-index values to push an element behind everything else.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <div class="movie-card card-behind">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card card-front">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-section {
+    position: relative;
+    background-color: #f0f0f0;
+    padding: 16px;
+    height: 150px;
+    }
+
+    .movie-card {
+    position: absolute;
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .card-behind {
+    top: 16px;
+    left: 16px;
+    z-index: -1;
+    }
+
+    .card-front {
+    top: 30px;
+    left: 80px;
+    z-index: 1;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The first card is now pushed behind the container itself because of <code>z-index: -1</code>. You will rarely use
+  negative values but it is useful when you need something to sit behind a background element.</p>
+
+<h2>The Stacking Context</h2>
+
+<p>Here is the part that trips up almost everyone — including experienced developers. Z-index does not always work
+  globally across the whole page. It works within something called a <strong>stacking context</strong>.</p>
+
+<p>A stacking context is like a group. Elements inside a group compete with each other for z-index order. But the whole
+  group competes as one unit with elements outside it.</p>
+
+<p>A new stacking context is created when an element has a position value and a z-index that is not auto. Or when it
+  has certain other properties like opacity less than 1, transform, or filter.</p>
+
+<p>Let me show you why this matters.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="group-one">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+        <span class="badge">z-index 999</span>
+      </div>
+    </div>
+
+    <div class="group-two">
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .group-one {
+    position: relative;
+    z-index: 1;
+    background-color: #f0f0f0;
+    padding: 16px;
+    margin-bottom: 8px;
+    }
+
+    .group-two {
+    position: relative;
+    z-index: 2;
+    background-color: #e0e0e0;
+    padding: 16px;
+    margin-top: -60px;
+    }
+
+    .movie-card {
+    position: relative;
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #E50914;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 999;
+    }
+  </template>
+</section>
+
+<p>Even though the badge has <code>z-index: 999</code> it still gets hidden behind group-two. That is because the badge
+  lives inside <code>group-one</code> which has <code>z-index: 1</code>. The whole group competes as one unit.
+  Group-two has <code>z-index: 2</code> so it wins and covers everything inside group-one — no matter what z-index
+  values the children have.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>group-one</code> has <code>z-index: 1</code> — the whole group including everything inside sits on layer 1.</p>
+
+<p><code>group-two</code> has <code>z-index: 2</code> — the whole group sits on layer 2, which is above layer 1.</p>
+
+<p>The badge has <code>z-index: 999</code> — but it is trapped inside group-one which is on layer 1. It can be on top
+  of other things inside group-one, but it cannot break out of layer 1 to compete with group-two.</p>
+
+<p>This is confusing at first, but once it clicks it explains a lot of z-index mysteries you will encounter in real
+  projects.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>If z-index is not working the way you expect, the first thing to check is whether a parent element is creating a
+    stacking context. Look up the parent chain for any element with position plus z-index, opacity, transform, or
+    filter. One of those is almost always the culprit. Removing or adjusting it usually fixes the problem immediately.
+  </p>
+</div>
+
+<h2>Real World Z-index Values</h2>
+
+<p>In real projects z-index values tend to follow a pattern. Developers usually pick numbers with gaps between them so
+  they can insert new layers later without renumbering everything.</p>
+
+<p>A common pattern looks like this:</p>
+
+<pre><code>/* Base content */
+.movie-card { z-index: 1; }
+
+/* Badges and labels on cards */
+.badge { z-index: 10; }
+
+/* Dropdown menus */
+.dropdown { z-index: 100; }
+
+/* Modals and overlays */
+.modal { z-index: 1000; }
+
+/* Navbar — always on top */
+.navbar { z-index: 9999; }</code></pre>
+
+<p>Using big gaps like this means if you ever need to add something between the navbar and the modal you can use
+  <code>z-index: 5000</code> without touching anything else.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Never use <code>z-index: 9999999</code> or crazy high numbers. It is a sign that z-index is being used as a
+    band-aid instead of being understood. If you find yourself needing absurdly high z-index values, step back and look
+    at your stacking contexts. The real fix is almost always restructuring the HTML or adjusting which parent creates a
+    stacking context.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Our Netflix clone already uses z-index in a few places. Let us make sure everything is layered correctly — the
+  navbar on top of everything, the badges on top of the movie cards, and the hero background behind the content.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <div class="navbar">
+        <h1 id="logo">Netflix</h1>
+        <button class="signin">Sign In</button>
+      </div>
+
+      <div class="hero">
+        <h1>Unlimited movies, TV shows, and more.</h1>
+        <p>Starts at USD 2.99. Cancel anytime.</p>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <form>
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+
+      <div class="movie-section">
+        <h2>Trending Now</h2>
+        <div class="movie-row">
+          <div class="movie-card">
+            <img src="/images/movie1.png" alt="Movie 1">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie2.png" alt="Movie 2">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie3.png" alt="Movie 3">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Movie 4">
+          </div>
+        </div>
+      </div>
+
+      <div class="movie-section">
+        <h2>Top Picks</h2>
+        <div class="movie-grid">
+          <div class="movie-card featured">
+            <img src="/images/movie1.png" alt="Movie 1">
+            <span class="badge">New</span>
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie2.png" alt="Movie 2">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie3.png" alt="Movie 3">
+            <span class="badge">Hot</span>
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Movie 4">
+          </div>
+        </div>
+      </div>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-color: #141414;
+    color: white;
+    }
+
+    /* Navbar — highest z-index, always on top */
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    z-index: 9999;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 120px 40px 80px;
+    text-align: center;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    max-width: 600px;
+    }
+
+    .hero form {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    }
+
+    .hero input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    width: 300px;
+    }
+
+    .hero button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+    cursor: pointer;
+    }
+
+    /* Movie Sections */
+    .movie-section {
+    padding: 40px;
+    background-color: #141414;
+    }
+
+    .movie-section h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    color: white;
+    }
+
+    /* Trending Row */
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    }
+
+    /* Top Picks Grid */
+    .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    }
+
+    /* Movie Cards */
+    .movie-card {
+    position: relative;
+    z-index: 1;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    }
+
+    .movie-card.featured {
+    grid-column: span 2;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    /* Badge — sits on top of the card image */
+    .badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+    background-color: #E50914;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    }
+  </template>
+</section>
+
+<p>Here is what is happening with the z-index layers in the full clone.</p>
+
+<p>The navbar has <code>z-index: 9999</code> — it sits at the very top of everything. No matter how many sections or
+  overlapping elements are on the page the navbar will always be visible above them all as you scroll.</p>
+
+<p>The hero has <code>z-index: 1</code> — it sits above the base page background but below the navbar. The background
+  image and gradient are part of this layer.</p>
+
+<p>Each movie card has <code>z-index: 1</code> — the cards sit in their normal stacking order within the movie
+  sections.</p>
+
+<p>Each badge has <code>z-index: 10</code> — the badges sit on top of their parent cards. Because they are positioned
+  inside the card which has <code>position: relative</code>, they measure from the card edges. The
+  <code>z-index: 10</code> makes sure they always appear above the card image.</p>
+
+<p>Everything is layered intentionally now. The page has clear depth and nothing is accidentally hidden behind
+  something else.</p>
+
+<div class="challenge" data-title="Make the badge sit on top of the card"
+  data-description="Give the movie card position: relative and z-index: 1. Give the badge position: absolute and z-index: 10 so it sits on top of the image."
+  data-starter-html="&lt;div class=&quot;movie-card&quot;&gt;
+  &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+  &lt;span class=&quot;badge&quot;&gt;New&lt;/span&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  top: 8px;
+  left: 8px;
+  background-color: #E50914;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}"
+  data-css-checks=".movie-card|position|relative;.movie-card|z-index|1;.badge|position|absolute;.badge|z-index|10"
+  data-lang="css"
+  data-solution=".movie-card {
+  position: relative;
+  z-index: 1;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  left: 8px;
+  background-color: #E50914;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you opacity — how to make elements transparent, fade things in and out, and
+    create subtle layering effects that make your page feel more polished. Come on in.</p>
+  <a href="/css/opacity">Learn about CSS Opacity →</a>
+</div>

@@ -1,0 +1,211 @@
+<p>Before we write a single line of CSS I want to make sure you have everything set up properly on your device.</p>
+
+<p>I know setup lessons can feel a little boring. You just want to get to the good stuff. I get that. But trust me — five minutes here will save you so much frustration later. So let us get through this together and then we will start building something real.</p>
+
+<h2>What You Will Need</h2>
+
+<p>You only need two things to write CSS.</p>
+
+<ul>
+  <li>A code editor — a place to write your code</li>
+  <li>A browser — to see what your code actually looks like</li>
+</ul>
+
+<p>That is it. No special software. No paid tools. Nothing complicated.</p>
+
+<h2>Step 1 — Install VS Code</h2>
+
+<p>The code editor I recommend is VS Code. It stands for Visual Studio Code and it is completely free.</p>
+
+<p>Here is why I like it for beginners.</p>
+
+<ul>
+  <li>It colors your code so it is easier to read</li>
+  <li>It finishes your code for you as you type</li>
+  <li>It catches small mistakes before they become big problems</li>
+  <li>And it has a feature called Live Server that refreshes your browser automatically every time you save — so you do not have to keep switching back and forth</li>
+</ul>
+
+<p>To install it go to code.visualstudio.com and click the big Download button. It will automatically pick the right version for your computer — Windows, Mac, or Linux. Once it downloads just open the file and keep clicking Next until it installs.</p>
+
+<p>When it is done open VS Code. You will see a clean empty workspace waiting for you.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — VS Code homepage with download button highlighted]
+</figure>
+
+<h2>Step 2 — Create Your Project Folder</h2>
+
+<p>Now let us create a home for everything we are going to build.</p>
+
+<p>Go to your desktop. Right click and choose New then Folder. Name it <code>netflix-clone</code>.</p>
+
+<p>This folder is where everything lives — your HTML file, your CSS file, and any images we add later. Keeping it all in one place matters more than it sounds. You will thank yourself later.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — desktop with new folder being created named netflix-clone]
+</figure>
+
+<h2>Step 3 — Open the Folder in VS Code</h2>
+
+<p>Now open VS Code and bring your project folder into it.</p>
+
+<p>You can do this two ways.</p>
+
+<p>The first way — find your <code>netflix-clone</code> folder, right click on it and choose Open with VS Code.</p>
+
+<p>The second way — open VS Code first, click File at the top, then Open Folder, find your <code>netflix-clone</code> folder and click Open.</p>
+
+<p>Either way works. Once you do it you will see your folder name appear on the left sidebar of VS Code. That is your project space. That is where everything happens.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — VS Code with netflix-clone folder open in the left sidebar]
+</figure>
+
+<h2>Step 4 — Create Your HTML File</h2>
+
+<p>Click the New File icon in the sidebar. It looks like a piece of paper with a small plus sign on it. Name it <code>index.html</code> and press Enter.</p>
+
+<p>Now paste this inside it.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Netflix Clone&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Save it by pressing <code>Ctrl + S</code> on Windows or <code>Cmd + S</code> on Mac.</p>
+
+<p>This is the starting point of your Netflix clone. Right now it is just a heading that says Netflix on a white background. That is fine. Everything starts somewhere.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — VS Code with index.html open showing the code above]
+</figure>
+
+<h2>Step 5 — Install Live Server</h2>
+
+<p>This step is going to make your life so much easier.</p>
+
+<p>Right now every time you change something in your code you would have to save it, go to your browser, find the file, and refresh the page manually. That gets old very fast.</p>
+
+<p>Live Server fixes that. Every time you save your file the browser updates automatically. No refreshing, no switching back and forth.</p>
+
+<p>Here is how to install it.</p>
+
+<p>Look at the left sidebar in VS Code. You will see an icon that looks like four small squares. Click it. That is the Extensions panel.</p>
+
+<p>In the search bar type <code>Live Server</code>. You will see one by Ritwick Dey. Click Install.</p>
+
+<p>Once it installs look at the very bottom right corner of VS Code. You will see a button that says <strong>Go Live</strong>. Click it.</p>
+
+<p>Your browser will open automatically and show your <code>index.html</code> page. From now on every time you save your file the page updates on its own.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — VS Code bottom bar with Go Live button highlighted]
+</figure>
+
+<h2>Step 6 — Create Your CSS File</h2>
+
+<p>Now let us create the file where all our CSS will live.</p>
+
+<p>In VS Code click that same New File icon again. This time name it <code>style.css</code> and press Enter.</p>
+
+<p>Leave it empty for now. We will fill it in the next lesson.</p>
+
+<p>The last thing we need to do is connect the CSS file to the HTML file so they talk to each other. Open your <code>index.html</code> file and add this line inside the head section right below the title.</p>
+
+<pre><code class="language-html">&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+<p>Your full HTML should now look like this.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Netflix Clone&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>Save the file. Your setup is now complete.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE PLACEHOLDER — VS Code showing both index.html and style.css files in the sidebar]
+</figure>
+
+<h2>Try It Yourself</h2>
+
+<p>Open your <code>style.css</code> file and type this inside it. Save it and look at your browser — the Netflix heading should turn red.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to open the editor and see it live.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+  </template>
+  <template class="try-default-css">
+h1 {
+  color: red;
+}
+  </template>
+</section>
+
+<p>That is your first line of CSS working on a real page. It does not look like much yet but you just made something happen. That is the foundation everything else is built on.</p>
+
+<h2>Quick Check</h2>
+
+<p>Before moving on make sure you have all of this in place.</p>
+
+<ul>
+  <li>A folder called <code>netflix-clone</code> on your desktop</li>
+  <li>An <code>index.html</code> file inside it with the code above</li>
+  <li>A <code>style.css</code> file inside it linked to your HTML</li>
+  <li>Live Server installed and running</li>
+  <li>The word Netflix showing up red in your browser</li>
+</ul>
+
+<p>If all of that is working you are ready. If something is not showing up right just go back through the steps slowly. It is almost always a small typo or a missing file.</p>
+
+<h2>Practice</h2>
+
+<p>Change the color of the Netflix heading to blue. Then try a few more — green, orange, purple. Just replace the color value with any color name and see what happens.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Click <strong>Try It Yourself</strong> to experiment. Change the color value to anything you like and watch the heading update instantly.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+  </template>
+  <template class="try-default-css">
+h1 {
+  color: blue;
+}
+  </template>
+</section>
+
+<p>The goal right now is not to make it look good. The goal is to feel that feedback loop — write, save, see the change. That is how everything in this course is going to work.</p>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you the different ways you can add CSS to a page and which one we will use for the rest of this course. Come on in.</p>
+  <a href="/css/adding-css">Learn how to add CSS →</a>
+</div>

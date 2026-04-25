@@ -1,0 +1,357 @@
+<div class="definition">
+  The border property adds a line around the outside of an element. It sits between the padding and the margin and gives
+  you control over the width, style, and color of that line.
+</div>
+
+<pre><code>button {
+  border: 2px solid white;
+}
+
+input {
+  border: 2px solid #cccccc;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever seen a card on a website with a clean thin line around it? Or an input field with a subtle border that
+  turns a different color when you click it? Or a section with a bold line on the left side making it stand out?</p>
+
+<p>All of that is border. It is one of those properties that seems simple on the surface but gives you a surprising
+  amount of creative control once you know how to use it.</p>
+
+<h2>What is a Border</h2>
+
+<p>A border is a line that goes around the outside of an element. It sits between the padding and the margin.</p>
+
+<p>In CSS you set a border using three things together — the width, the style, and the color.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: 2px solid white;
+    }
+  </template>
+</section>
+
+<p>The button now has a 2px solid white border around it.</p>
+
+<p>Let us break that down.</p>
+
+<ul>
+  <li><code>2px</code> — how thick the border is</li>
+  <li><code>solid</code> — the style of the line</li>
+  <li><code>white</code> — the color of the border</li>
+</ul>
+
+<p>All three values go together in one line separated by spaces. This is the shorthand and it is what you will use
+  almost every time.</p>
+
+<h2>Border Styles</h2>
+
+<p>The style is what controls what the line actually looks like. There are several options.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="solid">solid border</p>
+    <p class="dashed">dashed border</p>
+    <p class="dotted">dotted border</p>
+    <p class="double">double border</p>
+  </template>
+  <template class="try-default-css">
+    .solid {
+    border: 2px solid black;
+    padding: 8px;
+    }
+
+    .dashed {
+    border: 2px dashed black;
+    padding: 8px;
+    }
+
+    .dotted {
+    border: 2px dotted black;
+    padding: 8px;
+    }
+
+    .double {
+    border: 4px double black;
+    padding: 8px;
+    }
+  </template>
+</section>
+
+<p>Four different styles, four very different looks. In real projects you will use <code>solid</code> almost
+  exclusively. Dashed and dotted occasionally for things like dividers or upload zones. Double almost never.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>If you write a border without a style it will not show up at all. The style is required.
+    <code>border: 2px white</code> will not work. You need <code>border: 2px solid white</code>. The style is the one
+    value beginners most often forget.</p>
+</div>
+
+<h2>Border on Individual Sides</h2>
+
+<p>You can put a border on just one side of an element instead of all four. This is really useful for creating subtle
+  dividers or left-side accent lines.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="top">Border on top only</p>
+    <p class="left">Border on left only</p>
+    <p class="bottom">Border on bottom only</p>
+  </template>
+  <template class="try-default-css">
+    .top {
+    border-top: 2px solid black;
+    padding: 8px;
+    }
+
+    .left {
+    border-left: 4px solid #E50914;
+    padding: 8px;
+    }
+
+    .bottom {
+    border-bottom: 1px solid #cccccc;
+    padding: 8px;
+    }
+  </template>
+</section>
+
+<p>That left border on the second paragraph is a pattern you will see everywhere in modern design. A thick colored line
+  on the left side of a block of text creates a clean visual accent that draws the eye without being heavy handed.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A single <code>border-bottom</code> on a navigation bar is one of the most common design patterns in web
+    development. It creates a clean separator between the nav and the content below without feeling heavy. Try
+    <code>border-bottom: 1px solid rgba(255,255,255,0.1)</code> on a dark navbar for a subtle professional look.</p>
+</div>
+
+<h2>Border Color</h2>
+
+<p>You can set the border color separately if you want to change just the color without touching the other values.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <input type="email" placeholder="Email address">
+  </template>
+  <template class="try-default-css">
+    input {
+    border: 2px solid #cccccc;
+    border-color: #E50914;
+    padding: 12px 16px;
+    font-size: 1rem;
+    }
+  </template>
+</section>
+
+<p>First we set the full border then we override just the color. You will use this pattern when you want to change the
+  border color on hover or focus — which we will cover in the pseudo-classes lesson.</p>
+
+<h2>Removing a Border</h2>
+
+<p>Sometimes you want to remove a border completely. The most common case is removing the default border that browsers
+  put on input fields and buttons.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+    <input type="email" placeholder="Email address">
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 32px;
+    border: none;
+    }
+
+    input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: none;
+    }
+  </template>
+</section>
+
+<p>Clean. No border at all. You will use <code>border: none</code> constantly on buttons and inputs when you want to
+  style them from scratch without fighting the browser defaults.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Browsers add default borders to input fields and buttons. One of the first things most developers do when styling
+    a form is write <code>border: none</code> on the inputs and buttons to strip those defaults away and start fresh.
+    Then they add back exactly the border they want.</p>
+</div>
+
+<h2>Border Width</h2>
+
+<p>You can also set the border width separately using <code>border-width</code>. It works exactly like padding and
+  margin — one value for all sides or up to four values for each side individually.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    border-style: solid;
+    border-color: #333;
+    border-width: 1px 1px 4px 1px;
+    padding: 24px;
+    }
+  </template>
+</section>
+
+<p>Thin border on three sides and a thick border on the bottom. That asymmetry creates a subtle but interesting visual
+  effect.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add some borders to our Netflix clone. The input field needs a border and we should style the Sign In button
+  differently from the Get Started button — one filled and one outlined.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin: 60px 0 16px 0;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    margin-top: 24px;
+    border: none;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 0;
+    }
+
+    input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    }
+  </template>
+</section>
+
+<p>The Get Started button is solid red with no border. The Sign In button is transparent with a white outline border —
+  a classic ghost button style used everywhere in modern design. The input field has a clean subtle border. Everything
+  feels intentional and designed.</p>
+
+<div class="challenge" data-title="Style a primary and ghost button"
+  data-description="Make the primary button solid red with no border. Make the ghost button transparent with a white border."
+  data-starter-html="&lt;button class=&quot;primary&quot;&gt;Get Started&lt;/button&gt;
+&lt;button class=&quot;ghost&quot;&gt;Sign In&lt;/button&gt;"
+  data-starter-css=".primary {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+
+}
+
+.ghost {
+  padding: 12px 32px;
+
+}"
+  data-css-checks=".primary|border|none,.ghost|border|2px solid white"
+  data-lang="css"
+  data-solution=".primary {
+  background-color: #E50914;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+}
+
+.ghost {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 32px;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you border radius — how to round the corners of any element and create
+    everything from slightly softened buttons to perfect circles. Come on in.</p>
+  <a href="/css/border-radius">Learn about Border Radius →</a>
+</div>

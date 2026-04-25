@@ -1,0 +1,342 @@
+<div class="definition">
+  The box-shadow property adds a shadow behind an element. It gives cards, buttons, and sections depth and dimension —
+  making them feel like they are lifted off the page.
+</div>
+
+<pre><code>button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever noticed that cards on modern websites seem to float slightly above the background? That buttons feel
+  like they have a little bit of weight to them? That certain sections feel closer to you than others?</p>
+
+<p>That feeling of depth is not magic. It is box shadow. And once you understand it, you will see it everywhere.</p>
+
+<h2>What is Box Shadow</h2>
+
+<p>Box shadow adds a shadow behind an element. It works just like a real shadow — a light source above your element
+  casts a shadow below it, giving the element the illusion of being lifted off the page.</p>
+
+<p>Here is the basic syntax.</p>
+
+<pre><code>box-shadow: offset-x offset-y blur color;</code></pre>
+
+<p><strong>offset-x</strong> — how far the shadow moves left or right. Positive values push it right, negative values
+  push it left.</p>
+<p><strong>offset-y</strong> — how far the shadow moves up or down. Positive values push it down, negative values push
+  it up.</p>
+<p><strong>blur</strong> — how soft or sharp the shadow is. 0 is a hard shadow. Higher values make it softer and more
+  spread out.</p>
+<p><strong>color</strong> — the color of the shadow. Usually a dark semi-transparent RGBA value.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  </template>
+</section>
+
+<p>The card now appears to float slightly above the background. That single line of CSS creates the illusion of depth.</p>
+
+<h2>Adjusting the Blur</h2>
+
+<p>The blur value is what makes the biggest difference to how a shadow feels. A low blur creates a sharp, dramatic
+  shadow. A high blur creates a soft, subtle glow.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Sharp shadow</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    }
+  </template>
+</section>
+
+<p>Sharp and defined. Now try a higher blur.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Soft shadow</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+    }
+  </template>
+</section>
+
+<p>Softer and more spread out. This is the style used on most modern cards — a large blur with a low opacity gives a
+  gentle, realistic shadow.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>For most card shadows, aim for a blur between 12px and 32px with an RGBA opacity between 0.08 and 0.2. Shadows
+    that are too dark or too sharp feel dated. Subtle is almost always better.</p>
+</div>
+
+<h2>The Spread Value</h2>
+
+<p>There is an optional fourth value before the color — the spread. It controls how large the shadow grows beyond the
+  element itself. Positive spread makes the shadow bigger. Negative spread shrinks it.</p>
+
+<pre><code>box-shadow: offset-x offset-y blur spread color;</code></pre>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Card with spread shadow</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.1);
+    }
+  </template>
+</section>
+
+<p>The shadow now extends slightly further out from all sides of the card. This is useful when you want the shadow to
+  feel more like a glow than a directional light source.</p>
+
+<h2>Shadows on Buttons</h2>
+
+<p>Buttons with shadows feel more physical and clickable. They look like something you can actually press.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+    }
+  </template>
+</section>
+
+<p>Notice how the shadow color matches the button color — a semi-transparent red. This is called a colored shadow, and
+  it makes the button feel like it is glowing slightly. You will see this pattern on call-to-action buttons everywhere.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Matching the shadow color to the element color — just more transparent — creates a much more natural and modern
+    look than always using a grey or black shadow. Try it on any colored button or card.</p>
+</div>
+
+<h2>Inset Shadows</h2>
+
+<p>Adding the word <code>inset</code> at the start of a box-shadow flips it inside the element instead of outside. This
+  creates a pressed-in effect rather than a lifted effect.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <input type="text" placeholder="Email address">
+  </template>
+  <template class="try-default-css">
+    input {
+    padding: 12px 16px;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+  </template>
+</section>
+
+<p>The input field now looks slightly recessed into the page. This is a subtle but effective way to make form fields
+  feel more tactile and intentional.</p>
+
+<h2>Multiple Shadows</h2>
+
+<p>You can layer multiple shadows on a single element by separating them with commas. This is how designers create
+  rich, realistic depth effects.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <p>Layered shadow card</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+  </template>
+</section>
+
+<p>The first shadow is small and close — it defines the crisp edge of the element. The second is large and soft — it
+  creates the feeling of elevation. Together they produce a much more natural and polished shadow than a single value
+  ever could.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add some depth to our Netflix clone. A shadow on the sign-in button and a subtle lift on the input and
+  submit button will make everything feel more designed.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin: 60px 0 16px 0;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(229, 9, 20, 0.5);
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    }
+
+    input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </template>
+</section>
+
+<p>The Get Started button now glows with a red shadow that matches its color. The input has a subtle inset shadow making
+  it feel recessed. Small details, but they push the whole thing closer to a real production design.</p>
+
+<div class="challenge" data-title="Add a shadow to a card"
+  data-description="Add a box shadow to the card so it has 0 offset-x, 4px offset-y, 12px blur, and a color of rgba(0, 0, 0, 0.15)."
+  data-starter-html="&lt;div class=&quot;card&quot;&gt;
+  &lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;/div&gt;"
+  data-starter-css=".card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+
+}"
+  data-css-checks=".card|box-shadow|0 4px 12px rgba(0, 0, 0, 0.15)"
+  data-lang="css"
+  data-solution=".card {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you the box model — how padding, margin, border, and size all work together
+    to define the space every element takes up on the page. This is one of the most important concepts in CSS. Come on
+    in.</p>
+  <a href="/css/box-model">Learn about the Box Model →</a>
+</div>

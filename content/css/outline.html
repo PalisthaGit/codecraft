@@ -1,0 +1,317 @@
+<div class="definition">
+  The outline property draws a ring around the outside of an element, completely outside the border. Unlike border, it
+  takes up no space — adding or removing it never shifts anything on the page.
+</div>
+
+<pre><code>button:focus {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}</code></pre>
+
+<p>Have you ever clicked on a button or tabbed into an input field and seen a blue glow or ring appear around it that
+  you did not add yourself?</p>
+
+<p>That is the browser adding an outline automatically. It is trying to be helpful — showing keyboard users where they
+  currently are on the page. But it rarely matches your design and most developers end up removing it.</p>
+
+<p>Let us understand what outline actually is and how to use it properly.</p>
+
+<h2>Outline vs Border — What is the Difference</h2>
+
+<p>They look similar but they behave very differently.</p>
+
+<p>Border is part of the box model. It sits between the padding and the margin. Adding a border makes the element
+  bigger and can shift things around.</p>
+
+<p>Outline sits completely outside the border. It does not take up any space. Adding or removing an outline never
+  moves anything on the page. Nothing shifts. Nothing gets bigger or smaller.</p>
+
+<p>Think of it like this. A border is like a picture frame permanently attached to the photo. It is part of the
+  photo's size. An outline is like someone holding a glowing ring around the frame from outside. The frame and photo
+  are untouched. The ring just floats there.</p>
+
+<h2>How to Write an Outline</h2>
+
+<p>The syntax is identical to border. You write the width, the style, and the color.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button class="btn">Get Started</button>
+  </template>
+  <template class="try-default-css">
+    .btn {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: 3px solid white;
+    }
+  </template>
+</section>
+
+<p>A white ring appears around the button sitting just outside its edges. The button itself did not change size.
+  Nothing moved. The outline just appeared outside it.</p>
+
+<p>Here is what is happening.</p>
+
+<ul>
+  <li><code>outline: 3px solid white</code> — exactly like border syntax. <code>3px</code> is the thickness.
+    <code>solid</code> is the line style. <code>white</code> is the color. The outline floats outside the element
+    without affecting the layout at all.</li>
+</ul>
+
+<h2>outline-offset</h2>
+
+<p>By default the outline sits right against the element's edge. <code>outline-offset</code> pushes it outward giving
+  it breathing room.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button class="btn">Get Started</button>
+  </template>
+  <template class="try-default-css">
+    .btn {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: 2px solid white;
+    outline-offset: 4px;
+    }
+  </template>
+</section>
+
+<p>Now there is a small gap between the button and the outline ring. It feels like the ring is floating around the
+  button rather than pressed against it. Clean and intentional.</p>
+
+<ul>
+  <li><code>outline-offset: 4px</code> — pushes the outline 4px away from the element's edge on all sides. You can
+    also use negative values to pull the outline inward — useful for creating inset ring effects.</li>
+</ul>
+
+<h2>The Most Common Use — Custom Focus Styles</h2>
+
+<p>Here is why outline actually matters in real projects.</p>
+
+<p>Every browser adds a default focus outline to interactive elements — buttons, inputs, links, anything you can tab
+  to with a keyboard. It is there for accessibility. Blind users and keyboard-only users rely on it to know where
+  they are.</p>
+
+<p>The problem is the default outline is usually a thick blue glow that looks terrible on custom designs. So
+  developers write <code>outline: none</code> to remove it.</p>
+
+<p>But here is the thing — removing it without replacing it is a serious accessibility problem. Keyboard users are
+  now completely lost on your page.</p>
+
+<p>The right approach is to remove the default and replace it with something that fits your design.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: #141414;
+    padding: 2rem;
+    display: flex;
+    gap: 12px;
+    }
+
+    input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    outline: none;
+    }
+
+    input:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: none;
+    }
+
+    button:focus {
+    outline: 2px solid white;
+    outline-offset: 4px;
+    }
+  </template>
+</section>
+
+<p>Click into the input or tab to the button. A clean white ring appears. Move away and it disappears.</p>
+
+<p>Here is what is happening step by step.</p>
+
+<ul>
+  <li><code>outline: none</code> on input and button — removes the browser default. No more ugly blue glow.</li>
+  <li><code>input:focus</code> and <code>button:focus</code> — applies our custom outline only when the element is
+    focused. Not all the time. Just when the user is actively on it.</li>
+  <li><code>outline: 2px solid white</code> — a clean thin white ring. Visible against the dark background. Matches
+    the overall design.</li>
+  <li><code>outline-offset: 2px</code> on input — a small gap between the input border and the outline ring. Keeps
+    them visually separate.</li>
+  <li><code>outline-offset: 4px</code> on button — a slightly larger gap on the button since it has a solid
+    background. The ring floats more visibly around it.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>This pattern — <code>outline: none</code> on the base element and a custom outline on <code>:focus</code> — is
+    something every professional project uses. It gives you full control over focus styles without breaking keyboard
+    accessibility. Make it a habit to always replace any outline you remove.</p>
+</div>
+
+<h2>Outline Does Not Respect Border Radius</h2>
+
+<p>Here is one quirk worth knowing. Unlike border the outline does not follow <code>border-radius</code>. If you have
+  a rounded button with <code>border-radius: 4px</code> the border curves with it. The outline stays square.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button class="btn">Get Started</button>
+  </template>
+  <template class="try-default-css">
+    .btn {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: 3px solid white;
+    outline-offset: 4px;
+    }
+  </template>
+</section>
+
+<p>The button is fully pill shaped but the outline is a rectangle around it. The mismatch looks a little odd on
+  heavily rounded elements.</p>
+
+<p>The fix most developers use is to switch from outline to <code>box-shadow</code> for focus styles on rounded
+  elements. Box-shadow does follow border-radius.</p>
+
+<pre><code>.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px white;
+}</code></pre>
+
+<p><code>box-shadow: 0 0 0 3px white</code> — zero horizontal offset, zero vertical offset, zero blur, 3px spread.
+  This creates a solid ring that hugs the rounded corners perfectly. It looks exactly like an outline but follows the
+  border-radius.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>For pill shaped buttons or elements with large border-radius values use <code>box-shadow</code> instead of
+    outline for focus styles. The <code>0 0 0 Xpx color</code> pattern is the standard trick for this. It respects
+    border-radius, it does not affect layout just like outline, and it looks much cleaner on rounded shapes.</p>
+</div>
+
+<div class="challenge" data-title="Add a custom focus outline"
+  data-description="Remove the default browser outline on both the input and button. Then add a clean white focus ring that appears only when each element is focused. Use outline-offset to add a small gap."
+  data-starter-html="&lt;form&gt;
+  &lt;input type=&quot;email&quot; placeholder=&quot;Email address&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Get Started&lt;/button&gt;
+&lt;/form&gt;"
+  data-starter-css="body {
+  background-color: #141414;
+  padding: 2rem;
+  display: flex;
+  gap: 12px;
+}
+
+input {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+
+}
+
+input:focus {
+
+}
+
+button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+
+}
+
+button:focus {
+
+}"
+  data-css-checks="input|outline|none,input:focus|outline|2px solid white,button|outline|none,button:focus|outline|2px solid white"
+  data-lang="css"
+  data-solution="body {
+  background-color: #141414;
+  padding: 2rem;
+  display: flex;
+  gap: 12px;
+}
+
+input {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  outline: none;
+}
+
+input:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  outline: none;
+}
+
+button:focus {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you box-shadow — how to add depth and dimension to cards, buttons, and
+    sections, and the colored shadow technique used on every modern landing page. Come on in.</p>
+  <a href="/css/box-shadow">Learn about Box Shadow →</a>
+</div>

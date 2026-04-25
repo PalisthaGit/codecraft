@@ -1,299 +1,836 @@
 <div class="definition">
-  Flexbox is a CSS layout mode that arranges elements in a row or column and lets you control how they're spaced and aligned. It's the most-used tool for building navbars, hero sections, and button groups.
+  Flexbox is a CSS layout system that makes it simple to arrange elements in a row or column, space them out, align
+  them, and center them. You activate it with a single line — <code>display: flex</code> — on the parent container.
 </div>
 
-<p>Right now, our top bar has the Netflix logo and a Sign In button — but they both sit on the left, stacked on top of each other. Flexbox fixes that in three lines.</p>
-
-<h2>display: flex</h2>
-
-<p>To use Flexbox, set <code>display: flex</code> on the <strong>parent</strong> element. Its direct children automatically become flex items arranged in a row.</p>
-
-<pre><code class="language-css">.top-bar {
+<pre><code>.movie-row {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }</code></pre>
 
-<p>That's it. The logo and button immediately line up side by side.</p>
+<p>Let me ask you something.</p>
 
-<h2>justify-content</h2>
+<p>Have you ever tried to put two things side by side in CSS and it just would not work? Or tried to center something
+  perfectly in the middle of a page and spent twenty minutes fighting with margin and padding trying to get it right?
+</p>
 
-<p><code>justify-content</code> controls how items are spread along the main axis (horizontal in a row).</p>
+<p>I have been there. Everyone who has learned CSS has been there.</p>
 
-<pre><code class="language-css">.top-bar {
-  display: flex;
-  justify-content: space-between;  /* logo far left, button far right */
-}</code></pre>
+<p>Before Flexbox laying out elements in CSS was genuinely painful. You had to use floats and all sorts of hacks to get
+  things positioned the way you wanted. It was frustrating even for experienced developers.</p>
 
-<p>Common values:</p>
+<p>Then Flexbox arrived and everything changed.</p>
 
-<pre><code class="language-css">justify-content: flex-start;     /* pack to the left (default) */
-justify-content: flex-end;       /* pack to the right */
-justify-content: center;         /* center everything */
-justify-content: space-between;  /* first at left edge, last at right edge */
-justify-content: space-around;   /* equal space around each item */</code></pre>
+<p>Flexbox is a layout system that makes it incredibly simple to arrange elements in a row or a column, space them out,
+  align them, and center them. It is the most used layout tool in modern CSS and once it clicks you will reach for it
+  constantly.</p>
 
-<h2>align-items</h2>
+<p>Let us learn it properly. And we are going to use real movie cards throughout this whole lesson so everything feels
+  like you are actually building something.</p>
 
-<p><code>align-items</code> controls how items line up on the cross axis (vertical in a row).</p>
+<h2>How Flexbox Works</h2>
 
-<pre><code class="language-css">.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;   /* vertically centered */
-}</code></pre>
+<p>Flexbox works on a parent and children relationship.</p>
 
-<p>Without <code>align-items: center</code>, items sit at the top of the container. With it, they sit perfectly in the middle — no matter their height.</p>
+<p>You have a container element. Inside it you have items. When you turn the container into a flex container all the
+  items inside it automatically become flex items and you can control how they arrange themselves.</p>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to see the top bar come together. Try changing <code>justify-content</code> to <code>center</code> or <code>flex-end</code> and watch the items move.</p>
-</div>
+<p>You turn a container into a flex container by writing just one line.</p>
 
 <section class="try-example">
   <template class="try-default-html">
-<div class="top-bar">
-  <div class="logo">NETFLIX</div>
-  <button class="sign-in-btn">Sign In</button>
-</div>
-
-<div class="hero">
-  <h1>Unlimited movies, TV shows, and more</h1>
-  <p>Starts at USD 2.99. Cancel anytime.</p>
-</div>
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
   </template>
   <template class="try-default-css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
 
-body {
-  font-family: sans-serif;
-  color: white;
-  background-color: #000;
-}
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
 
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-}
-
-.logo {
-  color: #e50914;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.sign-in-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hero {
-  background-color: rgba(0, 0, 0, 0.75);
-  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
-  background-blend-mode: multiply;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px;
-}
-
-.hero h1 {
-  font-size: 40px;
-  font-weight: 700;
-  max-width: 600px;
-  margin-bottom: 16px;
-}
-
-.hero p {
-  font-size: 18px;
-  line-height: 1.6;
-}
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
   </template>
 </section>
 
-<h2>Centering the Hero Content</h2>
+<p>The three movie cards are now sitting side by side in a row at the same size. That is Flexbox doing its job. One line
+  — <code>display: flex</code> — and the layout changes completely.
+</p>
 
-<p>Flexbox is also perfect for centering content inside the hero section — both horizontally and vertically. Set <code>flex-direction: column</code> to stack items vertically, then center them:</p>
+<p>By default Flexbox arranges items in a horizontal row from left to right. That is called the <strong>main
+    axis</strong>. The vertical direction is called the <strong>cross axis</strong>.</p>
 
-<pre><code class="language-css">.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;   /* center vertically (in column mode) */
-  align-items: center;       /* center horizontally (in column mode) */
-  min-height: 100vh;
-}</code></pre>
+<h2>flex-direction</h2>
 
-<h2>gap</h2>
+<p>By default items go left to right in a row. But you can change the direction using <code>flex-direction</code>.</p>
 
-<p>The <code>gap</code> property adds space between flex items — without needing margins:</p>
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
 
-<pre><code class="language-css">.hero-form {
-  display: flex;
-  gap: 12px;
-}
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
 
-.top-bar {
-  display: flex;
-  gap: 20px;
-}</code></pre>
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
 
-<h2>Building the Movie Row</h2>
+<p>Now the movie cards stack vertically one on top of the other instead of sitting side by side.</p>
 
-<p>Flexbox also works for the movie row — the horizontal strip of thumbnails. Setting <code>overflow-x: auto</code> makes it scrollable when there are more cards than space.</p>
+<p>The four values are:</p>
 
-<pre><code class="language-css">.movie-row {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 16px 40px;
-}
+<p><code>row</code> — left to right. This is the default. Perfect for movie rows.</p>
+<p><code>row-reverse</code> — right to left.</p>
+<p><code>column</code> — top to bottom. Perfect for stacking cards vertically.</p>
+<p><code>column-reverse</code> — bottom to top.</p>
 
-.movie-card {
-  flex-shrink: 0;     /* don't let cards shrink smaller than their set size */
-  width: 200px;
-  height: 120px;
-  border-radius: 4px;
-  overflow: hidden;
-}</code></pre>
+<h2>justify-content</h2>
+
+<p><code>justify-content</code> controls how items are spaced along the main axis. If your direction is row it controls
+  horizontal spacing. If your direction is column it controls vertical spacing.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The three cards are now spread out. First card at the far left, last card at the far right, equal space between
+  them.</p>
+
+<p>Now try <code>center</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>All three cards are now centered together in the middle of the container.</p>
+
+<p>Here are all the main values:</p>
+
+<p><code>flex-start</code> — items sit at the beginning. This is the default.</p>
+<p><code>flex-end</code> — items sit at the end.</p>
+<p><code>center</code> — items are centered.</p>
+<p><code>space-between</code> — equal space between items, none at the edges.</p>
+<p><code>space-around</code> — equal space around each item including the edges.</p>
+<p><code>space-evenly</code> — perfectly equal space everywhere.</p>
 
 <div class="tip">
   <span>💡</span>
-  <p><code>flex-shrink: 0</code> prevents cards from getting squished. Without it, flex items shrink to fit the container and your cards lose their shape.</p>
+  <p><code>space-between</code> is the value you will use most often for navbars and layouts where you want items spread
+    across the full width. <code>center</code> is what you reach for when you want things grouped together in the
+    middle. These two cover probably 80 percent of real use cases.</p>
+</div>
+
+<h2>align-items</h2>
+
+<p><code>align-items</code> controls how items sit along the cross axis. When your direction is row the cross axis is
+  vertical — so <code>align-items</code> controls how the cards sit vertically inside the container.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card tall">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    height: 180px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card.tall {
+    height: 140px;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>All cards are now vertically centered inside the container even though the first one is taller than the others.</p>
+
+<p>Here are the main values:</p>
+
+<p><code>flex-start</code> — cards align to the top of the container.</p>
+<p><code>flex-end</code> — cards align to the bottom.</p>
+<p><code>center</code> — cards are centered vertically.</p>
+<p><code>stretch</code> — cards stretch to fill the full height. This is the default.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The combination of <code>justify-content: center</code> and <code>align-items: center</code> is the easiest way to
+    center anything perfectly in the middle of a container. Horizontally and vertically centered in two lines. I use
+    this constantly for hero sections, modals, and empty states.</p>
 </div>
 
 <section class="try-example">
   <template class="try-default-html">
-<h2 class="row-title">Trending Now</h2>
-<div class="movie-row">
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVgzdeZGRAwCEa709VhH3rjzGTNzIDlWer-mLr3GaH6qm10zCfxxN-E1-JYCA8CxkoBD74MIuxW1agaVLL4kUpFTtsZPIuTfAV1ljNzcrTPup4487rDCgRuZm-Jn8fUi1cVx.jpg?r=d90" alt="Movie 4">
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABUvQbIPXgpCDdCjDU1Ln9Hz_T9K4QWOeRqDC0_AqSS0EoDHnd3HZNvdU660QoLXfYN1J1onlnVJ6me4utt0EuPA35nq3AvkxOz4.jpg?r=00a" alt="Movie 5">
-  </div>
-</div>
+    <div class="hero">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+    </div>
   </template>
   <template class="try-default-css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #f0f0f0;
+    }
 
-body {
-  background-color: #141414;
-  color: white;
-  font-family: sans-serif;
-}
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
 
-.row-title {
-  font-size: 20px;
-  font-weight: 700;
-  padding: 24px 40px 8px;
-}
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
 
-.movie-row {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 8px 40px 16px;
-}
+<p>The movie card is now perfectly centered both horizontally and vertically inside the container. Two lines. That is it.</p>
 
-.movie-row::-webkit-scrollbar {
-  display: none;
+<h2>flex-wrap</h2>
+
+<p>By default flex items all try to fit on one line. If there are too many cards they shrink to fit rather than
+  wrapping onto the next line. <code>flex-wrap</code> fixes that.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie4.png" alt="Movie 4">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie4.png" alt="Movie 5">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>When there is not enough room for all five cards in one row they wrap onto the next line naturally. Try making the
+  browser window narrower and watch how the cards drop onto new rows automatically.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>flex-wrap: wrap</code> is essential when you have multiple cards that should flow into multiple rows. Without
+    it all five cards will shrink and squish to stay on one line which looks terrible. If you are ever building a card
+    grid always add <code>flex-wrap: wrap</code>.</p>
+</div>
+
+<h2>gap</h2>
+
+<p><code>gap</code> controls the space between flex items. It only adds space between items not around the outside edges
+  which makes it much cleaner than using margin on individual items.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    gap: 24px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>24px of clean consistent space between every card. Try changing it to <code>4px</code> and then <code>40px</code>
+  and see how the feel changes completely.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Now let us bring everything together. The navbar uses Flexbox for the logo and button. The hero uses Flexbox column
+  to center the content. The movie row uses Flexbox with overflow scrolling to show all five thumbnails.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+
+    <body>
+      <div class="navbar">
+        <h1 id="logo">Netflix</h1>
+        <button class="signin">Sign In</button>
+      </div>
+
+      <div class="hero">
+        <h1>Unlimited movies, TV shows, and more.</h1>
+        <p>Starts at USD 2.99. Cancel anytime.</p>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <form>
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+
+      <div class="movie-section">
+        <h2>Trending Now</h2>
+        <div class="movie-row">
+          <div class="movie-card">
+            <img src="/images/movie1.png" alt="Movie 1">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie2.png" alt="Movie 2">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie3.png" alt="Movie 3">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Movie 4">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Movie 5">
+          </div>
+        </div>
+      </div>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-color: #141414;
+    color: white;
+    }
+
+    /* Navbar */
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 80px 40px;
+    text-align: center;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    max-width: 600px;
+    }
+
+    .hero form {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    }
+
+    .hero input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    width: 300px;
+    }
+
+    .hero button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+    cursor: pointer;
+    }
+
+    /* Movie Section */
+    .movie-section {
+    padding: 40px;
+    background-color: #141414;
+    }
+
+    .movie-section h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    color: white;
+    }
+
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The navbar has a slightly lighter dark background with a subtle border so it is clearly separated from the rest. The
+  movie section has its own background tone. Everything is readable and clearly defined.</p>
+
+<div class="challenge" data-title="Center movie cards with Flexbox"
+  data-description="Use Flexbox to make the three movie cards sit side by side with a gap of 12px and centered in the row."
+  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie2.png&quot; alt=&quot;Movie 2&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie3.png&quot; alt=&quot;Movie 3&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;" data-starter-css=".movie-row {
+  background-color: #f0f0f0;
+  padding: 16px;
+
 }
 
 .movie-card {
-  flex-shrink: 0;
-  width: 200px;
-  height: 112px;
-  border-radius: 4px;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .movie-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-  </template>
-</section>
-
-<div class="challenge"
-  data-title="Build the top bar"
-  data-description="Style the .top-bar div using Flexbox so the logo sits on the far left and the button on the far right. Both should be vertically centered. Give the top bar 16px top/bottom padding and 40px left/right padding."
-  data-starter-html="&lt;div class=&quot;top-bar&quot;&gt;
-  &lt;div class=&quot;logo&quot;&gt;NETFLIX&lt;/div&gt;
-  &lt;button class=&quot;sign-in-btn&quot;&gt;Sign In&lt;/button&gt;
-&lt;/div&gt;"
-  data-starter-css="* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #000;
-  font-family: sans-serif;
-  color: white;
-}
-
-.logo {
-  color: #e50914;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.sign-in-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}"
-  data-checks="div"
-  data-lang="css"
-  data-solution=".top-bar {
+}" data-css-checks=".movie-row|display|flex;.movie-row|justify-content|center;.movie-row|gap|12px" data-lang="css"
+  data-solution=".movie-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
+  justify-content: center;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }">
 </div>
 
+<div class="also-read">
+  <h3>Also Read — CSS BEM Naming</h3>
+
+  <p>As your projects get bigger you will notice something. Class names start getting confusing. You have a class called
+    <code>.title</code> and you are not sure — is that the page title? The card title? The modal title? You have
+    <code>.button</code> and <code>.btn</code> and <code>.btn-red</code> all doing similar things. You have to read the
+    HTML to understand what any class is actually for.</p>
+
+  <p>BEM solves this. It is a naming convention that makes every class name self explanatory.</p>
+
+  <h4>What BEM Stands For</h4>
+
+  <p>BEM stands for Block Element Modifier.</p>
+
+  <p><strong>Block</strong> — a standalone component that means something on its own. A movie card. A navbar. A button.
+    A form.</p>
+
+  <p><strong>Element</strong> — a part inside a block that only makes sense as part of that block. The image inside a
+    movie card. The logo inside a navbar. The input inside a form.</p>
+
+  <p><strong>Modifier</strong> — a variation of a block or element. A featured movie card. A disabled button. A large
+    heading.</p>
+
+  <h4>The Syntax</h4>
+
+  <pre><code class="language-css">/* Block */
+.movie-card { }
+
+/* Element — double underscore */
+.movie-card__image { }
+.movie-card__title { }
+.movie-card__badge { }
+
+/* Modifier — double dash */
+.movie-card--featured { }
+.movie-card--unavailable { }
+
+/* Element with modifier */
+.movie-card__badge--hot { }
+.movie-card__badge--new { }</code></pre>
+
+  <p>Double underscore connects a block to its element. Double dash connects a block or element to its modifier.</p>
+
+  <h4>Seeing It on the Netflix Clone</h4>
+
+  <p>Without BEM our movie card HTML looks like this.</p>
+
+  <pre><code class="language-html">&lt;div class="movie-card featured"&gt;
+  &lt;img src="images/movie-1.png" alt="Movie 1"&gt;
+  &lt;span class="badge"&gt;New&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+  <p>With BEM it looks like this.</p>
+
+  <pre><code class="language-html">&lt;div class="movie-card movie-card--featured"&gt;
+  &lt;img class="movie-card__image" src="images/movie-1.png" alt="Movie 1"&gt;
+  &lt;span class="movie-card__badge movie-card__badge--new"&gt;New&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+  <p>And the CSS.</p>
+
+  <pre><code class="language-css">/* Block */
+.movie-card {
+  position: relative;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Element */
+.movie-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.movie-card__badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #333;
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Modifiers */
+.movie-card--featured {
+  grid-column: span 2;
+}
+
+.movie-card--unavailable {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.movie-card__badge--new {
+  background-color: #E50914;
+}
+
+.movie-card__badge--hot {
+  background-color: #ff6600;
+}</code></pre>
+
+  <p>Now every class name tells you exactly what it is and where it belongs. <code>.movie-card__badge--new</code> is
+    clearly the new badge inside a movie card. You do not need to look at the HTML or read any CSS to understand that.
+    The name says it all.</p>
+
+  <h4>Why BEM Matters on Bigger Projects</h4>
+
+  <p>On small projects like our Netflix clone BEM feels like overkill. Extra typing for not much benefit.</p>
+
+  <p>But imagine you are working on a codebase with fifty components and five developers. Someone writes a class called
+    <code>.title</code>. Does that mean the page title? The section title? The card title? Nobody knows without reading
+    the HTML.</p>
+
+  <p>With BEM <code>.hero__title</code> clearly belongs to the hero block. <code>.movie-card__title</code> clearly
+    belongs to a movie card. <code>.modal__title</code> clearly belongs to a modal. You can read a class name and
+    instantly know what it is and where it lives.</p>
+
+  <div class="tip">
+    <p>You do not have to use BEM on every project. A lot of experienced developers use it selectively — BEM for
+      reusable components, simpler names for one-off page sections. The core idea worth taking from BEM even if you do
+      not follow it strictly is to name classes by what they are and what they belong to rather than what they look
+      like. <code>.movie-card__badge</code> is better than <code>.red-dot</code>. <code>.signin-button</code> is better
+      than <code>.btn-top-right</code>. Meaningful names over descriptive ones.</p>
+  </div>
+</div>
+
 <div class="next-lesson">
-  <p>Next up: the movie row works, but what if you want a grid of cards that wraps into multiple rows? That's what CSS Grid is for.</p>
+  <p>In the next lesson I am going to show you CSS Grid — the most powerful layout system in CSS for building full page
+    structures, multi-column layouts, and complex arrangements that Flexbox alone cannot handle. Come on in.</p>
   <a href="/css/grid">Learn about CSS Grid →</a>
 </div>

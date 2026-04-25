@@ -1,0 +1,251 @@
+<div class="definition">
+  The font-weight property controls how thick or thin your text looks. The font-style property controls whether your
+  text is italic or normal. Together they give you fine-grained control over the visual weight and feel of every line
+  on your page.
+</div>
+
+<pre><code>h1 {
+  font-weight: 700;
+}
+
+p {
+  font-weight: 300;
+  font-style: italic;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever noticed that on a well designed page not all text looks the same weight? The heading is thick and
+  heavy. A label underneath it is thin and light. A price or a stat is bold to draw your eye. A disclaimer at the
+  bottom is light and subtle.</p>
+
+<p>That contrast in weight is doing a lot of work. It creates hierarchy. It tells your eye where to look first,
+  second, third. And it makes the whole page feel designed rather than just typed.</p>
+
+<p>Let us learn how to control it.</p>
+
+<h2>CSS Font Weight</h2>
+
+<p>Font weight controls how thick or thin your text looks. In CSS you set it using the
+  <code>font-weight</code> property.</p>
+
+<p>The most basic values are the ones you already know.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="light">Starts at USD 2.99.</p>
+    <p class="normal">Unlimited movies, TV shows, and more.</p>
+    <p class="bold">Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    .light {
+    font-weight: lighter;
+    }
+
+    .normal {
+    font-weight: normal;
+    }
+
+    .bold {
+    font-weight: bold;
+    }
+  </template>
+</section>
+
+<p>Three paragraphs, three different weights. The difference is immediate and clear.</p>
+
+<p>But CSS actually gives you much more control than just lighter, normal and bold. You can use numbers from 100 to
+  900 in steps of 100.</p>
+
+<ul>
+  <li>100 — Thin. Almost hairline.</li>
+  <li>200 — Extra light.</li>
+  <li>300 — Light.</li>
+  <li>400 — Normal. This is the default.</li>
+  <li>500 — Medium. Slightly heavier than normal.</li>
+  <li>600 — Semi bold.</li>
+  <li>700 — Bold. Same as writing bold.</li>
+  <li>800 — Extra bold.</li>
+  <li>900 — Black. The heaviest.</li>
+</ul>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="w300">Light text at 300</p>
+    <p class="w400">Normal text at 400</p>
+    <p class="w600">Semi bold text at 600</p>
+    <p class="w900">Heavy text at 900</p>
+  </template>
+  <template class="try-default-css">
+    .w300 {
+    font-weight: 300;
+    }
+
+    .w400 {
+    font-weight: 400;
+    }
+
+    .w600 {
+    font-weight: 600;
+    }
+
+    .w900 {
+    font-weight: 900;
+    }
+  </template>
+</section>
+
+<p>The difference between 400 and 600 is subtle but noticeable. The difference between 300 and 900 is dramatic.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Not every font supports all nine weights. If you set font-weight: 200 and nothing seems to change the font
+    probably only comes in a few weights. This is especially true with Google Fonts — when you select a font make sure
+    you also select the specific weights you need otherwise the browser will just use the closest available weight and
+    your styling will not work as expected.</p>
+</div>
+
+<h2>CSS Font Style</h2>
+
+<p>Font style controls whether your text is italic or normal. You set it using the <code>font-style</code> property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="normal">Unlimited movies, TV shows, and more.</p>
+    <p class="italic">Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    .normal {
+    font-style: normal;
+    }
+
+    .italic {
+    font-style: italic;
+    }
+  </template>
+</section>
+
+<p>The italic paragraph now leans slightly to the right. It feels softer and more conversational than the straight
+  normal text.</p>
+
+<p>You will use italic most often for things like quotes, captions, labels, or any text that should feel slightly
+  secondary or different from the main content.</p>
+
+<p>There is also a third value called oblique which is similar to italic but instead of using the font's actual italic
+  design it just slants the normal letters. Most of the time italic is the right choice.</p>
+
+<h2>Combining Weight and Style</h2>
+
+<p>Font weight and font style work completely independently. You can combine them freely.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="bold-italic">Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    .bold-italic {
+    font-weight: 700;
+    font-style: italic;
+    }
+  </template>
+</section>
+
+<p>Bold and italic at the same time. Use this sparingly — it draws a lot of attention and can feel heavy if
+  overused.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A really effective design pattern is to use a light font weight for supporting text and a heavy font weight for
+    the main message. Like a thin subtitle above a heavy bold heading. That contrast makes the heading feel even
+    stronger. You will see this on almost every modern landing page.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add proper font weights to our Netflix clone. Right now everything is the same weight. Let us create some
+  hierarchy.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+    <button>Sign In</button>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <p>Ready to watch? Enter your email to create or restart your membership.</p>
+    <form>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    }
+  </template>
+</section>
+
+<p>The headings are heavy and commanding at 700. The paragraphs are light and easy to read at 300. The buttons feel
+  confident at 600. That contrast makes the whole page feel much more intentional.</p>
+
+<div class="challenge" data-title="Set font weights on the Netflix clone"
+  data-description="Make the heading font-weight 700 and the paragraphs font-weight 300."
+  data-starter-html="&lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;p&gt;Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;"
+  data-starter-css="h1 {
+
+}
+
+p {
+
+}"
+  data-css-checks="h1|font-weight|700;p|font-weight|300"
+  data-lang="css"
+  data-solution="h1 {
+  font-weight: 700;
+}
+
+p {
+  font-weight: 300;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you text alignment, decoration, and transformation — how to center text,
+    underline it, make it uppercase, and all the other small text tricks that make a big difference. Come on in.</p>
+  <a href="/css/text-decoration">Learn about Text Decoration and Alignment →</a>
+</div>

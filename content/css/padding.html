@@ -1,0 +1,260 @@
+<div class="definition">
+  The padding property adds space between the content of an element and its own edges. It gives your content room to
+  breathe and makes layouts feel polished and intentional.
+</div>
+
+<pre><code>button {
+  padding: 12px 32px;
+}
+
+h1 {
+  padding-top: 60px;
+  padding-bottom: 20px;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever seen a button where the text was squished right up against the edges? Or a section where the text
+  started right at the very edge of the screen with no breathing room at all?</p>
+
+
+<p>It feels cramped. Uncomfortable. Like someone forgot to finish the design.</p>
+
+<p>That is a padding problem. And fixing it is one of the simplest things you can do to make your page feel more
+  polished and intentional.</p>
+
+<h2>What is Padding</h2>
+
+<p>Padding is the space between the content of an element and its own edges.</p>
+
+<p>Think of it like a picture frame. The photo is the content. The padding is the white border around the photo inside
+  the frame. The frame itself is the element. The padding just creates breathing room between what is inside and the
+  edges of the box.</p>
+
+<p>In CSS you add it using the <code>padding</code> property.</p>
+<img src="/images/css-padding.png" alt="CSS padding example" style="width: 100%; border-radius: 8px; margin: 16px 0;" />
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 16px;
+    }
+  </template>
+</section>
+
+<p>The button now has 16px of space on all four sides between the text and the edges of the button. It feels much more
+  comfortable and clickable.</p>
+
+<h2>Padding on All Four Sides at Once</h2>
+
+<p>When you write <code>padding</code> with one value it applies the same space to all four sides — top, right, bottom,
+  and left.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 20px;
+    }
+  </template>
+</section>
+
+<p>20px of space on every side equally.</p>
+
+<p>But you can also control each side separately using two values, three values, or four values. This is where it gets
+  really useful.</p>
+
+<p>Two values — the first controls top and bottom, the second controls left and right.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    }
+  </template>
+</section>
+
+<p>12px on the top and bottom, 32px on the left and right. This is the classic button padding shape — wider than it is
+  tall. Most buttons you see on real websites use this pattern.</p>
+
+<p>Four values — top, right, bottom, left. Goes clockwise starting from the top.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 10px 30px 14px 30px;
+    }
+  </template>
+</section>
+
+<p>10px top, 30px right, 14px bottom, 30px left.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>An easy way to remember the order of four values is the word TRBL — Top, Right, Bottom, Left. Or think of it like
+    a clock starting at 12 and going clockwise. Top, Right, Bottom, Left. Once this clicks you will never forget it.
+  </p>
+</div>
+
+<h2>Padding on Individual Sides</h2>
+
+<p>You can also set each side separately using its own property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    padding-top: 60px;
+    padding-bottom: 20px;
+    color: white;
+    }
+
+    p {
+    padding-left: 40px;
+    padding-right: 40px;
+    color: white;
+    }
+
+    body {
+    background-color: #141414;
+    }
+  </template>
+</section>
+
+<p>The heading has extra space above and below it. The paragraphs have space on the sides so they do not touch the
+  edges.</p>
+
+<p>This is useful when you only need to adjust one or two sides without touching the others.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>In real projects you will find yourself using padding shorthand most of the time — <code>padding: 12px 32px</code>
+    is cleaner and faster to write than four separate lines. Use individual properties only when you need to override
+    one specific side without changing the others.</p>
+</div>
+
+<h2>What Padding Actually Does to Your Element</h2>
+
+<p>Here is something important to understand. When you add padding to an element it makes the element bigger.</p>
+
+<p>If you have a button that is 100px wide and you add 20px of padding on each side the button does not stay 100px. It
+  becomes 140px wide — 100px of content plus 20px on the left plus 20px on the right.</p>
+
+<p>This can sometimes cause layout surprises. We will talk about how to control this behavior when we get to the box
+  model lesson. For now just know that padding adds to the size of the element.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Our Netflix clone is looking better but everything still feels too close together and too close to the edges. Let us
+  fix that with padding.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button>Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    }
+  </template>
+</section>
+
+<p>The body now has breathing room on all sides so nothing touches the edges of the screen. The buttons have that
+  classic wide padding shape that makes them feel satisfying to click. Everything feels more spacious and intentional.
+</p>
+
+<div class="challenge" data-title="Add padding to a button"
+  data-description="Add padding to the button so it has 12px on the top and bottom and 32px on the left and right."
+  data-starter-html="&lt;button&gt;Get Started&lt;/button&gt;" data-starter-css="button {
+  background-color: #E50914;
+  color: white;
+
+}" data-css-checks="button|padding|12px 32px" data-lang="css" data-solution="button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you margin — the space outside an element between it and everything around
+    it. Together padding and margin give you complete control over spacing on your page. Come on in.</p>
+  <a href="/css/margin">Learn about Margin →</a>
+</div>

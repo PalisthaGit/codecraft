@@ -1,219 +1,643 @@
 <div class="definition">
-  Pseudo-elements let you style specific parts of an element, or insert decorative content before and after it — without adding extra HTML. They're written with a double colon: <code>::before</code>, <code>::after</code>.
+  A pseudo-element lets you create and style a part of an element that does not exist in your HTML. You insert invisible
+  content from CSS alone using <code>::before</code> and <code>::after</code> — and then style it however you want.
 </div>
 
-<p>Every Netflix movie card has a gradient that fades from transparent at the top to dark at the bottom. That's not a separate HTML element — it's created with CSS using <code>::before</code> or <code>::after</code>. No extra divs needed.</p>
-
-<h2>::before and ::after</h2>
-
-<p>These pseudo-elements insert a virtual element <em>before</em> or <em>after</em> the content of an element. They must have a <code>content</code> property to appear — even if it's empty.</p>
-
-<pre><code class="language-css">.movie-card::after {
-  content: "";              /* required — can be empty */
+<pre><code>.section-title::after {
+  content: "";
   position: absolute;
-  inset: 0;                 /* shorthand for top/right/bottom/left: 0 */
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    transparent 60%
-  );
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: #E50914;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
 }</code></pre>
 
-<p>Combined with <code>position: absolute</code>, this creates a gradient layer that sits on top of the movie thumbnail — without any extra HTML.</p>
+<p>Let me ask you something.</p>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> and hover over the cards. The gradient overlay is created entirely with <code>::after</code> — there's no extra div in the HTML.</p>
-</div>
+<p>Have you ever seen a decorative line next to a heading? Or a quote with a big stylized quotation mark behind it? Or a
+  form input where the placeholder text is a different color from the typed text?</p>
+
+<p>None of that required extra HTML elements. It was all done with CSS pseudo-elements.</p>
+
+<p>A pseudo-element lets you create and style a part of an element that does not actually exist in your HTML. You are
+  essentially inserting invisible content from CSS alone and then styling it however you want.</p>
+
+<h2>The Double Colon Syntax</h2>
+
+<p>Pseudo-elements use two colons instead of one.</p>
+
+<pre><code>selector::pseudo-element {
+  property: value;
+}</code></pre>
+
+<p>One colon is for pseudo-classes like <code>:hover</code> and <code>:focus</code>. Two colons are for pseudo-elements
+  like <code>::before</code> and <code>::after</code>. That is how you tell them apart.</p>
+
+<h2>::before</h2>
+
+<p>The <code>::before</code> pseudo-element inserts content right before the content of an element. It sits inside the
+  element but before anything else in it.</p>
+
+<p>The one rule is that it always needs a <code>content</code> property. Even if you do not want any text you still
+  write <code>content: ""</code> to make it appear.</p>
 
 <section class="try-example">
   <template class="try-default-html">
-<div class="movie-row">
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="Movie 1">
-    <span class="movie-title">The Witcher</span>
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26" alt="Movie 2">
-    <span class="movie-title">Squid Game</span>
-  </div>
-  <div class="movie-card">
-    <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3" alt="Movie 3">
-    <span class="movie-title">Breaking Bad</span>
-  </div>
-</div>
+    <h2 class="section-title">Trending Now</h2>
   </template>
   <template class="try-default-css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .section-title {
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    background-color: #141414;
+    padding: 16px;
+    }
 
-body {
-  background-color: #141414;
-  padding: 40px;
-}
-
-.movie-row {
-  display: flex;
-  gap: 8px;
-}
-
-.movie-card {
-  flex: 1;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.movie-card:hover {
-  transform: scale(1.08);
-  z-index: 1;
-}
-
-.movie-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Gradient overlay using ::after */
-.movie-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.movie-card:hover::after {
-  opacity: 1;
-}
-
-.movie-title {
-  position: absolute;
-  bottom: 8px;
-  left: 10px;
-  color: white;
-  font-family: sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.movie-card:hover .movie-title {
-  opacity: 1;
-}
+    .section-title::before {
+    content: "▶ ";
+    color: #E50914;
+    }
   </template>
 </section>
 
-<h2>Pseudo-classes: :hover, :nth-child</h2>
+<p>A red play icon now appears before the heading text without touching the HTML at all.</p>
 
-<p>Pseudo-classes target elements in a specific state or position. Unlike pseudo-elements, they use a single colon.</p>
+<p>Here is what is happening.</p>
 
-<pre><code class="language-css">/* Applies when the user hovers */
-.movie-card:hover {
-  transform: scale(1.08);
-}
+<p><code>::before</code> — inserts generated content right before the text inside the element.</p>
 
-/* Targets every other card */
-.movie-card:nth-child(even) {
-  opacity: 0.9;
-}
+<p><code>content: "▶ "</code> — this is what gets inserted. It can be any text, symbol, or even an empty string.
+  Without this property the pseudo-element will not appear at all.</p>
 
-/* Targets only the first card */
-.movie-card:first-child {
-  border-left: 3px solid #e50914;
-}
+<p><code>color: #E50914</code> — only the pseudo-element turns red. The heading text stays white because we targeted
+  <code>::before</code> specifically.</p>
 
-/* Targets only the last card */
-.movie-card:last-child {
-  border-right: 3px solid #e50914;
-}</code></pre>
+<h2>::after</h2>
+
+<p>The <code>::after</code> pseudo-element works exactly like <code>::before</code> but inserts content after the
+  element's content instead of before it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h2 class="section-title">Trending Now</h2>
+  </template>
+  <template class="try-default-css">
+    .section-title {
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 8px;
+    display: inline-block;
+    background-color: #141414;
+    padding: 16px 16px 20px;
+    }
+
+    .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    width: 40px;
+    height: 3px;
+    background-color: #E50914;
+    border-radius: 2px;
+    }
+  </template>
+</section>
+
+<p>A short red underline now appears below the heading. Clean, decorative, and not a single extra HTML element needed.</p>
+
+<p>Here is what is happening step by step.</p>
+
+<p><code>content: ""</code> — empty string. We do not want any text. We just want the element to exist so we can style
+  it as a line.</p>
+
+<p><code>position: absolute</code> — takes the pseudo-element out of the normal flow so we can place it exactly where
+  we want. This works because the parent has <code>position: relative</code>.</p>
+
+<p><code>bottom: 0</code> and <code>left: 0</code> — places it right at the bottom left of the heading.</p>
+
+<p><code>width: 40px</code> and <code>height: 3px</code> — makes it a short wide flat line.</p>
+
+<p><code>background-color: #E50914</code> — the line is red.</p>
+
+<p>This short underline pattern is one of the most common uses of <code>::after</code> in real projects. You will see it
+  on section headings, card titles, and feature labels everywhere.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The combination of <code>position: relative</code> on the parent and <code>position: absolute</code> on a
+    <code>::before</code> or <code>::after</code> pseudo-element is the most powerful pattern these pseudo-elements
+    offer. It lets you place decorative elements anywhere around the parent without adding a single extra tag to your
+    HTML. Use this for underlines, badges, overlays, and decorative shapes.</p>
+</div>
+
+<h2>A Practical Use — Overlay on Movie Cards</h2>
+
+<p>Here is something you will actually use. When someone hovers over a movie card you want a dark overlay to appear on
+  top of the image. You could add an extra div inside every card. But with <code>::after</code> you can do it in pure
+  CSS with no extra HTML.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    position: relative;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    }
+
+    .movie-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    }
+
+    .movie-card:hover::after {
+    background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>Hover over any card and a dark overlay appears on top of the image. Move away and it disappears.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>.movie-card::after</code> — creates an invisible overlay covering the entire card. <code>width: 100%</code> and
+  <code>height: 100%</code> make it fill the card completely. <code>background-color: rgba(0,0,0,0)</code> means fully
+  transparent — invisible by default.</p>
+
+<p><code>.movie-card:hover::after</code> — this is combining a pseudo-class and a pseudo-element together. When the
+  card is hovered the overlay background changes to <code>rgba(0,0,0,0.4)</code> — a dark semi-transparent black. The
+  overlay appears.</p>
+
+<p><code>position: relative</code> on the card and <code>position: absolute</code> on <code>::after</code> — the
+  overlay needs to cover exactly the card and nothing else. This combination makes that happen.</p>
+
+<p>This is much cleaner than adding an extra div inside every single card in your HTML. One CSS rule handles all cards
+  at once.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Using <code>::after</code> for hover overlays on cards is a pattern used on virtually every streaming platform,
+    e-commerce site, and portfolio. It is clean, reusable, and keeps your HTML free of presentational elements. Any
+    time you think you need an extra empty div just for visual effect consider whether <code>::after</code> can handle
+    it instead.</p>
+</div>
 
 <h2>::placeholder</h2>
 
-<p>Style the placeholder text inside input fields — like the "Email address" hint on Netflix's form:</p>
+<p>The <code>::placeholder</code> pseudo-element styles the placeholder text inside input fields. By default placeholder
+  text is a light gray. You can change its color, size, and style.</p>
 
-<pre><code class="language-css">input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-}</code></pre>
+<section class="try-example">
+  <template class="try-default-html">
+    <form>
+      <input type="email" placeholder="Email address">
+    </form>
+  </template>
+  <template class="try-default-css">
+    form {
+    background-color: #141414;
+    padding: 24px;
+    }
 
-<div class="challenge"
-  data-title="Add a gradient overlay with ::after"
-  data-description="Add a ::after pseudo-element to .movie-card that creates a gradient overlay from rgba(0,0,0,0.85) at the bottom to transparent at the top. Make it appear on hover using opacity transition."
-  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
-  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg?r=a26&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;movie-card&quot;&gt;&lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg?r=af3&quot; alt=&quot;Movie&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;"
-  data-starter-css="* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 300px;
+    }
 
-body {
-  background-color: #141414;
-  padding: 40px;
-}
+    input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    }
 
-.movie-row {
-  display: flex;
-  gap: 8px;
-}
+    input:focus {
+    border-color: white;
+    }
+  </template>
+</section>
 
-.movie-card {
-  flex: 1;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
-  overflow: hidden;
+<p>The placeholder text is now a soft semi-transparent white and italic. When the user starts typing their text is fully
+  white and not italic because the actual input text is styled by the <code>input</code> selector — not the
+  <code>::placeholder</code>.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>input::placeholder</code> — targets only the placeholder text inside the input. The actual typed text is not
+  affected.</p>
+
+<p><code>color: rgba(255,255,255,0.5)</code> — semi-transparent white. Subtle enough to feel like a hint rather than
+  real content.</p>
+
+<p><code>font-style: italic</code> — makes it clearly different from typed text so users know it is just a suggestion.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Styling <code>::placeholder</code> is one of those small details that makes a form feel genuinely designed rather
+    than thrown together. On a dark background the default gray placeholder is often hard to read. A light
+    semi-transparent white or a muted version of your accent color works much better and keeps the form readable and
+    elegant.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us bring all three pseudo-elements into our Netflix clone. The section headings get a red underline using
+  <code>::after</code>. The movie cards get a hover overlay using <code>::after</code>. The email input gets a styled
+  placeholder using <code>::placeholder</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <div class="navbar">
+        <h1 id="logo">Netflix</h1>
+        <div class="nav-actions">
+          <div class="notification-wrapper">
+            <span class="icon">🔔</span>
+            <span class="notification-badge">3</span>
+          </div>
+          <button class="signin">Sign In</button>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>Unlimited movies, TV shows, and more.</h1>
+        <p>Starts at USD 2.99. Cancel anytime.</p>
+        <form>
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+
+      <div class="movie-section">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="movie-row">
+          <div class="movie-card">
+            <img src="/images/movie1.png" alt="Movie 1">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie2.png" alt="Movie 2">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie3.png" alt="Movie 3">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Movie 4">
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie5.png" alt="Movie 5">
+          </div>
+        </div>
+      </div>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    }
+
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    z-index: 9999;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: #E50914;
+    letter-spacing: 4px;
+    }
+
+    .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    }
+
+    .notification-wrapper {
+    position: relative;
+    cursor: pointer;
+    }
+
+    .icon { font-size: 1.5rem; }
+
+    .notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    z-index: 10;
+    background-color: #E50914;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .signin:hover {
+    background-color: white;
+    color: #141414;
+    }
+
+    .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 120px 40px 80px;
+    text-align: center;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    .hero form {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    }
+
+    .hero input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 300px;
+    }
+
+    .hero input:focus {
+    border-color: white;
+    }
+
+    .hero input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+    }
+
+    .hero button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .hero button:hover { background-color: #b20710; }
+    .hero button:active { transform: scale(0.98); }
+
+    .movie-section {
+    padding: 40px;
+    }
+
+    .section-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+    }
+
+    .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #E50914;
+    border-radius: 2px;
+    }
+
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    }
+
+    .movie-card {
+    position: relative;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    }
+
+    .movie-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    }
+
+    .movie-card:hover::after {
+    background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>Here is what every pseudo-element is doing.</p>
+
+<p><code>.section-title::after</code> — a short 40px red line sits under the heading.
+  <code>display: inline-block</code> on the parent makes the heading only as wide as its text so the underline does not
+  stretch the full page width.</p>
+
+<p><code>.movie-card::after</code> — an invisible overlay covers every card at all times. It is there but transparent
+  so you cannot see it.</p>
+
+<p><code>.movie-card:hover::after</code> — the moment you hover the overlay turns dark. The card does not fade —
+  instead a dark layer appears on top of it. This feels more cinematic than just opacity alone.</p>
+
+<p><code>input::placeholder</code> — the placeholder text is soft semi-transparent white and italic. Clearly a hint,
+  not real content.</p>
+
+<div class="challenge" data-title="Add a red underline and style the placeholder"
+  data-description="Add a short red underline below the heading using ::after. Style the placeholder text to be semi-transparent and italic using ::placeholder."
+  data-starter-html="&lt;h2 class=&quot;section-title&quot;&gt;Trending Now&lt;/h2&gt;
+&lt;input type=&quot;email&quot; placeholder=&quot;Email address&quot;&gt;"
+  data-starter-css=".section-title {
+  color: white;
+  font-family: &quot;Bebas Neue&quot;, sans-serif;
+  font-size: 1.5rem;
   position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  padding-bottom: 10px;
+  display: inline-block;
+  background-color: #141414;
+  padding: 16px 16px 26px;
 }
 
-.movie-card:hover {
-  transform: scale(1.08);
-  z-index: 1;
-}
-
-.movie-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+input {
+  margin-top: 16px;
   display: block;
+  padding: 12px 16px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
 }"
-  data-checks="div"
+  data-css-checks=".section-title::after|content|\"\";.section-title::after|background-color|#E50914;input::placeholder|font-style|italic"
   data-lang="css"
-  data-solution=".movie-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  data-solution=".section-title {
+  color: white;
+  font-family: &quot;Bebas Neue&quot;, sans-serif;
+  font-size: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+  background-color: #141414;
+  padding: 16px 16px 26px;
 }
 
-.movie-card:hover::after {
-  opacity: 1;
+.section-title::after {
+  content: &quot;&quot;;
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  width: 40px;
+  height: 3px;
+  background-color: #E50914;
+  border-radius: 2px;
+}
+
+input {
+  margin-top: 16px;
+  display: block;
+  padding: 12px 16px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
 }">
 </div>
 
 <div class="next-lesson">
-  <p>You've learned everything you need. Now let's put it all together and build the complete Netflix clone from scratch — step by step.</p>
-  <a href="/css/netflix-clone">Build the Netflix Clone →</a>
+  <p>In the next lesson I am going to show you transitions — how to make all these hover states and color changes
+    animate smoothly instead of snapping instantly. One line of CSS and everything starts feeling polished and alive.
+    Come on in.</p>
+  <a href="/css/transitions">Learn about CSS Transitions →</a>
 </div>

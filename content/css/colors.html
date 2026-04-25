@@ -1,220 +1,207 @@
 <div class="definition">
-  CSS gives you multiple ways to define colors — hex codes, RGB, RGBA, and named colors. RGBA also lets you control transparency, which is essential for overlays and tinted backgrounds.
+  CSS gives you complete control over every color on your page. You can set colors using names, hex codes, RGB, or RGBA
+  — and each format has its own use case. RGBA also lets you control transparency, which is essential for overlays and
+  faded text.
 </div>
 
-<p>Our page is starting to look like Netflix. Now let's add a form with an email input and a Get Started button — just like the real Netflix homepage.</p>
+<p>Let me ask you something.</p>
 
-<p>Add this to your HTML:</p>
+<p>Close your eyes for a second and think about Netflix. What is the first thing that comes to mind visually?</p>
 
-<pre><code class="language-html">&lt;form&gt;
-  &lt;input type="email" placeholder="Email address"&gt;
-  &lt;button type="submit"&gt;Get Started &gt;&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+<p>Black background. Red logo. White text.</p>
 
-<h2>Hex Codes</h2>
+<p>That is it. Three colors. And yet it feels instantly recognizable. Instantly professional. Instantly Netflix.</p>
 
-<p>Hex codes are the most common way to define colors in CSS. They start with <code>#</code> followed by six characters that represent the red, green, and blue values of a color.</p>
+<p>Colors are that powerful. They set the mood, they guide the eye, they make something feel cheap or premium in a split
+  second. And in CSS you have complete control over every single color on your page.</p>
 
-<pre><code class="language-css">button {
-  background-color: #e50914;
-}</code></pre>
+<p>Let us learn how to use them.</p>
 
-<p>That's Netflix red. Hex codes are popular because they're precise and universally recognized by browsers and designers.</p>
+<h2>How You Set a Color in CSS</h2>
 
-<h2>Named Colors and RGB</h2>
-
-<p>You can also use basic color names or RGB values:</p>
-
-<pre><code class="language-css">/* Named color */
-button {
-  color: white;
-}
-
-/* RGB — same result, using numbers 0–255 */
-button {
-  background-color: rgb(229, 9, 20);
-}</code></pre>
-
-<p>All three formats work. Hex is the most common in production code.</p>
-
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to experiment with button colors. Try switching between hex, rgb(), and named colors.</p>
-</div>
-
-<section class="try-example">
-  <template class="try-default-html">
-<h1>Netflix</h1>
-<p>Unlimited movies, TV shows, and more.</p>
-<form>
-  <input type="email" placeholder="Email address">
-  <button type="submit">Get Started &gt;</button>
-</form>
-  </template>
-  <template class="try-default-css">
-body {
-  background-color: #000;
-  color: white;
-  font-family: sans-serif;
-  padding: 40px;
-}
-
-h1 {
-  color: #e50914;
-}
-
-button {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-  </template>
-</section>
-
-<h2>transparent</h2>
-
-<p>You can also set a background to fully transparent — meaning it has no color at all and you can see whatever is behind it.</p>
-
-<pre><code class="language-css">input[type="email"] {
-  background-color: transparent;
-}</code></pre>
-
-<p>This makes the email input blend into the dark background instead of showing a white box.</p>
-
-<div class="challenge"
-  data-title="Style the button"
-  data-description="Make the button background red (#e50914) and the button text white."
-  data-starter-html="&lt;form&gt;
-  &lt;input type=&quot;email&quot; placeholder=&quot;Email address&quot;&gt;
-  &lt;button type=&quot;submit&quot;&gt;Get Started &gt;&lt;/button&gt;
-&lt;/form&gt;"
-  data-starter-css="body {
-  background-color: #000;
-  color: white;
-  font-family: sans-serif;
-  padding: 20px;
-}"
-  data-checks="button"
-  data-lang="css"
-  data-solution="button {
-  background-color: #e50914;
-  color: white;
-}">
-</div>
-
-<h2>Background Images</h2>
-
-<p>You can also use an image as the background instead of a solid color. For that, we use <code>background-image</code>:</p>
-
-<pre><code class="language-css">body {
-  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
-}</code></pre>
-
-<p>Now the full background of the page is the Netflix hero image.</p>
-
-<h2>Making Text Readable Over an Image</h2>
-
-<p>After adding the background image, the text can become hard to read. We can fix this by adding a dark, semi-transparent layer over the image — like tinted glass over a photo.</p>
-
-<p>To do that, we use RGBA colors.</p>
-
-<h2>RGBA</h2>
-
-<p>RGBA works like RGB but adds a fourth value — the alpha channel — which controls opacity:</p>
-
-<pre><code class="language-css">/* rgba(red, green, blue, opacity) */
-rgba(0, 0, 0, 0.75)</code></pre>
+<p>In CSS there are two main things you will color constantly.</p>
 
 <ul>
-  <li>The first three numbers are red, green, and blue (0–255)</li>
-  <li>The last number is opacity — from <code>0</code> (fully transparent) to <code>1</code> (fully solid)</li>
+  <li>The text itself — using the <code>color</code> property</li>
+  <li>The background — using the <code>background-color</code> property</li>
 </ul>
 
-<p>So <code>rgba(0, 0, 0, 0.75)</code> means black at 75% opacity. That's perfect for a dark tint over our background image.</p>
+<p>We will cover <code>background-color</code> in its own lesson. Right now let us focus on text color.</p>
 
-<h2>Blending the Color and Image</h2>
-
-<p>To blend the dark color and the background image together, we use <code>background-blend-mode</code>:</p>
-
-<pre><code class="language-css">body {
-  background-color: rgba(0, 0, 0, 0.75);
-  background-image: url('...');
-  background-blend-mode: multiply;
-}</code></pre>
-
-<p>Now the dark tint and the image blend together. The background still looks rich, but the white text is easy to read against it.</p>
-
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to see the blend mode in action. Try changing the opacity value — 0.3 for a lighter tint, 0.9 for a very dark one.</p>
-</div>
+<p>Here is how it looks:</p>
 
 <section class="try-example">
   <template class="try-default-html">
-<h1>Netflix</h1>
-<p>Unlimited movies, TV shows, and more.</p>
-<p>Starts at USD 2.99. Cancel anytime.</p>
+    <h1>Netflix</h1>
   </template>
   <template class="try-default-css">
-body {
-  background-color: rgba(0, 0, 0, 0.75);
-  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
-  background-blend-mode: multiply;
-  background-size: cover;
-  min-height: 100vh;
-  margin: 0;
-  padding: 40px;
-  font-family: sans-serif;
-}
-
-h1 {
-  color: white;
-  font-size: 40px;
-}
-
-p {
-  color: white;
-}
+    h1 {
+    color: red;
+    }
   </template>
 </section>
 
-<div class="challenge"
-  data-title="Add a background image with tint"
-  data-description="Set the body background to the Netflix image. Then add a dark RGBA overlay (rgba(0, 0, 0, 0.75)) and use background-blend-mode: multiply to blend them together. Make all text white."
+
+<p>That is it. You pick the element, you write <code>color</code>, you give it a value. The heading turns red.</p>
+
+<p>There are four different ways to write that color value in CSS. Let us go through each one.</p>
+
+<h2>CSS Colors Using Names</h2>
+
+<p>The simplest way to set a color is to just type its name.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: red;
+    }
+
+    p {
+    color: blue;
+    }
+  </template>
+</section>
+
+<p>CSS has 140 built-in color names. Things like <code>red</code>, <code>blue</code>, <code>green</code>,
+  <code>black</code>, <code>orange</code>, <code>purple</code>, <code>tomato</code>, <code>coral</code>,
+  <code>salmon</code>, <code>skyblue</code>, <code>gold</code>.
+</p>
+
+<p>Yes, <code>tomato</code> and <code>salmon</code> are real CSS color names. I smiled the first time I found that out
+  too.</p>
+
+<p>Color names are great for quick testing or when you just need something basic. But in real projects you will rarely
+  use them. The reason is simple — they are not precise enough. There are hundreds of shades of blue. Which blue do you
+  want exactly? Color names cannot answer that. The next method can.</p>
+
+<h2>CSS Colors Using Hex Codes</h2>
+
+<p>This is what you will see in almost every real project. Every design tool, every color palette, every handoff from a
+  designer to a developer — they all use hex codes.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: #E50914;
+    }
+
+    p {
+    color: #4A90D9;
+    }
+  </template>
+</section>
+
+<p>That sharp symbol followed by six characters. That is a hex code. And that specific one — <code>#E50914</code> — is
+  the exact red Netflix uses for their logo.</p>
+
+<p>Here is how it works. Those six characters are split into three pairs. The first pair controls how much red is in the
+  color. The second pair controls green. The third pair controls blue. Each pair goes from <code>00</code> which means
+  none of that color all the way to <code>FF</code> which means the maximum amount.</p>
+
+<p>So <code>#E50914</code> means a lot of red, almost no green, a tiny bit of blue. Which gives you that deep Netflix
+  red.</p>
+
+<p>You do not need to memorize any of this. You will never sit there calculating hex codes by hand. You just pick a
+  color from a color picker and copy the hex code. But understanding what those characters mean helps you read other
+  people's code confidently.</p>
+
+<h2>CSS Colors Using RGB</h2>
+
+<p>RGB stands for Red Green Blue. It works on the same idea as hex codes — you mix three colors together to get your
+  final color. But instead of characters you use numbers from 0 to 255.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: rgb(229, 9, 20);
+    }
+  </template>
+</section>
+<p>That is the exact same Netflix red written as RGB. 229 red, 9 green, 20 blue.</p>
+
+<p>0 means none of that color. 255 means the full amount.</p>
+
+<p>So pure red is <code>rgb(255, 0, 0)</code>. Pure white is <code>rgb(255, 255, 255)</code>. Pure black is
+  <code>rgb(0, 0, 0)</code>.
+</p>
+
+<p>RGB and hex codes do the exact same thing. Most developers just prefer hex codes because they are shorter to write.
+  But RGB is worth knowing because it leads us directly to the next one which you will use all the time.</p>
+
+<h2>CSS Colors Using RGBA</h2>
+
+<p>RGBA is RGB with one extra value — opacity. That A stands for alpha which just means how transparent the color is.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: rgba(229, 9, 20, 1);
+    }
+
+    p {
+    color: rgba(30, 30, 30, 0.5);
+    }
+  </template>
+</section>
+
+<p>That last number goes from 0 to 1. 1 means fully visible. 0 means completely invisible. 0.5 means half transparent.
+</p>
+
+<p>Why does this matter? Think about text sitting on top of a background image. Sometimes full solid text feels too
+  harsh. Dropping the opacity slightly makes it feel softer and more elegant. Small difference, big visual impact.</p>
+
+<p>You will use RGBA a lot when we start building the hero section of the Netflix clone.</p>
+
+<h2>Which One Should You Use</h2>
+
+<p>Here is my honest take after building a lot of projects.</p>
+
+<ul>
+  <li><strong>Use hex codes for most colors.</strong> They are precise, they are what designers give you, they are what
+    every color tool outputs. Make them your default.</li>
+  <li><strong>Use RGBA when you need transparency.</strong> Hex codes cannot do transparency. RGBA can.</li>
+  <li><strong>Use color names only when you are quickly testing something</strong> and do not care about the exact
+    shade.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>You do not have to memorize hex codes or figure out RGB values yourself. Just go to <strong>coolors.co</strong>,
+    pick any color you like, and copy the hex code. In real projects designers usually hand you the exact color values
+    anyway. Your job is just to know how to use them.</p>
+</div>
+
+<div class="challenge" data-title="Make the heading Netflix red"
+  data-description="Use a hex code to set the h1 color to the exact Netflix red. The hex code is #E50914."
   data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
-&lt;p&gt;Unlimited movies, TV shows, and more&lt;/p&gt;"
-  data-starter-css="body {
-  padding: 40px;
+&lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;" data-starter-css="body {
   font-family: sans-serif;
-  min-height: 100vh;
-  margin: 0;
-}"
-  data-checks="body"
-  data-lang="css"
-  data-solution="body {
-  background-color: rgba(0, 0, 0, 0.75);
-  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
-  background-blend-mode: multiply;
-  background-size: cover;
-  min-height: 100vh;
-  margin: 0;
-  padding: 40px;
-  font-family: sans-serif;
-}
-
-h1 {
-  color: white;
-}
-
-p {
-  color: white;
+  padding: 24px;
+}" data-css-checks="h1|color|rgb(229, 9, 20)" data-lang="css" data-solution="h1 {
+  color: #E50914;
 }">
 </div>
 
 <div class="next-lesson">
-  <p>Next up: the text looks great but the font is still the browser default. Let's give your Netflix clone a real custom font.</p>
-  <a href="/css/fonts">Learn about CSS fonts →</a>
+  <p>In the next lesson I am going to show you how to change the background color of your page and elements — and we
+    will start making the Netflix clone actually look dark and cinematic. Come on in.</p>
+  <a href="/css/background-color">Learn about background colors →</a>
 </div>

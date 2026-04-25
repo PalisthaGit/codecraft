@@ -1,0 +1,272 @@
+<div class="definition">
+  The font-size property controls how big or small your text appears on the page. You can set it using px for fixed
+  sizes, rem for sizes that scale with the root font size, or em for sizes that scale relative to the parent element.
+</div>
+
+<pre><code>h1 {
+  font-size: 48px;
+}
+
+p {
+  font-size: 18px;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever landed on a website where the text was just too small to read comfortably? Or so big it felt like it
+  was shouting at you? You probably left pretty quickly.</p>
+
+<p>Font size is one of those things that people do not notice when it is right. But they notice immediately when it is
+  wrong. Getting it right is one of the simplest things you can do to make your page feel professional and easy to
+  read.</p>
+
+<p>Let us learn how to control it.</p>
+
+<h2>What is Font Size</h2>
+
+<p>Font size controls how big or small your text appears on the page. In CSS you set it using the
+  <code>font-size</code> property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    font-size: 48px;
+    }
+
+    p {
+    font-size: 18px;
+    }
+  </template>
+</section>
+
+<p>The heading is now big and bold at 48px and the paragraph sits comfortably at 18px below it.</p>
+
+<p>Simple. But here is where it gets interesting. There are actually three different units you can use to set font size
+  in CSS and each one behaves differently. Understanding the difference will save you a lot of confusion later.</p>
+
+<h2>CSS Font Size Using px</h2>
+
+<p>px stands for pixels. It is the most straightforward unit — you say 16px and the text is always exactly 16 pixels
+  tall no matter what.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    font-size: 64px;
+    }
+
+    p {
+    font-size: 16px;
+    }
+  </template>
+</section>
+
+<p>Big heading, readable paragraph. Exactly what we told it to be.</p>
+
+<p>px is great when you want precise control and you know exactly how big you want something. It is the easiest unit to
+  think about as a beginner.</p>
+
+<p>The one downside of px is that it is fixed. If a user has set their browser to display larger text for accessibility
+  reasons px ignores that preference. The text stays the same size no matter what.</p>
+
+<p>That is where rem comes in.</p>
+
+<h2>CSS Font Size Using rem</h2>
+
+<p>rem stands for root em. It is based on the font size of the root element of the page which is the
+  <code>html</code> tag.</p>
+
+<p>By default browsers set the root font size to 16px. So 1rem equals 16px. 2rem equals 32px. 0.5rem equals 8px.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    font-size: 3rem;
+    }
+
+    p {
+    font-size: 1rem;
+    }
+  </template>
+</section>
+
+<p>The heading is 3 times the root size which is 48px. The paragraph is exactly the root size which is 16px.</p>
+
+<p>So why use rem instead of just writing 48px and 16px directly?</p>
+
+<p>Because rem respects the user's browser settings. If someone has set their browser to display larger text for
+  accessibility reasons rem scales with that. px does not. That makes rem the more respectful and accessible choice.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>In real projects most developers use rem for font sizes and px for things like borders or spacing where exact pixel
+    values matter more. Once you get comfortable with rem you will reach for it naturally. A good starting point is 1rem
+    for body text, 1.5rem for small headings and 2.5rem to 3rem for main headings.</p>
+</div>
+
+<h2>CSS Font Size Using em</h2>
+
+<p>em is similar to rem but with one important difference. Instead of being based on the root font size it is based on
+  the font size of the parent element.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    font-size: 20px;
+    }
+
+    h1 {
+    font-size: 2em;
+    }
+
+    p {
+    font-size: 0.8em;
+    }
+  </template>
+</section>
+
+<p>The hero div has a font size of 20px. The h1 is 2em which means 2 times the parent size — so 40px. The paragraph is
+  0.8em which means 80 percent of the parent size — so 16px.</p>
+
+<p>em is powerful but it can get confusing fast. If you have elements nested inside other elements the em values
+  compound on each other and things can get unpredictable.</p>
+
+<p>Here is my honest take. As a beginner start with px to understand what is happening. Then switch to rem as your main
+  unit for font sizes. Use em only when you specifically need something to scale relative to its parent.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <div>
+    <p>A quick way to make rem easier to work with is to set the root font size to 10px in your CSS. Then 1rem equals
+      10px, 1.6rem equals 16px, 2.4rem equals 24px. The math becomes much simpler. A lot of developers do this on every
+      project.</p>
+    <pre><code>html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem; /* this is now 16px */
+}
+
+h1 {
+  font-size: 4.8rem; /* this is now 48px */
+}</code></pre>
+  </div>
+</div>
+
+<h2>Which Unit Should You Use</h2>
+
+<p>Here is the honest answer.</p>
+
+<p>Use px when you are just starting out and want to think in straightforward numbers. Nothing wrong with that.</p>
+
+<p>Use rem once you are comfortable. It is better for accessibility and scales cleanly across different screen sizes.</p>
+
+<p>Use em when you specifically need something to scale relative to its immediate parent. Not very often.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us set proper font sizes on our Netflix clone. Right now the sizes are whatever the browser defaults are. Let us
+  make them intentional.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+    <button>Sign In</button>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <p>Ready to watch? Enter your email to create or restart your membership.</p>
+    <form>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: #E50914;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    }
+
+    p {
+    font-size: 1.1rem;
+    color: white;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    }
+  </template>
+</section>
+
+<p>Everything has a deliberate size now. The headings are big and cinematic. The paragraphs are comfortable to read.
+  The button text is clear without being oversized.</p>
+
+<div class="challenge" data-title="Set font sizes on the Netflix clone"
+  data-description="Set the font size of the h1 to 3rem and the paragraphs to 1.1rem."
+  data-starter-html="&lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+&lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;p&gt;Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;"
+  data-starter-css="h1 {
+
+}
+
+p {
+
+}"
+  data-css-checks="h1|font-size|3rem;p|font-size|1.1rem"
+  data-lang="css"
+  data-solution="h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1.1rem;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you font weight and style — how to make text bold, light, or italic and how
+    to use it in a way that actually looks intentional. Come on in.</p>
+  <a href="/css/font-weight">Learn about Font Weight and Style →</a>
+</div>

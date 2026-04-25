@@ -1,0 +1,216 @@
+<div class="definition">
+  Google Fonts is a free library of over a thousand beautiful fonts hosted by Google. Add a single link tag to your HTML
+  and any font in the library is ready to use on your page — no downloading, no installing, nothing complicated.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever looked at a website and thought the text just looks really good? Not the content, just the way the
+  letters look. Clean, modern, designed.</p>
+
+<p>That is almost always a Google Font.</p>
+
+<p>Web safe fonts are fine but there are only about a dozen of them and most of them feel plain. Google Fonts gives you
+  over a thousand beautiful free fonts that you can add to any project in about thirty seconds. No downloading, no
+  installing, nothing complicated.</p>
+
+<p>I use Google Fonts in almost every project I build. Let me show you exactly how it works.</p>
+
+<h2>What is Google Fonts</h2>
+
+<p>Google Fonts is a free library of fonts hosted by Google. Instead of the font living on your computer it lives on
+  Google's servers. When someone opens your webpage their browser pulls the font directly from Google and displays it on
+  the page.</p>
+
+<p>That means it works for everyone who visits your site no matter what device or operating system they are on.</p>
+
+<h2>How to Add a Google Font</h2>
+
+<p>Go to <strong>fonts.google.com</strong>. You will see hundreds of fonts to browse through.</p>
+
+<p>Click on any font you like. For our Netflix clone we are going to use a font called <strong>Bebas Neue</strong>. It
+  is bold, strong, and cinematic — perfect for a streaming platform.</p>
+
+<p>Once you click the font you will see a page with different styles. Click the <strong>Get Font</strong> button then
+  click <strong>Get embed code</strong>.</p>
+
+<p>Google will give you a link tag that looks like this:</p>
+
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+<p>Copy that and paste it inside the <code>head</code> section of your HTML file. It goes right above your
+  <code>style.css</code> link.</p>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Netflix Clone&lt;/title&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet"&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+
+<p>Now in your CSS you use it exactly like any other font family.</p>
+
+<pre><code>body {
+  font-family: "Bebas Neue", sans-serif;
+}</code></pre>
+
+<p>That is it. The font is now live on your page.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always put your Google Fonts link tag <strong>above</strong> your <code>style.css</code> link in the head. The
+    browser loads files in order from top to bottom. If your CSS loads before the font is ready you might see a flash of
+    the wrong font before it switches. Putting Google Fonts first avoids that.</p>
+</div>
+
+<h2>Using Multiple Google Fonts</h2>
+
+<p>You are not limited to one font. Most real projects use two — one for headings and one for body text.</p>
+
+<p>A classic combination that works beautifully is a bold display font for headings and a clean readable font for
+  paragraphs.</p>
+
+<p>Go back to Google Fonts, find Bebas Neue and also find Roboto. Select both and Google will give you one single link
+  tag that loads them together.</p>
+
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+<p>Now use them in your CSS.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <h1 id="logo">Netflix</h1>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    }
+  </template>
+</section>
+
+<p>The headings now use Bebas Neue and everything else uses Roboto. Clean, intentional, and completely different from
+  the default browser font.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A good rule of thumb for font pairing is to use a display or decorative font for headings and a simple readable
+    font for body text. Never use two decorative fonts together — it looks chaotic. One bold, one clean. That
+    combination works almost every time.</p>
+</div>
+
+<h2>Font Weights in Google Fonts</h2>
+
+<p>When you pick a font on Google Fonts you will notice it comes in different weights — 300, 400, 500, 700, 900. These
+  are how thin or bold the font is.</p>
+
+<p>400 is normal. 700 is bold. 300 is light.</p>
+
+<p>If you want to use a specific weight you need to select it on Google Fonts before copying the link. Otherwise the
+  browser will only load the default weight and your bold or light styles will not work.</p>
+
+<p>Look at the link tag we used for Roboto earlier:</p>
+
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+<p>That <code>wght@400;700</code> part means we are loading both the regular weight and the bold weight. If we only
+  loaded 400 and then tried to use <code>font-weight: bold</code> in our CSS nothing would happen.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Only load the font weights you actually need. Every weight you add is an extra file the browser has to download.
+    Loading all nine weights of a font when you only use two of them slows your page down for no reason.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us update our Netflix clone with proper Google Fonts. This is going to make a noticeable difference.</p>
+
+<p>The Google Fonts link goes in the <code>head</code> of your HTML above your stylesheet link. Then you use the fonts
+  in CSS exactly as you have been.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <h1 id="logo">Netflix</h1>
+    <button>Sign In</button>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <p>Ready to watch? Enter your email to create or restart your membership.</p>
+    <form>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    color: #E50914;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    }
+  </template>
+</section>
+
+<p>The headings now have that bold cinematic Bebas Neue look and the paragraphs use clean readable Roboto. The page is
+  starting to feel like a real product.</p>
+
+<div class="challenge" data-title="Apply Google Fonts to the Netflix clone"
+  data-description="The Google Fonts link for Bebas Neue and Roboto is already connected. Use Bebas Neue for all headings and Roboto for the body text."
+  data-starter-html="&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Roboto:wght@400;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+&lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;"
+  data-starter-css="body {
+
+}
+
+h1 {
+
+}"
+  data-css-checks="body|font-family|Roboto, Arial, sans-serif;h1|font-family|&quot;Bebas Neue&quot;, sans-serif"
+  data-lang="css"
+  data-solution='body {
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+h1 {
+  font-family: "Bebas Neue", sans-serif;
+}'>
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you how to control font size, font weight, and all the other text properties
+    that make your typography feel polished and intentional. Come on in.</p>
+  <a href="/css/typography">Learn about Typography →</a>
+</div>

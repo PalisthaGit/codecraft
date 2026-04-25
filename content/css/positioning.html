@@ -1,73 +1,615 @@
 <div class="definition">
-  CSS positioning controls where an element sits on the page. With <code>position: fixed</code>, elements stay in place as the user scrolls. With <code>position: absolute</code>, elements can be placed precisely inside a parent.
+  CSS positioning controls exactly where an element sits on the page. With it you can fix a navbar to the top of the
+  screen, layer text over a movie card, or pin a badge to the corner of a thumbnail — none of which are possible with
+  normal document flow alone.
 </div>
 
-<p>When you scroll down on Netflix, the black navbar stays at the top. The movie title text sits on top of the thumbnail image. Both of these are done with CSS positioning.</p>
-
-<h2>position: static</h2>
-
-<p>This is the default. Every element starts here — it just sits in the normal flow of the page, one after another.</p>
-
-<pre><code class="language-css">/* You'll never actually write this — it's the default */
-.element {
-  position: static;
-}</code></pre>
-
-<h2>position: relative</h2>
-
-<p><code>relative</code> lets you nudge an element from where it would normally sit, without affecting the layout around it. It also creates a positioning context for any <code>absolute</code> children inside it.</p>
-
-<pre><code class="language-css">.movie-card {
-  position: relative;   /* makes this the anchor for absolute children */
-}</code></pre>
-
-<h2>position: absolute</h2>
-
-<p><code>absolute</code> removes an element from the normal flow and places it precisely inside its nearest <code>relative</code> (or <code>fixed</code>) parent using <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>.</p>
-
-<pre><code class="language-css">.movie-card {
-  position: relative;
-}
-
-.movie-title {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  color: white;
-  font-size: 14px;
-}</code></pre>
-
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to see text overlaid on a movie card using absolute positioning. Try changing <code>bottom</code> and <code>left</code> to move the text around.</p>
-</div>
-
-<section class="try-example">
-  <template class="try-default-html">
-<div class="movie-card">
-  <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg?r=0af" alt="The Witcher">
-  <div class="movie-overlay">
-    <span class="movie-title">The Witcher</span>
-  </div>
-</div>
-  </template>
-  <template class="try-default-css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #141414;
-  padding: 20px;
+<pre><code>.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 .movie-card {
   position: relative;
-  width: 240px;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
+}
+
+.movie-card .label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever tried to get a navbar to stay at the top of the page while the user scrolls? Or tried to put a badge
+  in the corner of a card, or layer text on top of an image?</p>
+
+<p>If you tried to do any of that with just margin and padding you probably ran into a wall. Those properties push
+  elements around inside the normal document flow. They cannot pull an element out of that flow and pin it wherever
+  you want.</p>
+
+<p>CSS positioning is what lets you do that.</p>
+
+<p>There are five position values and they all behave differently. But once you understand the logic behind each one
+  everything clicks into place. Let us go through them one by one using the Netflix clone so every example feels
+  like you are actually building something.</p>
+
+<h2>How Positioning Works</h2>
+
+<p>By default every element sits in the normal document flow. Elements stack top to bottom, take up their natural
+  space, and push other elements around them.</p>
+
+<p>When you give an element a <code>position</code> value other than <code>static</code>, you unlock four offset
+  properties that let you move it around:</p>
+
+<p><code>top</code> — distance from the top edge.</p>
+<p><code>bottom</code> — distance from the bottom edge.</p>
+<p><code>left</code> — distance from the left edge.</p>
+<p><code>right</code> — distance from the right edge.</p>
+
+<p>Which edge those offsets measure from depends on which position value you use. That is the key to understanding
+  positioning.</p>
+
+<h2>position: static</h2>
+
+<p><code>static</code> is the default. Every element is statically positioned unless you say otherwise. The offset
+  properties — top, bottom, left, right — have no effect on static elements.</p>
+
+<p>You will almost never write <code>position: static</code> yourself. It just means leave this element in its
+  natural place in the flow.</p>
+
+<h2>position: relative</h2>
+
+<p><code>relative</code> moves an element relative to where it would normally sit. The element still takes up its
+  original space in the document — it just visually shifts from that natural position.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="/images/movie1.png" alt="Movie 1">
+      </div>
+      <div class="movie-card shifted">
+        <img src="/images/movie2.png" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="/images/movie3.png" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background-color: #f0f0f0;
+    padding: 16px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card.shifted {
+    position: relative;
+    top: 20px;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The second card shifted down 20px from where it would normally sit. Notice the gap it left behind — the space is
+  still reserved, the card just moved visually.</p>
+
+<p>On its own, nudging things with <code>relative</code> is rarely useful. The real power of
+  <code>position: relative</code> is that it creates a <strong>positioning context</strong> for absolutely positioned
+  children inside it. That is what the next section is about.</p>
+
+<h2>position: absolute</h2>
+
+<p><code>absolute</code> pulls an element completely out of the document flow. It no longer takes up space. It
+  positions itself relative to the nearest ancestor that has a <code>position</code> value other than
+  <code>static</code>.</p>
+
+<p>This is the combination you will use constantly: <code>position: relative</code> on the parent,
+  <code>position: absolute</code> on the child.</p>
+
+<p>A perfect real example is a badge overlaid on a movie card.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-card">
+      <img src="/images/movie1.png" alt="Movie 1">
+      <div class="badge">New</div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-card {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #E50914;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    }
+  </template>
+</section>
+
+<p>The badge sits in the top-left corner of the card, layered on top of the image. Try changing
+  <code>top: 8px; left: 8px</code> to <code>bottom: 8px; right: 8px</code> and watch it jump to the
+  bottom-right corner.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The most common mistake with <code>position: absolute</code> is forgetting to add <code>position: relative</code>
+    to the parent. Without it the absolutely positioned child will travel up the DOM looking for a positioned ancestor,
+    and if it finds none it positions itself relative to the entire page. Always set the parent to
+    <code>position: relative</code>.</p>
+</div>
+
+<h2>Overlaying a Title on a Movie Card</h2>
+
+<p>Now let us use absolute positioning to overlay a movie title at the bottom of a card — the way Netflix and every
+  streaming site does it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-card">
+      <img src="/images/movie1.png" alt="Inception">
+      <div class="overlay">
+        <p class="title">Inception</p>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-card {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    padding: 24px 10px 10px;
+    }
+
+    .title {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0;
+    }
+  </template>
+</section>
+
+<p>The gradient overlay fades from dark at the bottom to transparent at the top. The title sits cleanly at the bottom
+  of the card. This is exactly the pattern used on real streaming sites.</p>
+
+<h2>position: fixed</h2>
+
+<p><code>fixed</code> positions an element relative to the browser window itself — not to any parent element. It
+  stays in the same place on screen even when the user scrolls. This is exactly what you need for a sticky navbar.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="page">
+      <div class="navbar">
+        <h1 class="logo">Netflix</h1>
+        <button class="signin">Sign In</button>
+      </div>
+      <div class="content">
+        <p>Scroll down to see the navbar stay pinned at the top.</p>
+        <p>More content here...</p>
+        <p>Even more content...</p>
+        <p>Still scrolling...</p>
+        <p>The navbar never moves.</p>
+        <p>Keep going...</p>
+        <p>Still there.</p>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .page {
+    height: 380px;
+    overflow-y: auto;
+    background-color: #141414;
+    position: relative;
+    }
+
+    .navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background-color: #141414;
+    border-bottom: 1px solid #333;
+    z-index: 10;
+    }
+
+    .logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #E50914;
+    letter-spacing: 3px;
+    margin: 0;
+    }
+
+    .signin {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    }
+
+    .content {
+    padding: 24px 32px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    }
+  </template>
+</section>
+
+<p>The navbar stays pinned to the top of the scrollable area no matter how far down you go.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When you use <code>position: fixed</code> on a navbar the navbar is removed from the document flow. This means
+    page content will slide underneath it. Always add a <code>padding-top</code> to your main content equal to the
+    height of the navbar so nothing gets hidden behind it.</p>
+</div>
+
+<h2>position: sticky</h2>
+
+<p><code>sticky</code> is a hybrid. The element behaves like a normal in-flow element until the user scrolls it
+  to a threshold — then it sticks in place like a fixed element.</p>
+
+<p>A great use case is section headings that stick to the top as you scroll through a long list.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="movie-list">
+        <div class="movie-card"><img src="/images/movie1.png" alt="Movie 1"></div>
+        <div class="movie-card"><img src="/images/movie2.png" alt="Movie 2"></div>
+        <div class="movie-card"><img src="/images/movie3.png" alt="Movie 3"></div>
+        <div class="movie-card"><img src="/images/movie4.png" alt="Movie 4"></div>
+      </div>
+      <h2 class="section-title">Top Picks</h2>
+      <div class="movie-list">
+        <div class="movie-card"><img src="/images/movie4.png" alt="Movie 5"></div>
+        <div class="movie-card"><img src="/images/movie3.png" alt="Movie 6"></div>
+        <div class="movie-card"><img src="/images/movie2.png" alt="Movie 7"></div>
+        <div class="movie-card"><img src="/images/movie1.png" alt="Movie 8"></div>
+      </div>
+      <h2 class="section-title">New Releases</h2>
+      <div class="movie-list">
+        <div class="movie-card"><img src="/images/movie2.png" alt="Movie 9"></div>
+        <div class="movie-card"><img src="/images/movie1.png" alt="Movie 10"></div>
+        <div class="movie-card"><img src="/images/movie4.png" alt="Movie 11"></div>
+        <div class="movie-card"><img src="/images/movie3.png" alt="Movie 12"></div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-section {
+    height: 320px;
+    overflow-y: auto;
+    background-color: #141414;
+    padding: 0 16px 16px;
+    }
+
+    .section-title {
+    position: sticky;
+    top: 0;
+    background-color: #141414;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 12px 0 8px;
+    margin: 0;
+    z-index: 1;
+    }
+
+    .movie-list {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    }
+
+    .movie-card {
+    width: 140px;
+    height: 90px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>Scroll down inside the box. Each section heading sticks to the top as you pass it, then gets replaced by the next
+  one. This pattern is used in contact lists, playlist UIs, and dashboards everywhere.</p>
+
+<h2>z-index</h2>
+
+<p>When positioned elements overlap each other you need to control which one appears on top. That is what
+  <code>z-index</code> does. Elements with a higher <code>z-index</code> sit on top of those with a lower one. Think
+  of it as layers — higher number means closer to you.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="stack">
+      <div class="card card-1">Card 1<br><small>z-index: 1</small></div>
+      <div class="card card-2">Card 2<br><small>z-index: 2</small></div>
+      <div class="card card-3">Card 3<br><small>z-index: 3</small></div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .stack {
+    position: relative;
+    height: 160px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    }
+
+    .card {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+    text-align: center;
+    }
+
+    .card-1 {
+    background-color: #6367FF;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    }
+
+    .card-2 {
+    background-color: #E50914;
+    top: 40px;
+    left: 60px;
+    z-index: 2;
+    }
+
+    .card-3 {
+    background-color: #22C55E;
+    top: 60px;
+    left: 100px;
+    z-index: 3;
+    }
+  </template>
+</section>
+
+<p>Card 3 sits on top, Card 1 is at the back. Try swapping the z-index values and watch the stacking order change.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>z-index</code> only works on elements that have a <code>position</code> value other than
+    <code>static</code>. Keep your values simple — use 1, 2, 3 for normal stacking, and reserve higher values like 10
+    or 100 for navbars and modals so you always have room to slot things in between.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us bring everything together. A sticky navbar, movie cards with gradient title overlays, a red New badge, and
+  correct z-index layering so nothing gets hidden underneath something else.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="page">
+      <div class="navbar">
+        <h1 class="logo">Netflix</h1>
+        <button class="signin">Sign In</button>
+      </div>
+      <div class="content">
+        <h2 class="section-heading">Trending Now</h2>
+        <div class="movie-row">
+          <div class="movie-card">
+            <img src="/images/movie1.png" alt="Inception">
+            <span class="badge">New</span>
+            <div class="overlay"><p class="title">Inception</p></div>
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie2.png" alt="Interstellar">
+            <div class="overlay"><p class="title">Interstellar</p></div>
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie3.png" alt="The Dark Knight">
+            <div class="overlay"><p class="title">The Dark Knight</p></div>
+          </div>
+          <div class="movie-card">
+            <img src="/images/movie4.png" alt="Dune">
+            <div class="overlay"><p class="title">Dune</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    .page {
+    background-color: #141414;
+    font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background-color: #141414;
+    border-bottom: 1px solid #333;
+    z-index: 10;
+    }
+
+    .logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #E50914;
+    letter-spacing: 3px;
+    }
+
+    .signin {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    }
+
+    .content {
+    padding: 24px 32px;
+    }
+
+    .section-heading {
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    }
+
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    }
+
+    .movie-card {
+    position: relative;
+    width: 180px;
+    height: 110px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    .badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #E50914;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 3px;
+    z-index: 2;
+    }
+
+    .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    padding: 20px 10px 8px;
+    z-index: 1;
+    }
+
+    .title {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    }
+  </template>
+</section>
+
+<p>The navbar sticks to the top. Each card has a gradient overlay with the title. The first card has a red New badge.
+  The z-index values keep the badge above the overlay and the navbar above everything.</p>
+
+<div class="challenge"
+  data-title="Overlay a badge on a movie card"
+  data-description="Add a 'Top 10' badge to the top-right corner of the movie card. The badge should be absolutely positioned inside the card."
+  data-starter-html="&lt;div class=&quot;movie-card&quot;&gt;
+  &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+  &lt;div class=&quot;badge&quot;&gt;Top 10&lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-card {
+  width: 200px;
+  height: 120px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -77,218 +619,45 @@ body {
   object-fit: cover;
 }
 
-.movie-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-  padding: 20px 10px 8px;
-}
-
-.movie-title {
+.badge {
+  background-color: #E50914;
   color: white;
-  font-family: sans-serif;
-  font-size: 13px;
+  font-size: 0.75rem;
   font-weight: 700;
-}
-  </template>
-</section>
-
-<h2>position: fixed</h2>
-
-<p><code>fixed</code> locks an element to the viewport — it stays in place as the user scrolls. This is exactly what Netflix uses for its navbar.</p>
-
-<pre><code class="language-css">.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;            /* stretches to full width */
-  z-index: 100;        /* sits above all other content */
-  background-color: rgba(0, 0, 0, 0.9);
-}</code></pre>
-
-<div class="tip">
-  <span>💡</span>
-  <p>When you fix the navbar, the page content starts at the top behind it. Add padding-top to the body equal to the navbar height to prevent overlap.</p>
-</div>
-
-<h2>z-index</h2>
-
-<p><code>z-index</code> controls which element appears on top when elements overlap. Higher numbers sit in front.</p>
-
-<pre><code class="language-css">.top-bar {
-  position: fixed;
-  z-index: 100;      /* always on top */
-}
-
-.hero {
-  z-index: 1;        /* below the nav */
-}
-
-.modal {
-  z-index: 999;      /* above everything */
-}</code></pre>
-
-<div class="tip">
-  <span>💡</span>
-  <p><code>z-index</code> only works on elements that have a <code>position</code> set (anything other than <code>static</code>).</p>
-</div>
-
-<section class="try-example">
-  <template class="try-default-html">
-<nav class="top-bar">
-  <div class="logo">NETFLIX</div>
-  <button class="sign-in-btn">Sign In</button>
-</nav>
-
-<div class="hero">
-  <h1>Unlimited movies, TV shows, and more</h1>
-  <p>Scroll down to see the nav stay fixed.</p>
-</div>
-
-<div class="content">
-  <p>The navbar stays at the top even as you scroll past the hero section.</p>
-</div>
-  </template>
-  <template class="try-default-css">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  color: white;
-  background-color: #141414;
-}
-
-.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.logo {
-  color: #e50914;
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.sign-in-btn {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 8px 18px;
+  padding: 4px 8px;
   border-radius: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hero {
-  background-color: rgba(0, 0, 0, 0.75);
-  background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg');
-  background-blend-mode: multiply;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 80px 40px;
-}
-
-.hero h1 {
-  font-size: 36px;
-  font-weight: 700;
-  max-width: 500px;
-  margin-bottom: 16px;
-}
-
-.content {
-  padding: 60px 40px;
-  font-size: 18px;
-  line-height: 1.8;
-  background-color: #1a1a1a;
-  min-height: 200px;
-}
-  </template>
-</section>
-
-<div class="challenge"
-  data-title="Fix the navbar to the top"
-  data-description="Make the .top-bar stay fixed at the top of the page as the user scrolls. Position it at top: 0, stretch it full width, and give it a z-index of 100."
-  data-starter-html="&lt;nav class=&quot;top-bar&quot;&gt;
-  &lt;div class=&quot;logo&quot;&gt;NETFLIX&lt;/div&gt;
-  &lt;button&gt;Sign In&lt;/button&gt;
-&lt;/nav&gt;
-&lt;div class=&quot;hero&quot;&gt;
-  &lt;h1&gt;Scroll down&lt;/h1&gt;
-  &lt;p&gt;See if the nav stays fixed.&lt;/p&gt;
-&lt;/div&gt;"
-  data-starter-css="* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  color: white;
-  background-color: #141414;
-}
-
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  background-color: rgba(0,0,0,0.9);
-}
-
-.logo {
-  color: #e50914;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-.hero {
-  background-color: #222;
-  min-height: 200vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 40px;
 }"
-  data-checks="nav"
+  data-css-checks=".movie-card|position|relative;.badge|position|absolute;.badge|top|8px;.badge|right|8px"
   data-lang="css"
-  data-solution=".top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 40px;
-  background-color: rgba(0,0,0,0.9);
+  data-solution=".movie-card {
+  position: relative;
+  width: 200px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #E50914;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
 }">
 </div>
 
 <div class="next-lesson">
-  <p>Next up: the layout is complete. Now let's bring it to life — add smooth hover animations to the movie cards using CSS transitions.</p>
-  <a href="/css/transitions">Learn about CSS transitions →</a>
+  <p>In the next lesson I am going to show you CSS Transitions — how to add smooth hover animations to buttons and
+    cards so your Netflix clone feels polished and alive. Come on in.</p>
+  <a href="/css/transitions">Learn about CSS Transitions →</a>
 </div>

@@ -1,0 +1,821 @@
+<div class="definition">
+  CSS animations let elements animate automatically on their own — no hover or click needed. You define the steps with
+  <code>@keyframes</code> and attach them with the <code>animation</code> property.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever landed on a website and the heading slides in from the left as the page loads? Or seen a loading spinner
+  rotating in a circle? Or a notification that pulses gently to grab your attention?</p>
+
+<p>None of that required JavaScript. It was pure CSS animations.</p>
+
+<p>Transitions are great but they need something to trigger them — a hover, a click, a focus. Animations are different.
+  They run on their own. The moment an element appears on the page the animation starts. No user interaction needed.</p>
+
+<h2>Transitions vs Animations</h2>
+
+<p>Before we go further let me make sure this distinction is clear.</p>
+
+<ul>
+  <li><strong>Transitions</strong> — animate between two states. They need a trigger. Hover, focus, active. You define
+    the start and end and CSS handles the in between.</li>
+  <li><strong>Animations</strong> — run automatically. No trigger needed. You define multiple steps and CSS loops
+    through them. They can repeat, reverse, and run forever if you want.</li>
+</ul>
+
+<p>Think of a transition like a light switch. It goes from off to on when you flip it. An animation is like a traffic
+  light. It cycles through states on its own continuously.</p>
+
+<h2>@keyframes — Defining the Animation</h2>
+
+<p>To create an animation you first define what it does using <code>@keyframes</code>. This is where you describe each
+  step of the animation.</p>
+
+<pre><code class="language-css">@keyframes animation-name {
+  from {
+    /* starting state */
+  }
+  to {
+    /* ending state */
+  }
+}</code></pre>
+
+<p><code>from</code> is where the animation starts. <code>to</code> is where it ends. CSS handles everything in between
+  automatically.</p>
+
+<p>Then you attach it to an element using the <code>animation</code> property.</p>
+
+<p>Let us start with something simple. A pulsing red glow on the Netflix logo.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: #E50914;
+  letter-spacing: 4px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+  </template>
+</section>
+
+<p>The Netflix logo now gently fades in and out continuously. Here is what is happening.</p>
+
+<ul>
+  <li><code>@keyframes pulse</code> — defines an animation called <code>pulse</code>. It starts at full opacity and ends
+    at half opacity.</li>
+  <li><code>animation: pulse 2s ease-in-out infinite</code> — attaches the animation to the logo. Let us break down each
+    value.</li>
+</ul>
+
+<ul>
+  <li><code>pulse</code> — the name of the keyframes to use.</li>
+  <li><code>2s</code> — the animation takes 2 seconds to complete one cycle.</li>
+  <li><code>ease-in-out</code> — the timing function. It eases in and out making the pulse feel smooth and natural.</li>
+  <li><code>infinite</code> — the animation repeats forever. Remove this and it only plays once.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The <code>animation</code> property follows this order: name, duration, timing-function, delay, iteration-count,
+    direction. You do not need to write all of them every time. The most common pattern is just name, duration, and
+    <code>infinite</code> for looping animations. Everything else defaults to sensible values.</p>
+</div>
+
+<h2>Using Percentage Steps</h2>
+
+<p>Instead of just <code>from</code> and <code>to</code> you can define multiple steps using percentages.
+  <code>0%</code> is the start, <code>100%</code> is the end, and anything in between is a middle step.</p>
+
+<p>This is how you create more complex animations with multiple stages.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: #E50914;
+  letter-spacing: 4px;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 1;
+    text-shadow: none;
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: none;
+  }
+}
+  </template>
+</section>
+
+<p>The logo now pulses with a red glow at the halfway point of the animation and then fades back. Three steps — start,
+  middle, end.</p>
+
+<ul>
+  <li><code>0%</code> — the starting state. Full opacity, no glow.</li>
+  <li><code>50%</code> — halfway through. Slightly faded with a red text shadow glowing behind it.</li>
+  <li><code>100%</code> — back to the start. Full opacity, no glow.</li>
+</ul>
+
+<p>Because <code>0%</code> and <code>100%</code> are identical the animation loops seamlessly. You cannot tell where one
+  cycle ends and the next begins.</p>
+
+<h2>animation-direction: alternate</h2>
+
+<p>Instead of jumping from <code>100%</code> back to <code>0%</code> at the end of each cycle you can make the
+  animation reverse smoothly using <code>alternate</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: #E50914;
+  letter-spacing: 4px;
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+  </template>
+</section>
+
+<p>The logo fades out then fades back in smoothly. <code>alternate</code> makes the animation play forward then backward
+  then forward again in a continuous smooth loop.</p>
+
+<p>Instead of jumping back to <code>0%</code> when it hits <code>100%</code> the animation reverses direction. It plays
+  <code>from</code> to <code>to</code> then <code>to</code> back to <code>from</code> again. This is much smoother than
+  manually making <code>0%</code> and <code>100%</code> match.</p>
+
+<h2>A Loading Spinner</h2>
+
+<p>Spinners are everywhere. Loading states, processing indicators, buffering icons. Here is how to make one with a pure
+  CSS rotation animation.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="spinner"></div>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #E50914;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+  </template>
+</section>
+
+<p>A red spinning circle. Clean, simple, and exactly what you see on loading screens everywhere. Here is what is
+  happening.</p>
+
+<ul>
+  <li><code>border: 4px solid rgba(255,255,255,0.2)</code> — a light transparent border on all four sides. This is the
+    gray track of the spinner.</li>
+  <li><code>border-top-color: #E50914</code> — only the top border is red. As the element rotates this red section spins
+    around the track.</li>
+  <li><code>border-radius: 50%</code> — makes it a circle not a square.</li>
+  <li><code>animation: spin 0.8s linear infinite</code> — rotates it continuously. <code>linear</code> timing is
+    important here.</li>
+  <li><code>transform: rotate(0deg)</code> to <code>rotate(360deg)</code> — rotates the element one full turn. Then it
+    loops back and goes again.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>linear</code> is the right timing function for rotation animations. <code>ease</code> or
+    <code>ease-in-out</code> would make the spinner slow down and speed up which looks wrong. Spinners should feel
+    mechanical and constant. <code>linear</code> gives you that.</p>
+</div>
+
+<h2>Slide In on Page Load</h2>
+
+<p>This is something you see on almost every modern landing page. Content slides in from below as the page loads. It
+  feels welcoming and dynamic.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="hero-content">
+  <h1>Unlimited movies, TV shows, and more.</h1>
+  <p>Starts at USD 2.99. Cancel anytime.</p>
+</div>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.hero-content {
+  text-align: center;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.hero-content h1 {
+  font-family: sans-serif;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.hero-content p {
+  color: white;
+  font-size: 1.1rem;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </template>
+</section>
+
+<p>When the page loads the content fades in while sliding up from 40px below its final position. It feels polished and
+  intentional. Here is what is happening.</p>
+
+<ul>
+  <li><code>from</code> — the content starts invisible (<code>opacity: 0</code>) and 40px below where it will end up
+    (<code>translateY(40px)</code>).</li>
+  <li><code>to</code> — the content ends fully visible (<code>opacity: 1</code>) and in its normal position
+    (<code>translateY(0)</code>).</li>
+  <li><code>forwards</code> — this is <code>animation-fill-mode</code>. It tells the animation to stay at its final
+    state when it finishes instead of snapping back to the starting state. Without this the content would slide up and
+    then jump back to being invisible.</li>
+  <li><code>ease-out</code> — starts fast and slows down at the end. This feels like the content is settling into place.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The combination of <code>opacity</code> going from <code>0</code> to <code>1</code> and <code>translateY</code>
+    going from a positive value to <code>0</code> is the most used entrance animation on the entire web. Start with
+    30px to 50px of <code>translateY</code> and 0.6s to 0.8s duration for most hero content.</p>
+</div>
+
+<h2>animation-delay — Staggering Multiple Elements</h2>
+
+<p>When multiple elements animate in at the same time it looks fine. But when each one enters slightly after the
+  previous one it looks intentional and choreographed. You do this with <code>animation-delay</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="hero-content">
+  <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+  <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+  <p class="animate delay-2">Ready to watch? Enter your email below.</p>
+</div>
+  </template>
+  <template class="try-default-css">
+body {
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.hero-content {
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-content h1 {
+  font-family: sans-serif;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.hero-content p {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.animate {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </template>
+</section>
+
+<p>The heading slides in first. Then the first paragraph 0.2 seconds later. Then the second paragraph 0.2 seconds after
+  that. Each element enters in sequence like a choreographed reveal. Here is what is happening.</p>
+
+<ul>
+  <li><code>opacity: 0</code> on <code>.animate</code> — all elements start invisible. Without this they would flash at
+    full opacity before the animation starts.</li>
+  <li><code>animation-delay: 0.2s</code> and <code>0.4s</code> — each element waits a little longer before starting its
+    animation. 0.2 seconds between each one creates a clean cascading effect.</li>
+  <li><code>forwards</code> — each element stays visible after its animation completes. Without this they would all snap
+    back to invisible once done.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Keep stagger delays short. 0.1s to 0.2s between elements feels elegant. Longer than 0.3s starts to feel slow and
+    impatient. The whole entrance sequence should complete within about 1 second total.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add animations to our Netflix clone. The hero content slides up on load. The logo pulses subtly. We add a
+  loading spinner for when the page is buffering.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="navbar">
+  <h1 id="logo">Netflix</h1>
+  <div class="nav-actions">
+    <div class="notification-wrapper">
+      <span class="icon">🔔</span>
+      <span class="notification-badge">3</span>
+    </div>
+    <button class="signin">Sign In</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+    <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+    <p class="animate delay-2">Ready to watch? Enter your email to create or restart your membership.</p>
+    <form class="animate delay-3">
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </div>
+</div>
+
+<div class="movie-section">
+  <h2 class="section-title">Trending Now</h2>
+  <div class="movie-row">
+    <div class="movie-card"><img src="/images/movie1.png" alt="Movie 1"></div>
+    <div class="movie-card"><img src="/images/movie2.png" alt="Movie 2"></div>
+    <div class="movie-card"><img src="/images/movie3.png" alt="Movie 3"></div>
+    <div class="movie-card"><img src="/images/movie4.png" alt="Movie 4"></div>
+    <div class="movie-card"><img src="/images/movie5.png" alt="Movie 5"></div>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #141414;
+  color: white;
+}
+
+/* Keyframes */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+  }
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  z-index: 9999;
+}
+
+#logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: #E50914;
+  letter-spacing: 4px;
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.icon { font-size: 1.5rem; }
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 10;
+  background-color: #E50914;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.signin:hover {
+  background-color: white;
+  color: #141414;
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 120px 40px 80px;
+  text-align: center;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: white;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.hero form {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero input {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.hero input:focus { border-color: white; }
+
+.hero input::placeholder {
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+.hero button {
+  background-color: #E50914;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero button:hover { background-color: #b20710; }
+.hero button:active { transform: scale(0.98); }
+
+/* Staggered entrance animations */
+.animate {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+
+/* Movie Section */
+.movie-section {
+  padding: 40px;
+}
+
+.section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: #E50914;
+  border-radius: 2px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.movie-card {
+  position: relative;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
+  transition: background-color 0.3s ease;
+}
+
+.movie-card:hover::after {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Here is what every animation is doing.</p>
+
+<ul>
+  <li><code>logoGlow</code> — the Netflix logo pulses with a soft red glow every 3 seconds. The <code>0%, 100%</code>
+    pattern on the same state means it loops seamlessly.</li>
+  <li><code>slideUp</code> on hero content — each element in the hero slides up from 40px below and fades in. The
+    heading goes first, then the paragraphs, then the form.</li>
+  <li><code>opacity: 0</code> on <code>.animate</code> — all animated elements start invisible so there is no flash
+    before the animation begins.</li>
+  <li><code>forwards</code> on all entrance animations — every element stays visible after its animation completes.
+    Without this they would all disappear the moment their animation finished.</li>
+</ul>
+
+<div class="challenge"
+  data-title="Spinner and slide-in heading"
+  data-description="Make the spinner rotate continuously using a spin animation. Make the heading slide up and fade in on load using a slideUp animation."
+  data-starter-html="&lt;div class=&quot;spinner&quot;&gt;&lt;/div&gt;
+&lt;h1 class=&quot;animate&quot;&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;"
+  data-starter-css="* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 40px;
+  font-family: sans-serif;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #E50914;
+  border-radius: 50%;
+}
+
+.animate {
+  opacity: 0;
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  max-width: 500px;
+}"
+  data-lang="css"
+  data-cssChecks=".spinner|animation-name|spin;.animate|animation-name|slideUp"
+  data-solution=".spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #E50914;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate {
+  opacity: 0;
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  max-width: 500px;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}">
+</div>
+
+<div class="next-lesson">
+  <p>Next up: you have already seen <code>scale</code> and <code>translateY</code> in action. Now let us learn the full
+    power of what <code>transform</code> can do — rotate, scale, move, and skew elements with precision.</p>
+  <a href="/css/transform">Learn about CSS Transform →</a>
+</div>

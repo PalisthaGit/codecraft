@@ -1,0 +1,753 @@
+<div class="definition">
+  A CSS Variable is a custom property you define once and reuse everywhere. Change the value in one place and it updates
+  across the entire page instantly — no hunting through hundreds of lines of code.
+</div>
+
+<pre><code>:root {
+  --color-brand: #E50914;
+}
+
+.btn {
+  background-color: var(--color-brand);
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Look at our Netflix clone CSS. How many times have we written <code>#E50914</code>? The red color for the logo, the
+  buttons, the badges, the borders, the box shadows. It is scattered everywhere throughout the file.</p>
+
+<p>Now imagine the client comes back and says actually we want to change the brand color to a slightly different red. Or
+  maybe to orange. You would have to find every single place you used that color and change it one by one. Miss one and
+  the design is inconsistent.</p>
+
+<p>CSS Variables solve this completely. You define your values once at the top and use them everywhere. Change the value
+  in one place and it updates across the entire page instantly.</p>
+
+<p>This is how real professional projects are built.</p>
+
+<h2>What is a CSS Variable</h2>
+
+<p>A CSS Variable is a custom property you define yourself. You give it a name and a value. Then you reference that name
+  anywhere in your CSS instead of writing the actual value.</p>
+
+<p>You define variables inside a <code>:root</code> selector. <code>:root</code> refers to the very top of the document
+  — the html element. Putting variables there makes them available everywhere on the page.</p>
+
+<pre><code>:root {
+  --variable-name: value;
+}</code></pre>
+
+<p>Variable names always start with two dashes. That is how CSS knows it is a custom property and not a regular CSS
+  property.</p>
+
+<p>Then you use it with the <code>var()</code> function.</p>
+
+<pre><code>element {
+  property: var(--variable-name);
+}</code></pre>
+
+<p>Let us see it in action.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+    <button class="btn">Get Started</button>
+  </template>
+  <template class="try-default-css">
+    :root {
+    --brand-color: #E50914;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: var(--brand-color);
+    letter-spacing: 4px;
+    }
+
+    .btn {
+    background-color: var(--brand-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    }
+  </template>
+</section>
+
+<p>Both the logo and the button use the same <code>--brand-color</code> variable. Now if you change <code>#E50914</code>
+  to any other color in the <code>:root</code> both update instantly.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>:root</code> — the top level selector. Variables defined here are available to every element on the page.</p>
+<p><code>--brand-color: #E50914</code> — defines a variable called <code>--brand-color</code> with the value
+  <code>#E50914</code>. The two dashes at the start are required.</p>
+<p><code>var(--brand-color)</code> — retrieves the value of the variable. Wherever you write this CSS inserts
+  <code>#E50914</code> in its place.</p>
+
+<h2>Building a Design System</h2>
+
+<p>The real power of CSS Variables is when you define all your design decisions in one place. Colors, font sizes,
+  spacing, border radius — everything your design uses consistently.</p>
+
+<p>This is called a design system or design tokens. Every professional project has one.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <button class="btn-primary">Get Started</button>
+    </div>
+  </template>
+  <template class="try-default-css">
+    :root {
+    /* Colors */
+    --color-brand: #E50914;
+    --color-brand-dark: #b20710;
+    --color-bg: #141414;
+    --color-bg-light: #1a1a1a;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.6);
+    --color-border: #333333;
+
+    /* Typography */
+    --font-primary: "Roboto", Arial, sans-serif;
+    --font-display: "Bebas Neue", sans-serif;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.1rem;
+    --text-xl: 1.5rem;
+    --text-hero: 3rem;
+
+    /* Spacing */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+
+    /* Border */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+
+    /* Shadows */
+    --shadow-button: 0 4px 12px rgba(229, 9, 20, 0.4);
+    }
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-xl);
+    background-color: var(--color-bg-light);
+    border-bottom: 1px solid var(--color-border);
+    }
+
+    #logo {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    color: var(--color-brand);
+    letter-spacing: 4px;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid var(--color-text);
+    color: var(--color-text);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .signin:hover {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+    }
+
+    .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--space-xl);
+    text-align: center;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hero h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    color: var(--color-text);
+    letter-spacing: 2px;
+    margin-bottom: var(--space-md);
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: var(--text-lg);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+    }
+
+    .btn-primary {
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin-top: var(--space-lg);
+    box-shadow: var(--shadow-button);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover { background-color: var(--color-brand-dark); }
+    .btn-primary:active { transform: scale(0.98); }
+  </template>
+</section>
+
+<p>Now look at how clean and readable that CSS is. Every value has a name that describes what it is.
+  <code>--color-brand</code> is clearly the brand color. <code>--space-xl</code> is clearly the extra large spacing.
+  <code>--font-display</code> is clearly the display font.</p>
+
+<p>Here is what is happening.</p>
+
+<p>All the variables are defined in <code>:root</code> — one place. Every color, every font, every spacing value, every
+  shadow. The entire design system lives at the top of the file.</p>
+
+<p>Every property references a variable — nothing is hardcoded anywhere else in the file. If you want to change the
+  brand color you change it in one place and every button, every logo, every badge, every border that uses
+  <code>--color-brand</code> updates instantly.</p>
+
+<p>The names are descriptive — <code>--color-brand</code> not <code>--red</code>. <code>--space-xl</code> not
+  <code>--40px</code>. This makes the CSS self documenting. Anyone reading it immediately understands what each value
+  represents.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Naming your variables by their purpose rather than their value is one of the most important habits to build.
+    <code>--color-brand</code> tells you what the color is for. <code>--red</code> just tells you what color it is. If
+    you ever change the brand color from red to orange <code>--color-brand</code> still makes sense.
+    <code>--red</code> does not. Always name by purpose.</p>
+</div>
+
+<h2>Updating Variables with JavaScript</h2>
+
+<p>CSS Variables are also accessible from JavaScript. This means you can change them dynamically — like switching
+  between light and dark mode with one line of code.</p>
+
+<pre><code>// Switch to a different brand color
+document.documentElement.style.setProperty('--color-brand', '#0066ff');</code></pre>
+
+<p>One line and every element using <code>--color-brand</code> instantly turns blue. This is exactly how dark mode
+  toggles and theme switchers work on real websites.</p>
+
+<p>We are not covering JavaScript in this course but it is worth knowing this connection exists. CSS Variables are not
+  just a CSS feature — they are the bridge between CSS and JavaScript for dynamic theming.</p>
+
+<h2>Fallback Values</h2>
+
+<p>You can provide a fallback value inside <code>var()</code> in case the variable is not defined. The fallback goes as
+  a second argument separated by a comma.</p>
+
+<pre><code>color: var(--color-brand, #E50914);</code></pre>
+
+<p>If <code>--color-brand</code> exists its value is used. If it does not exist for any reason the fallback
+  <code>#E50914</code> is used instead. This is useful for component libraries where a variable might or might not be
+  defined depending on the context.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us refactor the entire Netflix clone to use CSS Variables throughout. This is the final version of the clone —
+  everything we have built over the last lessons brought together into a clean well structured stylesheet.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <div class="nav-actions">
+        <div class="notification-wrapper">
+          <span class="icon">🔔</span>
+          <span class="notification-badge">3</span>
+        </div>
+        <button class="signin">Sign In</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+        <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+        <form class="animate delay-2">
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="/images/movie1.png" alt="Movie 1">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie2.png" alt="Movie 2">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie3.png" alt="Movie 3">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie4.png" alt="Movie 4">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie5.png" alt="Movie 5">
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    /* ================================
+    DESIGN SYSTEM
+    ================================ */
+    :root {
+    /* Colors */
+    --color-brand: #E50914;
+    --color-brand-dark: #b20710;
+    --color-bg: #141414;
+    --color-bg-light: #1a1a1a;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.6);
+    --color-border: #333333;
+    --color-overlay: rgba(0, 0, 0, 0.4);
+
+    /* Typography */
+    --font-primary: "Roboto", Arial, sans-serif;
+    --font-display: "Bebas Neue", sans-serif;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.1rem;
+    --text-xl: 1.5rem;
+    --text-hero: 3rem;
+
+    /* Spacing */
+    --space-xs: 0.375rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+
+    /* Borders */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-full: 50%;
+
+    /* Shadows */
+    --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.6);
+    --shadow-button: 0 4px 12px rgba(229, 9, 20, 0.4);
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    }
+
+    /* ================================
+    RESET
+    ================================ */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    }
+
+    /* ================================
+    KEYFRAMES
+    ================================ */
+    @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes logoGlow {
+    0%, 100% { text-shadow: none; }
+    50% { text-shadow: 0 0 20px rgba(229, 9, 20, 0.6); }
+    }
+
+    /* ================================
+    NAVBAR
+    ================================ */
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-xl);
+    background-color: var(--color-bg-light);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 9999;
+    }
+
+    #logo {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    color: var(--color-brand);
+    letter-spacing: 4px;
+    animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    }
+
+    .notification-wrapper {
+    position: relative;
+    cursor: pointer;
+    transition: transform var(--transition-base);
+    }
+
+    .notification-wrapper:hover { transform: rotate(20deg); }
+
+    .icon { font-size: var(--text-xl); }
+
+    .notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    z-index: 10;
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid var(--color-text);
+    color: var(--color-text);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    transition: background-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+    }
+
+    .signin:hover { background-color: var(--color-text); color: var(--color-bg); }
+    .signin:active { transform: scale(0.97); }
+
+    /* ================================
+    HERO
+    ================================ */
+    .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 7.5rem var(--space-xl) 5rem;
+    text-align: center;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), var(--color-overlay)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+
+    .hero h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    color: var(--color-text);
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: var(--text-lg);
+    font-weight: 300;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+    }
+
+    .hero form {
+    display: flex;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+    }
+
+    .hero input {
+    padding: 0.75rem var(--space-md);
+    font-size: var(--text-base);
+    border: 2px solid #cccccc;
+    border-radius: var(--radius-sm);
+    outline: none;
+    background-color: rgba(0,0,0,0.7);
+    color: var(--color-text);
+    width: 300px;
+    transition: border-color var(--transition-base);
+    }
+
+    .hero input:focus { border-color: var(--color-text); }
+
+    .hero input::placeholder {
+    color: var(--color-text-muted);
+    font-style: italic;
+    }
+
+    .hero button {
+    background-color: var(--color-brand);
+    color: var(--color-text);
+    font-size: var(--text-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    transition: background-color var(--transition-base), transform var(--transition-fast);
+    }
+
+    .hero button:hover { background-color: var(--color-brand-dark); }
+    .hero button:active { transform: scale(0.98); }
+
+    /* ================================
+    ANIMATIONS
+    ================================ */
+    .animate {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+
+    /* ================================
+    MOVIE SECTION
+    ================================ */
+    .movie-section { padding: var(--space-xl); }
+
+    .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    letter-spacing: 2px;
+    margin-bottom: var(--space-md);
+    position: relative;
+    padding-bottom: 0.625rem;
+    display: inline-block;
+    }
+
+    .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--color-brand);
+    border-radius: 2px;
+    }
+
+    .movie-row {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+    overflow-x: auto;
+    padding: var(--space-md) 0;
+    }
+
+    .movie-card {
+    position: relative;
+    width: 160px;
+    height: 100px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .movie-card:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: var(--shadow-card);
+    }
+
+    .movie-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    transition: background-color var(--transition-base);
+    }
+
+    .movie-card:hover::after { background-color: rgba(0,0,0,0.3); }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    }
+
+    /* ================================
+    MEDIA QUERIES
+    ================================ */
+    @media (max-width: 992px) {
+    #logo { font-size: 2.5rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero form { flex-direction: column; align-items: center; }
+    .hero input { width: 100%; max-width: 400px; }
+    .hero button { width: 100%; max-width: 400px; }
+    }
+
+    @media (max-width: 768px) {
+    .navbar { padding: 0.75rem var(--space-lg); }
+    #logo { font-size: 2rem; }
+    .signin { padding: 0.4rem var(--space-md); font-size: 0.8rem; }
+    .hero { padding: 6rem var(--space-lg) 3rem; }
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: var(--text-base); }
+    .movie-section { padding: var(--space-lg); }
+    .movie-card { width: 130px; height: 80px; }
+    }
+
+    @media (max-width: 480px) {
+    #logo { font-size: 1.75rem; }
+    .hero h1 { font-size: 1.75rem; }
+    .hero p { font-size: 0.95rem; }
+    .movie-card { width: 110px; height: 68px; }
+    }
+  </template>
+</section>
+
+<p>Here is what CSS Variables brought to the full clone.</p>
+
+<p><strong>One place to change everything</strong> — want to update the brand color, the spacing system, the border
+  radius, the transition speed? Change it in <code>:root</code> and the entire page updates. No hunting through hundreds
+  of lines.</p>
+
+<p><strong>Self documenting code</strong> — <code>var(--color-brand)</code> tells you exactly what that color
+  represents. <code>var(--transition-base)</code> tells you this is the standard transition speed. No more guessing what
+  <code>#E50914</code> or <code>0.3s ease</code> mean without context.</p>
+
+<p><strong>Consistent design</strong> — because every spacing value comes from the same set of variables the padding,
+  gaps, and margins all have a consistent rhythm. Nothing is arbitrary.</p>
+
+<p><code>--transition-fast</code> and <code>--transition-base</code> — even transition durations are variables now. If
+  you decide all transitions should be slightly faster you change two values and the whole page feels snappier.</p>
+
+<p>This is what professional CSS looks like. Not just working code but organized, intentional, maintainable code that
+  another developer could open and understand immediately.</p>
+
+<div class="challenge" data-title="Define and use CSS Variables"
+  data-description="Define two CSS variables in :root — one for the brand color and one for the background color. Use them on the logo and button."
+  data-starter-html="&lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+&lt;button class=&quot;btn&quot;&gt;Get Started&lt;/button&gt;"
+  data-starter-css=":root {
+
+}
+
+body {
+  background-color: ;
+}
+
+#logo {
+  font-size: 3rem;
+  color: ;
+}
+
+.btn {
+  background-color: ;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}"
+  data-css-checks=":root|--color-brand|#E50914;:root|--color-bg|#141414;body|background-color|var(--color-bg);#logo|color|var(--color-brand);.btn|background-color|var(--color-brand)"
+  data-lang="css"
+  data-solution=":root {
+  --color-brand: #E50914;
+  --color-bg: #141414;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+#logo {
+  font-size: 3rem;
+  color: var(--color-brand);
+}
+
+.btn {
+  background-color: var(--color-brand);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you CSS Reset and how to organize your CSS files properly so your projects
+    stay clean and maintainable as they grow. Come on in.</p>
+  <a href="/css/css-reset">Learn about CSS Reset →</a>
+</div>

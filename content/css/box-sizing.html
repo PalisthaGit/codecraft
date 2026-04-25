@@ -1,0 +1,330 @@
+<div class="definition">
+  The box-sizing property controls how CSS calculates the total width and height of an element. Setting it to
+  border-box makes the width you set include padding and border — so elements stay exactly the size you expect.
+</div>
+
+<pre><code>* {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 300px;
+  padding: 24px;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever set the width of an element to 300px, added some padding to it, and then wondered why it was suddenly
+  wider than 300px? You told it to be 300px. Why is it not 300px?</p>
+
+<p>I remember being genuinely confused by this for longer than I would like to admit. It felt like CSS was lying to me.</p>
+
+<p>It was not lying. It was just using a sizing model I did not fully understand yet. Once I learned about box sizing
+  everything clicked and layouts stopped behaving unexpectedly.</p>
+
+<p>Let me explain it properly.</p>
+
+<h2>How CSS Calculates Size by Default</h2>
+
+<p>By default CSS calculates the size of an element like this.</p>
+
+<p>The width and height you set only apply to the content inside the element. Any padding or border you add gets added
+  on top of that.</p>
+
+<p>So if you write this:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="box">
+      <p>This is a box</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .box {
+    width: 300px;
+    padding: 24px;
+    border: 2px solid black;
+    background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>You told the box to be 300px wide. But what you actually get is:</p>
+
+<ul>
+  <li>300px content width</li>
+  <li>plus 24px padding on the left</li>
+  <li>plus 24px padding on the right</li>
+  <li>plus 2px border on the left</li>
+  <li>plus 2px border on the right</li>
+</ul>
+
+<p>Total actual width — 352px.</p>
+
+<p>That is the default behavior. The width you set is just for the content. Everything else gets added on top. This is
+  called <strong>content-box</strong> sizing and it is the CSS default.</p>
+
+<!-- IMAGE PLACEHOLDER — diagram showing a box with 300px content area, then padding added on both sides making it wider, then border added making it even wider. Arrows clearly labeling each layer and the total final width of 352px -->
+
+<h2>The Problem This Causes</h2>
+
+<p>Imagine you are building a layout with two columns sitting side by side. You want each column to be exactly 50% wide
+  so they fill the page perfectly.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="column">Column 1</div>
+    <div class="column">Column 2</div>
+  </template>
+  <template class="try-default-css">
+    .column {
+    width: 50%;
+    padding: 24px;
+    display: inline-block;
+    background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>You would expect them to sit perfectly side by side. But they do not. They break onto separate lines because each
+  column is actually wider than 50% once the padding is added.</p>
+
+<p>This is the kind of layout bug that makes beginners want to give up. But there is a simple fix.</p>
+
+<h2>The Fix — border-box</h2>
+
+<p>CSS gives you a different sizing model called <strong>border-box</strong>. When you use it the width and height you
+  set include the padding and border — not just the content.</p>
+
+<p>So if you set width to 300px and add 24px of padding the element stays 300px total. The browser shrinks the content
+  area to make room for the padding instead of expanding the whole element.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="box">
+      <p>This is a box</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .box {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 24px;
+    border: 2px solid black;
+    background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>Now the box is exactly 300px wide. The padding fits inside that 300px. No surprises.</p>
+
+<!-- IMAGE PLACEHOLDER — two boxes side by side. Left box labeled content-box showing 300px content plus padding plus border equals 352px total. Right box labeled border-box showing 300px total with padding and border fitting inside that 300px. Arrows clearly showing the difference -->
+
+<h2>Apply It to Everything</h2>
+
+<p>Here is what you should do on every single project you build. Right at the very top of your CSS file before anything
+  else write this:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="box">
+      <p>This is a box</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    * {
+    box-sizing: border-box;
+    }
+
+    .box {
+    width: 300px;
+    padding: 24px;
+    border: 2px solid black;
+    background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>The universal selector targets every single element on the page and sets them all to border-box. Now every element
+  you create will behave predictably. The width you set is the width you get.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Adding <code>box-sizing: border-box</code> to the universal selector is something every professional developer does
+    on every project. It is so universally used that some people consider it a bug that content-box is still the CSS
+    default. Just add it at the top of every CSS file you ever write and never think about it again.</p>
+</div>
+
+<h2>Why This Matters for Layouts</h2>
+
+<p>Let us go back to that two column example from before. With border-box it now works perfectly.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="column">Column 1</div>
+    <div class="column">Column 2</div>
+  </template>
+  <template class="try-default-css">
+    * {
+    box-sizing: border-box;
+    }
+
+    .column {
+    width: 50%;
+    padding: 24px;
+    display: inline-block;
+    background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>Each column is exactly 50% of the page width including its padding. They sit perfectly side by side the way you
+  intended.</p>
+
+<p>This is why box sizing matters. It is not just a theoretical concept. It directly affects how your layouts behave in
+  practice.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>If you ever build a layout and things are not lining up the way you expect, the first thing to check is whether
+    <code>box-sizing: border-box</code> is applied. It solves a surprisingly large number of layout mysteries.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add box sizing to our Netflix clone reset at the top of the CSS. This is just good practice and we want to
+  make sure everything behaves predictably as the layout gets more complex.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin: 60px 0 16px 0;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 20px;
+    margin-top: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    }
+
+    input {
+    border: 2px solid #cccccc;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </template>
+</section>
+
+<p>The reset at the top now includes <code>box-sizing: border-box</code> alongside the margin and padding reset. Every
+  element on the page will now size predictably. As we build more complex layouts in the coming lessons this will
+  quietly save us from a lot of headaches.</p>
+
+<div class="challenge" data-title="Add box-sizing to make width predictable"
+  data-description="Add box-sizing: border-box to the universal selector then set the box width to 300px with 24px of padding. Check that the total width stays at 300px."
+  data-starter-html="&lt;div class=&quot;box&quot;&gt;
+  &lt;p&gt;This box should be exactly 300px wide.&lt;/p&gt;
+&lt;/div&gt;"
+  data-starter-css="* {
+
+}
+
+.box {
+  background-color: lightblue;
+
+}"
+  data-css-checks="*|box-sizing|border-box"
+  data-lang="css"
+  data-solution="* {
+  box-sizing: border-box;
+}
+
+.box {
+  width: 300px;
+  padding: 24px;
+  background-color: lightblue;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you the display property — one of the most important concepts in CSS layout.
+    It controls whether elements stack on top of each other, sit side by side, or disappear entirely. Come on in.</p>
+  <a href="/css/display">Learn about Display →</a>
+</div>

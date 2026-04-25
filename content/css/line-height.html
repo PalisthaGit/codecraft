@@ -1,0 +1,237 @@
+<div class="definition">
+  The line-height property controls the vertical space between lines of text. A unitless number like 1.6 is the
+  recommended way to set it — it multiplies the font size and scales automatically when the font size changes.
+</div>
+
+<pre><code>p {
+  line-height: 1.6;
+}
+
+h1 {
+  line-height: 1.1;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever tried to read a paragraph on a website and it just felt exhausting? The lines were packed so tightly
+  together that your eye kept losing its place. You kept rereading the same line over and over.</p>
+
+<p>That is a line height problem.</p>
+
+<p>Line height is one of those things that nobody notices when it is right. But when it is wrong it makes reading feel
+  like work. Getting it right is one of the easiest ways to make your page feel more professional and comfortable.</p>
+
+<p>Let me show you how it works.</p>
+
+<h2>What is Line Height</h2>
+
+<p>Line height is the vertical space between lines of text. Think of it like the spacing between lines in a notebook.
+  Too tight and everything feels cramped. Too loose and the paragraph feels disconnected and hard to follow.</p>
+
+<p>In CSS you control it with the <code>line-height</code> property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p>Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime. Ready to watch? Enter your email to create
+      or restart your membership.</p>
+  </template>
+  <template class="try-default-css">
+    p {
+    line-height: 1;
+    }
+  </template>
+</section>
+
+<p>At 1 the lines are packed tightly together. Reading it feels uncomfortable.</p>
+
+<p>Now try this.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p>Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime. Ready to watch? Enter your email to create
+      or restart your membership.</p>
+  </template>
+  <template class="try-default-css">
+    p {
+    line-height: 1.6;
+    }
+  </template>
+</section>
+
+<p>Immediately more breathable. The lines have space between them and your eye can follow each one naturally without
+  getting lost.</p>
+
+<h2>How Line Height Values Work</h2>
+
+<p>You can set line height in a few different ways.</p>
+
+<ul>
+  <li><strong>A unitless number</strong> — like 1.6 or 2. This is the recommended way. The number is a multiplier of
+    the font size. So if your font size is 16px and your line height is 1.6 the actual line height becomes 25.6px.</li>
+  <li><code>px</code> — a fixed pixel value. Like <code>line-height: 24px</code>. This works but it does not scale if
+    you change the font size later.</li>
+  <li><code>%</code> — a percentage of the font size. Like <code>line-height: 160%</code>. Works the same as the
+    unitless number but less commonly used.</li>
+</ul>
+
+<p>The unitless number is the best choice almost every time. It stays proportional to the font size automatically.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="tight">Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime. Ready to watch? Enter your
+      email to create or restart your membership.</p>
+
+    <p class="normal">Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime. Ready to watch? Enter your
+      email to create or restart your membership.</p>
+
+    <p class="loose">Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime. Ready to watch? Enter your
+      email to create or restart your membership.</p>
+  </template>
+  <template class="try-default-css">
+    .tight {
+    line-height: 1;
+    }
+
+    .normal {
+    line-height: 1.6;
+    }
+
+    .loose {
+    line-height: 2.2;
+    }
+  </template>
+</section>
+
+<p>Three paragraphs, same text, completely different feel. The tight one feels cramped. The loose one feels
+  disconnected. The normal one feels just right.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>For body text most designers use a line height between 1.5 and 1.8. This is the sweet spot that feels comfortable
+    to read on screens. For headings you can go tighter — around 1.1 to 1.3 — because headings are usually short and
+    do not wrap across many lines.</p>
+</div>
+
+<h2>Line Height on Headings</h2>
+
+<p>Line height matters on headings too especially when they are long enough to wrap onto two lines.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Unlimited movies TV shows and more watch anywhere cancel anytime</h1>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    }
+  </template>
+</section>
+
+<p>A tight line height on a big heading looks sharp and intentional. If you left it at the default the gap between the
+  two lines would feel too large and the heading would look broken in two.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Whenever you have a large heading that wraps onto two or more lines always check the line height. The default
+    browser line height on headings is usually too loose and makes them look disconnected. Bring it down to around 1.1
+    or 1.2 and it will look much tighter and more professional.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add proper line heights to our Netflix clone. The paragraphs especially need some breathing room.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button>Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    }
+  </template>
+</section>
+
+<p>The headings feel tight and bold. The paragraphs breathe comfortably. Everything has its own rhythm now.</p>
+
+<div class="challenge" data-title="Set line heights on the Netflix clone"
+  data-description="Set the line height of the heading to 1.2 and the paragraph to 1.6."
+  data-starter-html="&lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime. Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;"
+  data-starter-css="h1 {
+
+}
+
+p {
+
+}"
+  data-css-checks="h1|line-height|1.2;p|line-height|1.6"
+  data-lang="css"
+  data-solution="h1 {
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you padding — the space inside an element between its content and its edges.
+    It is one of the most used properties in CSS and once you understand it everything about layout starts to click.
+    Come on in.</p>
+  <a href="/css/padding">Learn about Padding →</a>
+</div>

@@ -1,0 +1,356 @@
+<div class="definition">
+  The text-align property controls where text sits horizontally inside its element. The text-decoration property adds
+  or removes lines on text. The text-transform property controls capitalization. The letter-spacing property controls
+  the space between characters.
+</div>
+
+<pre><code>h1 {
+  text-align: center;
+  letter-spacing: 4px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  text-transform: uppercase;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever looked at a hero section on a website and noticed that all the text is perfectly centered? The
+  heading, the paragraph, the button — all sitting right in the middle of the screen. It feels balanced and
+  intentional.</p>
+
+<p>Or have you noticed that links on some websites do not have that default blue underline? Or that some buttons have
+  text in all caps even though it was not typed that way?</p>
+
+<p>All of that is controlled by three simple CSS properties. Text align, text decoration, and text transform. Let us
+  go through each one.</p>
+
+<h2>CSS Text Align</h2>
+
+<p>Text align controls where your text sits horizontally inside its element. Left, right, center, or justified.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    text-align: center;
+    }
+
+    p {
+    text-align: center;
+    }
+  </template>
+</section>
+
+<p>Both the heading and paragraph are now centered on the page.</p>
+
+<p>Here are all the values you can use.</p>
+
+<ul>
+  <li><code>left</code> — aligns text to the left. This is the default.</li>
+  <li><code>right</code> — aligns text to the right.</li>
+  <li><code>center</code> — centers the text.</li>
+  <li><code>justify</code> — stretches the text so both left and right edges line up perfectly like a newspaper
+    column.</li>
+</ul>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="left">This text is aligned left.</p>
+    <p class="center">This text is aligned center.</p>
+    <p class="right">This text is aligned right.</p>
+    <p class="justify">This is justified text. It stretches to fill the full width of the element on every line so
+      both edges line up perfectly like a column in a newspaper or a book.</p>
+  </template>
+  <template class="try-default-css">
+    .left {
+    text-align: left;
+    }
+
+    .center {
+    text-align: center;
+    }
+
+    .right {
+    text-align: right;
+    }
+
+    .justify {
+    text-align: justify;
+    }
+  </template>
+</section>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Justified text looks clean in print but on screens it can create awkward gaps between words especially on narrow
+    containers or mobile screens. Most web designers stick to left aligned text for paragraphs and center for headings
+    and hero sections. Justify is rarely used in modern web design.</p>
+</div>
+
+<h2>CSS Text Decoration</h2>
+
+<p>Text decoration controls the lines that appear on your text. Underlines, overlines, line-throughs.</p>
+
+<p>The most common use you will see is removing the default underline from links. By default every anchor tag has an
+  underline. Most modern designs remove it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <a href="#">Click here to learn more</a>
+  </template>
+  <template class="try-default-css">
+    a {
+    text-decoration: none;
+    }
+  </template>
+  <template class="try-hidden-js">
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  e.preventDefault();
+  var existing = document.getElementById('__link-toast');
+  if (existing) existing.remove();
+  var toast = document.createElement('div');
+  toast.id = '__link-toast';
+  toast.textContent = 'This link goes here';
+  toast.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1E293B;color:#E2E8F0;padding:10px 18px;border-radius:8px;font-size:13px;z-index:9999;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);';
+  document.body.appendChild(toast);
+  setTimeout(function() { toast.remove(); }, 3000);
+});
+  </template>
+</section>
+
+<p>The underline is gone. The link is still clickable but it looks like clean text now.</p>
+
+<p>Here are all the values.</p>
+
+<ul>
+  <li><code>none</code> — removes any decoration. Used most often on links.</li>
+  <li><code>underline</code> — adds an underline. This is the default for links.</li>
+  <li><code>overline</code> — adds a line above the text.</li>
+  <li><code>line-through</code> — adds a line through the middle of the text. Great for showing a crossed out price.
+  </li>
+</ul>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="underline">This text has an underline.</p>
+    <p class="overline">This text has an overline.</p>
+    <p class="linethrough">This text has a line through it.</p>
+  </template>
+  <template class="try-default-css">
+    .underline {
+    text-decoration: underline;
+    }
+
+    .overline {
+    text-decoration: overline;
+    }
+
+    .linethrough {
+    text-decoration: line-through;
+    }
+  </template>
+</section>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The line-through value is really useful for showing original prices next to sale prices. Like showing $99 crossed
+    out next to a discounted $49. You will see this pattern everywhere on e-commerce sites.</p>
+</div>
+
+<h2>CSS Text Transform</h2>
+
+<p>Text transform controls the capitalization of your text. You can make text uppercase, lowercase, or capitalize the
+  first letter of every word — without actually changing the text in your HTML.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="upper">unlimited movies, tv shows, and more.</p>
+    <p class="lower">UNLIMITED MOVIES, TV SHOWS, AND MORE.</p>
+    <p class="cap">unlimited movies, tv shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    .upper {
+    text-transform: uppercase;
+    }
+
+    .lower {
+    text-transform: lowercase;
+    }
+
+    .cap {
+    text-transform: capitalize;
+    }
+  </template>
+</section>
+
+<p>The HTML text stays exactly as you typed it but CSS displays it differently. Uppercase for the first, lowercase for
+  the second, and every word capitalized for the third.</p>
+
+<p>Here are all the values.</p>
+
+<ul>
+  <li><code>uppercase</code> — ALL CAPS no matter what.</li>
+  <li><code>lowercase</code> — all lowercase no matter what.</li>
+  <li><code>capitalize</code> — First Letter Of Every Word Is Capitalized.</li>
+  <li><code>none</code> — shows the text exactly as typed. This is the default.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Using text-transform: uppercase on buttons and navigation links is a very common design pattern. It makes them
+    feel more structured and intentional. But use it sparingly — all caps text in long paragraphs is hard to read and
+    feels like shouting.</p>
+</div>
+
+<h2>CSS Letter Spacing</h2>
+
+<p>While we are talking about text let us also cover letter spacing. It controls the space between individual
+  characters.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    letter-spacing: 4px;
+    }
+
+    p {
+    letter-spacing: 1px;
+    }
+  </template>
+</section>
+
+<p>The heading now has noticeable space between each letter giving it a wide airy feel. The paragraph has just a tiny
+  bit of extra breathing room.</p>
+
+<p>Negative values pull letters closer together.</p>
+
+<pre><code>h1 {
+  letter-spacing: -2px;
+}</code></pre>
+
+<p>That makes the letters feel tight and compressed which can look really bold and impactful on large headings.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A small amount of letter spacing on uppercase text — around 2px to 4px — makes it look much more refined and
+    professional. Try text-transform: uppercase combined with letter-spacing: 3px on a button or a label and see the
+    difference it makes.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us bring all of this together on our Netflix clone.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button>Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    }
+  </template>
+</section>
+
+<p>Everything is centered. The logo has wide letter spacing giving it that bold brand feel. The buttons are uppercase
+  with a little letter spacing making them feel sharp and clickable. The page is really starting to come together.</p>
+
+<div class="challenge" data-title="Style the Netflix clone text"
+  data-description="Center all the text on the page. Make the button text uppercase. Add letter spacing of 2px to the heading."
+  data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;button&gt;Get Started&lt;/button&gt;"
+  data-starter-css="body {
+
+}
+
+h1 {
+
+}
+
+button {
+
+}"
+  data-css-checks="body|text-align|center;h1|letter-spacing|2px;button|text-transform|uppercase"
+  data-lang="css"
+  data-solution="body {
+  text-align: center;
+}
+
+h1 {
+  letter-spacing: 2px;
+}
+
+button {
+  text-transform: uppercase;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you line height — how to control the space between lines of text and why
+    getting it right makes your page so much more comfortable to read. Come on in.</p>
+  <a href="/css/line-height">Learn about Line Height →</a>
+</div>

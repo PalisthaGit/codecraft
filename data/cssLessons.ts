@@ -1,4 +1,5 @@
 import type { ContentMeta } from "@/lib/contentRegistry";
+import type { LessonGroup } from "./htmlLessons";
 import userCssLessonsJson from "./userCssLessons.json";
 
 const userCssLessons = userCssLessonsJson as ContentMeta[];
@@ -8,6 +9,13 @@ export const cssLessons: ContentMeta[] = [
     slug: "introduction",
     title: "Understanding CSS",
     description: "Learn what CSS is, how it works alongside HTML and JavaScript, and what you'll build in this course.",
+    readTime: "5 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "setting-up",
+    title: "Setting Up CSS",
+    description: "Install VS Code, create your project folder, connect a CSS file, and get Live Server running before writing your first line of CSS.",
     readTime: "5 min read",
     difficulty: "Beginner",
   },
@@ -23,6 +31,139 @@ export const cssLessons: ContentMeta[] = [
     title: "Colors",
     description: "Use hex codes, RGB, RGBA, and background images to bring your Netflix clone to life.",
     readTime: "6 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "background-color",
+    title: "Background Color",
+    description: "Set background colors on any element using hex codes, color names, and RGBA to start building the dark Netflix look.",
+    readTime: "6 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "gradients",
+    title: "CSS Gradients",
+    description: "Use linear and radial gradients to blend colors, create dramatic backgrounds, and overlay images with the technique used by Netflix and every modern landing page.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "font-family",
+    title: "CSS Font Family",
+    description: "Use the font-family property to choose a typeface, set fallback stacks, and mix fonts across headings and body text.",
+    readTime: "6 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "google-fonts",
+    title: "Google Fonts",
+    description: "Add beautiful free fonts to any project in thirty seconds using Google Fonts and the font-family property.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "font-size",
+    title: "CSS Font Size",
+    description: "Control text size using px, rem, and em — and learn which unit to reach for and why.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "font-weight-style",
+    title: "CSS Font Weight and Style",
+    description: "Control text thickness and italics using font-weight and font-style to create visual hierarchy on your page.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "text-decoration",
+    title: "CSS Text Align and Decoration",
+    description: "Control text alignment, decoration, transformation, and letter spacing to polish every line of text on your page.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "line-height",
+    title: "CSS Line Height",
+    description: "Control the vertical space between lines of text to make your page comfortable and easy to read.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "padding",
+    title: "CSS Padding",
+    description: "Add breathing room inside your elements using padding — the space between your content and the edges of its box.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "margin",
+    title: "CSS Margin",
+    description: "Add space outside your elements using margin — and learn the margin: 0 auto trick for centering anything on the page.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "border",
+    title: "CSS Border",
+    description: "Add lines around your elements using border — control the width, style, and color, and learn the ghost button pattern used everywhere in modern design.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "border-radius",
+    title: "CSS Border Radius",
+    description: "Round the corners of any element using border-radius — from subtle softened buttons to perfect circles and pill shapes.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "outline",
+    title: "CSS Outline",
+    description: "Understand how outline differs from border, control focus styles for accessibility, and learn the box-shadow trick for rounded elements.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "box-shadow",
+    title: "CSS Box Shadow",
+    description: "Add depth and dimension to cards, buttons, and sections using box-shadow — and learn the colored shadow technique used on every modern landing page.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "box-sizing",
+    title: "CSS Box Sizing",
+    description: "Understand why elements grow larger than expected when you add padding, and fix it forever with box-sizing: border-box.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "width-height",
+    title: "CSS Width and Height",
+    description: "Control the size of any element using fixed values, percentages, viewport units, and min/max constraints — and build a full-screen Netflix hero section.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "display",
+    title: "CSS Display",
+    description: "Control how elements sit on the page using display — block, inline, inline-block, and none — and start building the Netflix navbar layout.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "overflow",
+    title: "CSS Overflow",
+    description: "Control what happens when content is too big for its container — clip it, scroll it, or let it spill — and build a horizontal scrolling Netflix movie row.",
+    readTime: "8 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "object-fit",
+    title: "CSS Object Fit",
+    description: "Control how images fill their containers using object-fit and object-position — and never deal with a stretched or squished image again.",
+    readTime: "8 min read",
     difficulty: "Beginner",
   },
   {
@@ -75,10 +216,38 @@ export const cssLessons: ContentMeta[] = [
     difficulty: "Intermediate",
   },
   {
+    slug: "z-index",
+    title: "CSS Z-index",
+    description: "Control which elements sit on top when things overlap — fix navbars, badges, modals, and stacking context issues.",
+    readTime: "8 min read",
+    difficulty: "Intermediate",
+  },
+  {
+    slug: "opacity",
+    title: "CSS Opacity",
+    description: "Control transparency on elements using opacity — fade cards on hover, hide elements while preserving layout, and understand when to use opacity versus visibility and RGBA.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
     slug: "transitions",
     title: "Transitions",
     description: "Add smooth hover animations to Netflix movie cards using CSS transitions and transform.",
     readTime: "6 min read",
+    difficulty: "Intermediate",
+  },
+  {
+    slug: "animations",
+    title: "CSS Animations and Keyframes",
+    description: "Make elements animate automatically on their own using @keyframes — build a pulsing logo, loading spinner, and staggered page entrance.",
+    readTime: "10 min read",
+    difficulty: "Intermediate",
+  },
+  {
+    slug: "units",
+    title: "CSS Units",
+    description: "Choose the right unit for every situation — px, %, rem, em, vw, and vh — and understand when to use each one for accessible, responsive layouts.",
+    readTime: "10 min read",
     difficulty: "Intermediate",
   },
   {
@@ -96,11 +265,119 @@ export const cssLessons: ContentMeta[] = [
     difficulty: "Intermediate",
   },
   {
+    slug: "transform",
+    title: "CSS Transform",
+    description: "Rotate, scale, move, and skew elements using transform — and build the signature Netflix card hover effect that lifts cards off the page.",
+    readTime: "9 min read",
+    difficulty: "Intermediate",
+  },
+  {
+    slug: "filter",
+    title: "CSS Filter",
+    description: "Add visual effects to images and elements using filter — grayscale unavailable cards, blur backgrounds, and brighten thumbnails on hover.",
+    readTime: "8 min read",
+    difficulty: "Intermediate",
+  },
+  {
     slug: "netflix-clone",
     title: "Project: Netflix Clone",
     description: "Put it all together. Build a complete Netflix-style homepage step by step using everything you've learned.",
     readTime: "20 min read",
     difficulty: "Project",
   },
+  {
+    slug: "css-variables",
+    title: "CSS Variables",
+    description: "Define colors, fonts, and spacing once in :root and reuse them everywhere — the foundation of every professional design system.",
+    readTime: "10 min read",
+    difficulty: "Intermediate",
+  },
+  {
+    slug: "visibility",
+    title: "CSS Visibility",
+    description: "Learn the third way to hide elements in CSS — visibility: hidden keeps the space while making the element fully invisible and non-interactive, unlike opacity: 0 and display: none.",
+    readTime: "7 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "normalize",
+    title: "CSS Normalize",
+    description: "Understand the difference between a CSS Reset and CSS Normalize — and learn when to reach for each one in your projects.",
+    readTime: "6 min read",
+    difficulty: "Beginner",
+  },
+  {
+    slug: "css-reset",
+    title: "CSS Reset and Organizing CSS",
+    description: "Strip browser default styles with a modern CSS reset and structure your CSS file the way professional developers do — with clear sections, variables, and comments.",
+    readTime: "10 min read",
+    difficulty: "Intermediate",
+  },
   ...userCssLessons,
+];
+
+function pick(slug: string): ContentMeta {
+  return cssLessons.find((l) => l.slug === slug)!;
+}
+
+export const cssLessonGroups: LessonGroup[] = [
+  {
+    title: "Basics",
+    lessons: ["introduction", "setting-up", "selectors"].map(pick),
+  },
+  {
+    title: "Colors & Backgrounds",
+    lessons: ["colors", "background-color", "gradients"].map(pick),
+  },
+  {
+    title: "Text & Fonts",
+    lessons: [
+      "font-family",
+      "google-fonts",
+      "font-size",
+      "font-weight-style",
+      "text-decoration",
+      "line-height",
+    ].map(pick),
+  },
+  {
+    title: "Box Model",
+    lessons: [
+      "padding",
+      "margin",
+      "border",
+      "border-radius",
+      "outline",
+      "box-shadow",
+      "box-sizing",
+    ].map(pick),
+  },
+  {
+    title: "Layout",
+    lessons: [
+      "display",
+      "width-height",
+      "overflow",
+      "flexbox",
+      "grid",
+      "positioning",
+      "z-index",
+    ].map(pick),
+  },
+  {
+    title: "Visual Styling",
+    lessons: ["opacity", "visibility", "filter", "object-fit"].map(pick),
+  },
+  {
+    title: "Interactivity",
+    lessons: ["pseudo-elements", "transitions", "animations", "transform"].map(pick),
+  },
+  {
+    title: "Responsive Design",
+    lessons: ["units", "responsive"].map(pick),
+  },
+  {
+    title: "Best Practices",
+    lessons: ["css-variables", "normalize", "css-reset"].map(pick),
+  },
 ];

@@ -1,100 +1,138 @@
 <div class="definition">
-  CSS (Cascading Style Sheets) is the language that controls how your HTML looks — colors, fonts, spacing, and layout. Without it, every website would look like a plain document.
+  CSS stands for Cascading Style Sheets. It is the language that controls how your HTML looks — the colors, the fonts, the spacing, and the layout. Without CSS, every website would look like a plain text document.
 </div>
 
-<p>Every website you've ever used — Netflix, YouTube, Amazon — is built from three parts that work together. Before we start writing CSS, it helps to understand what each part does.</p>
+<p>Let me ask you something honest.</p>
 
-<h2>The Role of HTML</h2>
+<p>Have you ever opened a website and just thought — wow, this looks good? Clean layout, nice colors, everything in the right place. And then opened another website with the exact same information and it looked like it was thrown together in five minutes?</p>
 
-<p>HTML is the foundation. It puts the content on the page — the text, the buttons, the images, the links.</p>
+<p>Same content. Completely different experience.</p>
 
-<p>Think of HTML as the skeleton of a webpage. It gives everything shape and order, but it doesn't decide how it looks. If you loaded a page with only HTML and no CSS, you'd see plain black text on a white background — like a Word document.</p>
+<p>That difference is not luck. It is not magic. It is CSS. And by the end of this lesson you are going to understand exactly what it is, why it matters, and what you are going to build with it.</p>
 
-<p>If you don't know much HTML yet, that's fine. You only need a few basics to follow along here.</p>
+<h2>What Even Is CSS</h2>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to see what a page looks like with only HTML and no CSS.</p>
-</div>
+<p>CSS stands for Cascading Style Sheets.</p>
 
-<section class="try-example">
-  <template class="try-default-html">
-<h1>Netflix</h1>
-<p>Unlimited movies, TV shows, and more.</p>
-<p>Starts at USD 2.99. Cancel anytime.</p>
-<button>Get Started</button>
-  </template>
-</section>
+<p>I know. That sounds like something only a computer science textbook would say. So let me explain it the way I wish someone had explained it to me.</p>
 
-<h2>The Role of CSS</h2>
+<p>Think about building a house.</p>
 
-<p>This is where the design starts to take shape.</p>
+<p>First you lay the foundation. You put up the walls, the roof, the doors, the windows. The structure is there. You could technically live in it.</p>
 
-<p>CSS controls how things look. It tells the browser things like "make this background black," "make that text white," or "put this button in the center." Without CSS, every website would look the same — boring and unstyled.</p>
+<p>But would you want to?</p>
 
-<p>With CSS, you get Netflix's dark theme, smooth spacing, and clean layout. If HTML builds the walls, CSS paints them and arranges the furniture.</p>
+<p>No paint on the walls. No flooring. No furniture. Just bare concrete and wood. It works but it does not feel like a home.</p>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Click <strong>Try It Yourself</strong> to see the same page with some CSS added.</p>
-</div>
+<p>Now imagine painting every wall your favorite color. Putting down warm wooden flooring. Hanging the right lights in every room. Arranging the furniture exactly how you like it. Suddenly the exact same structure feels completely different. It feels like yours.</p>
 
-<section class="try-example">
-  <template class="try-default-html">
-<h1>Netflix</h1>
-<p>Unlimited movies, TV shows, and more.</p>
-<p>Starts at USD 2.99. Cancel anytime.</p>
-<button>Get Started</button>
-  </template>
-  <template class="try-default-css">
-body {
-  background-color: #000;
-  color: white;
-  font-family: sans-serif;
-  padding: 40px;
-}
+<p>That is what CSS does to a webpage.</p>
 
-h1 {
-  color: #e50914;
-  font-size: 48px;
-}
+<p>HTML builds the structure — the walls, the roof, the doors.</p>
 
-button {
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-  </template>
-</section>
+<p>CSS makes it feel like a home — the colors, the spacing, the layout, the personality.</p>
 
-<h2>The Role of JavaScript</h2>
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE — left: bare concrete house structure. Right: same house fully finished and decorated]
+</figure>
 
-<p>JavaScript adds movement and interactivity. When you click play and a trailer starts, or when a preview appears as you hover over a show — that's JavaScript.</p>
+<h2>What Can You Actually Do With CSS</h2>
 
-<p>But that comes later. Before we make anything interactive, we need to make it look good. That's what CSS is all about.</p>
-
-<h2>What You'll Build</h2>
-
-<p>In this course, we'll learn CSS by building something real — a Netflix-style homepage, step by step.</p>
+<p>Once you know CSS you can control almost everything about how a webpage looks. Here is what that means in practice.</p>
 
 <ul>
-  <li>We'll start with the basics: colors, fonts, and spacing</li>
-  <li>Then we'll move into layouts using Flexbox and Grid</li>
-  <li>By the end, you'll have a Netflix-style homepage that actually looks professional</li>
+  <li><strong>Colors</strong> — change the color of any text, background, button, or border on your page</li>
+  <li><strong>Fonts</strong> — choose which font to use, how big the text is, how bold or light it feels</li>
+  <li><strong>Spacing</strong> — control exactly how much breathing room there is around and between elements</li>
+  <li><strong>Layout</strong> — decide where things sit on the page, whether they stack on top of each other or sit side by side</li>
+  <li><strong>Size</strong> — set exactly how wide or tall any element should be</li>
+  <li><strong>Effects</strong> — add shadows, rounded corners, smooth hover animations, and more</li>
 </ul>
 
-<div class="tip">
-  <span>💡</span>
-  <p>Every lesson adds something new to the page. By the time you finish, all the pieces will come together into a full design.</p>
+<p>If it has anything to do with how something looks or where it sits on the page — that is CSS handling it.</p>
+
+<h2>The Same Language Behind Every Website You Love</h2>
+
+<p>Here is something I want you to really sit with for a moment.</p>
+
+<p>Every website you have ever used is styled with CSS. Netflix, Instagram, Amazon, YouTube, Airbnb — all of them. The exact same language you are about to learn.</p>
+
+<p>The dark background on Netflix? CSS. The grid of photos on Instagram? CSS. The big red Add to Cart button on Amazon? CSS. The smooth animation when you hover over something? CSS.</p>
+
+<p>I remember the moment this clicked for me. It felt like being let in on a secret. These massive, beautiful, professional websites were built with the same tool I was sitting there learning as a beginner. That did not feel intimidating at all. It felt exciting.</p>
+
+<p>And it should feel that way for you too.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE — screenshots of Netflix, Instagram, Amazon with CSS labels pointing to different styled elements]
+</figure>
+
+<h2>Where CSS Fits in the Bigger Picture</h2>
+
+<p>Every website you visit is made of three layers working together.</p>
+
+<p><strong>HTML</strong> is the content layer. It puts everything on the page — the text, the images, the buttons, the links. Think of it as the structure of the house.</p>
+
+<p><strong>CSS</strong> is the design layer. It controls how everything looks and where it sits. The paint, the flooring, the furniture.</p>
+
+<p><strong>JavaScript</strong> is the interactive layer. It handles what happens when you click, scroll, type, or interact with the page in any way.</p>
+
+<p>Right now we are focused entirely on CSS. Before anything moves or reacts it needs to look right. That is where we start.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE — three clean labeled layers stacked: HTML as the base, CSS in the middle, JavaScript on top]
+</figure>
+
+<h2>The Best Way to Learn CSS as a Beginner</h2>
+
+<p>I have seen a lot of people try to learn CSS the wrong way. They read article after article, watch video after video, and never actually build anything. A few days later they have forgotten everything.</p>
+
+<p>Here is the truth. You learn CSS by writing CSS. There is no shortcut.</p>
+
+<p>That is why this course is built differently. Every single concept you learn goes straight onto a real project. We are not doing isolated exercises that go nowhere. We are building something actual — a Netflix clone — from a completely blank white page to something that looks like a real website.</p>
+
+<p>Every lesson adds one new piece to that page. By the end you will not just understand CSS. You will have built something real with it that you can show anyone.</p>
+
+<p>Here is a preview of what your Netflix clone will look like when you are done.</p>
+
+<div style="border-radius: 14px; border: 1.5px solid #e5e7eb; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden;">
+  <iframe
+    src="/css/netflix-clone/index.html"
+    loading="lazy"
+    style="width: 100%; height: 600px; border: none; display: block;"
+    title="Netflix clone final project preview"
+  ></iframe>
 </div>
 
-<p>Let's begin by setting up CSS.</p>
+<p>Go ahead and scroll around in there. Every single thing you see — the background, the colors, the layout, the buttons, the image grid — you are going to build all of that yourself. Line by line.</p>
+
+<h2>Try It Yourself</h2>
+
+<p>Before we move on I want you to do something.</p>
+
+<p>Open any website you use regularly. Could be YouTube, could be your favorite news site, could be anything.</p>
+
+<p>Right click anywhere on the page and click Inspect. A panel will open on the side. Look at the styles tab on the right side of that panel.</p>
+
+<p>What you are looking at is the CSS of that website. The actual code that makes it look the way it looks.</p>
+
+<p>Do not worry about understanding it yet. Just look at it. Get familiar with what it looks like. Because very soon you are going to be writing code that looks exactly like that.</p>
+
+<figure style="border-radius: 12px; overflow: hidden; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: #f1f5f9; padding: 2rem; text-align: center; color: #64748B; font-size: 0.9rem;">
+  [IMAGE — browser with inspect panel open showing CSS styles panel]
+</figure>
+
+<h2>The Best Way to Learn CSS as a Beginner</h2>
+
+<p>I have seen a lot of people learn CSS in many different ways. Videos, articles, tutorials, documentation. All of them work to some extent.</p>
+
+<p>But here is what I have found actually makes it stick. You learn CSS by writing CSS and building something real with it. That is the approach we are taking here.</p>
+
+<p>That is why this course is built differently. Every single concept you learn goes straight onto a real project. We are not doing isolated exercises that go nowhere. We are building something actual — a Netflix clone — from a completely blank white page to something that looks like a real website.</p>
+
+<p>Every lesson adds one new piece to that page. By the end you will not just understand CSS. You will have built something real with it that you can show anyone.</p>
 
 <div class="next-lesson">
-  <p>Next up: you'll learn three different ways to add CSS to an HTML page — and write your first real styles.</p>
-  <a href="/css/adding-css">Learn how to add CSS →</a>
+  <p>In the next lesson I am going to show you exactly how to set up CSS on your device, step by step. Come on in.</p>
+  <a href="/css/setting-up">Set up CSS on your device →</a>
 </div>

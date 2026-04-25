@@ -1,0 +1,383 @@
+<div class="definition">
+  Filter applies visual effects directly to an element — blur, brightness, contrast, grayscale, and more. One line and
+  you can completely change how an element looks. It works on images, divs, buttons, anything.
+</div>
+
+<pre><code>.movie-card.unavailable {
+  filter: grayscale(100%);
+}
+
+.movie-card:hover {
+  filter: brightness(1.2);
+}
+
+.hero-bg {
+  filter: blur(4px);
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever seen a movie card on a streaming site that turns grayscale when it is unavailable? Or a background
+  image that looks slightly blurred behind a modal? Or a profile photo with a subtle brightness boost?</p>
+
+<p>All of that is the CSS <code>filter</code> property. One line and you can completely change how an element looks.</p>
+
+<h2>What is Filter</h2>
+
+<p>Filter applies visual effects directly to an element — blur, brightness, contrast, grayscale, and more. It works on
+  images, divs, buttons, anything.</p>
+
+<pre><code>element {
+  filter: effect(value);
+}</code></pre>
+
+<p>Let us go through the ones you will actually use.</p>
+
+<h2>filter: grayscale</h2>
+
+<p>Removes color from an element. <code>0%</code> is full color. <code>100%</code> is completely gray.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="/images/movie1.png" alt="Movie 1">
+  </div>
+  <div class="movie-card unavailable">
+    <img src="/images/movie2.png" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie3.png" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+.movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.movie-card.unavailable {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>The second card is now gray and slightly faded — exactly how streaming platforms show unavailable content.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>filter: grayscale(100%)</code> — strips all color from the card. Combined with <code>opacity: 0.6</code> it
+  looks clearly unavailable without being hidden.</p>
+
+<h2>filter: blur</h2>
+
+<p>Blurs an element. Higher values mean more blur.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="hero">
+  <div class="overlay">
+    <h1>Now Playing</h1>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+.hero {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  background-image: url("/images/movie1.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
+}
+  </template>
+</section>
+
+<p>The background is blurred creating a frosted glass background effect. You will see this technique constantly — a
+  blurred version of an image sitting behind text to make it readable.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When you blur an element the blur effect bleeds past the edges leaving a soft halo. Adding
+    <code>overflow: hidden</code> to the parent clips that bleed cleanly.</p>
+</div>
+
+<h2>filter: brightness</h2>
+
+<p>Controls how bright or dark an element is. <code>1</code> is normal. Below <code>1</code> is darker. Above
+  <code>1</code> is brighter.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="/images/movie1.png" alt="Movie 1">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie2.png" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie3.png" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+.movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.movie-card:hover {
+  filter: brightness(1.2);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Hover over any card and it brightens slightly. A subtle way to signal interactivity — different from the scale
+  effect we already have.</p>
+
+<h2>Combining Filters</h2>
+
+<p>You can stack multiple filters on one element by writing them one after another.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-card">
+  <img src="/images/movie1.png" alt="Movie 1">
+</div>
+  </template>
+  <template class="try-default-css">
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(50%) brightness(0.8);
+}
+  </template>
+</section>
+
+<p>The image is half desaturated and slightly darkened at the same time. Both filters apply together.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>filter</code> applies to the whole element including its children. If you want to filter just a background
+    image but not the text on top, use a pseudo-element for the background instead and filter that.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add grayscale to unavailable cards and brightness on hover as an alternative to the overlay effect.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-section">
+  <h2 class="section-title">Trending Now</h2>
+  <div class="movie-row">
+    <div class="movie-card">
+      <img src="/images/movie1.png" alt="Movie 1">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie2.png" alt="Movie 2">
+    </div>
+    <div class="movie-card unavailable">
+      <img src="/images/movie3.png" alt="Movie 3">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie4.png" alt="Movie 4">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie4.png" alt="Movie 5">
+    </div>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+.movie-section {
+  padding: 2.5rem;
+  background-color: #141414;
+}
+
+.section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.movie-card {
+  position: relative;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08) translateY(-4px);
+  filter: brightness(1.15);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+}
+
+.movie-card.unavailable {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.movie-card.unavailable:hover {
+  transform: none;
+  filter: grayscale(100%);
+  box-shadow: none;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Here is what is happening.</p>
+
+<p><code>.movie-card:hover filter: brightness(1.15)</code> — available cards brighten slightly on hover instead of
+  using a dark overlay. Feels more like a spotlight effect.</p>
+
+<p><code>.movie-card.unavailable</code> — the third card is grayed out at half opacity with
+  <code>cursor: not-allowed</code> to make it clearly unclickable.</p>
+
+<p><code>.movie-card.unavailable:hover</code> — overrides the hover state so unavailable cards do not scale or
+  brighten. They stay flat and unresponsive no matter what the user does.</p>
+
+<div class="challenge"
+  data-title="Make unavailable cards gray and available cards brighten on hover"
+  data-description="Make the unavailable card fully grayscale. Make the available card brighten on hover."
+  data-starter-html="&lt;div class=&quot;movie-row&quot;&gt;
+  &lt;div class=&quot;movie-card&quot;&gt;
+    &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;movie-card unavailable&quot;&gt;
+    &lt;img src=&quot;/images/movie2.png&quot; alt=&quot;Movie 2&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}"
+  data-css-checks=".movie-card:hover|filter|brightness;.movie-card.unavailable|filter|grayscale"
+  data-lang="css"
+  data-solution=".movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.movie-card:hover {
+  filter: brightness(1.2);
+}
+
+.movie-card.unavailable {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.movie-card.unavailable:hover {
+  filter: grayscale(100%);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you object-fit — how to control exactly how images fill their containers
+    without stretching or distorting. Come on in.</p>
+  <a href="/css/object-fit">Learn about CSS Object-fit →</a>
+</div>

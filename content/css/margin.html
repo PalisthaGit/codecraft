@@ -1,0 +1,365 @@
+<div class="definition">
+  The margin property adds space outside an element between it and everything around it. It controls how far
+  apart elements sit from each other on the page.
+</div>
+
+<pre><code>h1 {
+  margin-bottom: 24px;
+}
+
+.card {
+  margin: 0 auto;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever noticed that on a well designed page everything has room to breathe? The heading is not sitting right on
+  top of the paragraph. The button has space above it. The sections are separated cleanly from each other.</p>
+
+<p>That space between elements is margin. And it is one of the most used properties in all of CSS.</p>
+
+<p>We just learned about padding which is the space inside an element. Margin is the space outside an element between it
+  and everything around it.</p>
+
+<h2>Padding vs Margin</h2>
+
+<p>Before we go further let me make sure this distinction is crystal clear because it confuses almost everyone at the
+  beginning.</p>
+
+<p>Padding is space inside the element. Between the content and the element's own edges. It pushes inward.</p>
+
+<p>Margin is space outside the element. Between the element and everything around it. It pushes outward.</p>
+
+<img src="/images/css-margin.png" alt="Padding vs margin comparison — padding pushes inward, margin pushes outward" style="width: 100%; border-radius: 8px; margin: 16px 0;" />
+
+<p>Think of it like a person standing in a room. Padding is the space inside their personal bubble. Margin is the
+  distance they keep from other people around them.</p>
+
+<h2>What is Margin</h2>
+
+<p>In CSS you add margin using the <code>margin</code> property. It works exactly the same way as padding — one value
+  for all sides, two values for top-bottom and left-right, or four values for each side individually.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: white;
+    margin: 40px;
+    }
+
+    p {
+    color: white;
+    }
+
+    body {
+    background-color: #141414;
+    }
+  </template>
+</section>
+
+<p>The heading now has 40px of space pushing everything away from it on all four sides.</p>
+
+<h2>Margin on Specific Sides</h2>
+
+<p>Just like padding you can control each side separately.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: white;
+    margin-bottom: 8px;
+    }
+
+    p {
+    color: white;
+    margin-bottom: 24px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 32px;
+    margin-top: 16px;
+    }
+
+    body {
+    background-color: #141414;
+    }
+  </template>
+</section>
+
+<p>The heading sits close to the paragraph below it. The paragraph has more space before the button. The button has
+  extra space above it. Everything is controlled precisely.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>In real projects you will find yourself using <code>margin-top</code> and <code>margin-bottom</code> far more than
+    <code>margin-left</code> and <code>margin-right</code>. Vertical spacing between sections and elements is what you
+    will be adjusting constantly. Get comfortable with these two first.</p>
+</div>
+
+<h2>Two Values and Four Values</h2>
+
+<p>Just like padding, margin supports shorthand with two or four values.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    h1 {
+    color: white;
+    margin: 40px 0;
+    }
+
+    p {
+    color: white;
+    }
+
+    body {
+    background-color: #141414;
+    }
+  </template>
+</section>
+
+<p>40px on the top and bottom, 0 on the left and right. This is a very common pattern for headings and sections — you
+  want vertical space but no extra horizontal space.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Writing <code>margin: 40px 0</code> is something you will type hundreds of times in your career. It adds breathing
+    room above and below an element without pushing it left or right. Almost every section heading on every website uses
+    this pattern.</p>
+</div>
+
+<h2>Margin Auto — Centering Elements</h2>
+
+<p>Here is one of the most useful tricks in CSS. If you want to center a block element horizontally on the page you can
+  use <code>margin: auto</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="card">
+      <h1>Netflix</h1>
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .card {
+    width: 400px;
+    background-color: white;
+    padding: 24px;
+    margin: 0 auto;
+    }
+
+    h1 {
+    margin: 0 0 8px 0;
+    }
+  </template>
+</section>
+
+<p>The card is now centered on the page. The browser automatically splits the available space equally on the left and
+  right sides.</p>
+
+<p>This only works when the element has a defined width. Without a width the element takes up the full available space
+  and there is nothing to center.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>margin: 0 auto</code> is one of the most classic CSS patterns. You will use it to center cards, containers,
+    forms, and page wrappers constantly. It is one of those things you just memorize early and use forever.</p>
+</div>
+
+<h2>Removing Default Margins</h2>
+
+<p>Here is something that trips up almost every beginner. Browsers automatically add their own default margins to
+  certain elements. Headings, paragraphs, the body itself — they all come with built in margin that you did not ask for.
+</p>
+
+<p>This is why when you open a fresh HTML page there is already a gap around the content even though you did not add any
+  CSS yet.</p>
+
+<p>To remove all those defaults in one go you use this:</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    }
+
+    h1 {
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+
+    body {
+    background-color: #141414;
+    padding: 24px;
+    }
+  </template>
+</section>
+
+<p>Now everything starts from zero and you are in full control of every space on the page. This is called a CSS reset
+  and it is something most developers add to the very top of their CSS file before writing anything else.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always add that <code>margin: 0</code> and <code>padding: 0</code> reset at the top of your CSS file on every
+    project. Without it you are constantly fighting against browser defaults and wondering why things are not lining up
+    the way you expect. Starting from zero gives you a clean slate.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us use margin to properly space out all the elements in our Netflix clone.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <h1 id="logo">Netflix</h1>
+      <button>Sign In</button>
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form>
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+    margin: 0;
+    padding: 0;
+    }
+
+    body {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 16px;
+    padding: 40px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    }
+
+    #logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E50914;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 16px;
+    }
+
+    h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin: 60px 0 16px 0;
+    }
+
+    p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    margin-top: 24px;
+    }
+  </template>
+</section>
+
+<p>Everything is reset to zero first. Then we add back exactly the spacing we want. The logo sits at the top with space
+  below it. The main heading has a generous top margin pushing it down toward the center of the page. The paragraphs
+  have breathing room between them. The button sits comfortably below the form with space above it.</p>
+
+<div class="challenge" data-title="Space out a layout with margin"
+  data-description="Add a margin-bottom of 16px to the heading and a margin-top of 24px to the button."
+  data-starter-html="&lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;button&gt;Get Started&lt;/button&gt;"
+  data-starter-css="h1 {
+  color: white;
+
+}
+
+p {
+  color: white;
+}
+
+button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+
+}
+
+body {
+  background-color: #141414;
+  padding: 24px;
+}"
+  data-css-checks="h1|margin-bottom|16px;button|margin-top|24px"
+  data-lang="css"
+  data-solution="h1 {
+  color: white;
+  margin-bottom: 16px;
+}
+
+p {
+  color: white;
+}
+
+button {
+  background-color: #E50914;
+  color: white;
+  padding: 12px 32px;
+  margin-top: 24px;
+}
+
+body {
+  background-color: #141414;
+  padding: 24px;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you borders — how to add lines around elements, control their style and
+    thickness, and use them to create clean dividers and card outlines. Come on in.</p>
+  <a href="/css/border">Learn about Border →</a>
+</div>

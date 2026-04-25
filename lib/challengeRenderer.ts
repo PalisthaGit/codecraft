@@ -40,6 +40,8 @@ function initChallenge(el: HTMLElement): void {
   const title       = el.dataset.title ?? "";
   const description = el.dataset.description ?? "";
   const checks      = (el.dataset.checks ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  // CSS style checks: "selector|property|expectedComputedValue" (comma-separated)
+  const cssChecks   = (el.dataset.cssChecks ?? "").split(";").map((s) => s.trim()).filter(Boolean);
   const solution    = el.dataset.solution ?? "";
   const starterHtml = el.dataset.starterHtml ?? "";
   const starterCss  = el.dataset.starterCss ?? "";
@@ -146,9 +148,26 @@ function initChallenge(el: HTMLElement): void {
     }
     const doc = iframe.contentDocument;
     const missing: string[] = [];
-    for (const sel of checks) {
-      if (!doc.querySelector(sel)) {
-        missing.push(`Try adding a &lt;${sel}&gt; tag`);
+    if (cssChecks.length > 0) {
+      // CSS property checks: verify computed styles
+      const view = iframe.contentWindow ?? window;
+      for (const check of cssChecks) {
+        const [selector, property, expectedValue] = check.split("|");
+        const elem = doc.querySelector(selector);
+        if (!elem) {
+          missing.push(`Could not find element: ${selector}`);
+        } else {
+          const actual = (view as Window).getComputedStyle(elem).getPropertyValue(property).trim();
+          if (actual !== expectedValue.trim()) {
+            missing.push(`The ${selector} ${property} is not correct yet`);
+          }
+        }
+      }
+    } else {
+      for (const sel of checks) {
+        if (!doc.querySelector(sel)) {
+          missing.push(`Try adding a &lt;${sel}&gt; tag`);
+        }
       }
     }
     resultDiv.style.display = "block";

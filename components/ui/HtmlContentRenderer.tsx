@@ -18,8 +18,8 @@ export default function HtmlContentRenderer({ html }: HtmlContentRendererProps) 
   const { strippedHtml, scriptContents } = useMemo(() => {
     let processed = html;
 
-    // Detect full HTML document
-    if (/<body[\s>]/i.test(html)) {
+    // Detect full HTML document (not just a <body> inside a <template>)
+    if (/<!DOCTYPE\s+html/i.test(html) || /<html[\s>]/i.test(html)) {
       const styles: string[] = [];
       // Extract <style> blocks from anywhere (typically in <head>)
       processed = processed.replace(

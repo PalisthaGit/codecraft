@@ -1,0 +1,267 @@
+<div class="definition">
+  A gradient is when one color smoothly transitions into another. CSS gives you linear gradients that flow in a straight
+  line and radial gradients that spread outward from a center point — and both are used everywhere on the modern web.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever noticed that a lot of modern websites do not just have one flat color as their background? They have
+  colors that slowly blend into each other. Dark at the top, lighter at the bottom. Or one color on the left fading into
+  a completely different color on the right.</p>
+
+<p>That is a gradient. And once you know how to use it you will start seeing it everywhere — Netflix thumbnail overlays,
+  Spotify cards, Instagram buttons, hero sections on almost every modern landing page.</p>
+
+<p>Let us learn how to make them.</p>
+
+<h2>What is a Gradient</h2>
+
+<p>A gradient is when one color smoothly transitions into another. Instead of a sharp line where one color ends and
+  another begins, the colors blend naturally.</p>
+
+<p>CSS gives you two main types of gradients.</p>
+
+<p><strong>Linear gradient</strong> — colors flow in a straight line. Left to right, top to bottom, or any angle you
+  choose.</p>
+
+
+
+<p><strong>Radial gradient</strong> — colors flow outward from a center point, like a spotlight or a glow effect.</p>
+
+
+
+<p>We will cover both. But linear gradients are what you will use in almost every project so let us start there.</p>
+
+<h2>CSS Linear Gradient</h2>
+
+<p>A linear gradient is made using the <code>linear-gradient()</code> function inside the <code>background</code>
+  property.</p>
+
+<p>Here is the most basic version — two colors blending from left to right.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background: linear-gradient(to right, #000000, #E50914);
+    height: 300px;
+    }
+
+    h1 {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>The background smoothly goes from black on the left to Netflix red on the right.</p>
+
+<p>Let us break down what is happening inside that <code>linear-gradient()</code>.</p>
+
+<ul>
+  <li><code>to right</code> — this is the direction. The gradient flows from left to right.</li>
+  <li><code>#000000</code> — this is the starting color.</li>
+  <li><code>#E50914</code> — this is the ending color.</li>
+</ul>
+
+<p>That is the basic structure. Direction, starting color, ending color.</p>
+
+<h2>Changing the Direction</h2>
+
+<p>You can make the gradient flow in any direction you want.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background: linear-gradient(to bottom, #000000, #E50914);
+    height: 300px;
+    }
+
+    h1 {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Now the gradient flows from top to bottom. Black at the top fading into red at the bottom.</p>
+
+<p>Here are all the directions you can use:</p>
+
+<ul>
+  <li><code>to right</code> — left to right</li>
+  <li><code>to left</code> — right to left</li>
+  <li><code>to bottom</code> — top to bottom</li>
+  <li><code>to top</code> — bottom to top</li>
+  <li><code>to bottom right</code> — diagonal from top left to bottom right</li>
+</ul>
+
+<p>You can also use angles instead of words. <code>45deg</code> gives you a diagonal, <code>90deg</code> gives you left
+  to right, <code>180deg</code> gives you top to bottom.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background: linear-gradient(45deg, #000000, #E50914);
+    height: 300px;
+    }
+
+    h1 {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>A diagonal gradient from bottom left to top right.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Diagonal gradients at <code>45deg</code> or <code>135deg</code> tend to look more dynamic and modern than straight
+    left to right ones. Next time you want a gradient background try a slight angle first and see how it feels.</p>
+</div>
+
+<h2>Using More Than Two Colors</h2>
+
+<p>You are not limited to just two colors. You can add as many as you want separated by commas.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background: linear-gradient(to right, #000000, #E50914, #000000);
+    height: 300px;
+    }
+
+    h1 {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Now the gradient goes black to red and back to black. This creates a nice centered glow effect.</p>
+
+<h2>A Technique You Will Use All the Time</h2>
+
+<p>Here is something I use in almost every project. Instead of blending from one color to another you can fade from a
+  solid color to transparent. This is perfect for putting a gradient overlay on top of a background image so the text
+  stays readable.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    }
+
+    h1 {
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>The top of the section is dark so the text is perfectly readable. As you go down the image becomes more visible. That
+  is the exact technique Netflix uses on their thumbnail cards and hero sections.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When you stack a gradient on top of a background image like this the gradient always goes first inside
+    <code>background-image</code> and the actual image goes second. The order matters. If you flip them the gradient
+    will
+    be hidden behind the image and you will not see it.
+  </p>
+</div>
+
+
+
+<h2>CSS Radial Gradient</h2>
+
+<p>A radial gradient flows outward from a center point. Think of it like a spotlight shining on a wall — bright in the
+  middle, fading out toward the edges.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .hero {
+    background: radial-gradient(circle, #E50914, #000000);
+    height: 300px;
+    }
+
+    h1 {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Red glowing outward from the center fading to black at the edges.</p>
+
+<p>Radial gradients are used less often than linear ones but they are great for creating spotlight effects, glowing
+  buttons, or dramatic background effects.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A subtle radial gradient behind a hero heading — very slightly lighter in the center and darker at the edges — can
+    make your page feel much more cinematic without being obvious about it. Less is more with radial gradients.</p>
+</div>
+
+<div class="challenge" data-title="Add a gradient to the hero section"
+  data-description="Add a linear gradient to the hero div that goes from black on the left to Netflix red on the right. Make the text white so it is visible."
+  data-starter-html="&lt;div class=&quot;hero&quot;&gt;
+  &lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+  &lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;/div&gt;" data-starter-css=".hero {
+  height: 300px;
+}"
+  data-css-checks=".hero|background-image|linear-gradient(to right, rgb(0, 0, 0), rgb(229, 9, 20));h1|color|rgb(255, 255, 255);p|color|rgb(255, 255, 255)"
+  data-lang="css" data-solution=".hero {
+  background: linear-gradient(to right, #000000, #E50914);
+  height: 300px;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you how to control fonts on your page — how to choose a font, import
+    beautiful ones from Google, and make your text feel intentional and designed. Come on in.</p>
+  <a href="/css/fonts">Learn about CSS fonts →</a>
+</div>

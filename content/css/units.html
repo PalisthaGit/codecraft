@@ -1,0 +1,670 @@
+<div class="definition">
+  CSS units control how sizes are measured. Choosing the right unit — <code>px</code>, <code>%</code>, <code>rem</code>,
+  <code>em</code>, <code>vw</code>, or <code>vh</code> — determines whether your layout holds up across every screen
+  size and accessibility setting.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>You have been using <code>px</code> throughout this entire course. And it has worked fine. But have you ever noticed
+  that on some websites text looks perfectly sized on a big screen but tiny on a phone? Or a section that fills the
+  screen beautifully on one device looks completely broken on another?</p>
+
+<p>A lot of that comes down to units. Picking the right unit for the right situation is one of those things that
+  separates layouts that work everywhere from layouts that only work on your screen.</p>
+
+<p>There are quite a few units in CSS but honestly you only need to know five well. Let us go through each one
+  properly.</p>
+
+<h2>px — Pixels</h2>
+
+<p>You already know this one. <code>px</code> gives you a fixed size that never changes regardless of the screen or
+  the user's settings.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+      background-color: #141414;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: white;
+    }
+
+    p {
+      font-size: 16px;
+      color: white;
+    }
+  </template>
+</section>
+
+<p>The heading is always exactly 48px. The paragraph is always exactly 16px. On a small screen or a large screen. On
+  any device. Always the same.</p>
+
+<p><strong>When to use px</strong> — borders, shadows, spacing where you need exact pixel precision. Things like
+  <code>border: 2px solid white</code> or <code>box-shadow: 0 4px 12px</code> are always in px because you want them
+  exact.</p>
+
+<p><strong>When not to use px</strong> — font sizes and layout widths. Fixed pixel fonts do not scale with user
+  preferences which hurts accessibility. Fixed pixel widths break on different screen sizes.</p>
+
+<h2>% — Percentage</h2>
+
+<p>Percentage is relative to the parent element. If the parent is 800px wide and you set <code>width: 50%</code> the
+  element becomes 400px. If the parent changes size the element changes with it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="container">
+      <div class="hero">
+        <h1>Netflix</h1>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .container {
+      width: 800px;
+      background-color: #1a1a1a;
+      padding: 24px;
+    }
+
+    .hero {
+      width: 50%;
+      background-color: #E50914;
+      padding: 24px;
+    }
+
+    h1 {
+      color: white;
+      font-size: 2rem;
+    }
+  </template>
+</section>
+
+<p>The hero takes up exactly half the container. If you change the container width the hero adjusts automatically.</p>
+
+<p><strong>When to use %</strong> — widths of containers, columns, and images that should scale relative to their
+  parent. The classic <code>max-width: 100%</code> on images uses percentage to make sure images never overflow their
+  container.</p>
+
+<h2>rem — Root Em</h2>
+
+<p><code>rem</code> is relative to the root font size of the document — the font size set on the <code>html</code>
+  element. By default browsers set this to 16px. So 1rem equals 16px. 2rem equals 32px. 0.5rem equals 8px.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <p class="small">Starts at USD 2.99.</p>
+  </template>
+  <template class="try-default-css">
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      background-color: #141414;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: white;
+    }
+
+    p {
+      font-size: 1rem;
+      color: white;
+    }
+
+    .small {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+    }
+  </template>
+</section>
+
+<p>Here is what is happening.</p>
+
+<p><code>3rem</code> — 3 multiplied by the root font size of 16px equals 48px.</p>
+<p><code>1rem</code> — 1 multiplied by 16px equals 16px.</p>
+<p><code>0.875rem</code> — 0.875 multiplied by 16px equals 14px.</p>
+
+<p>The big advantage of rem over px is accessibility. If a user has set their browser to display larger text because
+  they have difficulty reading small fonts the root font size increases. Everything in rem scales up with it.
+  Everything in px stays fixed and potentially becomes unreadable.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>A popular trick for making rem math easier is setting the root font size to 10px instead of 16px. Then 1rem
+    equals 10px, 1.6rem equals 16px, 2.4rem equals 24px. The math becomes much more intuitive. A lot of developers do
+    this on every project.</p>
+</div>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background-color: #141414;
+    }
+
+    h1 {
+      font-size: 4.8rem; /* 48px */
+      color: white;
+    }
+
+    p {
+      font-size: 1.6rem; /* 16px */
+      color: white;
+    }
+  </template>
+</section>
+
+<h2>em — Element Em</h2>
+
+<p><code>em</code> is similar to rem but instead of being relative to the root it is relative to the font size of the
+  current element or its parent.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <h2>Trending Now</h2>
+      <p>Watch the latest releases.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    body {
+      background-color: #141414;
+    }
+
+    .movie-section {
+      font-size: 20px;
+      background-color: #1a1a1a;
+      padding: 2em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: white;
+    }
+
+    p {
+      font-size: 0.9em;
+      color: rgba(255,255,255,0.7);
+    }
+  </template>
+</section>
+
+<p>Here is what is happening.</p>
+
+<p><code>font-size: 20px</code> on <code>.movie-section</code> — this sets the base for all em calculations inside.</p>
+<p><code>padding: 2em</code> — 2 times 20px equals 40px of padding.</p>
+<p><code>font-size: 1.5em</code> on h2 — 1.5 times the parent font size of 20px equals 30px.</p>
+<p><code>font-size: 0.9em</code> on p — 0.9 times 20px equals 18px.</p>
+
+<p><code>em</code> is useful when you want everything inside a component to scale together relative to one base size.
+  Change the parent font size and everything inside scales proportionally.</p>
+
+<p>The tricky part is that em compounds. If you have nested elements each with em font sizes they multiply together
+  and can get unpredictable. This is why most developers prefer rem for font sizes — it is always relative to the same
+  root value and never compounds.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Use <code>rem</code> for font sizes across the whole page. Use <code>em</code> for padding and spacing inside
+    components where you want everything to scale relative to that component's font size. This combination gives you
+    the best of both worlds — consistent typography with flexible component spacing.</p>
+</div>
+
+<h2>vw and vh — Viewport Units</h2>
+
+<p><code>vw</code> is viewport width. <code>vh</code> is viewport height. The viewport is the visible area of the
+  browser window.</p>
+
+<p><code>1vw</code> equals 1 percent of the viewport width.</p>
+<p><code>1vh</code> equals 1 percent of the viewport height.</p>
+<p><code>100vw</code> equals the full viewport width.</p>
+<p><code>100vh</code> equals the full viewport height.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="hero">
+      <h1>Netflix</h1>
+      <p>Unlimited movies, TV shows, and more.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .hero {
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+        url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 5vw;
+      color: white;
+      letter-spacing: 4px;
+    }
+
+    p {
+      font-size: 2vw;
+      color: white;
+    }
+  </template>
+</section>
+
+<p>The hero fills the entire screen. The heading size is 5 percent of the viewport width so it scales as the browser
+  window gets wider or narrower.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>width: 100vw</code> — the hero is exactly as wide as the browser window.</p>
+<p><code>min-height: 100vh</code> — the hero is at least as tall as the browser window.</p>
+<p><code>font-size: 5vw</code> — the heading is 5 percent of the viewport width. On a 1200px wide screen that is 60px.
+  On a 800px screen it is 40px. The text scales with the window automatically.</p>
+
+<p><strong>When to use vw and vh</strong> — full screen hero sections, elements that should always fill the visible
+  screen, and fluid typography that scales with the window size.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>min-height: 100vh</code> is almost always better than <code>height: 100vh</code> for hero sections. With
+    <code>height: 100vh</code> if the content inside grows taller than the screen it overflows outside the section.
+    With <code>min-height: 100vh</code> the section grows to fit the content while still filling the screen when
+    content is short.</p>
+</div>
+
+<h2>Choosing the Right Unit</h2>
+
+<p>Here is a practical guide for when to reach for each unit.</p>
+
+<p><strong>Font sizes</strong> — use <code>rem</code>. Scales with user preferences and never compounds.</p>
+<p><strong>Borders and shadows</strong> — use <code>px</code>. You want exact pixel precision here.</p>
+<p><strong>Padding and margin</strong> — use <code>rem</code> for consistency. <code>px</code> is fine for small fixed
+  values like 2px or 4px.</p>
+<p><strong>Component widths</strong> — use <code>%</code> so they fill their container responsively.</p>
+<p><strong>Full screen sections</strong> — use <code>vh</code> and <code>vw</code>.</p>
+<p><strong>Max widths for content containers</strong> — use <code>px</code>. You want a fixed maximum like
+  <code>max-width: 1200px</code>.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us audit our Netflix clone and make sure we are using the right units everywhere. Font sizes move to rem. The
+  hero uses vh. Borders and shadows stay in px.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <div class="nav-actions">
+        <div class="notification-wrapper">
+          <span class="icon">🔔</span>
+          <span class="notification-badge">3</span>
+        </div>
+        <button class="signin">Sign In</button>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+        <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+        <form class="animate delay-2">
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="/images/movie1.png" alt="Movie 1">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie2.png" alt="Movie 2">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie3.png" alt="Movie 3">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie4.png" alt="Movie 4">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie5.png" alt="Movie 5">
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      background-color: #141414;
+      color: white;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes logoGlow {
+      0%, 100% { text-shadow: none; }
+      50% { text-shadow: 0 0 20px rgba(229,9,20,0.6); }
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background-color: #1a1a1a;
+      border-bottom: 1px solid #333;
+      z-index: 9999;
+    }
+
+    #logo {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 3rem;
+      color: #E50914;
+      letter-spacing: 4px;
+      animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .notification-wrapper {
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .notification-wrapper:hover {
+      transform: rotate(20deg);
+    }
+
+    .icon { font-size: 1.5rem; }
+
+    .notification-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      z-index: 10;
+      background-color: #E50914;
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .signin {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+
+    .signin:hover {
+      background-color: white;
+      color: #141414;
+    }
+
+    .signin:active { transform: scale(0.97); }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 7.5rem 2.5rem 5rem;
+      text-align: center;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+        url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 3rem;
+      color: white;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: white;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero form {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .hero input {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #cccccc;
+      border-radius: 4px;
+      outline: none;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      width: 300px;
+      transition: border-color 0.3s ease;
+    }
+
+    .hero input:focus { border-color: white; }
+
+    .hero input::placeholder {
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+    }
+
+    .hero button {
+      background-color: #E50914;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .hero button:hover { background-color: #b20710; }
+    .hero button:active { transform: scale(0.98); }
+
+    .animate {
+      opacity: 0;
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+
+    .movie-section {
+      padding: 2.5rem;
+    }
+
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 0.625rem;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: #E50914;
+      border-radius: 2px;
+    }
+
+    .movie-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .movie-card {
+      position: relative;
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>Here is what changed and why.</p>
+
+<p><code>html font-size: 16px</code> — sets the root explicitly so rem calculations are predictable everywhere.</p>
+<p><code>padding: 1rem 2.5rem</code> instead of <code>padding: 16px 40px</code> — the same values but now they scale
+  if the root font size ever changes.</p>
+<p><code>gap: 1.25rem</code> instead of <code>gap: 20px</code> — consistent with the spacing system.</p>
+<p><code>min-height: 100vh</code> on hero — the hero always fills the full viewport height on any screen size.</p>
+<p>Borders stay in <code>px</code> — <code>border: 2px solid white</code> stays in px because border thickness should
+  always be exactly 2px regardless of font size or screen size.</p>
+<p>Box shadows stay in <code>px</code> — shadow values are precise visual effects that should not scale with font
+  size.</p>
+
+<div class="challenge"
+  data-title="Make the hero fill the screen with the right units"
+  data-description="Make the hero fill the full viewport height using min-height. Set the heading to 3rem and the paragraph to 1.1rem."
+  data-starter-html="&lt;div class=&quot;hero&quot;&gt;
+  &lt;h1&gt;Netflix&lt;/h1&gt;
+  &lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;/div&gt;"
+  data-starter-css=".hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #141414;
+  padding: 2rem;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}"
+  data-css-checks=".hero|min-height|100vh;h1|font-size|3rem;p|font-size|1.1rem"
+  data-lang="css"
+  data-solution=".hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #141414;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+}
+
+p {
+  font-size: 1.1rem;
+  color: white;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you media queries — how to make your page look great on every screen size
+    from a phone to a large desktop monitor. This is where responsive design begins. Come on in.</p>
+  <a href="/css/responsive">Learn about Responsive Design →</a>
+</div>

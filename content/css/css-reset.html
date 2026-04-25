@@ -1,0 +1,802 @@
+<div class="definition">
+  CSS Reset strips away browser default styles so every project starts from a clean, consistent foundation. Good file organization keeps your CSS navigable as it grows. This lesson covers both — and shows you exactly how a professional CSS file is structured.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever started a new project, written your first few lines of CSS, and noticed things look slightly different than
+  you expected? A gap you did not add. A font size that seems off. A margin that appeared from nowhere.</p>
+
+<p>That is the browser doing things you did not ask for. And as your projects grow bigger you will also start facing a
+  different problem — a CSS file that started at 50 lines is now 500 lines and finding anything feels like searching
+  through a jungle.</p>
+
+<p>Both of these problems have simple solutions. CSS Reset handles the browser. Good organization handles the file. Let us
+  go through both.</p>
+
+<h2>Why Browsers Add Styles You Did Not Write</h2>
+
+<p>Every browser — Chrome, Firefox, Safari, Edge — comes with its own built-in stylesheet called the <strong>user agent
+    stylesheet</strong>. It adds default styles to HTML elements so they look reasonable even without any CSS.</p>
+
+<p>That is why an <code>h1</code> is big and bold without you doing anything. Why paragraphs have space between them. Why
+  links are blue and underlined. Why the body has a small margin around it.</p>
+
+<p>These defaults are helpful for plain HTML documents but they cause problems when you are building a designed website.
+  Different browsers apply slightly different defaults which means your page can look slightly different in Chrome versus
+  Firefox versus Safari without you changing a single line.</p>
+
+<p>A CSS Reset solves this by stripping all those defaults away and giving you a clean consistent starting point across
+  every browser.</p>
+
+<h2>The Simple Reset</h2>
+
+<p>You have already been using a basic reset throughout this course.</p>
+
+<pre><code class="language-css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</code></pre>
+
+<p>This removes the default margins and paddings from every element and sets <code>box-sizing</code> to
+  <code>border-box</code> so sizing is predictable. It is the minimum reset that every project should have.</p>
+
+<p>But there are a few more things worth adding for a more complete starting point.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<h1>Netflix</h1>
+<p>Unlimited movies, TV shows, and more.</p>
+<a href="#">Learn more</a>
+<img src="/images/movie1.png" alt="Movie">
+<button>Get Started</button>
+  </template>
+  <template class="try-default-css">
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+  </template>
+</section>
+
+<p>This is a solid modern reset. Let us go through what each part does.</p>
+
+<ul>
+  <li><code>*::before</code> and <code>*::after</code> — extends the reset to pseudo-elements too. Without this,
+    <code>::before</code> and <code>::after</code> elements could still have unexpected margins or padding.</li>
+  <li><code>line-height: 1.5</code> on <code>body</code> — sets a comfortable default line height for all text. The
+    browser default is around 1.2 which is too tight for readable body text.</li>
+  <li><code>-webkit-font-smoothing: antialiased</code> — makes text render more crisply on Mac and iOS. You will not
+    notice it on Windows but on Mac the difference is clear.</li>
+  <li><code>max-width: 100%</code> on <code>img</code> — prevents images from ever overflowing their container. Without
+    this an image wider than its parent will break out of it. This one line prevents a very common layout problem.</li>
+  <li><code>display: block</code> on <code>img</code> — images are inline by default which causes a small gap at the
+    bottom because of how inline elements sit on the text baseline. Making them block removes that gap. This is
+    especially noticeable inside card components.</li>
+  <li><code>cursor: pointer</code> on <code>button</code> — browsers do not always show the pointer cursor on buttons.
+    This makes sure every button feels clickable.</li>
+  <li><code>font-family: inherit</code> on <code>button</code> — browsers use their own system font for buttons by
+    default, ignoring whatever font you set on the body. <code>inherit</code> makes buttons use whatever font the parent
+    is using.</li>
+  <li><code>text-decoration: none</code> and <code>color: inherit</code> on <code>a</code> — removes the default blue
+    underline from links and makes them inherit their color from the parent instead of always being blue. You can still
+    add underlines or colors back where you want them.</li>
+</ul>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Save this reset as a snippet you can paste into every new project. It takes thirty seconds to add and saves you
+    from fighting browser defaults for the rest of the project. Once you have a reset you trust just reuse it
+    everywhere.</p>
+</div>
+
+<h2>Organizing Your CSS File</h2>
+
+<p>Now let us talk about keeping your CSS file organized as it grows.</p>
+
+<p>When a project is small — 50 or 100 lines — organization does not matter much. Everything fits on one screen. But
+  once you are at 300 or 500 lines finding things becomes genuinely difficult without a clear structure.</p>
+
+<p>Here is the organization pattern that most professional developers use. It keeps everything in a logical order that
+  anyone can navigate quickly.</p>
+
+<pre><code class="language-css">/* ================================
+   1. DESIGN SYSTEM — Variables
+   ================================ */
+
+/* ================================
+   2. RESET — Base defaults
+   ================================ */
+
+/* ================================
+   3. BASE — Body, typography
+   ================================ */
+
+/* ================================
+   4. LAYOUT — Page structure
+   ================================ */
+
+/* ================================
+   5. COMPONENTS — Reusable pieces
+   ================================ */
+
+/* ================================
+   6. UTILITIES — Helper classes
+   ================================ */
+
+/* ================================
+   7. MEDIA QUERIES — Responsive
+   ================================ */</code></pre>
+
+<p>Let us go through what belongs in each section.</p>
+
+<ul>
+  <li><strong>Design System</strong> — all your CSS variables. Colors, fonts, spacing, shadows, transitions. Everything
+    goes here first because everything else references it.</li>
+  <li><strong>Reset</strong> — the universal reset and any base normalization. This always comes second because it
+    establishes the foundation everything else builds on.</li>
+  <li><strong>Base</strong> — styles for raw HTML elements. <code>body</code>, <code>h1</code> through <code>h6</code>,
+    <code>p</code>, <code>a</code>, <code>img</code>. These are global styles that apply everywhere without any class.
+  </li>
+  <li><strong>Layout</strong> — the overall page structure. The navbar, the hero, the main content area, the footer. The
+    big structural sections.</li>
+  <li><strong>Components</strong> — reusable pieces. Buttons, cards, badges, forms, inputs. Things that appear multiple
+    times in different places.</li>
+  <li><strong>Utilities</strong> — small single-purpose helper classes. Things like <code>.text-center</code>,
+    <code>.hidden</code>, <code>.mt-sm</code>. Optional but useful on larger projects.</li>
+  <li><strong>Media Queries</strong> — all responsive styles at the bottom. Keeping them together at the end means you
+    can find all your responsive overrides in one place.</li>
+</ul>
+
+<h2>Commenting Your CSS</h2>
+
+<p>Comments are the simplest thing you can do to make your CSS easier to navigate. A clear section header tells you
+  exactly what is below it without reading a single line of code.</p>
+
+<pre><code class="language-css">/* ================================
+   NAVBAR
+   ================================ */
+.navbar { ... }
+.navbar #logo { ... }
+.navbar .signin { ... }
+
+/* ================================
+   HERO
+   ================================ */
+.hero { ... }
+.hero h1 { ... }
+.hero form { ... }</code></pre>
+
+<p>Those big section dividers make it immediately obvious where one section ends and the next begins. When you need to
+  find the navbar styles you scan for the divider not through hundreds of lines of code.</p>
+
+<p>For smaller notes inside sections use inline comments.</p>
+
+<pre><code class="language-css">.movie-card {
+  position: relative; /* needed for badge positioning */
+  overflow: hidden;   /* clips image to rounded corners */
+  flex-shrink: 0;     /* prevents cards from squishing in flex row */
+}</code></pre>
+
+<p>These explain <em>why</em> you made a decision, not just what the code does. Three months from now when you come back
+  to this file you will thank yourself.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Comment the <em>why</em>, not the <em>what</em>. Writing <code>/* sets color to red */</code> above
+    <code>color: red</code> adds no value — you can already see it is red. But writing <code>/* brand color from design
+      system */</code> tells you something useful. Even better, just use a variable name like
+    <code>var(--color-brand)</code> which is self-documenting.</p>
+</div>
+
+<h2>The Final Netflix Clone CSS Structure</h2>
+
+<p>Here is how our Netflix clone CSS file should be structured using everything we have learned.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="navbar">
+  <h1 id="logo">Netflix</h1>
+  <div class="nav-actions">
+    <div class="notification-wrapper">
+      <span class="icon">🔔</span>
+      <span class="notification-badge">3</span>
+    </div>
+    <button class="signin">Sign In</button>
+  </div>
+</div>
+
+<div class="hero">
+  <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+  <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+  <form class="animate delay-2">
+    <input type="email" placeholder="Email address">
+    <button type="submit">Get Started</button>
+  </form>
+</div>
+
+<div class="movie-section">
+  <h2 class="section-title">Trending Now</h2>
+  <div class="movie-row">
+    <div class="movie-card"><img src="/images/movie1.png" alt="Movie 1"></div>
+    <div class="movie-card"><img src="/images/movie2.png" alt="Movie 2"></div>
+    <div class="movie-card"><img src="/images/movie3.png" alt="Movie 3"></div>
+    <div class="movie-card"><img src="/images/movie4.png" alt="Movie 4"></div>
+    <div class="movie-card"><img src="/images/movie5.png" alt="Movie 5"></div>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+/* ================================
+   1. DESIGN SYSTEM
+   ================================ */
+:root {
+  --color-brand: #E50914;
+  --color-brand-dark: #b20710;
+  --color-bg: #141414;
+  --color-bg-light: #1a1a1a;
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+  --color-border: #333333;
+
+  --font-primary: "Roboto", Arial, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1rem;
+  --text-xl: 1.5rem;
+  --text-hero: 3rem;
+
+  --space-xs: 0.375rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 50%;
+
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-button: 0 4px 12px rgba(229, 9, 20, 0.4);
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+}
+
+/* ================================
+   2. RESET
+   ================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================================
+   3. BASE
+   ================================ */
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================================
+   4. KEYFRAMES
+   ================================ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logoGlow {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 20px rgba(229, 9, 20, 0.6); }
+}
+
+/* ================================
+   5. LAYOUT — Navbar
+   ================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-xl);
+  background-color: var(--color-bg-light);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 9999;
+}
+
+#logo {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  color: var(--color-brand);
+  letter-spacing: 4px;
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* ================================
+   5. LAYOUT — Hero
+   ================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 7.5rem var(--space-xl) 5rem;
+  text-align: center;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  letter-spacing: 2px;
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  max-width: 700px;
+}
+
+.hero p {
+  font-size: var(--text-lg);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-xs);
+}
+
+.hero form {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-lg);
+}
+
+/* ================================
+   5. LAYOUT — Movie Section
+   ================================ */
+.movie-section { padding: var(--space-xl); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  letter-spacing: 2px;
+  margin-bottom: var(--space-md);
+  position: relative;
+  padding-bottom: 0.625rem;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-brand);
+  border-radius: 2px;
+}
+
+.movie-row {
+  display: flex;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  padding: var(--space-md) 0;
+}
+
+/* ================================
+   6. COMPONENTS — Buttons
+   ================================ */
+.signin {
+  background-color: transparent;
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  transition: background-color var(--transition-base), color var(--transition-base), transform var(--transition-fast);
+}
+
+.signin:hover { background-color: var(--color-text); color: var(--color-bg); }
+.signin:active { transform: scale(0.97); }
+
+.hero button {
+  background-color: var(--color-brand);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-button);
+  transition: background-color var(--transition-base), transform var(--transition-fast);
+}
+
+.hero button:hover { background-color: var(--color-brand-dark); }
+.hero button:active { transform: scale(0.98); }
+
+/* ================================
+   6. COMPONENTS — Input
+   ================================ */
+.hero input {
+  padding: 0.75rem var(--space-md);
+  font-size: var(--text-base);
+  border: 2px solid #cccccc;
+  border-radius: var(--radius-sm);
+  outline: none;
+  background-color: rgba(0,0,0,0.7);
+  color: var(--color-text);
+  width: 300px;
+  transition: border-color var(--transition-base);
+}
+
+.hero input:focus { border-color: var(--color-text); }
+
+.hero input::placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ================================
+   6. COMPONENTS — Notification
+   ================================ */
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-base);
+}
+
+.notification-wrapper:hover { transform: rotate(20deg); }
+
+.icon { font-size: var(--text-xl); }
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 10;
+  background-color: var(--color-brand);
+  color: var(--color-text);
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   6. COMPONENTS — Movie Card
+   ================================ */
+.movie-card {
+  position: relative;
+  width: 160px;
+  height: 100px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.movie-card:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0);
+  transition: background-color var(--transition-base);
+}
+
+.movie-card:hover::after { background-color: rgba(0,0,0,0.3); }
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================================
+   7. ANIMATIONS
+   ================================ */
+.animate {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+
+/* ================================
+   8. MEDIA QUERIES
+   ================================ */
+@media (max-width: 992px) {
+  #logo { font-size: 2.5rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero form { flex-direction: column; align-items: center; }
+  .hero input { width: 100%; max-width: 400px; }
+  .hero button { width: 100%; max-width: 400px; }
+}
+
+@media (max-width: 768px) {
+  .navbar { padding: 0.75rem var(--space-lg); }
+  #logo { font-size: 2rem; }
+  .signin { padding: 0.4rem var(--space-md); font-size: 0.8rem; }
+  .hero { padding: 6rem var(--space-lg) 3rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: var(--text-base); }
+  .movie-section { padding: var(--space-lg); }
+  .movie-card { width: 130px; height: 80px; }
+}
+
+@media (max-width: 480px) {
+  #logo { font-size: 1.75rem; }
+  .hero h1 { font-size: 1.75rem; }
+  .movie-card { width: 110px; height: 68px; }
+}
+  </template>
+</section>
+
+<p>Here is what the organized structure gives you.</p>
+
+<ul>
+  <li><strong>The design system at the top</strong> — every value in one place. Change <code>--color-brand</code> and the
+    entire page updates.</li>
+  <li><strong>The reset right after</strong> — clean consistent foundation before any styles are applied.</li>
+  <li><strong>Clear section headers</strong> — you can find anything in seconds. Need the movie card styles? Scan for the
+    movie card header.</li>
+  <li><strong>Components grouped together</strong> — buttons, inputs, cards, notifications all have their own clearly
+    labeled sections.</li>
+  <li><strong>Media queries at the very bottom</strong> — all responsive overrides in one place. No hunting through the
+    file for where things change on mobile.</li>
+</ul>
+
+<p>This is genuinely what professional CSS files look like. Not because the rules are arbitrary but because this
+  structure makes the file easy to navigate, easy to update, and easy for another developer to understand.</p>
+
+<div class="challenge"
+  data-title="Structured CSS file"
+  data-description="Write a properly structured CSS file with a design system section defining two variables, a reset section, and a components section styling the logo and button."
+  data-starter-html="&lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+&lt;button class=&quot;btn&quot;&gt;Get Started&lt;/button&gt;"
+  data-starter-css="/* ================================
+   DESIGN SYSTEM
+   ================================ */
+:root {
+
+}
+
+/* ================================
+   RESET
+   ================================ */
+
+
+/* ================================
+   BASE
+   ================================ */
+
+
+/* ================================
+   COMPONENTS
+   ================================ */"
+  data-lang="css"
+  data-cssChecks="*|box-sizing|border-box;#logo|font-size|3rem;.btn|border-radius|4px"
+  data-solution="/* ================================
+   DESIGN SYSTEM
+   ================================ */
+:root {
+  --color-brand: #E50914;
+  --color-bg: #141414;
+}
+
+/* ================================
+   RESET
+   ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ================================
+   BASE
+   ================================ */
+body {
+  background-color: var(--color-bg);
+  font-family: Arial, sans-serif;
+}
+
+/* ================================
+   COMPONENTS
+   ================================ */
+#logo {
+  font-size: 3rem;
+  color: var(--color-brand);
+}
+
+.btn {
+  background-color: var(--color-brand);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+}">
+</div>
+
+<div class="also-read">
+  <h3>Also Read — CSS Normalize</h3>
+
+  <p>You have been using a CSS Reset throughout this course. Every project started with this.</p>
+
+  <pre><code class="language-css">*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</code></pre>
+
+  <p>That strips everything away. Clean slate. You build from scratch.</p>
+
+  <p>CSS Normalize is a different philosophy entirely. Instead of removing all defaults it fixes the inconsistencies
+    between browsers while keeping the useful defaults intact.</p>
+
+  <h4>Reset vs Normalize — The Real Difference</h4>
+
+  <p>Imagine two approaches to renovating a house.</p>
+
+  <p><strong>Reset</strong> is like gutting the house completely. Every wall torn down. Every floor ripped up. You start
+    with bare concrete and build exactly what you want. Total control. Total effort.</p>
+
+  <p><strong>Normalize</strong> is like a careful renovation. You keep the walls that are in good shape. You fix the
+    ones that are cracked or uneven. You replace only what is broken. Less work. Useful starting point kept.</p>
+
+  <p>Neither is wrong. They just suit different situations.</p>
+
+  <p>With a reset you get complete control but you have to style everything yourself including things like list markers,
+    heading sizes, and form element appearances.</p>
+
+  <p>With normalize you get consistent cross browser behavior with sensible defaults still in place. A <code>h1</code>
+    is still big. A <code>ul</code> still has bullet points. A <code>button</code> still looks like a button. They just
+    look the same across every browser.</p>
+
+  <h4>What Normalize Actually Fixes</h4>
+
+  <p>Here are some real examples of what normalize corrects.</p>
+
+  <ul>
+    <li>Some browsers make the <code>html</code> element have a different line height. Normalize fixes that.</li>
+    <li>Some browsers style the <code>sub</code> and <code>sup</code> elements differently affecting text flow.
+      Normalize fixes that.</li>
+    <li>Some browsers add different default padding to <code>fieldset</code> elements inside forms. Normalize fixes
+      that.</li>
+    <li>Some browsers render the <code>hr</code> element with different border styles. Normalize fixes that.</li>
+  </ul>
+
+  <p>None of these are things you would ever think to reset yourself. But they can cause your page to look subtly
+    different on Safari versus Chrome versus Firefox without you having any idea why.</p>
+
+  <h4>How to Use Normalize</h4>
+
+  <p>The easiest way is to link it from a CDN before your own stylesheet.</p>
+
+  <pre><code class="language-html">&lt;head&gt;
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+
+  <p>It must come before your own CSS so your styles override it where needed.</p>
+
+  <p>You can also install it with npm if you are working on a project with a build system.</p>
+
+  <pre><code class="language-bash">npm install normalize.css</code></pre>
+
+  <h4>Which Should You Use</h4>
+
+  <p>Here is my honest take after building a lot of projects.</p>
+
+  <p>For learning and personal projects the simple reset we built is perfect. It is small, you understand every line,
+    and it gives you a clean consistent starting point.</p>
+
+  <p>For larger professional projects or when working with a team normalize is worth considering. It handles a lot of
+    edge cases you would never think of and reduces cross browser surprises on elements like forms, tables, and
+    typographic elements.</p>
+
+  <p>For modern projects using a framework like React or a tool like Tailwind CSS neither matters as much because these
+    tools bring their own reset or preflight styles built in.</p>
+
+  <div class="tip">
+    <span>💡</span>
+    <p>Never use both a reset and normalize together. They contradict each other. Reset removes defaults that normalize
+      is trying to preserve. Pick one and commit to it. If you are not sure which just use the simple reset we built.
+      It covers everything you need for building real projects.</p>
+  </div>
+</div>
+
+<div class="next-lesson">
+  <p>You just finished the core CSS curriculum. You started not knowing what a selector was — now you have built a
+    complete Netflix clone with a design system, animations, responsive layout, and properly organized code. The next
+    lessons cover finishing touches like <code>filter</code>, <code>object-fit</code>, and responsive typography that
+    take a good page to a great one.</p>
+  <a href="/css/filter">Learn about CSS Filter →</a>
+</div>

@@ -1,0 +1,226 @@
+<div class="definition">
+  The font-family property sets which typeface your text uses. Set it once on the body and every element on the page
+  inherits it automatically. Always include fallback fonts separated by commas so the browser has a backup if the first
+  font is unavailable.
+</div>
+
+<pre><code>body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-family: Georgia, serif;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever opened two websites with the exact same content and one felt modern, clean and professional while the
+  other felt outdated and cheap?</p>
+
+<p>A lot of the time the difference is the font.</p>
+
+<p>Fonts carry personality. The right font makes your page feel premium without changing a single word on it. The wrong
+  font makes even good content feel untrustworthy. That is how powerful typography is.</p>
+
+<p>And in CSS controlling fonts is incredibly simple. Let me show you.</p>
+
+<h2>What is Font Family</h2>
+
+<p>Font family is just the name of the typeface you want to use on your page. The font that all your text appears in.</p>
+
+<p>In CSS you set it using the <code>font-family</code> property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: Arial;
+    }
+  </template>
+</section>
+
+<p>Every single element on the page now uses Arial. The heading, the paragraph, the buttons, everything. That is because
+  we set it on the <code>body</code> and every element inside the body inherits it automatically.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Always set your <code>font-family</code> on the <code>body</code> first. That way you set it once and everything on
+    the page picks it up automatically. You only need to set it again on specific elements when you want something
+    different.</p>
+</div>
+
+<h2>Web Safe Fonts</h2>
+
+<p>Some fonts come pre-installed on almost every computer and device in the world. These are called web safe fonts. You
+  can use them without doing anything special — they just work.</p>
+
+<p>Here are the most common ones:</p>
+
+<ul>
+  <li><strong>Arial</strong> — clean, modern, sans-serif. Used everywhere.</li>
+  <li><strong>Georgia</strong> — elegant, slightly old school, serif.</li>
+  <li><strong>Times New Roman</strong> — very traditional, serif.</li>
+  <li><strong>Courier New</strong> — monospace, looks like code.</li>
+  <li><strong>Verdana</strong> — wide and easy to read on screens.</li>
+  <li><strong>Trebuchet MS</strong> — friendly and slightly rounded.</li>
+</ul>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: Georgia;
+    }
+  </template>
+</section>
+
+<p>The page now uses Georgia. Notice how different it feels compared to Arial. Same words, completely different
+  personality.</p>
+
+<p>Web safe fonts are reliable but they are limited. There are only about a dozen of them. And honestly most of them
+  feel a little plain for modern design. That is where Google Fonts comes in — but we will cover that in the next
+  lesson.</p>
+
+<h2>Always Add a Fallback Font</h2>
+
+<p>Here is something important. What if a font fails to load or is not available on a user's device? The browser needs a
+  backup plan.</p>
+
+<p>That is why you always give CSS a list of fonts separated by commas. The browser tries the first one. If it cannot
+  find it it tries the second. If that fails it falls back to the last one.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    }
+  </template>
+</section>
+
+<p>The browser first tries Arial. If Arial is not available it tries Helvetica. If that is also not available it uses
+  whatever sans-serif font the device has built in.</p>
+
+<p>That last fallback — <code>sans-serif</code>, <code>serif</code>, or <code>monospace</code> — is a generic category
+  not a specific font. Every device in the world has at least one font in each category so it is your safety net. Always
+  end your font list with one of these.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>The most common fallback stack for modern websites is <code>Arial, Helvetica, sans-serif</code>. It covers Windows,
+    Mac, and every mobile device cleanly. When in doubt use this as your default.</p>
+</div>
+
+<h2>Font Family on Specific Elements</h2>
+
+<p>Sometimes you want a different font on your headings than on your body text. That is very common in real design — a
+  decorative font for headings and a clean readable font for paragraphs.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+    font-family: Georgia, serif;
+    }
+  </template>
+</section>
+
+<p>The paragraphs use Arial from the body. The heading overrides it with Georgia. Two different fonts, working together
+  on the same page.</p>
+
+<p>This is a pattern you will use constantly. Set a base font on the body then override it for specific elements where
+  you want something different.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add a font to our Netflix clone. Right now it is using whatever the browser default is. Let us make it
+  intentional.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+    <button>Sign In</button>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <p>Ready to watch? Enter your email to create or restart your membership.</p>
+    <form>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </template>
+  <template class="try-default-css">
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    }
+
+    #logo {
+    color: #E50914;
+    }
+
+    h1 {
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+
+    button {
+    background-color: #E50914;
+    color: white;
+    }
+  </template>
+</section>
+
+<p>The Netflix logo stays red using the ID selector, the rest of the headings and paragraphs are white, and everything
+  uses the same clean font throughout.</p>
+
+<div class="challenge" data-title="Set the font for the whole page"
+  data-description="Set the font of the whole page to Arial with Helvetica and sans-serif as fallbacks. Then give the heading a different font — Georgia with serif as the fallback."
+  data-starter-html="&lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+&lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;" data-starter-css="body {
+
+}
+
+h1 {
+
+}"
+  data-css-checks="body|font-family|Arial, Helvetica, sans-serif;h1|font-family|Georgia, serif"
+  data-lang="css" data-solution="body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-family: Georgia, serif;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you how to use Google Fonts — thousands of beautiful free fonts you can add
+    to any project in about thirty seconds. Come on in.</p>
+  <a href="/css/fonts">Learn about Google Fonts →</a>
+</div>

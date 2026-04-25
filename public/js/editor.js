@@ -512,7 +512,7 @@
       return [
         '<!DOCTYPE html><html><head>',
         css ? '<style>' + css + '</style>' : '',
-        '</head><body style="margin:0;padding:16px;font-family:sans-serif;overflow-x:hidden;">',
+        '</head><body style="margin:0;padding:16px;font-family:sans-serif;overflow:hidden;">',
         html,
         allJs ? '<scr' + 'ipt>' + allJs + '</scr' + 'ipt>' : '',
         '</body></html>'
@@ -561,7 +561,7 @@
         body.style.margin    = '0';
         body.style.padding   = '16px';
         body.style.boxSizing = 'border-box';
-        output.style.height  = Math.max(220, Math.min(body.scrollHeight, 500)) + 'px';
+        output.style.height  = Math.max(220, body.scrollHeight) + 'px';
       } catch (e) {}
     });
 

@@ -1,0 +1,219 @@
+<div class="definition">
+  The background-color property lets you set the background of any element — a page, a button, a heading, anything. It
+  is one of the most powerful tools for setting mood and making your designs feel real.
+</div>
+
+<p>Let me ask you something.</p>
+
+<p>When you open Netflix what is the very first thing you notice?</p>
+
+<p>It is dark. The whole page is dark. That darkness is not just a design choice — it is a feeling. It says cinema. It
+  says premium. It says sit back and relax.</p>
+
+<p>That dark background is one single line of CSS. And you are about to write it.</p>
+
+<h2>What is Background Color</h2>
+
+<p>Every element on a webpage has a background. By default that background is transparent which means you just see
+  white. But you can change it to any color you want using the <code>background-color</code> property.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: rgba(0, 0, 0, 1);
+    }
+  </template>
+</section>
+
+<p>The whole page turns black instantly.</p>
+
+<p>That is it. One property, one value, and the entire mood of your page changes.</p>
+
+<h2>Background Color on Any Element</h2>
+
+<p>You are not limited to just the body. You can put a background color on any element — a heading, a paragraph, a
+  button, a div, anything.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button>Sign In</button>
+  </template>
+  <template class="try-default-css">
+    button {
+    background-color: rgba(229, 9, 20, 1);
+    }
+  </template>
+</section>
+
+<p>The button now has that Netflix red background.</p>
+
+<p>This is how you start building real UI. A colored button on a dark background already starts to feel like a real
+  product.</p>
+
+<h2>Background Color Using Hex Codes</h2>
+
+<p>Just like text color you can use hex codes, color names, RGB or RGBA for background colors. The property changes but
+  the color values work exactly the same way.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+    <br><button>Sign In</button>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: rgba(0, 0, 0, 1);
+    }
+
+    h1 {
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+
+    button {
+    background-color: rgba(229, 9, 20, 1);
+    color: white;
+    }
+  </template>
+</section>
+
+<p>The page goes black, the text goes white, the button goes Netflix red.</p>
+
+<div class="tip">
+  Notice we also made the text white here. That is something worth keeping in mind as you build — always make sure your
+  text color works with your background color. Dark background needs light text. Light background needs dark text. It
+  sounds obvious but it is one of the most common mistakes beginners make and it makes a page impossible to read.
+</div>
+
+<h2>Background Color Using RGBA</h2>
+
+<p>Remember RGBA from the last lesson? That transparency value becomes really useful with backgrounds.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1>Netflix</h1>
+    <p>Unlimited movies, TV shows, and more.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    h1 {
+    color: white;
+    }
+
+    p {
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Instead of a flat solid black you get a very slightly transparent black. The page behind it slightly shows through.
+</p>
+
+<p>Now let me explain that last number because it is really important to understand.</p>
+
+<p>That number is the opacity value. It goes from 0 to 1.</p>
+
+<ul>
+  <li><strong>0</strong> means completely invisible. You cannot see the color at all.</li>
+  <li><strong>0.3</strong> means very transparent. Just a hint of the color.</li>
+  <li><strong>0.5</strong> means half transparent. The color and whatever is behind it share equal presence.</li>
+  <li><strong>0.7</strong> means mostly visible. The color is strong but slightly see through.</li>
+  <li><strong>0.9</strong> means almost fully solid. Just the tiniest bit of transparency.</li>
+  <li><strong>1</strong> means fully solid. No transparency at all.</li>
+</ul>
+
+<p>Think of it like tinted glass. A value of 0.2 is like very light sunglasses — you can still see through clearly. A
+  value of 0.9 is like very dark tinted windows — almost opaque but not quite.</p>
+
+<img src="/images/background-color-example.png"
+  alt="Six boxes showing black color at different opacity levels from 0 to 1"
+  style="width: 100%; border-radius: 10px; margin: 16px 0;" />
+
+<p>Why does this matter for backgrounds? Imagine you have a background image and you want to put a dark layer over it to
+  make the text readable. If you use a solid black it completely covers the image. But if you use
+  <code>rgba(0, 0, 0, 0.6)</code> the dark layer sits on top while the image still shows through underneath. That is
+  exactly the technique we used in the background image lesson.
+</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Now let us put this to work on our actual project. Try it yourself below — give the page a dark background, white
+  text, and that Netflix red button.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="netflix-logo">Netflix</h1>
+
+    <br> <button>Sign In</button>
+    <h1>Unlimited movies, TV shows, and more.</h1>
+    <p>Starts at USD 2.99. Cancel anytime.</p>
+    <p>Ready to watch? Enter your email to create or restart your membership.</p>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: rgba(0, 0, 0, 1);
+    }
+
+    h1 {
+    color: white;
+
+    }
+    #netflix-logo {
+    color: red;
+    }
+    p {
+    color: white;
+    }
+
+    button {
+    background-color: rgba(229, 9, 20, 1);
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Dark background, white text, red button. Your Netflix clone just started looking like Netflix.</p>
+
+<div class="challenge" data-title="Give the page a dark Netflix look"
+  data-description="Give the page a black background and make the button red. Make all the text white so it is visible on the dark background."
+  data-starter-html="&lt;h1&gt;Netflix&lt;/h1&gt;
+&lt;p&gt;Unlimited movies, TV shows, and more.&lt;/p&gt;
+&lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+&lt;button&gt;Sign In&lt;/button&gt;" data-starter-css="body {
+  font-family: sans-serif;
+  padding: 24px;
+}"
+  data-css-checks="body|background-color|rgb(0, 0, 0);button|background-color|rgb(229, 9, 20);h1|color|rgb(255, 255, 255)"
+  data-lang="css" data-solution="body {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+button {
+  background-color: rgba(229, 9, 20, 1);
+  color: white;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you how to add a background image to your page and make it look like a real
+    cinematic Netflix hero section. Come on in.</p>
+  <a href="/css/fonts">Learn about CSS fonts →</a>
+</div>

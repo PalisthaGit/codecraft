@@ -1,0 +1,98 @@
+<div class="definition">
+  CSS Normalize is an alternative to a CSS Reset. Instead of stripping all browser defaults away it carefully fixes the
+  inconsistencies between browsers while keeping the useful defaults intact. A reset gives you a blank slate. Normalize
+  gives you a consistent, corrected one.
+</div>
+
+<p>You have been using a CSS Reset throughout this course. Every project started with this.</p>
+
+<pre><code class="language-css">*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</code></pre>
+
+<p>That strips everything away. Clean slate. You build from scratch.</p>
+
+<p>CSS Normalize is a different philosophy entirely. Instead of removing all defaults it fixes the inconsistencies
+  between browsers while keeping the useful defaults intact.</p>
+
+<h2>Reset vs Normalize — The Real Difference</h2>
+
+<p>Imagine two approaches to renovating a house.</p>
+
+<p>Reset is like gutting the house completely. Every wall torn down. Every floor ripped up. You start with bare
+  concrete and build exactly what you want. Total control. Total effort.</p>
+
+<p>Normalize is like a careful renovation. You keep the walls that are in good shape. You fix the ones that are
+  cracked or uneven. You replace only what is broken. Less work. Useful starting point kept.</p>
+
+<p>Neither is wrong. They just suit different situations.</p>
+
+<p>With a reset you get complete control but you have to style everything yourself including things like list markers,
+  heading sizes, and form element appearances.</p>
+
+<p>With normalize you get consistent cross-browser behavior with sensible defaults still in place. A <code>h1</code>
+  is still big. A <code>ul</code> still has bullet points. A <code>button</code> still looks like a button. They just
+  look the same across every browser.</p>
+
+<h2>What Normalize Actually Fixes</h2>
+
+<p>Here are some real examples of what normalize corrects.</p>
+
+<p>Some browsers make the <code>html</code> element have a different line height. Normalize fixes that.</p>
+
+<p>Some browsers style the <code>sub</code> and <code>sup</code> elements differently affecting text flow. Normalize
+  fixes that.</p>
+
+<p>Some browsers add different default padding to <code>fieldset</code> elements inside forms. Normalize fixes that.
+</p>
+
+<p>Some browsers render the <code>hr</code> element with different border styles. Normalize fixes that.</p>
+
+<p>None of these are things you would ever think to reset yourself. But they can cause your page to look subtly
+  different on Safari versus Chrome versus Firefox without you having any idea why.</p>
+
+<h2>How to Use Normalize</h2>
+
+<p>The easiest way is to link it from a CDN before your own stylesheet.</p>
+
+<pre><code class="language-html">&lt;head&gt;
+  &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;</code></pre>
+
+<p>It must come before your own CSS so your styles override it where needed.</p>
+
+<p>You can also install it with npm if you are working on a project with a build system.</p>
+
+<pre><code class="language-bash">npm install normalize.css</code></pre>
+
+<h2>Which Should You Use</h2>
+
+<p>Here is the honest take after building a lot of projects.</p>
+
+<p>For learning and personal projects the simple reset we built is perfect. It is small, you understand every line,
+  and it gives you a clean consistent starting point.</p>
+
+<p>For larger professional projects or when working with a team normalize is worth considering. It handles a lot of
+  edge cases you would never think of and reduces cross-browser surprises on elements like forms, tables, and
+  typographic elements.</p>
+
+<p>For modern projects using a framework like React or a tool like Tailwind CSS neither matters as much because these
+  tools bring their own reset or preflight styles built in.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Never use both a reset and normalize together. They contradict each other. Reset removes defaults that normalize
+    is trying to preserve. Pick one and commit to it. If you are not sure which, just use the simple reset we built.
+    It covers everything you need for building real projects.</p>
+</div>
+
+<div class="next-lesson">
+  <p>Next up — CSS Reset and Organizing CSS. You have seen the reset throughout this course. Now we go deeper into
+    structuring a professional CSS file the way developers actually do it in the real world.</p>
+  <a href="/css/css-reset">Learn about CSS Reset and Organizing CSS →</a>
+</div>

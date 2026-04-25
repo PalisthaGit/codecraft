@@ -1,0 +1,336 @@
+<div class="definition">
+  The display property controls how an element is placed in the page layout — whether it takes up the full width and
+  stacks on a new line, sits inline with surrounding content, or disappears entirely.
+</div>
+
+<pre><code>#logo {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever wondered why some elements automatically stack on top of each other while others sit side by side? Why
+  does a paragraph always take up the full width of the page even if it only has a few words in it? Why does a bold tag
+  inside a sentence not push everything else onto a new line?</p>
+
+<p>That behavior is controlled by the display property. And understanding it is one of the most important steps toward
+  actually being able to build layouts in CSS.</p>
+
+<h2>How Elements Behave by Default</h2>
+
+<p>Every HTML element has a default display value. You did not set it. The browser just applies it automatically.</p>
+
+<p>Most elements fall into one of two categories.</p>
+
+<p>Block elements take up the full width available and always start on a new line. The next element after them gets
+  pushed down below.</p>
+
+<p>Inline elements only take up as much space as their content needs. They sit inside the flow of text without breaking
+  onto a new line.</p>
+
+<p>Here is what that looks like in practice.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p>This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+    <span>This is a span.</span>
+    <span>This is another span.</span>
+  </template>
+  <template class="try-default-css">
+    p {
+      background-color: lightblue;
+    }
+
+    span {
+      background-color: lightyellow;
+    }
+  </template>
+</section>
+
+<p>The paragraphs stack on top of each other and stretch the full width. The spans sit right next to each other only
+  taking up as much space as their text.</p>
+
+<p>That is block vs inline behavior. And you can change it on any element using the display property.</p>
+
+<h2>display: block</h2>
+
+<p>Setting <code>display: block</code> on an element makes it behave like a block element. It takes up the full width
+  and pushes the next element below it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <span class="block">This span is now block.</span>
+    <span>This span is normal inline.</span>
+  </template>
+  <template class="try-default-css">
+    .block {
+      display: block;
+      background-color: lightyellow;
+    }
+  </template>
+</section>
+
+<p>The first span now behaves like a paragraph. It takes up the full line and pushes the second span below it even
+  though spans are normally inline.</p>
+
+<h2>display: inline</h2>
+
+<p>Setting <code>display: inline</code> makes a block element behave like an inline one. It shrinks to fit its content
+  and sits inside the flow of text.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p class="inline">This paragraph is now inline.</p>
+    <p class="inline">This one too.</p>
+  </template>
+  <template class="try-default-css">
+    .inline {
+      display: inline;
+      background-color: lightblue;
+    }
+  </template>
+</section>
+
+<p>The paragraphs now sit side by side like words in a sentence instead of stacking.</p>
+
+<p>One important thing about inline elements — you cannot set a width or height on them. They just take up as much space
+  as their content needs and that is it. If you try to set a width on an inline element nothing will happen.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>This is one of the most common points of confusion for beginners. You add a width to something and nothing changes.
+    Almost always the reason is the element is set to <code>display: inline</code>. Switch it to
+    <code>inline-block</code> or <code>block</code> and your width will work immediately.</p>
+</div>
+
+<h2>display: inline-block</h2>
+
+<p>This is the best of both worlds. An inline-block element sits in the flow like an inline element — so it does not
+  break onto a new line — but you can still set a width and height on it like a block element.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <button class="btn">Get Started</button>
+    <button class="btn">Sign In</button>
+  </template>
+  <template class="try-default-css">
+    .btn {
+      display: inline-block;
+      width: 160px;
+      padding: 12px 24px;
+      background-color: #E50914;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+  </template>
+</section>
+
+<p>Both buttons sit side by side and they both have a fixed width. That is inline-block doing its job.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Buttons and navigation links are the most common places you will use <code>inline-block</code>. They need to sit
+    side by side but they also need a defined size. <code>inline-block</code> gives you both.</p>
+</div>
+
+<h2>display: none</h2>
+
+<p>This one is simple but powerful. Setting <code>display: none</code> makes an element completely disappear. It is not
+  just invisible — it is removed from the layout entirely. The space it would have taken up disappears too.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <p>This paragraph is visible.</p>
+    <p class="hidden">This paragraph is hidden.</p>
+    <p>This paragraph is also visible.</p>
+  </template>
+  <template class="try-default-css">
+    .hidden {
+      display: none;
+    }
+  </template>
+</section>
+
+<p>The second paragraph is completely gone. The third paragraph moves up to fill the space as if the second one never
+  existed.</p>
+
+<p>You will use <code>display: none</code> constantly when building interactive components with JavaScript — showing and
+  hiding menus, modals, dropdowns, and notifications.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>There is an important difference between <code>display: none</code> and <code>visibility: hidden</code>. Both make
+    an element invisible but <code>display: none</code> removes it from the layout entirely so other elements move to
+    fill the space. <code>visibility: hidden</code> keeps the element invisible but it still takes up its space in the
+    layout leaving a blank gap. In most cases <code>display: none</code> is what you want.</p>
+</div>
+
+<h2>Common Block and Inline Elements</h2>
+
+<p>It is worth knowing which elements are block and which are inline by default so you know what you are working with.</p>
+
+<p>Block by default — <code>div</code>, <code>p</code>, <code>h1</code> through <code>h6</code>, <code>section</code>,
+  <code>article</code>, <code>header</code>, <code>footer</code>, <code>nav</code>, <code>form</code>, <code>ul</code>,
+  <code>ol</code>, <code>li</code></p>
+
+<p>Inline by default — <code>span</code>, <code>a</code>, <code>strong</code>, <code>em</code>, <code>img</code>,
+  <code>button</code>, <code>input</code>, <code>label</code></p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Now that we understand display let us start organizing our Netflix clone properly. The logo and Sign In button should
+  sit on the same line at the top — the logo on the left and the button on the right. That requires them to be in the
+  same container and laid out side by side.</p>
+
+<p>We will use a div with a class of navbar to wrap them together.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <body>
+      <div class="navbar">
+        <h1 id="logo">Netflix</h1>
+        <button class="signin">Sign In</button>
+      </div>
+      <div class="hero">
+        <h1>Unlimited movies, TV shows, and more.</h1>
+        <p>Starts at USD 2.99. Cancel anytime.</p>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <form>
+          <input type="email" placeholder="Email address">
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+    </body>
+  </template>
+  <template class="try-default-css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      font-size: 16px;
+      background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+        url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .navbar {
+      padding: 16px 40px;
+    }
+
+    #logo {
+      display: inline-block;
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #E50914;
+      letter-spacing: 4px;
+    }
+
+    .signin {
+      display: inline-block;
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 4px;
+    }
+
+    .hero {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: white;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    button {
+      background-color: #E50914;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 12px 32px;
+      margin-top: 24px;
+      border: none;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+    }
+
+    input {
+      border: 2px solid #cccccc;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 4px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </template>
+</section>
+
+<p>The page is starting to take real shape now. The navbar and hero sections are separated. The logo and sign in button
+  are both inline-block so they sit on the same line. In the next lesson we will use Flexbox to push the logo to the
+  left and the button to the right properly.</p>
+
+<div class="challenge" data-title="Make elements sit on the same line"
+  data-description="Make both the logo and the Sign In button display as inline-block so they sit on the same line."
+  data-starter-html="&lt;div class=&quot;navbar&quot;&gt;
+  &lt;h1 id=&quot;logo&quot;&gt;Netflix&lt;/h1&gt;
+  &lt;button class=&quot;signin&quot;&gt;Sign In&lt;/button&gt;
+&lt;/div&gt;"
+  data-starter-css=".navbar {
+  padding: 16px 40px;
+}
+
+#logo {
+
+}
+
+.signin {
+
+}"
+  data-css-checks="#logo|display|inline-block"
+  data-lang="css"
+  data-solution="#logo {
+  display: inline-block;
+}
+
+.signin {
+  display: inline-block;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you width and height — how to control the exact size of any element on your
+    page and the difference between fixed sizes and flexible ones. Come on in.</p>
+  <a href="/css/width-height">Learn about Width and Height →</a>
+</div>

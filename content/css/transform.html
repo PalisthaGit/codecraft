@@ -1,0 +1,708 @@
+<div class="definition">
+  Transform is one of the most powerful properties in CSS. It lets you rotate, scale, move, and skew any element on the page without affecting the layout around it. The element moves visually but everything else stays exactly where it is.
+</div>
+
+<p>You have already seen transform doing small things in previous lessons. The button that shrinks slightly when clicked. The content that slides up on page load. Those were just two of the things transform can do.</p>
+
+<p>When you combine transform with transitions and animations it creates some of the most satisfying effects in web design. Let us go through each transform function properly.</p>
+
+<h2>How Transform Works</h2>
+
+<p>Transform is different from properties like <code>margin</code> or <code>position</code>. When you move an element with margin or position the layout around it adjusts. Other elements move to accommodate it.</p>
+
+<p>Transform does not touch the layout at all. The element moves visually but its original space is still reserved in the document. Other elements act like it never moved.</p>
+
+<p>Think of it like a sticker on a piece of paper. You can rotate or stretch the sticker but the paper underneath does not change. That is transform.</p>
+
+<h2>translate — Moving Elements</h2>
+
+<p><code>translateX</code> moves an element horizontally. <code>translateY</code> moves it vertically. <code>translate</code> moves it in both directions at once.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="/images/movie1.png" alt="Movie 1">
+  </div>
+  <div class="movie-card moved">
+    <img src="/images/movie2.png" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie3.png" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 40px 16px 60px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.movie-card.moved {
+  transform: translateY(-20px);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>The second card moves 20px upward. But notice the other cards did not shift. The space where the card was is still reserved. Only the visual position changed.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>translateY(-20px)</code> — moves the element 20px upward. Negative values go up or left. Positive values go down or right.</p>
+
+<p><code>translateX(20px)</code> — would move it 20px to the right.</p>
+
+<p><code>translate(20px, -10px)</code> — would move it 20px right and 10px up at the same time.</p>
+
+<p>You have already used <code>translateY</code> in the slideUp animation from the last lesson. This is the same thing — content starting below its final position and moving up into place.</p>
+
+<h2>scale — Making Elements Bigger or Smaller</h2>
+
+<p>Scale changes the size of an element. <code>1</code> is the normal size. <code>1.1</code> is 10 percent bigger. <code>0.9</code> is 10 percent smaller.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="/images/movie1.png" alt="Movie 1">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie2.png" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie3.png" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 40px 16px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 24px 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Hover over any card and it grows slightly. Move away and it shrinks back smoothly.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>scale(1.08)</code> — grows the element to 108 percent of its normal size. Just 8 percent larger. Subtle but noticeable.</p>
+
+<p><code>transition: transform 0.3s ease</code> — makes the scale animate smoothly instead of snapping. Without this the card would jump instantly to the larger size.</p>
+
+<p><code>align-items: center</code> on the row — when a card scales up it would push other cards if they were not centered. Centering them vertically means the card grows from its center point and nothing else shifts.</p>
+
+<p>This scale on hover is the signature Netflix interaction. Every movie card on the real Netflix site does exactly this. Now you know how it is built.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Keep hover scale values subtle. <code>1.05</code> to <code>1.1</code> feels polished and intentional. Anything above <code>1.15</code> starts to feel dramatic and can push other elements around. The goal is to signal interactivity not to surprise the user.</p>
+</div>
+
+<h2>rotate — Spinning Elements</h2>
+
+<p>Rotate spins an element around its center point. Positive values spin clockwise. Negative values spin counterclockwise.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="icon-wrapper">
+  <span class="icon">&#9654;</span>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #E50914;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.icon-wrapper:hover {
+  transform: rotate(360deg);
+}
+
+.icon {
+  color: white;
+  font-size: 1.2rem;
+}
+  </template>
+</section>
+
+<p>Hover over the play button and it spins a full 360 degrees. Move away and it spins back.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>rotate(360deg)</code> — spins the element a full turn clockwise.</p>
+
+<p><code>transition: transform 0.4s ease</code> — animates the rotation smoothly over 0.4 seconds.</p>
+
+<p>When you move the mouse away the rotation goes back to <code>0deg</code> which means it spins in reverse back to its starting position.</p>
+
+<p>You will use rotate most often for things like arrow icons that flip direction, loading spinners, and decorative elements that need a playful hover effect.</p>
+
+<h2>Combining Multiple Transforms</h2>
+
+<p>You can apply multiple transform functions to one element by writing them together separated by spaces.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-row">
+  <div class="movie-card">
+    <img src="/images/movie1.png" alt="Movie 1">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie2.png" alt="Movie 2">
+  </div>
+  <div class="movie-card">
+    <img src="/images/movie3.png" alt="Movie 3">
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 40px 16px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 24px 16px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Hover over a card and it grows slightly while also lifting upward. Combined with the box shadow it feels like the card is physically floating off the page.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>scale(1.08) translateY(-4px)</code> — two transforms applied together. The card grows 8 percent and moves 4px upward at the same time.</p>
+
+<p><code>box-shadow</code> on hover — a deeper shadow appears as the card lifts. This reinforces the illusion of the card rising off the surface.</p>
+
+<p>This scale plus translate plus shadow combination is one of the most satisfying card hover effects in web design. It feels tactile and physical.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When combining transforms always write them in this order: scale, rotate, translate. CSS applies transforms from right to left so the order matters. If you translate first and then scale, the scaling happens from the translated position which can give unexpected results. Scale first, then translate.</p>
+</div>
+
+<h2>transform-origin</h2>
+
+<p>By default transforms happen from the center of the element. But you can change that using <code>transform-origin</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="movie-card">
+  <img src="/images/movie1.png" alt="Movie 1">
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #141414;
+  padding: 60px 40px;
+}
+
+.movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  transform-origin: bottom left;
+}
+
+.movie-card:hover {
+  transform: scale(1.1);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Hover over the card and it grows from the bottom left corner instead of the center.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>transform-origin: bottom left</code> — the point the transform radiates from is now the bottom left corner. So when the card scales up it grows outward from that corner.</p>
+
+<p>Common values are <code>center</code> (default), <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>, <code>top left</code>, <code>bottom right</code> and so on. You can also use pixel values or percentages for precise control.</p>
+
+<p>This becomes very useful for dropdown menus that should open from their trigger point, tooltips that appear from their anchor, and card grids where you want edge cards to scale inward rather than off screen.</p>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Let us add the proper Netflix card hover effect to our clone. Cards scale up, lift slightly, and cast a deeper shadow. The notification bell gets a rotation on hover.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+<div class="navbar">
+  <h1 id="logo">Netflix</h1>
+  <div class="nav-actions">
+    <div class="notification-wrapper">
+      <span class="icon">&#128276;</span>
+      <span class="notification-badge">3</span>
+    </div>
+    <button class="signin">Sign In</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="animate">Unlimited movies, TV shows, and more.</h1>
+    <p class="animate delay-1">Starts at USD 2.99. Cancel anytime.</p>
+    <form class="animate delay-2">
+      <input type="email" placeholder="Email address">
+      <button type="submit">Get Started</button>
+    </form>
+  </div>
+</div>
+
+<div class="movie-section">
+  <h2 class="section-title">Trending Now</h2>
+  <div class="movie-row">
+    <div class="movie-card">
+      <img src="/images/movie1.png" alt="Movie 1">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie2.png" alt="Movie 2">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie3.png" alt="Movie 3">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie4.png" alt="Movie 4">
+    </div>
+    <div class="movie-card">
+      <img src="/images/movie5.png" alt="Movie 5">
+    </div>
+  </div>
+</div>
+  </template>
+  <template class="try-default-css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #141414;
+  color: white;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logoGlow {
+  0%, 100% { text-shadow: none; }
+  50% { text-shadow: 0 0 20px rgba(229,9,20,0.6); }
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  z-index: 9999;
+}
+
+#logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: #E50914;
+  letter-spacing: 4px;
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notification-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.notification-wrapper:hover {
+  transform: rotate(20deg);
+}
+
+.icon { font-size: 1.5rem; }
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 10;
+  background-color: #E50914;
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.signin:hover {
+  background-color: white;
+  color: #141414;
+}
+
+.signin:active {
+  transform: scale(0.97);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 120px 40px 80px;
+  text-align: center;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  color: white;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.hero form {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero input {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  outline: none;
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.hero input:focus { border-color: white; }
+
+.hero input::placeholder {
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+.hero button {
+  background-color: #E50914;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero button:hover { background-color: #b20710; }
+.hero button:active { transform: scale(0.98); }
+
+.animate {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+
+.movie-section {
+  padding: 40px;
+}
+
+.section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: #E50914;
+  border-radius: 2px;
+}
+
+.movie-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 16px 0;
+}
+
+.movie-card {
+  position: relative;
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
+  transition: background-color 0.3s ease;
+}
+
+.movie-card:hover::after {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  </template>
+</section>
+
+<p>Here is what every transform is doing.</p>
+
+<p><code>.notification-wrapper:hover rotate(20deg)</code> — hovering the bell icon tilts it slightly like a real notification bell ringing. A small playful detail that makes the navbar feel alive.</p>
+
+<p><code>.signin:active scale(0.97)</code> — pressing the Sign In button shrinks it very slightly giving a satisfying physical press feeling.</p>
+
+<p><code>.movie-card:hover scale(1.08) translateY(-4px)</code> — the signature Netflix card effect. Cards grow 8 percent and lift 4px upward. Combined with the deeper box shadow it feels like the card is physically rising off the page inviting you to click.</p>
+
+<p><code>.hero button:active scale(0.98)</code> — the Get Started button presses down satisfyingly when clicked.</p>
+
+<p>Every interactive element now has a complete set of states — resting, hovering, and active — and they all animate smoothly thanks to the transitions we added in the last lesson.</p>
+
+<div class="challenge"
+  data-title="Make the card lift on hover"
+  data-description="Make the card scale up to 1.08 and lift 4px upward on hover with a smooth transition. Add a deeper box shadow on hover too."
+  data-starter-html="&lt;div class=&quot;movie-card&quot;&gt;
+  &lt;img src=&quot;/images/movie1.png&quot; alt=&quot;Movie 1&quot;&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}"
+  data-css-checks=".movie-card|transition|transform;.movie-card:hover|transform|scale"
+  data-lang="css"
+  data-solution=".movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.08) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you units — px, em, rem, vh, vw, and percentage. You have been using these throughout the course but now we are going to understand exactly how each one works and when to reach for each one. Come on in.</p>
+  <a href="/css/units">Learn about CSS Units →</a>
+</div>

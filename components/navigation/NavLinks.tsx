@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { htmlLessonGroups } from "@/data/htmlLessons";
-import { cssLessons } from "@/data/cssLessons";
+import { cssLessonGroups } from "@/data/cssLessons";
 import { javascriptLessons } from "@/data/javascriptLessons";
 import type { ContentMeta } from "@/lib/contentRegistry";
 import type { LessonGroup } from "@/data/htmlLessons";
@@ -116,6 +116,7 @@ function GroupedSectionNav({
   pathname,
   completed,
   onNavigate,
+  alsoRead,
 }: {
   groups: LessonGroup[];
   basePath: string;
@@ -124,6 +125,7 @@ function GroupedSectionNav({
   pathname: string;
   completed: Set<string>;
   onNavigate?: () => void;
+  alsoRead?: { href: string; label: string }[];
 }) {
   return (
     <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
@@ -168,6 +170,28 @@ function GroupedSectionNav({
           </ul>
         </div>
       ))}
+      {alsoRead && alsoRead.length > 0 && (
+        <div>
+          <SectionHeading title="Also Read" />
+          <ul className="space-y-1">
+            {alsoRead.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onNavigate}
+                  className={`flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors ${
+                    pathname === item.href
+                      ? "bg-[#6367ff] text-white font-semibold"
+                      : "text-[#64748b] hover:bg-[#f8fafc] hover:text-[#0f172a]"
+                  }`}
+                >
+                  <span className="font-medium text-[#374151]">{item.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
@@ -269,13 +293,18 @@ export default function NavLinks({ onNavigate }: NavLinksProps) {
 
   if (pathname.startsWith("/css")) {
     return (
-      <FlatSectionNav
-        title="CSS Fundamentals"
-        lessons={cssLessons}
+      <GroupedSectionNav
+        groups={cssLessonGroups}
         basePath="/css"
         pathname={pathname}
         completed={completed}
         onNavigate={onNavigate}
+        alsoRead={[
+          { href: "/css/outline", label: "CSS Outline" },
+          { href: "/css/visibility", label: "CSS Visibility" },
+          { href: "/css/normalize", label: "CSS Normalize" },
+          { href: "/css/bem-naming", label: "CSS BEM Naming" },
+        ]}
       />
     );
   }

@@ -1,0 +1,425 @@
+<div class="definition">
+  The object-fit property controls how an image or video fills its container — letting you scale and crop it cleanly
+  without distortion, no matter what size you give the container.
+</div>
+
+<pre><code>.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}</code></pre>
+
+<p>Let me ask you something.</p>
+
+<p>Have you ever put an image inside a fixed size container and it came out stretched or squished? A face that looks
+  wide and distorted. A landscape photo that looks tall and compressed. The image is there but it looks wrong.</p>
+
+<p>That is what happens when you force an image into a size it was not designed for without telling CSS how to handle
+  it. Object-fit is the fix.</p>
+
+<h2>What is Object Fit</h2>
+
+<p>Object-fit controls how an image or video fills its container. It tells the browser what to do when the image
+  dimensions do not match the container dimensions.</p>
+
+<p>Without object-fit the image stretches to fill exactly the width and height you gave it. With object-fit you can
+  tell it to fill the space while keeping its original proportions.</p>
+
+<h2>The Problem First</h2>
+
+<p>Let us see the problem clearly before we fix it.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+      display: flex;
+      gap: 12px;
+      background-color: #f0f0f0;
+      padding: 16px;
+    }
+
+    .movie-card {
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+    }
+  </template>
+</section>
+
+<p>The images fill the cards but they look stretched and distorted. The proportions are broken because we forced the
+  image to be exactly 160px by 100px regardless of its actual dimensions.</p>
+
+<p>Now let us fix it.</p>
+
+<h2>object-fit: cover</h2>
+
+<p>Cover scales the image up until it fills the container completely. It maintains the original proportions. Any part
+  of the image that does not fit is cropped out.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg" alt="Movie 2">
+      </div>
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg" alt="Movie 3">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+      display: flex;
+      gap: 12px;
+      background-color: #f0f0f0;
+      padding: 16px;
+    }
+
+    .movie-card {
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </template>
+</section>
+
+<p>The images now fill their cards perfectly without any distortion. The proportions are maintained and the overflow is
+  hidden cleanly by the card container.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>object-fit: cover</code> — the image scales to fill the full width and height of its container. The aspect
+  ratio is preserved. Anything that spills outside the container is cropped. You never see empty space and you never
+  see stretching.</p>
+
+<p>This is the value you will use for almost every image in a fixed size container. Movie cards, profile photos, hero
+  backgrounds, blog post thumbnails — they all use cover.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p><code>object-fit: cover</code> is the most used value by a wide margin. Any time you have an image inside a fixed
+    container just add <code>object-fit: cover</code> and it will look right. Make it a habit to always include it when
+    sizing images.</p>
+</div>
+
+<h2>object-fit: contain</h2>
+
+<p>Contain scales the image down until the whole image fits inside the container. Nothing gets cropped. But you may see
+  empty space around the image if the proportions do not match.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Movie 1">
+      </div>
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg" alt="Movie 2">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+      display: flex;
+      gap: 12px;
+      background-color: #f0f0f0;
+      padding: 16px;
+    }
+
+    .movie-card {
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-color: #333;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  </template>
+</section>
+
+<p>The full image is visible but you will see dark space on the sides or top and bottom depending on the image
+  proportions.</p>
+
+<p>Use contain when you need the entire image visible — like a product photo, a logo, or a diagram where cropping would
+  cut off important content.</p>
+
+<h2>object-fit: none</h2>
+
+<p>None displays the image at its natural size ignoring the container dimensions entirely. The image does not scale
+  at all.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-card">
+      <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Movie 1">
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-card {
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: none;
+    }
+  </template>
+</section>
+
+<p>You will see just a portion of the image — whatever falls within the 160x100 container. The image is not scaled
+  at all.</p>
+
+<p>You will rarely use none in practice but it is useful when you want to show a specific cropped portion of an image
+  without scaling.</p>
+
+<h2>object-position</h2>
+
+<p>By default cover centers the image inside the container. But sometimes the most important part of the image is not
+  in the center — like a face near the top or a subject on the left side.</p>
+
+<p>Object-position controls where the image is anchored inside the container.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-row">
+      <div class="movie-card">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Center">
+      </div>
+      <div class="movie-card top">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Top">
+      </div>
+      <div class="movie-card bottom">
+        <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Bottom">
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-row {
+      display: flex;
+      gap: 12px;
+      background-color: #f0f0f0;
+      padding: 16px;
+    }
+
+    .movie-card {
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .movie-card.top img {
+      object-position: top;
+    }
+
+    .movie-card.bottom img {
+      object-position: bottom;
+    }
+  </template>
+</section>
+
+<p>Three cards with the same image but each shows a different part of it. Center shows the middle, top shows the upper
+  portion, bottom shows the lower portion.</p>
+
+<p>Here is what is happening.</p>
+
+<p><code>object-position: center</code> — the default. The image is centered inside the container. Equal amounts are
+  cropped from each side.</p>
+
+<p><code>object-position: top</code> — the image is anchored to the top. The bottom gets cropped. Useful for portraits
+  where the face is at the top.</p>
+
+<p><code>object-position: bottom</code> — the image is anchored to the bottom. The top gets cropped.</p>
+
+<p>You can also use <code>left</code>, <code>right</code>, or specific values like
+  <code>object-position: 30% 20%</code> for precise control.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>When your images have a subject that keeps getting cropped out by <code>object-fit: cover</code> try adjusting
+    <code>object-position</code>. A portrait where the face disappears just needs <code>object-position: top</code>. A
+    landscape where the horizon gets cut needs <code>object-position: center</code> or <code>bottom</code>. This one
+    property saves a lot of awkward cropping situations.</p>
+</div>
+
+<h2>Building the Netflix Clone</h2>
+
+<p>Our movie cards already use <code>object-fit: cover</code> throughout. Let us make sure every image in the clone is
+  using it properly and add <code>object-position</code> where it makes sense.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg" alt="Movie 1">
+        </div>
+        <div class="movie-card">
+          <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXTgkhmaQTqVqZWQpU6KcZlwBYvnrX5MTQatuonAXBk8F7-PcyiPtUhO0lD4-feRRw_GvjwVhHxlkvtpXF4T4lfHs-aaYJa0cNs.jpg" alt="Movie 2">
+        </div>
+        <div class="movie-card">
+          <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABX04eZFeuzxRxlBcsdsrl5az5RX7R_kpmMlIZijxOUjn3ODejcccCsLin87Ic6qMLGWScu-dBSVqq6MzS47a17_6OpIbR7LAEUA.jpg" alt="Movie 3">
+        </div>
+        <div class="movie-card">
+          <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABVgzdeZGRAwCEa709VhH3rjzGTNzIDlWer-mLr3GaH6qm10zCfxxN-E1-JYCA8CxkoBD74MIuxW1agaVLL4kUpFTtsZPIuTfAV1ljNzcrTPup4487rDCgRuZm-Jn8fUi1cVx.jpg" alt="Movie 4">
+        </div>
+        <div class="movie-card">
+          <img src="https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABUvQbIPXgpCDdCjDU1Ln9Hz_T9K4QWOeRqDC0_AqSS0EoDHnd3HZNvdU660QoLXfYN1J1onlnVJ6me4utt0EuPA35nq3AvkxOz4.jpg" alt="Movie 5">
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    .movie-section {
+      padding: 2.5rem;
+      background-color: #141414;
+    }
+
+    .section-title {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .movie-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .movie-card {
+      position: relative;
+      width: 160px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card:hover img {
+      transform: scale(1.05);
+    }
+  </template>
+</section>
+
+<p>Here is what is happening.</p>
+
+<p><code>object-fit: cover</code> — every card image fills its container without distortion. This is the foundation.</p>
+
+<p><code>object-position: center top</code> — the image is anchored to the center horizontally and the top vertically.
+  Since our movie thumbnails have titles and subjects near the top this keeps the most important part of each image
+  visible even after cropping.</p>
+
+<p>Transition on the <code>img</code> itself — the image inside the card has its own subtle scale transition on hover.
+  Combined with the card scaling up this creates a layered zoom effect. The card scales to 1.08 and the image inside
+  scales to an additional 1.05 giving a pleasing depth effect.</p>
+
+<div class="challenge" data-title="Make images fill their card"
+  data-description="Make the image fill the card without distortion. Anchor it to the top center."
+  data-starter-html="&lt;div class=&quot;movie-card&quot;&gt;
+  &lt;img src=&quot;https://occ-0-7254-2186.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABcgE2p0rLBllX45kwT98woah-ZOlFFRzICsJBWWAjkfbtAK3StFZEQyk2QdqpPvi8cbmB_M0HaaDN_LLH2jKbQRLWe4wWMui0jn3ONXVrBqeMnU1XDaoFVfQm3bQQG9-mjlL.jpg&quot; alt=&quot;Movie 1&quot;&gt;
+&lt;/div&gt;"
+  data-starter-css=".movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+
+}"
+  data-css-checks=".movie-card img|object-fit|cover"
+  data-lang="css"
+  data-solution=".movie-card {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}">
+</div>
+
+<div class="next-lesson">
+  <p>In the next lesson I am going to show you CSS Units — how to choose the right unit for every situation so your
+    layouts are flexible, accessible, and look great at every screen size. Come on in.</p>
+  <a href="/css/units">Learn about CSS Units →</a>
+</div>

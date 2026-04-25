@@ -298,6 +298,49 @@ body {
   color: #0f172a;
 }
 
+/* ── Also Read block ─────────────────────────────────────────────────────── */
+
+.html-content .also-read {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #6367ff;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1.75rem;
+  text-decoration: none;
+}
+
+.html-content .also-read:hover {
+  border-color: #6367ff;
+  background-color: #f0f4ff;
+}
+
+.html-content .also-read .also-read-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6367ff;
+  margin-bottom: 0.2rem;
+}
+
+.html-content .also-read .also-read-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.html-content .also-read .also-read-icon {
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: #6367ff;
+  flex-shrink: 0;
+}
+
 /* ── Challenge block ──────────────────────────────────────────────────────── */
 
 .challenge {
