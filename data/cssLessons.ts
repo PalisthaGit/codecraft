@@ -279,6 +279,13 @@ export const cssLessons: ContentMeta[] = [
     difficulty: "Intermediate",
   },
   {
+    slug: "netflix-clone",
+    title: "Project: Netflix Clone",
+    description: "Put it all together. Build a complete Netflix-style homepage step by step using everything you've learned.",
+    readTime: "20 min read",
+    difficulty: "Project",
+  },
+  {
     slug: "create-netflix-clone",
     title: "Build a Netflix Clone With CSS",
     description: "Build a Netflix-style homepage from scratch in 12 focused steps — navbar, hero, email form, movie cards, and responsive design all in one beginner project.",
