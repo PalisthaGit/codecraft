@@ -1,0 +1,1022 @@
+<div class="definition">
+  What if instead of learning CSS concept by concept in isolation you just built something real right now? That is
+  exactly what we are going to do. We are going to build a Netflix clone together from scratch. No experience needed.
+  Just follow along and by the end you will have something that actually looks like Netflix sitting on your screen.
+</div>
+
+<p>Every section is short. Every section does one thing. Let us go.</p>
+
+<h2>Step 1 — Connect CSS to HTML</h2>
+
+<p>Before we style anything we need two files talking to each other. Create a folder on your desktop called
+  <code>netflix-clone</code>. Inside it we will have two files — <code>index.html</code> and <code>style.css</code>.
+</p>
+
+<p>In <code>index.html</code> we will start with this.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Netflix Clone&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>That <code>link</code> tag in the head is what connects your CSS file to your HTML file. Without it nothing we write
+  in <code>style.css</code> will show up on the page.</p>
+
+<p>Open the folder in VS Code and click Go Live at the bottom. Your browser will open. Blank white page for now. That is
+  exactly where we want to start.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how connecting CSS to HTML works in more depth? Read <a href="/css/adding-css"><strong>Adding
+        CSS</strong></a>.</p>
+</div>
+
+<h2>Step 2 — Add the Netflix Heading</h2>
+
+<p>Let us put something on the page. In the body of <code>index.html</code> we will have this.</p>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;h1 id="logo"&gt;Netflix&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+
+<p>You will see the word Netflix appear on a white background. Plain black text. Now for the color — in
+  <code>style.css</code> we will use this.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+    #logo {
+    color: #E50914;
+    }
+  </template>
+</section>
+
+<p>The Netflix heading is now that deep recognizable red. That value <code>#E50914</code> is the exact red Netflix uses
+  for their logo. It is called a hex code — a precise way to write any color in CSS.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to learn more about how colors work in CSS? Read <a href="/css/colors"><strong>Colors</strong></a>.</p>
+</div>
+
+<h2>Step 3 — Make the Background Dark</h2>
+
+<p>Netflix has a dark background. For that in <code>style.css</code> we will add this to the body.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: #141414;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    }
+  </template>
+</section>
+
+<p>The whole page goes dark. The logo is now bigger and more prominent against that dark background. Starting to feel
+  like Netflix already.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand background colors more? Read <a href="/css/background-color"><strong>Background
+        Color</strong></a>.</p>
+</div>
+
+<h2>Step 4 — Add a Google Font</h2>
+
+<p>Right now the text is using whatever font the browser defaults to. Netflix uses a clean modern font so for that we
+  will add one from Google Fonts.</p>
+
+<p>In the head section of <code>index.html</code> above the <code>style.css</code> link we will add this.</p>
+
+<pre><code class="language-html">&lt;link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+<p>Now to use Roboto across the whole page and give the logo Bebas Neue, we will update <code>style.css</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <h1 id="logo">Netflix</h1>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    }
+  </template>
+</section>
+
+<p>The Netflix logo now has that strong display font and the rest of the page uses clean readable Roboto.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to learn how Google Fonts work? Read <a href="/css/google-fonts"><strong>Google Fonts</strong></a>.</p>
+</div>
+
+<h2>Step 5 — Build the Navbar</h2>
+
+<p>Netflix has a navbar at the top with the logo on the left and a Sign In button on the right. For that structure in
+  <code>index.html</code> the body will look like this.
+</p>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;div class="navbar"&gt;
+    &lt;h1 id="logo"&gt;Netflix&lt;/h1&gt;
+    &lt;button class="signin"&gt;Sign In&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+
+<p>Now to push the logo to the left and the button to the right we will use Flexbox in <code>style.css</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+  </template>
+</section>
+
+<p>The logo sits on the left and the Sign In button sits on the right. That <code>justify-content: space-between</code>
+  is what pushes them to opposite sides. Flexbox is one of the most powerful layout tools in CSS.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how Flexbox works? Read <a href="/css/flexbox"><strong>Flexbox Layout</strong></a>.</p>
+</div>
+
+<h2>Step 6 — Add the Hero Background Image</h2>
+
+<p>The most dramatic part of Netflix is that full screen cinematic background. For the structure in
+  <code>index.html</code> the body will look like this.
+</p>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;div class="navbar"&gt;
+    &lt;h1 id="logo"&gt;Netflix&lt;/h1&gt;
+    &lt;button class="signin"&gt;Sign In&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="hero"&gt;
+  &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+
+<p>And for the background image and that dark gradient overlay on top of it we will have this in <code>style.css</code>.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div class="hero"></div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    .hero {
+    min-height: 400px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    }
+  </template>
+</section>
+
+<p>The whole page now has that dark cinematic Netflix background. That gradient sitting on top of the image is what
+  makes it darker so text stays readable on top of it.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand background images and gradients? Read <a href="/css/background-color"><strong>Background
+        Color</strong></a> and <a href="/css/gradients"><strong>CSS Gradients</strong></a>.</p>
+</div>
+
+<h2>Step 7 — Add the Hero Text</h2>
+
+<p>Now for the main text inside the hero. In <code>index.html</code> the hero div will look like this.</p>
+
+<pre><code class="language-html">&lt;div class="hero"&gt;
+  &lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+  &lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+  &lt;p&gt;Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<p>For the text to sit centered on the hero and for the heading and paragraph to look right we will update
+  <code>style.css</code> like this.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    .hero {
+    min-height: 400px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2.5rem;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    }
+  </template>
+</section>
+
+<p>The text now sits perfectly centered on the hero section over that dark cinematic background.</p>
+
+<h2>Step 8 — Add the Email Form</h2>
+
+<p>Netflix has an email input and a Get Started button right below the text. For that in <code>index.html</code> we will
+  update the hero div like this.</p>
+
+<pre><code class="language-html">&lt;div class="hero"&gt;
+  &lt;h1&gt;Unlimited movies, TV shows, and more.&lt;/h1&gt;
+  &lt;p&gt;Starts at USD 2.99. Cancel anytime.&lt;/p&gt;
+  &lt;p&gt;Ready to watch? Enter your email to create or restart your membership.&lt;/p&gt;
+  &lt;form class="hero-form"&gt;
+    &lt;input type="email" placeholder="Email address"&gt;
+    &lt;button type="submit"&gt;Get Started&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</code></pre>
+
+<p>For the input and button to sit side by side and look clean we will have this in <code>style.css</code>.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form class="hero-form">
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    .hero {
+    min-height: 400px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2.5rem;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    }
+
+    .hero-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    }
+
+    .hero-form input {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    width: 300px;
+    }
+
+    .hero-form input::placeholder {
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+    }
+
+    .hero-form input:focus {
+    border-color: white;
+    }
+
+    .hero-form button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .hero-form button:hover {
+    background-color: #b20710;
+    }
+  </template>
+</section>
+
+<p>The email form now looks clean and professional. Click into the input and the border turns white. Hover over the
+  button and it darkens slightly. Small details that make a big difference.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how hover states and focus styles work? Read <a
+      href="/css/transitions"><strong>Transitions</strong></a>.</p>
+</div>
+
+<h2>Step 9 — Add the Movie Cards</h2>
+
+<p>Netflix has rows of movie thumbnails. For the structure in <code>index.html</code> we will add this section below the
+  hero.</p>
+
+<pre><code class="language-html">&lt;div class="movie-section"&gt;
+  &lt;h2 class="section-title"&gt;Trending Now&lt;/h2&gt;
+  &lt;div class="movie-row"&gt;
+    &lt;div class="movie-card"&gt;
+      &lt;img src="/images/movie1.png" alt="Movie 1"&gt;
+    &lt;/div&gt;
+    &lt;div class="movie-card"&gt;
+      &lt;img src="/images/movie2.png" alt="Movie 2"&gt;
+    &lt;/div&gt;
+    &lt;div class="movie-card"&gt;
+      &lt;img src="/images/movie3.png" alt="Movie 3"&gt;
+    &lt;/div&gt;
+    &lt;div class="movie-card"&gt;
+      &lt;img src="/images/movie4.png" alt="Movie 4"&gt;
+    &lt;/div&gt;
+    &lt;div class="movie-card"&gt;
+      &lt;img src="/images/movie5.png" alt="Movie 5"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p>For the cards to sit in a horizontal scrolling row and lift off the page on hover we will have this in
+  <code>style.css</code>.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="movie-section">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="movie-row">
+        <div class="movie-card">
+          <img src="/images/movie1.png" alt="Movie 1">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie2.png" alt="Movie 2">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie3.png" alt="Movie 3">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie4.png" alt="Movie 4">
+        </div>
+        <div class="movie-card">
+          <img src="/images/movie5.png" alt="Movie 5">
+        </div>
+      </div>
+    </div>
+  </template>
+  <template class="try-default-css">
+    body {
+    background-color: #141414;
+    margin: 0;
+    }
+
+    .movie-section {
+    padding: 2.5rem;
+    background-color: #141414;
+    }
+
+    .section-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: white;
+    margin-bottom: 1rem;
+    }
+
+    .movie-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    }
+
+    .movie-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .movie-card:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    }
+
+    .movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    }
+  </template>
+</section>
+
+<p>A horizontal scrolling row of movie thumbnails. Hover over any card and it lifts off the page. That is the exact
+  Netflix card effect built with <code>transform</code> and <code>transition</code>.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how transitions and hover animations work? Read <a
+      href="/css/transitions"><strong>Transitions</strong></a>.</p>
+</div>
+
+<h2>Step 10 — Fix the Navbar to the Top</h2>
+
+<p>Right now the navbar scrolls away with the page. For it to stick to the top as you scroll we will update the
+  <code>.navbar</code> in <code>style.css</code> like this.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div style="height: 600px; background: #141414; padding: 2rem; color: #64748b;">
+      Scroll up — the navbar stays locked to the top.
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    margin: 0;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0;
+    }
+
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    z-index: 9999;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+  </template>
+</section>
+
+<p>Scroll the page now and the navbar stays locked to the top. That <code>position: fixed</code> with
+  <code>z-index: 9999</code> is what keeps it there and makes sure it always sits on top of everything else.
+</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how position and z-index work? Read <a href="/css/positioning"><strong>Positioning</strong></a>
+    and <a href="/css/z-index"><strong>CSS Z-index</strong></a>.</p>
+</div>
+
+<h2>Step 11 — Reset Default Browser Styles</h2>
+
+<p>You might notice some small gaps or unexpected spacing here and there. That is the browser adding its own default
+  styles. To remove those and start clean we will add this at the very top of <code>style.css</code> before everything
+  else.</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    img {
+    max-width: 100%;
+    display: block;
+    }
+
+    button {
+    cursor: pointer;
+    font-family: inherit;
+    }
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    .hero {
+    min-height: 300px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2.5rem;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    }
+  </template>
+</section>
+
+<p>Clean consistent foundation. No browser surprises. The
+  <code>* { margin: 0; padding: 0; box-sizing: border-box; }</code> block is the first thing most professional
+  developers put in every project.
+</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand CSS resets and why they matter? Read <a href="/css/css-reset"><strong>CSS Reset and Organizing
+        CSS</strong></a>.</p>
+</div>
+
+<h2>Step 12 — Make It Responsive</h2>
+
+<p>The page looks great on desktop. For phones we will adjust a few things with media queries. At the bottom of
+  <code>style.css</code> we will have this.
+</p>
+
+<section class="try-example">
+  <template class="try-default-html">
+    <div class="navbar">
+      <h1 id="logo">Netflix</h1>
+      <button class="signin">Sign In</button>
+    </div>
+    <div class="hero">
+      <h1>Unlimited movies, TV shows, and more.</h1>
+      <p>Starts at USD 2.99. Cancel anytime.</p>
+      <p>Ready to watch? Enter your email to create or restart your membership.</p>
+      <form class="hero-form">
+        <input type="email" placeholder="Email address">
+        <button type="submit">Get Started</button>
+      </form>
+    </div>
+  </template>
+  <template class="try-default-css">
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    background-color: #141414;
+    font-family: "Roboto", Arial, sans-serif;
+    }
+
+    #logo {
+    color: #E50914;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    }
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    }
+
+    .signin {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    }
+
+    .hero {
+    min-height: 300px;
+    background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4)),
+    url("https://assets.nflxext.com/ffe/siteui/vlv3/9ba9f0e2-b246-47f4-bd1f-3e84c23a5db8/web/NP-en-20251020-TRIFECTA-perspective_774f89dc-b75d-4cfc-b1fe-52086741fae3_large.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2.5rem;
+    }
+
+    .hero h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    max-width: 700px;
+    }
+
+    .hero p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    }
+
+    .hero-form {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    }
+
+    .hero-form input {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    width: 300px;
+    }
+
+    .hero-form button {
+    background-color: #E50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+    .navbar {
+    padding: 0.75rem 1.25rem;
+    }
+
+    #logo {
+    font-size: 2rem;
+    }
+
+    .hero h1 {
+    font-size: 2rem;
+    }
+
+    .hero-form {
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .hero-form input {
+    width: 100%;
+    max-width: 400px;
+    }
+
+    .hero-form button {
+    width: 100%;
+    max-width: 400px;
+    }
+    }
+  </template>
+</section>
+
+<p>Drag the browser window narrower now. The heading shrinks, the form stacks vertically, and everything stays readable
+  on a small screen.</p>
+
+<div class="tip">
+  <span>💡</span>
+  <p>Want to understand how responsive design and media queries work? Read <a href="/css/responsive"><strong>Responsive
+        Design</strong></a>.</p>
+</div>
+
+<h2>You Just Built a Netflix Clone</h2>
+
+<p>Look at what is on your screen right now.</p>
+
+<ul>
+  <li>A fixed navbar with the Netflix logo and a Sign In button.</li>
+  <li>A full screen hero section with a cinematic background and gradient overlay.</li>
+  <li>A centered heading, paragraph, and email form.</li>
+  <li>A horizontal scrolling row of movie cards that lift on hover.</li>
+  <li>A page that looks right on desktop and mobile.</li>
+</ul>
+
+<p>That is a real webpage. Built by you. With real CSS techniques used on production websites.</p>
+
+<p>Every single thing you built here is a concept with much more depth to explore. You touched the surface of Flexbox,
+  position, transitions, animations, pseudo-classes, media queries, and more.</p>
+
+<p>If you want to go deeper on any of it the <a href="/css">full CSS course</a> covers every one of these topics from
+  scratch with detailed explanations and hands on challenges.</p>
