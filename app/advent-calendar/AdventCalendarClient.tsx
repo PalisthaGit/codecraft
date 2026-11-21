@@ -439,7 +439,6 @@ export default function AdventCalendarClient() {
           position: 'relative', zIndex: 3, minHeight: '100vh',
           display: 'flex', flexDirection: 'column', alignItems: 'center',
           paddingTop: 'max(env(safe-area-inset-top, 0px), 2rem)',
-          paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 10rem)',
           gap: 0,
         }}>
 
@@ -486,6 +485,67 @@ export default function AdventCalendarClient() {
               />
             </div>
           </div>
+
+          {/* Footer */}
+          <footer style={{
+            width: '100%',
+            marginTop: '3rem',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            background: '#0d1117',
+            paddingBottom: '14rem',
+            fontFamily: 'var(--font-nunito, sans-serif)',
+          }}>
+            <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2.5rem 1.5rem 0' }}>
+
+              {/* Top row */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem', marginBottom: '2.5rem' }}>
+
+                {/* Brand */}
+                <div style={{ flex: 1, minWidth: '160px' }}>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 900, color: '#f1f5f9', letterSpacing: '-0.01em' }}>
+                    CodingBanana
+                  </span>
+                  <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#475569', lineHeight: 1.6, maxWidth: '200px' }}>
+                    Free, beginner-friendly tutorials for HTML, CSS, and JavaScript.
+                  </p>
+                </div>
+
+                {/* Links */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem' }}>
+                  {([
+                    ['Learn', [['HTML Basics', '/html'], ['CSS Fundamentals', '/css'], ['JavaScript', '/javascript'], ['Blog', '/blog']]],
+                    ['Company', [['About', '/about'], ['Contact', '/contact']]],
+                    ['Legal', [['Privacy Policy', '/privacy'], ['Terms of Use', '/terms']]],
+                  ] as [string, [string, string][]][]).map(([group, items]) => (
+                    <div key={group}>
+                      <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#6367ff', marginBottom: '0.75rem', marginTop: 0 }}>
+                        {group}
+                      </p>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {items.map(([label, href]) => (
+                          <li key={href}>
+                            <a href={href} style={{ fontSize: '0.85rem', color: '#94a3b8', textDecoration: 'none' }}>
+                              {label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom row */}
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '1.5rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '0.5rem' }}>
+                <p style={{ fontSize: '0.75rem', color: '#334155', margin: 0 }}>
+                  © {new Date().getFullYear()} CodingBanana. All rights reserved.
+                </p>
+                <p style={{ fontSize: '0.75rem', color: '#334155', margin: 0 }}>
+                  Free for everyone. Always.
+                </p>
+              </div>
+            </div>
+          </footer>
         </div>
 
         {/* Popup */}
@@ -520,7 +580,7 @@ export default function AdventCalendarClient() {
                 December {popup}
               </p>
               <a
-                href={`/advent-calendar/day/${popup}`}
+                href={`/advent-calendar/day${popup}`}
                 style={{
                   display: 'block',
                   background: 'linear-gradient(135deg,#6367ff 0%,#8494ff 100%)',

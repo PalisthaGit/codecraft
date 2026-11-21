@@ -140,7 +140,7 @@ export default function Day1Page() {
         minHeight: '100vh',
         background: 'linear-gradient(180deg,#020209 0%,#05051a 25%,#08082a 55%,#0d1b3e 85%,#0a1428 100%)',
         color: 'white',
-        padding: '2.25rem 1rem 6rem',
+        padding: '2.25rem 1rem 0',
         fontFamily: 'var(--font-nunito, sans-serif)',
       }}>
         <div style={{ maxWidth: '660px', margin: '0 auto' }}>
@@ -289,8 +289,8 @@ export default function Day1Page() {
             </div>
           )}
 
-          {/* Footer */}
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          {/* Next day teaser */}
+          <div style={{ textAlign: 'center', marginTop: '2.5rem', marginBottom: '2.5rem' }}>
             <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: '1rem', fontSize: '0.95rem' }}>
               Done? Tomorrow the snow starts to fall ❄️
             </p>
@@ -305,6 +305,60 @@ export default function Day1Page() {
           </div>
 
         </div>
+
+        {/* Footer */}
+        <footer style={{
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          background: '#0d1117',
+          fontFamily: 'var(--font-nunito, sans-serif)',
+        }}>
+          <div style={{ maxWidth: '720px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
+
+            {/* Top row */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem', marginBottom: '2.5rem' }}>
+              <div style={{ flex: 1, minWidth: '160px' }}>
+                <span style={{ fontSize: '1.1rem', fontWeight: 900, color: '#f1f5f9', letterSpacing: '-0.01em' }}>
+                  CodingBanana
+                </span>
+                <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#475569', lineHeight: 1.6, maxWidth: '200px' }}>
+                  Free, beginner-friendly tutorials for HTML, CSS, and JavaScript.
+                </p>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3rem' }}>
+                {([
+                  ['Learn', [['HTML Basics', '/html'], ['CSS Fundamentals', '/css'], ['JavaScript', '/javascript'], ['Blog', '/blog']]],
+                  ['Company', [['About', '/about'], ['Contact', '/contact']]],
+                  ['Legal', [['Privacy Policy', '/privacy'], ['Terms of Use', '/terms']]],
+                ] as [string, [string, string][]][]).map(([group, items]) => (
+                  <div key={group}>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#6367ff', marginBottom: '0.75rem', marginTop: 0 }}>
+                      {group}
+                    </p>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      {items.map(([label, href]) => (
+                        <li key={href}>
+                          <a href={href} style={{ fontSize: '0.85rem', color: '#94a3b8', textDecoration: 'none' }}>
+                            {label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom row */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '1.5rem', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '0.5rem' }}>
+              <p style={{ fontSize: '0.75rem', color: '#334155', margin: 0 }}>
+                © {new Date().getFullYear()} CodingBanana. All rights reserved.
+              </p>
+              <p style={{ fontSize: '0.75rem', color: '#334155', margin: 0 }}>
+                Free for everyone. Always.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

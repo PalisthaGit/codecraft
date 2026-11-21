@@ -14,7 +14,11 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  if (pathname.startsWith("/compiler") || pathname.startsWith("/html/projects/")) {
+  if (
+    pathname.startsWith("/compiler") ||
+    pathname.startsWith("/html/projects/") ||
+    pathname.startsWith("/advent-calendar")
+  ) {
     return <>{children}</>;
   }
 
