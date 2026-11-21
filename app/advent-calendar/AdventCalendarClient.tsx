@@ -520,7 +520,7 @@ export default function AdventCalendarClient() {
                 December {popup}
               </p>
               <a
-                href={`#day-${popup}`}
+                href={`/advent-calendar/day/${popup}`}
                 style={{
                   display: 'block',
                   background: 'linear-gradient(135deg,#6367ff 0%,#8494ff 100%)',
