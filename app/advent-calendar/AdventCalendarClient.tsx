@@ -449,14 +449,8 @@ export default function AdventCalendarClient() {
             textShadow: '0 0 30px rgba(255,215,0,0.4), 0 2px 8px rgba(0,0,0,0.6)',
             letterSpacing: '-0.01em', fontFamily: 'var(--font-nunito, sans-serif)',
           }}>
-            🎄 Advent Calendar
+            🎄 Advent Calendar 2026
           </h1>
-          <p style={{
-            color: '#7dd3fc', fontSize: '0.95rem', marginBottom: '1.25rem', marginTop: 0,
-            textAlign: 'center', fontFamily: 'var(--font-nunito, sans-serif)',
-          }}>
-            December 2024 · CodingBanana
-          </p>
 
           {/* Days 1-23 grid */}
           <div className="ac-wrap">
