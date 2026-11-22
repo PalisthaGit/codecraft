@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import MobileMenu from "@/components/navigation/MobileMenu";
+import ChristmasBanner from "./ChristmasBanner";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -60,6 +61,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
             CodingBanana
           </span>
         </header>
+
+        {/* Christmas banner */}
+        <ChristmasBanner />
 
         {/* Page content */}
         <main className="flex-1 p-6 md:p-10">{children}</main>
