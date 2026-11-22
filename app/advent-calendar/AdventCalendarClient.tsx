@@ -247,7 +247,7 @@ export default function AdventCalendarClient() {
   const [openedDoors, setOpenedDoors] = useState<Set<number>>(new Set());
   const [popup, setPopup] = useState<number | null>(null);
 
-  const isUnlocked = (day: number) => day <= 2;
+  const isUnlocked = (day: number) => day <= 3;
 
   const handleClick = (day: number) => {
     if (!isUnlocked(day)) return;
